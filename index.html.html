@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Treino">
+<meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2I4ODkyZSIvPjx0ZXh0IHg9IjUwIiB5PSI2NSIgZm9udC1zaXplPSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IkFyaWFsIj7wn4q1PC90ZXh0Pjwvc3ZnPg==">
+<title>Treino Gerson</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --bg2: #ffffff;
+    --bg3: #f0ede5;
+    --border: #e5e1d8;
+    --border2: #d4cfc2;
+    --text: #1a1a1a;
+    --text2: #555;
+    --text3: #999;
+    --accent: #b8892e;
+    --accent-bg: #fdf6e3;
+    --green: #2d8f4f;
+    --green-bg: #e8f5ed;
+    --red: #c0392b;
+    --red-bg: #fdeae8;
+    --blue: #2c6ea4;
+    --blue-bg: #e8f0f8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; padding-bottom: 100px; }
+  input[type="number"] { -moz-appearance: textfield; }
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .hidden { display: none !important; }
+
+  .header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 14px 16px; position: sticky; top: 0; z-index: 30; }
+  .h-row { display: flex; align-items: center; justify-content: space-between; }
+  .btn-back { background: transparent; border: none; color: var(--accent); font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px 0; }
+  .btn-finish { background: var(--accent); border: none; color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .h-label { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-top: 8px; }
+  .h-title { font-size: 22px; font-weight: 700; color: var(--text); margin-top: 2px; }
+  .h-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  .content { padding: 16px; max-width: 720px; margin: 0 auto; }
+
+  .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: transform 0.1s; }
+  .day-card:active { transform: scale(0.98); }
+  .day-card.today { background: var(--green-bg); border-color: var(--green); }
+  .day-card h3 { font-size: 15px; font-weight: 700; color: var(--text); }
+  .day-card p { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .today-badge { font-size: 10px; color: var(--green); font-weight: 700; letter-spacing: 0.1em; }
+
+  .warmup { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  .warmup-header { padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .warmup-title { font-size: 13px; font-weight: 700; color: var(--blue); }
+  .warmup-body { padding: 0 14px 14px; border-top: 1px solid var(--border); }
+  .warmup-section { font-size: 10px; color: var(--text3); margin-top: 10px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  .warmup-item { font-size: 13px; color: var(--text2); padding: 3px 0; }
+
+  .ex-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+  .ex-header { padding: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .ex-num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); flex-shrink: 0; }
+  .ex-num.done { background: var(--green); color: white; border-color: var(--green); }
+  .ex-info { flex: 1; min-width: 0; }
+  .ex-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .ex-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .ex-chevron { font-size: 12px; color: var(--text3); }
+  .ex-body { padding: 0 14px 14px; border-top: 1px solid var(--border); }
+  .ex-note { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: var(--text2); margin: 12px 0; line-height: 1.5; }
+  .ex-stats { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .ex-stats strong { color: var(--accent); font-weight: 700; }
+
+  .set-row { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
+  .set-row.done { background: var(--green-bg); border-color: var(--green); }
+  .set-row.done .set-num { background: var(--green); color: white; }
+  .set-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .set-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); }
+  .set-label { font-size: 12px; color: var(--text2); }
+  .amrap-tag { color: var(--accent); font-weight: 700; }
+  .set-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; align-items: end; }
+  .field-label { font-size: 10px; color: var(--text3); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .field-input { width: 100%; background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; padding: 10px 8px; color: var(--text); font-size: 16px; font-weight: 700; text-align: center; }
+  .field-input:disabled { opacity: 0.6; }
+  .btn-save { background: var(--accent); color: white; border: none; border-radius: 6px; padding: 0 16px; height: 40px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .btn-save:disabled { background: var(--bg3); color: var(--text3); cursor: default; }
+
+  .timer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--border); padding: 14px 16px; z-index: 50; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); }
+  .timer-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 720px; margin: 0 auto; }
+  .timer-display { font-size: 28px; font-weight: 700; color: var(--accent); min-width: 70px; }
+  .timer-display.done { color: var(--green); }
+  .timer-bar-wrap { flex: 1; }
+  .timer-bar-bg { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .timer-bar { height: 100%; background: var(--accent); transition: width 1s linear; }
+  .timer-bar.done { background: var(--green); }
+  .timer-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
+  .btn-skip { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
+
+  .btn-secondary { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--accent); padding: 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+
+  .history-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+  .history-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .history-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .history-date { font-size: 11px; color: var(--text3); }
+  .history-meta { font-size: 11px; color: var(--text3); }
+  .history-ex { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text2); }
+  .history-ex strong { color: var(--accent); }
+
+  .empty { text-align: center; color: var(--text3); padding: 60px 20px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+// ============ DADOS DO PROGRAMA ============
+const PROGRAM = {
+  'push-a': {
+    name: 'Push A',
+    subtitle: 'Força · Peito-dominante',
+    duration: 65,
+    warmup: {
+      general: ['3min bike leve', 'Band pull-apart 2x15', 'Rot externa mini-band 2x12', 'Círculos de ombro'],
+      rampa: '1º exerc: leve x12 / 50% x8 / 75% x5 / 92% x2'
+    },
+    exercises: [
+      { id: 'pa1', name: 'Chest Press Inclinado', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 150, note: '15s intra-set, 2-3min entre clusters. Ref: PR 105kg x10 @RPE9 (05/26)', metaS1: 105 },
+      { id: 'pa2', name: 'Supino Máquina', sets: 4, reps: '6-8', technique: 'DP', rest: 120, note: 'Double progression. Ref atual: 95kg', metaS1: 95 },
+      { id: 'pa3', name: 'Supino Incl Halter 30°', sets: 3, reps: '8-10', technique: 'DP + SF', rest: 120, note: 'Stretch focus 2s na descida', metaS1: 32 },
+      { id: 'pa4', name: 'Cross Over Alta→Baixa', sets: 3, reps: '10-12', technique: 'Squeeze 1s', rest: 90, note: 'Pode trocar por Pec Dec 100kg se preferir (mesmo padrão)', metaS1: 15 },
+      { id: 'pa5', name: 'Desenv Militar Máquina', sets: 3, reps: '8-10', technique: 'DP', rest: 90, note: 'Calibrar Bodytech na primeira sessão', metaS1: 50 },
+      { id: 'pa6', name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', technique: 'MYO no último', rest: 60, note: 'Último set: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações. Calibrar Bodytech', metaS1: 12 },
+      { id: 'pa7', name: 'Tríceps Corda', sets: 3, reps: '12-15', technique: 'DROP no último', rest: 60, note: 'Último set: até falha + (-25% carga) AMRAP. Ref: 55kg', metaS1: 55 }
+    ]
+  },
+  'pull-a': {
+    name: 'Pull A',
+    subtitle: 'Força · Dorso-dominante',
+    duration: 68,
+    warmup: {
+      general: ['3min bike leve', 'Cat-camel 10', 'T-spine rotação 8/lado', 'Dead hang 20s'],
+      rampa: 'T-bar: leve x10 / 50% x8 / 75% x5 / 90% x2'
+    },
+    exercises: [
+      { id: 'pla1', name: 'T-Bar (Cavalinho)', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 150, note: '15s intra-set, cotovelo baixo. Ref: 55kg (consolidação)', metaS1: 55 },
+      { id: 'pla2', name: 'Pulldown Neutro', sets: 4, reps: '6-8', technique: 'DP + contração 1s', rest: 120, note: 'Pega neutra, contração no peito. Ref Puxada Supinada: 65kg', metaS1: 65 },
+      { id: 'pla3', name: 'Remada Serrote Halter', sets: 3, reps: '8-10/lado', technique: 'ROM total', rest: 90, note: 'Unilateral, puxar até o quadril', metaS1: 28 },
+      { id: 'pla4', name: 'Pullover Polia Alta', sets: 3, reps: '12-15', technique: 'SF', rest: 75, note: 'Braço estendido, stretch máximo. Pode usar Pulldown Reto 50kg ref', metaS1: 50 },
+      { id: 'pla5', name: 'Face Pull Corda', sets: 3, reps: '15-20', technique: 'Rotação externa', rest: 60, note: 'Cotovelos altos, abrir bem. Calibrar Bodytech', metaS1: 25 },
+      { id: 'pla6', name: 'Rosca Scott Máquina', sets: 3, reps: '8-10', technique: 'MYO no último', rest: 60, note: 'Substituto da rosca direta. Ref: 77,5kg', metaS1: 77.5 },
+      { id: 'pla7', name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', technique: 'DROP no último', rest: 45, note: 'Último set: falha + (-25%) AMRAP', metaS1: 16 }
+    ]
+  },
+  'legs-a': {
+    name: 'Legs A',
+    subtitle: 'Força · Quadríceps-dominante',
+    duration: 70,
+    warmup: {
+      general: ['5min bike (subindo intensidade)', '90/90 hip 8/lado', 'Dorsiflexão parede 10/lado', 'Agachamento profundo 30s'],
+      rampa: 'Hack: leve x10 / 40% x8 / 60% x5 / 80% x3 / 90% x1'
+    },
+    exercises: [
+      { id: 'la1', name: 'Hack Squat', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 180, note: '20s intra-set, ROM profundo. Ref Bodytech: 60kg', metaS1: 60 },
+      { id: 'la2', name: 'Leg Press 45° Pés Baixos', sets: 4, reps: '8-10', technique: 'ROM profundo', rest: 120, note: 'Sem travar joelho no topo. Ref Bodytech: 110kg', metaS1: 110 },
+      { id: 'la3', name: 'Cadeira Extensora', sets: 3, reps: '12-15', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps + 15s + reps. Ref: 120kg PR', metaS1: 120 },
+      { id: 'la4', name: 'Stiff Halter', sets: 3, reps: '8-10', technique: 'SF + RIR 2', rest: 120, note: 'Excêntrica 3s, hip hinge limpo. Ref: 56kg', metaS1: 56 },
+      { id: 'la5', name: 'Mesa Flexora', sets: 3, reps: '10-12', technique: 'MYO no último', rest: 75, note: 'Pico de contração, ROM total. Ref: 36kg', metaS1: 36 },
+      { id: 'la6', name: 'Panturrilha em Pé', sets: 4, reps: '10-12', technique: 'DROP + 2s alongado', rest: 60, note: 'Pausa 2s no alongamento máx. Ref: 130kg PR', metaS1: 130 }
+    ]
+  },
+  'push-b': {
+    name: 'Push B',
+    subtitle: 'Hipertrofia · Volume metabólico',
+    duration: 67,
+    warmup: {
+      general: ['3min bike leve', 'Band pull-apart 2x15', 'Rot externa mini-band 2x12'],
+      rampa: '1º exerc: halter leve x10 / 50% x8 / 75% x5'
+    },
+    exercises: [
+      { id: 'pb1', name: 'Supino Incl Halter 45°', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', rest: 120, note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP', metaS1: 30 },
+      { id: 'pb2', name: 'Chest Press Reto Máquina', sets: 3, reps: '10-12', technique: 'Squeeze', rest: 90, note: 'Foco em squeeze no topo. Ref Supino Máq: 95kg → usar 75-80% pra reps altas', metaS1: 75 },
+      { id: 'pb3', name: 'Peck Deck (Crucifixo Máq)', sets: 3, reps: '12-15', technique: 'MYO no último', rest: 75, note: 'Pico de contração 1-2s. Ref: 100kg (Pec Dec)', metaS1: 100 },
+      { id: 'pb4', name: 'Desenv Halter Sentado', sets: 4, reps: '8-10', technique: 'ROM completo', rest: 120, note: 'Descida até paralelo ao chão', metaS1: 24 },
+      { id: 'pb5', name: 'Elev Lateral Cabo Inclinado', sets: 4, reps: '12-15', technique: 'DROP DUPLO', rest: 60, note: 'Último: -25% AMRAP, -25% AMRAP. Calibrar Bodytech', metaS1: 10 },
+      { id: 'pb6', name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', technique: 'SF + cotovelo alto', rest: 75, note: 'Cotovelo apontando teto, stretch', metaS1: 20 },
+      { id: 'pb7', name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', technique: 'MYO no último', rest: 45, note: 'Pegada supinada, unilateral', metaS1: 20 }
+    ]
+  },
+  'pull-b': {
+    name: 'Pull B',
+    subtitle: 'Hipertrofia · Largura',
+    duration: 65,
+    warmup: {
+      general: ['3min bike leve', 'Cat-camel 10', 'T-spine rotação 8/lado', 'Dead hang 20s'],
+      rampa: 'Puxada: leve x12 / 50% x8 / 75% x5'
+    },
+    exercises: [
+      { id: 'plb1', name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', technique: 'DP + ROM total', rest: 120, note: 'Pega larga, puxar até parte alta do peito. Ref: 60kg (hold execução até 3x10-12 limpas)', metaS1: 60 },
+      { id: 'plb2', name: 'Remada Baixa Peg Aberta', sets: 4, reps: '8-10', technique: 'AMRAP no último', rest: 120, note: 'Pega aberta, cotovelos abertos. Ref Remada Fechada: 92,5kg → ajustar p/ pega aberta', metaS1: 75 },
+      { id: 'plb3', name: 'Pulldown Pega Fechada', sets: 3, reps: '10-12', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps. Ref Pulldown Reto: 50kg', metaS1: 50 },
+      { id: 'plb4', name: 'Remada Baixa Triângulo', sets: 3, reps: '10-12', technique: 'Squeeze 1s', rest: 75, note: 'Apertar escápulas 1s', metaS1: 60 },
+      { id: 'plb5', name: 'Crucifixo Inverso', sets: 3, reps: '12-15', technique: 'DROP no último', rest: 60, note: 'Pico contração 1-2s. Ref: 107,5kg', metaS1: 107.5 },
+      { id: 'plb6', name: 'Rosca Alternada Banco Inclinado', sets: 3, reps: '10-12', technique: 'SF', rest: 75, note: 'Stretch focus, supinar no início', metaS1: 16 },
+      { id: 'plb7', name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', technique: 'MYO no último', rest: 45, note: 'Pico de contração. Ref: 77,5kg → usar 65-70%', metaS1: 55 }
+    ]
+  },
+  'legs-b': {
+    name: 'Legs B',
+    subtitle: 'Posterior + Metabólico',
+    duration: 70,
+    warmup: {
+      general: ['5min bike (subindo intensidade)', '90/90 hip 8/lado', 'Dorsiflexão parede 10/lado'],
+      rampa: 'Stiff: halter leve x10 / 50% x8 / 75% x5'
+    },
+    exercises: [
+      { id: 'lb1', name: 'Stiff Halter', sets: 4, reps: '6-8', technique: 'SF + AMRAP no último', rest: 150, note: 'Excêntrica 3s, hip hinge. Ref: 56kg', metaS1: 56 },
+      { id: 'lb2', name: 'Hack Squat Pés Altos', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', rest: 120, note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP. Ref Bodytech: 60kg', metaS1: 50 },
+      { id: 'lb3', name: 'Mesa Flexora Deitada', sets: 3, reps: '10-12', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps. Ref Mesa Flexora: 36kg', metaS1: 36 },
+      { id: 'lb4', name: 'Cadeira Abdutora', sets: 3, reps: '15-20', technique: 'MYO + tronco à frente', rest: 60, note: 'Inclinar tronco para frente p/ glúteo médio. Calibrar Bodytech', metaS1: 60 },
+      { id: 'lb5', name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', technique: 'Excêntrica controlada', rest: 90, note: 'Descida controlada 2s', metaS1: 18 },
+      { id: 'lb6', name: 'Panturrilha Sentado', sets: 4, reps: '15-20', technique: 'DROP + 2s alongado', rest: 45, note: 'Pausa 2s no alongamento. Ref Panturrilha em pé: 130kg', metaS1: 50 },
+      { id: 'lb7', name: 'Abdominal Pulley', sets: 3, reps: '12-15', technique: 'Crunch completo', rest: 60, note: 'Curvar coluna, não dobrar quadril', metaS1: 40 }
+    ]
+  }
+};
+
+const DAYS_ORDER = ['push-a', 'pull-a', 'legs-a', 'push-b', 'pull-b', 'legs-b'];
+const DAY_LABELS = { 'push-a': 'Push A', 'pull-a': 'Pull A', 'legs-a': 'Legs A', 'push-b': 'Push B', 'pull-b': 'Pull B', 'legs-b': 'Legs B' };
+const STORAGE_KEY = 'gerson_treino_v2';
+
+let state = {
+  screen: 'session',
+  selectedDay: 'push-a',
+  data: loadData(),
+  restTimer: null,
+  restInterval: null,
+  restRemaining: 0,
+  restTotal: 0
+};
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : { sessions: [], currentSession: null };
+  } catch { return { sessions: [], currentSession: null }; }
+}
+
+function saveData() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data)); } catch {}
+}
+
+function getLastSession(dayKey) {
+  return [...state.data.sessions].reverse().find(s => s.day === dayKey);
+}
+
+function getCurrentSession() {
+  const today = new Date().toISOString().slice(0, 10);
+  if (state.data.currentSession && state.data.currentSession.day === state.selectedDay && state.data.currentSession.date === today) {
+    return state.data.currentSession;
+  }
+  state.data.currentSession = { day: state.selectedDay, date: today, exercises: [] };
+  return state.data.currentSession;
+}
+
+function getLastWeightForExercise(dayKey, exId) {
+  const last = getLastSession(dayKey);
+  if (!last) return null;
+  const ex = last.exercises.find(e => e.id === exId);
+  if (!ex || !ex.sets || !ex.sets.length) return null;
+  const validSets = ex.sets.filter(Boolean);
+  if (!validSets.length) return null;
+  return validSets[validSets.length - 1];
+}
+
+function logSet(exId, setIdx, setData) {
+  const current = getCurrentSession();
+  let exEntry = current.exercises.find(e => e.id === exId);
+  if (!exEntry) {
+    exEntry = { id: exId, sets: [] };
+    current.exercises.push(exEntry);
+  }
+  exEntry.sets[setIdx] = setData;
+  saveData();
+}
+
+function finishSession() {
+  if (!confirm('Finalizar e salvar essa sessão no histórico?')) return;
+  const current = getCurrentSession();
+  if (!current.exercises.length) {
+    alert('Nenhuma série registrada. Volte e registre antes de finalizar.');
+    return;
+  }
+  state.data.sessions.push(current);
+  state.data.currentSession = null;
+  saveData();
+  state.screen = 'home';
+  render();
+}
+
+function startRest(duration) {
+  state.restTotal = duration;
+  state.restRemaining = duration;
+  if (state.restInterval) clearInterval(state.restInterval);
+  state.restInterval = setInterval(() => {
+    state.restRemaining--;
+    if (state.restRemaining <= 0) {
+      clearInterval(state.restInterval);
+      state.restInterval = null;
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
+    }
+    updateTimerUI();
+  }, 1000);
+  state.restTimer = duration;
+  render();
+}
+
+function stopRest() {
+  if (state.restInterval) clearInterval(state.restInterval);
+  state.restInterval = null;
+  state.restTimer = null;
+  state.restRemaining = 0;
+  state.restTotal = 0;
+  render();
+}
+
+function updateTimerUI() {
+  const el = document.getElementById('timer-display');
+  const bar = document.getElementById('timer-bar');
+  if (!el) return;
+  const mm = Math.floor(state.restRemaining / 60);
+  const ss = state.restRemaining % 60;
+  el.textContent = String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
+  const pct = ((state.restTotal - state.restRemaining) / state.restTotal) * 100;
+  if (bar) bar.style.width = pct + '%';
+  if (state.restRemaining === 0) {
+    el.classList.add('done');
+    if (bar) bar.classList.add('done');
+  }
+}
+
+function isAmrapSet(ex, setIdx) {
+  const t = ex.technique.toUpperCase();
+  if (t.includes('AMRAP NO ÚLTIMO') || t.includes('AMRAP NO 5')) return setIdx === ex.sets - 1;
+  if (t.includes('AMRAP')) return setIdx === ex.sets - 1;
+  return false;
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state.data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'treino-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+}
+
+// ============ RENDER ============
+
+function renderHome() {
+  const dayOfWeek = new Date().getDay();
+  const dayMap = { 1: 'push-a', 2: 'pull-a', 3: 'legs-a', 4: 'push-b', 5: 'pull-b', 6: 'legs-b' };
+  const suggestedDay = dayMap[dayOfWeek];
+
+  return `
+    <div class="header">
+      <div class="h-label">Gerson — PPL 6x</div>
+      <div class="h-title">Treino do dia</div>
+      <div class="h-meta">${state.data.sessions.length} sessões registradas</div>
+    </div>
+    <div class="content">
+      ${DAYS_ORDER.map(key => `
+        <div class="day-card ${suggestedDay === key ? 'today' : ''}" onclick="selectDay('${key}')">
+          <div>
+            <h3>${PROGRAM[key].name}</h3>
+            <p>${PROGRAM[key].subtitle} · ${PROGRAM[key].duration}min</p>
+          </div>
+          ${suggestedDay === key ? '<div class="today-badge">HOJE</div>' : ''}
+        </div>
+      `).join('')}
+      <button class="btn-secondary" onclick="goHistory()">📊 Histórico & Exportar</button>
+    </div>
+  `;
+}
+
+function renderSession() {
+  const session = PROGRAM[state.selectedDay];
+  const today = new Date().toISOString().slice(0, 10).split('-').reverse().join('/');
+  const current = getCurrentSession();
+
+  return `
+    <div class="header">
+      <div class="h-row">
+        <button class="btn-back" onclick="goHome()">← Voltar</button>
+        <button class="btn-finish" onclick="finishSession()">Finalizar</button>
+      </div>
+      <div class="h-label">${session.subtitle}</div>
+      <div class="h-title">${session.name}</div>
+      <div class="h-meta">~${session.duration} min · ${today}</div>
+    </div>
+    <div class="content">
+      <div class="warmup">
+        <div class="warmup-header" onclick="toggleWarmup()">
+          <div class="warmup-title">🔥 Aquecimento</div>
+          <div style="font-size:11px;color:var(--text3)" id="warmup-chevron">▼</div>
+        </div>
+        <div class="warmup-body" id="warmup-body">
+          <div class="warmup-section">Geral (5min)</div>
+          ${session.warmup.general.map(i => `<div class="warmup-item">• ${i}</div>`).join('')}
+          <div class="warmup-section">Rampa</div>
+          <div class="warmup-item">${session.warmup.rampa}</div>
+        </div>
+      </div>
+      ${session.exercises.map((ex, idx) => renderExercise(ex, idx, current)).join('')}
+    </div>
+    ${state.restTimer ? renderTimer() : ''}
+  `;
+}
+
+function renderExercise(ex, exIdx, current) {
+  const exEntry = current.exercises.find(e => e.id === ex.id);
+  const completedSets = exEntry ? exEntry.sets : [];
+  const allDone = completedSets.filter(Boolean).length === ex.sets;
+  const lastWeight = getLastWeightForExercise(state.selectedDay, ex.id);
+
+  let setsHtml = '';
+  for (let i = 0; i < ex.sets; i++) {
+    setsHtml += renderSet(ex, i, completedSets[i], isAmrapSet(ex, i));
+  }
+
+  return `
+    <div class="ex-card">
+      <div class="ex-header" onclick="toggleEx('${ex.id}')">
+        <div class="ex-num ${allDone ? 'done' : ''}">${allDone ? '✓' : exIdx + 1}</div>
+        <div class="ex-info">
+          <div class="ex-name">${ex.name}</div>
+          <div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.technique}</div>
+        </div>
+        <div class="ex-chevron" id="chevron-${ex.id}">${exIdx === 0 ? '▲' : '▼'}</div>
+      </div>
+      <div class="ex-body" id="body-${ex.id}" ${exIdx !== 0 ? 'style="display:none"' : ''}>
+        <div class="ex-note">${ex.note}</div>
+        <div class="ex-stats">
+          Última: ${lastWeight ? lastWeight.kg + 'kg × ' + lastWeight.reps : '—'} ·
+          Meta S1: <strong>${ex.metaS1}kg</strong>
+        </div>
+        ${setsHtml}
+      </div>
+    </div>
+  `;
+}
+
+function renderSet(ex, setIdx, setData, isAmrap) {
+  const saved = !!setData;
+  const kg = setData ? setData.kg : '';
+  const reps = setData ? setData.reps : '';
+  const rpe = setData ? setData.rpe : '';
+
+  return `
+    <div class="set-row ${saved ? 'done' : ''}" id="set-${ex.id}-${setIdx}">
+      <div class="set-head">
+        <div class="set-num">${saved ? '✓' : setIdx + 1}</div>
+        <div class="set-label">
+          Série ${setIdx + 1}
+          ${isAmrap ? '<span class="amrap-tag">· AMRAP</span>' : ''}
+        </div>
+      </div>
+      <div class="set-grid">
+        <div>
+          <div class="field-label">KG</div>
+          <input type="number" inputmode="decimal" class="field-input" id="kg-${ex.id}-${setIdx}" value="${kg}" ${saved ? 'disabled' : ''}>
+        </div>
+        <div>
+          <div class="field-label">Reps</div>
+          <input type="number" inputmode="numeric" class="field-input" id="reps-${ex.id}-${setIdx}" value="${reps}" ${saved ? 'disabled' : ''}>
+        </div>
+        <div>
+          <div class="field-label">RPE</div>
+          <input type="number" inputmode="numeric" min="1" max="10" class="field-input" id="rpe-${ex.id}-${setIdx}" value="${rpe}" ${saved ? 'disabled' : ''}>
+        </div>
+        <button class="btn-save" ${saved ? 'disabled' : ''} onclick="saveSet('${ex.id}', ${setIdx}, ${ex.rest})">${saved ? '✓' : 'OK'}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderTimer() {
+  const mm = Math.floor(state.restRemaining / 60);
+  const ss = state.restRemaining % 60;
+  const pct = ((state.restTotal - state.restRemaining) / state.restTotal) * 100;
+  return `
+    <div class="timer">
+      <div class="timer-row">
+        <div class="timer-display ${state.restRemaining === 0 ? 'done' : ''}" id="timer-display">
+          ${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}
+        </div>
+        <div class="timer-bar-wrap">
+          <div class="timer-bar-bg">
+            <div class="timer-bar ${state.restRemaining === 0 ? 'done' : ''}" id="timer-bar" style="width:${pct}%"></div>
+          </div>
+          <div class="timer-label">Descanso ${Math.floor(state.restTotal / 60)}:${String(state.restTotal % 60).padStart(2, '0')}</div>
+        </div>
+        <button class="btn-skip" onclick="stopRest()">Pular</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderHistory() {
+  const sessions = [...state.data.sessions].reverse();
+  return `
+    <div class="header">
+      <button class="btn-back" onclick="goHome()">← Voltar</button>
+      <div class="h-title" style="margin-top:8px">Histórico</div>
+      <div class="h-meta">${sessions.length} sessões registradas</div>
+    </div>
+    <div class="content">
+      <button class="btn-secondary" onclick="exportData()" style="margin-top:0;margin-bottom:16px">↓ Exportar dados (JSON)</button>
+      ${sessions.length === 0 ? '<div class="empty">Nenhuma sessão finalizada ainda</div>' : ''}
+      ${sessions.map(s => {
+        const totalSets = s.exercises.reduce((a, e) => a + (e.sets ? e.sets.filter(Boolean).length : 0), 0);
+        return `
+          <div class="history-card">
+            <div class="history-head">
+              <div class="history-name">${DAY_LABELS[s.day]}</div>
+              <div class="history-date">${s.date.split('-').reverse().join('/')}</div>
+            </div>
+            <div class="history-meta">${s.exercises.length} exerc · ${totalSets} séries</div>
+            ${s.exercises.map(e => {
+              const exDef = PROGRAM[s.day] && PROGRAM[s.day].exercises.find(x => x.id === e.id);
+              const completed = e.sets ? e.sets.filter(Boolean) : [];
+              if (!exDef || !completed.length) return '';
+              return `
+                <div class="history-ex">
+                  <strong>${exDef.name}:</strong>
+                  ${completed.map(c => c.kg + '×' + c.reps + '@' + c.rpe).join(' · ')}
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function render() {
+  const app = document.getElementById('app');
+  if (state.screen === 'home') app.innerHTML = renderHome();
+  else if (state.screen === 'session') app.innerHTML = renderSession();
+  else if (state.screen === 'history') app.innerHTML = renderHistory();
+}
+
+// ============ ACTIONS ============
+function selectDay(key) { state.selectedDay = key; state.screen = 'session'; render(); }
+function goHome() { state.screen = 'home'; if (state.restInterval) { clearInterval(state.restInterval); state.restInterval = null; } state.restTimer = null; render(); }
+function goHistory() { state.screen = 'history'; render(); }
+
+function toggleWarmup() {
+  const body = document.getElementById('warmup-body');
+  const chev = document.getElementById('warmup-chevron');
+  if (body.style.display === 'none') { body.style.display = 'block'; chev.textContent = '▲'; }
+  else { body.style.display = 'none'; chev.textContent = '▼'; }
+}
+
+function toggleEx(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chevron-' + id);
+  if (body.style.display === 'none') { body.style.display = 'block'; chev.textContent = '▲'; }
+  else { body.style.display = 'none'; chev.textContent = '▼'; }
+}
+
+function saveSet(exId, setIdx, restDuration) {
+  const kg = document.getElementById('kg-' + exId + '-' + setIdx).value;
+  const reps = document.getElementById('reps-' + exId + '-' + setIdx).value;
+  const rpe = document.getElementById('rpe-' + exId + '-' + setIdx).value;
+  if (!kg || !reps || !rpe) {
+    alert('Preencha kg, reps e RPE (obrigatório)');
+    return;
+  }
+  if (parseInt(rpe) < 1 || parseInt(rpe) > 10) {
+    alert('RPE deve estar entre 1 e 10');
+    return;
+  }
+  logSet(exId, setIdx, { kg: parseFloat(kg), reps: parseInt(reps), rpe: parseInt(rpe) });
+  if (navigator.vibrate) navigator.vibrate(50);
+  startRest(restDuration);
+}
+
+// ============ INIT ============
+render();
+</script>
+
+</body>
+</html>
