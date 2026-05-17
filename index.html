@@ -25,8 +25,12 @@
     --green-bg: #e8f5ed;
     --red: #c0392b;
     --red-bg: #fdeae8;
+    --yellow: #d4a000;
+    --yellow-bg: #fdf7e0;
     --blue: #2c6ea4;
     --blue-bg: #e8f0f8;
+    --purple: #7a4cad;
+    --purple-bg: #f1ebf7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body { background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; padding-bottom: 100px; }
@@ -40,9 +44,15 @@
   .btn-finish { background: var(--accent); border: none; color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; }
   .h-label { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-top: 8px; }
   .h-title { font-size: 22px; font-weight: 700; color: var(--text); margin-top: 2px; }
-  .h-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .h-meta { font-size: 11px; color: var(--text3); margin-top: 2px; display: flex; gap: 12px; align-items: center; }
+  .session-timer { display: inline-flex; align-items: center; gap: 4px; background: var(--accent-bg); color: var(--accent); padding: 2px 8px; border-radius: 10px; font-weight: 700; font-size: 11px; }
 
   .content { padding: 16px; max-width: 720px; margin: 0 auto; }
+
+  .nav-tabs { display: flex; gap: 6px; padding: 12px 16px 0; background: var(--bg2); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 25; overflow-x: auto; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab { flex-shrink: 0; padding: 8px 14px 10px; border: none; background: transparent; color: var(--text3); font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
   .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: transform 0.1s; }
   .day-card:active { transform: scale(0.98); }
@@ -63,13 +73,27 @@
   .ex-num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); flex-shrink: 0; }
   .ex-num.done { background: var(--green); color: white; border-color: var(--green); }
   .ex-info { flex: 1; min-width: 0; }
+  .ex-name-row { display: flex; align-items: center; gap: 6px; }
   .ex-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .progress-arrow { font-size: 14px; }
+  .progress-arrow.up { color: var(--green); }
+  .progress-arrow.flat { color: var(--yellow); }
+  .progress-arrow.down { color: var(--red); }
   .ex-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
   .ex-chevron { font-size: 12px; color: var(--text3); }
   .ex-body { padding: 0 14px 14px; border-top: 1px solid var(--border); }
   .ex-note { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: var(--text2); margin: 12px 0; line-height: 1.5; }
-  .ex-stats { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .ex-stats { font-size: 11px; color: var(--text3); margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
   .ex-stats strong { color: var(--accent); font-weight: 700; }
+  .alert-box { background: var(--yellow-bg); border-left: 3px solid var(--yellow); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: #7a5d00; margin-bottom: 10px; }
+  .alert-box.red { background: var(--red-bg); border-left-color: var(--red); color: #8a2018; }
+
+  .sub-toggle { background: var(--bg3); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 11px; color: var(--text2); cursor: pointer; margin-bottom: 10px; display: inline-block; font-weight: 600; }
+  .sub-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 10px; }
+  .sub-box-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--text3); margin-bottom: 6px; }
+  .sub-option { padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; cursor: pointer; font-size: 13px; color: var(--text); background: var(--bg2); display: flex; justify-content: space-between; align-items: center; }
+  .sub-option.active { border-color: var(--accent); background: var(--accent-bg); font-weight: 700; }
+  .sub-rank { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
 
   .set-row { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
   .set-row.done { background: var(--green-bg); border-color: var(--green); }
@@ -96,7 +120,8 @@
   .timer-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
   .btn-skip { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
 
-  .btn-secondary { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--accent); padding: 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+  .btn-secondary { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--accent); padding: 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 12px; }
+  .btn-primary { width: 100%; background: var(--accent); border: none; color: white; padding: 14px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; }
 
   .history-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
   .history-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
@@ -105,8 +130,28 @@
   .history-meta { font-size: 11px; color: var(--text3); }
   .history-ex { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text2); }
   .history-ex strong { color: var(--accent); }
+  .history-actions { display: flex; gap: 8px; margin-top: 10px; }
+  .btn-mini { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text2); padding: 8px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; }
 
   .empty { text-align: center; color: var(--text3); padding: 60px 20px; font-size: 14px; }
+
+  .pr-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+  .pr-ex-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .pr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pr-item { background: var(--bg); border-radius: 8px; padding: 10px; }
+  .pr-item-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 4px; }
+  .pr-item-value { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .pr-item-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+  .summary-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: flex-end; justify-content: center; padding: 0; }
+  .summary-content { background: var(--bg2); width: 100%; max-width: 720px; max-height: 90vh; border-radius: 16px 16px 0 0; padding: 16px; overflow-y: auto; }
+  .summary-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .summary-title { font-size: 16px; font-weight: 700; color: var(--text); }
+  .btn-close { background: var(--bg3); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; color: var(--text2); }
+  .summary-text { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; color: var(--text); white-space: pre-wrap; line-height: 1.6; max-height: 60vh; overflow-y: auto; }
+  .summary-actions { display: flex; gap: 8px; margin-top: 12px; }
+
+  .pr-badge { display: inline-block; background: var(--purple-bg); color: var(--purple); padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-left: 6px; }
 </style>
 </head>
 <body>
@@ -125,13 +170,13 @@ const PROGRAM = {
       rampa: '1º exerc: leve x12 / 50% x8 / 75% x5 / 92% x2'
     },
     exercises: [
-      { id: 'pa1', name: 'Chest Press Inclinado', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 150, note: '15s intra-set, 2-3min entre clusters. Ref: PR 105kg x10 @RPE9 (05/26)', metaS1: 105 },
-      { id: 'pa2', name: 'Supino Máquina', sets: 4, reps: '6-8', technique: 'DP', rest: 120, note: 'Double progression. Ref atual: 95kg', metaS1: 95 },
-      { id: 'pa3', name: 'Supino Incl Halter 30°', sets: 3, reps: '8-10', technique: 'DP + SF', rest: 120, note: 'Stretch focus 2s na descida', metaS1: 32 },
-      { id: 'pa4', name: 'Cross Over Alta→Baixa', sets: 3, reps: '10-12', technique: 'Squeeze 1s', rest: 90, note: 'Pode trocar por Pec Dec 100kg se preferir (mesmo padrão)', metaS1: 15 },
-      { id: 'pa5', name: 'Desenv Militar Máquina', sets: 3, reps: '8-10', technique: 'DP', rest: 90, note: 'Calibrar Bodytech na primeira sessão', metaS1: 50 },
-      { id: 'pa6', name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', technique: 'MYO no último', rest: 60, note: 'Último set: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações. Calibrar Bodytech', metaS1: 12 },
-      { id: 'pa7', name: 'Tríceps Corda', sets: 3, reps: '12-15', technique: 'DROP no último', rest: 60, note: 'Último set: até falha + (-25% carga) AMRAP. Ref: 55kg', metaS1: 55 }
+      { id: 'pa1', name: 'Chest Press Inclinado', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 150, note: '15s intra-set, 2-3min entre clusters. Ref: PR 105kg x10 @RPE9 (05/26)', metaS1: 105, subs: ['Supino Incl Halter 30°', 'Supino Máquina'] },
+      { id: 'pa2', name: 'Supino Máquina', sets: 4, reps: '6-8', technique: 'DP', rest: 120, note: 'Double progression. Ref atual: 95kg', metaS1: 95, subs: ['Chest Press Inclinado', 'Supino Incl Halter 30°'] },
+      { id: 'pa3', name: 'Supino Incl Halter 30°', sets: 3, reps: '8-10', technique: 'DP + SF', rest: 120, note: 'Stretch focus 2s na descida', metaS1: 32, subs: ['Chest Press Inclinado', 'Supino Smith'] },
+      { id: 'pa4', name: 'Cross Over Alta→Baixa', sets: 3, reps: '10-12', technique: 'Squeeze 1s', rest: 90, note: 'Pode trocar por Pec Dec 100kg se preferir (mesmo padrão)', metaS1: 15, subs: ['Pec Dec (Crucifixo Máq)', 'Crucifixo Incl Halter'] },
+      { id: 'pa5', name: 'Desenv Militar Máquina', sets: 3, reps: '8-10', technique: 'DP', rest: 90, note: 'Calibrar Bodytech na primeira sessão', metaS1: 50, subs: ['Desenv Halter Sentado', 'Arnold Press'] },
+      { id: 'pa6', name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', technique: 'MYO no último', rest: 60, note: 'Último set: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações. Calibrar Bodytech', metaS1: 12, subs: ['Elev Lateral Cabo', 'Elev Lateral Máquina'] },
+      { id: 'pa7', name: 'Tríceps Corda', sets: 3, reps: '12-15', technique: 'DROP no último', rest: 60, note: 'Último set: até falha + (-25% carga) AMRAP. Ref: 55kg', metaS1: 55, subs: ['Tríceps Pulley Barra', 'Tríceps Testa Barra W'] }
     ]
   },
   'pull-a': {
@@ -143,13 +188,13 @@ const PROGRAM = {
       rampa: 'T-bar: leve x10 / 50% x8 / 75% x5 / 90% x2'
     },
     exercises: [
-      { id: 'pla1', name: 'T-Bar (Cavalinho)', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 150, note: '15s intra-set, cotovelo baixo. Ref: 55kg (consolidação)', metaS1: 55 },
-      { id: 'pla2', name: 'Pulldown Neutro', sets: 4, reps: '6-8', technique: 'DP + contração 1s', rest: 120, note: 'Pega neutra, contração no peito. Ref Puxada Supinada: 65kg', metaS1: 65 },
-      { id: 'pla3', name: 'Remada Serrote Halter', sets: 3, reps: '8-10/lado', technique: 'ROM total', rest: 90, note: 'Unilateral, puxar até o quadril', metaS1: 28 },
-      { id: 'pla4', name: 'Pullover Polia Alta', sets: 3, reps: '12-15', technique: 'SF', rest: 75, note: 'Braço estendido, stretch máximo. Pode usar Pulldown Reto 50kg ref', metaS1: 50 },
-      { id: 'pla5', name: 'Face Pull Corda', sets: 3, reps: '15-20', technique: 'Rotação externa', rest: 60, note: 'Cotovelos altos, abrir bem. Calibrar Bodytech', metaS1: 25 },
-      { id: 'pla6', name: 'Rosca Scott Máquina', sets: 3, reps: '8-10', technique: 'MYO no último', rest: 60, note: 'Substituto da rosca direta. Ref: 77,5kg', metaS1: 77.5 },
-      { id: 'pla7', name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', technique: 'DROP no último', rest: 45, note: 'Último set: falha + (-25%) AMRAP', metaS1: 16 }
+      { id: 'pla1', name: 'T-Bar (Cavalinho)', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 150, note: '15s intra-set, cotovelo baixo. Ref: 55kg (consolidação)', metaS1: 55, subs: ['Remada Máquina Fechada', 'Remada Serrote Halter'] },
+      { id: 'pla2', name: 'Pulldown Neutro', sets: 4, reps: '6-8', technique: 'DP + contração 1s', rest: 120, note: 'Pega neutra, contração no peito. Ref Puxada Supinada: 65kg', metaS1: 65, subs: ['Puxada Aberta Pronada', 'Pulldown Reto'] },
+      { id: 'pla3', name: 'Remada Serrote Halter', sets: 3, reps: '8-10/lado', technique: 'ROM total', rest: 90, note: 'Unilateral, puxar até o quadril', metaS1: 28, subs: ['T-Bar', 'Remada Máquina Fechada'] },
+      { id: 'pla4', name: 'Pullover Polia Alta', sets: 3, reps: '12-15', technique: 'SF', rest: 75, note: 'Braço estendido, stretch máximo. Pode usar Pulldown Reto 50kg ref', metaS1: 50, subs: ['Pulldown Reto', 'Cross Over Inverso'] },
+      { id: 'pla5', name: 'Face Pull Corda', sets: 3, reps: '15-20', technique: 'Rotação externa', rest: 60, note: 'Cotovelos altos, abrir bem. Calibrar Bodytech', metaS1: 25, subs: ['Crucifixo Inverso', 'Remada Alta Corda'] },
+      { id: 'pla6', name: 'Rosca Scott Máquina', sets: 3, reps: '8-10', technique: 'MYO no último', rest: 60, note: 'Substituto da rosca direta. Ref: 77,5kg', metaS1: 77.5, subs: ['Rosca Direta Barra W', 'Rosca Concentrada'] },
+      { id: 'pla7', name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', technique: 'DROP no último', rest: 45, note: 'Último set: falha + (-25%) AMRAP', metaS1: 16, subs: ['Rosca Direta Halter', 'Rosca Corda Polia'] }
     ]
   },
   'legs-a': {
@@ -161,12 +206,12 @@ const PROGRAM = {
       rampa: 'Hack: leve x10 / 40% x8 / 60% x5 / 80% x3 / 90% x1'
     },
     exercises: [
-      { id: 'la1', name: 'Hack Squat', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 180, note: '20s intra-set, ROM profundo. Ref Bodytech: 60kg', metaS1: 60 },
-      { id: 'la2', name: 'Leg Press 45° Pés Baixos', sets: 4, reps: '8-10', technique: 'ROM profundo', rest: 120, note: 'Sem travar joelho no topo. Ref Bodytech: 110kg', metaS1: 110 },
-      { id: 'la3', name: 'Cadeira Extensora', sets: 3, reps: '12-15', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps + 15s + reps. Ref: 120kg PR', metaS1: 120 },
-      { id: 'la4', name: 'Stiff Halter', sets: 3, reps: '8-10', technique: 'SF + RIR 2', rest: 120, note: 'Excêntrica 3s, hip hinge limpo. Ref: 56kg', metaS1: 56 },
-      { id: 'la5', name: 'Mesa Flexora', sets: 3, reps: '10-12', technique: 'MYO no último', rest: 75, note: 'Pico de contração, ROM total. Ref: 36kg', metaS1: 36 },
-      { id: 'la6', name: 'Panturrilha em Pé', sets: 4, reps: '10-12', technique: 'DROP + 2s alongado', rest: 60, note: 'Pausa 2s no alongamento máx. Ref: 130kg PR', metaS1: 130 }
+      { id: 'la1', name: 'Hack Squat', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', rest: 180, note: '20s intra-set, ROM profundo. Ref Bodytech: 60kg', metaS1: 60, subs: ['Leg Press 45°', 'Agachamento Smith'] },
+      { id: 'la2', name: 'Leg Press 45° Pés Baixos', sets: 4, reps: '8-10', technique: 'ROM profundo', rest: 120, note: 'Sem travar joelho no topo. Ref Bodytech: 110kg', metaS1: 110, subs: ['Hack Squat', 'Leg Press Vertical'] },
+      { id: 'la3', name: 'Cadeira Extensora', sets: 3, reps: '12-15', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps + 15s + reps. Ref: 120kg PR', metaS1: 120, subs: ['Cadeira Extensora Unilateral', 'Leg Press Pés Altos'] },
+      { id: 'la4', name: 'Stiff Halter', sets: 3, reps: '8-10', technique: 'SF + RIR 2', rest: 120, note: 'Excêntrica 3s, hip hinge limpo. Ref: 56kg', metaS1: 56, subs: ['Stiff Barra', 'Levantamento Terra Romeno'] },
+      { id: 'la5', name: 'Mesa Flexora', sets: 3, reps: '10-12', technique: 'MYO no último', rest: 75, note: 'Pico de contração, ROM total. Ref: 36kg', metaS1: 36, subs: ['Cadeira Flexora', 'Flexora em Pé'] },
+      { id: 'la6', name: 'Panturrilha em Pé', sets: 4, reps: '10-12', technique: 'DROP + 2s alongado', rest: 60, note: 'Pausa 2s no alongamento máx. Ref: 130kg PR', metaS1: 130, subs: ['Panturrilha Sentado', 'Panturrilha Leg Press'] }
     ]
   },
   'push-b': {
@@ -178,13 +223,13 @@ const PROGRAM = {
       rampa: '1º exerc: halter leve x10 / 50% x8 / 75% x5'
     },
     exercises: [
-      { id: 'pb1', name: 'Supino Incl Halter 45°', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', rest: 120, note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP', metaS1: 30 },
-      { id: 'pb2', name: 'Chest Press Reto Máquina', sets: 3, reps: '10-12', technique: 'Squeeze', rest: 90, note: 'Foco em squeeze no topo. Ref Supino Máq: 95kg → usar 75-80% pra reps altas', metaS1: 75 },
-      { id: 'pb3', name: 'Peck Deck (Crucifixo Máq)', sets: 3, reps: '12-15', technique: 'MYO no último', rest: 75, note: 'Pico de contração 1-2s. Ref: 100kg (Pec Dec)', metaS1: 100 },
-      { id: 'pb4', name: 'Desenv Halter Sentado', sets: 4, reps: '8-10', technique: 'ROM completo', rest: 120, note: 'Descida até paralelo ao chão', metaS1: 24 },
-      { id: 'pb5', name: 'Elev Lateral Cabo Inclinado', sets: 4, reps: '12-15', technique: 'DROP DUPLO', rest: 60, note: 'Último: -25% AMRAP, -25% AMRAP. Calibrar Bodytech', metaS1: 10 },
-      { id: 'pb6', name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', technique: 'SF + cotovelo alto', rest: 75, note: 'Cotovelo apontando teto, stretch', metaS1: 20 },
-      { id: 'pb7', name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', technique: 'MYO no último', rest: 45, note: 'Pegada supinada, unilateral', metaS1: 20 }
+      { id: 'pb1', name: 'Supino Incl Halter 45°', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', rest: 120, note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP', metaS1: 30, subs: ['Supino Incl Halter 30°', 'Chest Press Inclinado'] },
+      { id: 'pb2', name: 'Chest Press Reto Máquina', sets: 3, reps: '10-12', technique: 'Squeeze', rest: 90, note: 'Foco em squeeze no topo. Ref Supino Máq: 95kg → usar 75-80% pra reps altas', metaS1: 75, subs: ['Supino Máquina', 'Supino Incl Halter 30°'] },
+      { id: 'pb3', name: 'Peck Deck (Crucifixo Máq)', sets: 3, reps: '12-15', technique: 'MYO no último', rest: 75, note: 'Pico de contração 1-2s. Ref: 100kg (Pec Dec)', metaS1: 100, subs: ['Cross Over Alta→Baixa', 'Crucifixo Incl Halter'] },
+      { id: 'pb4', name: 'Desenv Halter Sentado', sets: 4, reps: '8-10', technique: 'ROM completo', rest: 120, note: 'Descida até paralelo ao chão', metaS1: 24, subs: ['Desenv Militar Máquina', 'Arnold Press'] },
+      { id: 'pb5', name: 'Elev Lateral Cabo Inclinado', sets: 4, reps: '12-15', technique: 'DROP DUPLO', rest: 60, note: 'Último: -25% AMRAP, -25% AMRAP. Calibrar Bodytech', metaS1: 10, subs: ['Elev Lateral Halter', 'Elev Lateral Máquina'] },
+      { id: 'pb6', name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', technique: 'SF + cotovelo alto', rest: 75, note: 'Cotovelo apontando teto, stretch', metaS1: 20, subs: ['Tríceps Francês Halter', 'Tríceps Pulley Barra'] },
+      { id: 'pb7', name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', technique: 'MYO no último', rest: 45, note: 'Pegada supinada, unilateral', metaS1: 20, subs: ['Tríceps Corda', 'Tríceps Francês Unilateral'] }
     ]
   },
   'pull-b': {
@@ -196,13 +241,13 @@ const PROGRAM = {
       rampa: 'Puxada: leve x12 / 50% x8 / 75% x5'
     },
     exercises: [
-      { id: 'plb1', name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', technique: 'DP + ROM total', rest: 120, note: 'Pega larga, puxar até parte alta do peito. Ref: 60kg (hold execução até 3x10-12 limpas)', metaS1: 60 },
-      { id: 'plb2', name: 'Remada Baixa Peg Aberta', sets: 4, reps: '8-10', technique: 'AMRAP no último', rest: 120, note: 'Pega aberta, cotovelos abertos. Ref Remada Fechada: 92,5kg → ajustar p/ pega aberta', metaS1: 75 },
-      { id: 'plb3', name: 'Pulldown Pega Fechada', sets: 3, reps: '10-12', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps. Ref Pulldown Reto: 50kg', metaS1: 50 },
-      { id: 'plb4', name: 'Remada Baixa Triângulo', sets: 3, reps: '10-12', technique: 'Squeeze 1s', rest: 75, note: 'Apertar escápulas 1s', metaS1: 60 },
-      { id: 'plb5', name: 'Crucifixo Inverso', sets: 3, reps: '12-15', technique: 'DROP no último', rest: 60, note: 'Pico contração 1-2s. Ref: 107,5kg', metaS1: 107.5 },
-      { id: 'plb6', name: 'Rosca Alternada Banco Inclinado', sets: 3, reps: '10-12', technique: 'SF', rest: 75, note: 'Stretch focus, supinar no início', metaS1: 16 },
-      { id: 'plb7', name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', technique: 'MYO no último', rest: 45, note: 'Pico de contração. Ref: 77,5kg → usar 65-70%', metaS1: 55 }
+      { id: 'plb1', name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', technique: 'DP + ROM total', rest: 120, note: 'Pega larga, puxar até parte alta do peito. Ref: 60kg (hold execução até 3x10-12 limpas)', metaS1: 60, subs: ['Pulldown Neutro', 'Pulldown Reto'] },
+      { id: 'plb2', name: 'Remada Baixa Peg Aberta', sets: 4, reps: '8-10', technique: 'AMRAP no último', rest: 120, note: 'Pega aberta, cotovelos abertos. Ref Remada Fechada: 92,5kg → ajustar p/ pega aberta', metaS1: 75, subs: ['Remada Máquina Fechada', 'T-Bar'] },
+      { id: 'plb3', name: 'Pulldown Pega Fechada', sets: 3, reps: '10-12', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps. Ref Pulldown Reto: 50kg', metaS1: 50, subs: ['Pulldown Neutro', 'Puxada Supinada'] },
+      { id: 'plb4', name: 'Remada Baixa Triângulo', sets: 3, reps: '10-12', technique: 'Squeeze 1s', rest: 75, note: 'Apertar escápulas 1s', metaS1: 60, subs: ['Remada Máquina Fechada', 'Remada Serrote Halter'] },
+      { id: 'plb5', name: 'Crucifixo Inverso', sets: 3, reps: '12-15', technique: 'DROP no último', rest: 60, note: 'Pico contração 1-2s. Ref: 107,5kg', metaS1: 107.5, subs: ['Face Pull Corda', 'Remada Alta Corda'] },
+      { id: 'plb6', name: 'Rosca Alt Banco Inclinado', sets: 3, reps: '10-12', technique: 'SF', rest: 75, note: 'Stretch focus, supinar no início', metaS1: 16, subs: ['Rosca Concentrada', 'Rosca Scott'] },
+      { id: 'plb7', name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', technique: 'MYO no último', rest: 45, note: 'Pico de contração. Ref: 77,5kg → usar 65-70%', metaS1: 55, subs: ['Rosca Direta Barra W', 'Rosca Concentrada'] }
     ]
   },
   'legs-b': {
@@ -214,36 +259,51 @@ const PROGRAM = {
       rampa: 'Stiff: halter leve x10 / 50% x8 / 75% x5'
     },
     exercises: [
-      { id: 'lb1', name: 'Stiff Halter', sets: 4, reps: '6-8', technique: 'SF + AMRAP no último', rest: 150, note: 'Excêntrica 3s, hip hinge. Ref: 56kg', metaS1: 56 },
-      { id: 'lb2', name: 'Hack Squat Pés Altos', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', rest: 120, note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP. Ref Bodytech: 60kg', metaS1: 50 },
-      { id: 'lb3', name: 'Mesa Flexora Deitada', sets: 3, reps: '10-12', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps. Ref Mesa Flexora: 36kg', metaS1: 36 },
-      { id: 'lb4', name: 'Cadeira Abdutora', sets: 3, reps: '15-20', technique: 'MYO + tronco à frente', rest: 60, note: 'Inclinar tronco para frente p/ glúteo médio. Calibrar Bodytech', metaS1: 60 },
-      { id: 'lb5', name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', technique: 'Excêntrica controlada', rest: 90, note: 'Descida controlada 2s', metaS1: 18 },
-      { id: 'lb6', name: 'Panturrilha Sentado', sets: 4, reps: '15-20', technique: 'DROP + 2s alongado', rest: 45, note: 'Pausa 2s no alongamento. Ref Panturrilha em pé: 130kg', metaS1: 50 },
-      { id: 'lb7', name: 'Abdominal Pulley', sets: 3, reps: '12-15', technique: 'Crunch completo', rest: 60, note: 'Curvar coluna, não dobrar quadril', metaS1: 40 }
+      { id: 'lb1', name: 'Stiff Halter', sets: 4, reps: '6-8', technique: 'SF + AMRAP no último', rest: 150, note: 'Excêntrica 3s, hip hinge. Ref: 56kg', metaS1: 56, subs: ['Stiff Barra', 'Levantamento Terra Romeno'] },
+      { id: 'lb2', name: 'Hack Squat Pés Altos', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', rest: 120, note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP. Ref Bodytech: 60kg', metaS1: 50, subs: ['Leg Press Pés Altos', 'Agachamento Smith Pés Altos'] },
+      { id: 'lb3', name: 'Mesa Flexora Deitada', sets: 3, reps: '10-12', technique: 'RP no último', rest: 90, note: 'Último: falha + 15s + reps. Ref Mesa Flexora: 36kg', metaS1: 36, subs: ['Cadeira Flexora', 'Mesa Flexora'] },
+      { id: 'lb4', name: 'Cadeira Abdutora', sets: 3, reps: '15-20', technique: 'MYO + tronco à frente', rest: 60, note: 'Inclinar tronco para frente p/ glúteo médio. Calibrar Bodytech', metaS1: 60, subs: ['Glúteo Máquina', 'Abdução Polia'] },
+      { id: 'lb5', name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', technique: 'Excêntrica controlada', rest: 90, note: 'Descida controlada 2s', metaS1: 18, subs: ['Búlgaro Halter', 'Avanço Smith'] },
+      { id: 'lb6', name: 'Panturrilha Sentado', sets: 4, reps: '15-20', technique: 'DROP + 2s alongado', rest: 45, note: 'Pausa 2s no alongamento. Ref Panturrilha em pé: 130kg', metaS1: 50, subs: ['Panturrilha em Pé', 'Panturrilha Leg Press'] },
+      { id: 'lb7', name: 'Abdominal Pulley', sets: 3, reps: '12-15', technique: 'Crunch completo', rest: 60, note: 'Curvar coluna, não dobrar quadril', metaS1: 40, subs: ['Crunch Máquina', 'Prancha Abdominal'] }
     ]
   }
 };
 
 const DAYS_ORDER = ['push-a', 'pull-a', 'legs-a', 'push-b', 'pull-b', 'legs-b'];
 const DAY_LABELS = { 'push-a': 'Push A', 'pull-a': 'Pull A', 'legs-a': 'Legs A', 'push-b': 'Push B', 'pull-b': 'Pull B', 'legs-b': 'Legs B' };
-const STORAGE_KEY = 'gerson_treino_v2';
+const STORAGE_KEY = 'gerson_treino_v3';
 
 let state = {
-  screen: 'session',
+  screen: 'home',
   selectedDay: 'push-a',
   data: loadData(),
   restTimer: null,
   restInterval: null,
   restRemaining: 0,
-  restTotal: 0
+  restTotal: 0,
+  sessionStartTime: null,
+  sessionTimerInterval: null,
+  sessionElapsed: 0,
+  showSubFor: null,
+  showSummary: false,
+  summaryText: '',
+  homeTab: 'today',
+  historyTab: 'list'
 };
 
 function loadData() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : { sessions: [], currentSession: null };
-  } catch { return { sessions: [], currentSession: null }; }
+    if (raw) return JSON.parse(raw);
+    // Migrar dados da v2 se existir
+    const old = localStorage.getItem('gerson_treino_v2');
+    if (old) {
+      const parsed = JSON.parse(old);
+      return { ...parsed, exerciseSubs: {} };
+    }
+    return { sessions: [], currentSession: null, exerciseSubs: {} };
+  } catch { return { sessions: [], currentSession: null, exerciseSubs: {} }; }
 }
 
 function saveData() {
@@ -259,11 +319,11 @@ function getCurrentSession() {
   if (state.data.currentSession && state.data.currentSession.day === state.selectedDay && state.data.currentSession.date === today) {
     return state.data.currentSession;
   }
-  state.data.currentSession = { day: state.selectedDay, date: today, exercises: [] };
+  state.data.currentSession = { day: state.selectedDay, date: today, exercises: [], startTime: Date.now() };
   return state.data.currentSession;
 }
 
-function getLastWeightForExercise(dayKey, exId) {
+function getLastSetForExercise(dayKey, exId) {
   const last = getLastSession(dayKey);
   if (!last) return null;
   const ex = last.exercises.find(e => e.id === exId);
@@ -273,27 +333,190 @@ function getLastWeightForExercise(dayKey, exId) {
   return validSets[validSets.length - 1];
 }
 
+function getExerciseHistory(exId) {
+  const history = [];
+  state.data.sessions.forEach(s => {
+    const ex = s.exercises.find(e => e.id === exId);
+    if (ex && ex.sets) {
+      const valid = ex.sets.filter(Boolean);
+      if (valid.length) history.push({ date: s.date, sets: valid });
+    }
+  });
+  return history;
+}
+
+function getProgressIndicator(exId) {
+  const history = getExerciseHistory(exId);
+  if (history.length < 2) return null;
+  const last = history[history.length - 1];
+  const prev = history[history.length - 2];
+  const lastMax = Math.max(...last.sets.map(s => s.kg));
+  const prevMax = Math.max(...prev.sets.map(s => s.kg));
+  if (lastMax > prevMax) return 'up';
+  if (lastMax < prevMax) return 'down';
+  // Mesma carga: comparar reps
+  const lastReps = last.sets.reduce((a, s) => a + s.reps, 0);
+  const prevReps = prev.sets.reduce((a, s) => a + s.reps, 0);
+  if (lastReps > prevReps) return 'up';
+  if (lastReps < prevReps) return 'down';
+  return 'flat';
+}
+
+function getStagnationAlert(exId) {
+  const history = getExerciseHistory(exId);
+  if (history.length < 3) return null;
+  const last3 = history.slice(-3);
+  const maxes = last3.map(h => Math.max(...h.sets.map(s => s.kg)));
+  // Estagnado: mesma carga máx por 3 sessões
+  if (maxes[0] === maxes[1] && maxes[1] === maxes[2]) {
+    return { type: 'yellow', text: '⚠ Estagnado há 3 sessões — considerar deload ou variação' };
+  }
+  // Regressão: subiu e caiu por 2 sessões seguidas
+  if (history.length >= 2) {
+    const last = last3[last3.length - 1];
+    const lastReps = last.sets.reduce((a, s) => a + s.reps, 0);
+    const prev = last3[last3.length - 2];
+    const prevReps = prev.sets.reduce((a, s) => a + s.reps, 0);
+    const lastMax = Math.max(...last.sets.map(s => s.kg));
+    const prevMax = Math.max(...prev.sets.map(s => s.kg));
+    if (lastMax === prevMax && lastReps < prevReps) {
+      return { type: 'red', text: '↓ Reps caíram na última sessão — considerar manter carga e consolidar' };
+    }
+  }
+  return null;
+}
+
+function getPRForExercise(exId) {
+  const history = getExerciseHistory(exId);
+  if (!history.length) return null;
+  let maxLoad = 0, maxLoadReps = 0, maxLoadDate = '', maxVolume = 0, maxVolumeDate = '';
+  history.forEach(h => {
+    const sessionMaxLoad = Math.max(...h.sets.map(s => s.kg));
+    if (sessionMaxLoad > maxLoad) {
+      maxLoad = sessionMaxLoad;
+      const topSet = h.sets.find(s => s.kg === sessionMaxLoad);
+      maxLoadReps = topSet.reps;
+      maxLoadDate = h.date;
+    }
+    const sessionVol = h.sets.reduce((a, s) => a + s.kg * s.reps, 0);
+    if (sessionVol > maxVolume) {
+      maxVolume = sessionVol;
+      maxVolumeDate = h.date;
+    }
+  });
+  return { maxLoad, maxLoadReps, maxLoadDate, maxVolume, maxVolumeDate };
+}
+
+function checkPRsInSession(session) {
+  const prs = [];
+  session.exercises.forEach(ex => {
+    const valid = ex.sets ? ex.sets.filter(Boolean) : [];
+    if (!valid.length) return;
+    const exDef = PROGRAM[session.day]?.exercises.find(x => x.id === ex.id);
+    if (!exDef) return;
+    // Histórico ANTES desta sessão
+    const allHistory = getExerciseHistory(ex.id).filter(h => h.date !== session.date);
+    const sessionMaxLoad = Math.max(...valid.map(s => s.kg));
+    const sessionVolume = valid.reduce((a, s) => a + s.kg * s.reps, 0);
+    let prevMaxLoad = 0, prevMaxVolume = 0;
+    allHistory.forEach(h => {
+      const m = Math.max(...h.sets.map(s => s.kg));
+      if (m > prevMaxLoad) prevMaxLoad = m;
+      const v = h.sets.reduce((a, s) => a + s.kg * s.reps, 0);
+      if (v > prevMaxVolume) prevMaxVolume = v;
+    });
+    if (sessionMaxLoad > prevMaxLoad && prevMaxLoad > 0) {
+      const topSet = valid.find(s => s.kg === sessionMaxLoad);
+      prs.push(`${exDef.name}: PR carga ${sessionMaxLoad}kg × ${topSet.reps} reps`);
+    }
+    if (sessionVolume > prevMaxVolume && prevMaxVolume > 0) {
+      prs.push(`${exDef.name}: PR volume ${Math.round(sessionVolume)} kg`);
+    }
+  });
+  return prs;
+}
+
+function generateSummary(session) {
+  const program = PROGRAM[session.day];
+  const dateBr = session.date.split('-').reverse().join('/');
+  const duration = session.duration || '?';
+  const energy = session.energy || '?';
+  const obs = session.obs || '';
+  const prs = checkPRsInSession(session);
+  let totalVolume = 0;
+  let setsRPE9plus = 0;
+
+  let txt = `${program.name.toUpperCase()} — ${dateBr} — ${duration}min — energia ${energy}/10\n\n`;
+
+  session.exercises.forEach(ex => {
+    const valid = ex.sets ? ex.sets.filter(Boolean) : [];
+    if (!valid.length) return;
+    const exDef = program.exercises.find(x => x.id === ex.id);
+    if (!exDef) return;
+    const name = ex.subUsed || exDef.name;
+    txt += `${name.toUpperCase()} (${exDef.sets}x${exDef.reps})\n`;
+    valid.forEach((s, i) => {
+      txt += `  S${i + 1}: ${s.kg}kg × ${s.reps} reps @RPE ${s.rpe}\n`;
+      if (s.rpe >= 9) setsRPE9plus++;
+    });
+    const exVol = valid.reduce((a, s) => a + s.kg * s.reps, 0);
+    totalVolume += exVol;
+    txt += `  Volume: ${Math.round(exVol).toLocaleString('pt-BR')} kg\n\n`;
+  });
+
+  txt += `---\n`;
+  txt += `RESUMO DA SESSÃO\n`;
+  txt += `Volume total: ${Math.round(totalVolume).toLocaleString('pt-BR')} kg\n`;
+  txt += `Sets RPE 9+: ${setsRPE9plus}\n`;
+  if (prs.length) {
+    txt += `PRs batidos:\n`;
+    prs.forEach(p => txt += `  ✓ ${p}\n`);
+  } else {
+    txt += `PRs batidos: nenhum nesta sessão\n`;
+  }
+  if (obs) txt += `\nObs: ${obs}\n`;
+  return txt;
+}
+
 function logSet(exId, setIdx, setData) {
   const current = getCurrentSession();
   let exEntry = current.exercises.find(e => e.id === exId);
   if (!exEntry) {
-    exEntry = { id: exId, sets: [] };
+    exEntry = { id: exId, sets: [], subUsed: state.data.exerciseSubs[`${state.selectedDay}-${exId}`] || null };
     current.exercises.push(exEntry);
   }
   exEntry.sets[setIdx] = setData;
+  // Iniciar cronômetro de sessão na primeira série
+  if (!current.startTime) current.startTime = Date.now();
   saveData();
 }
 
 function finishSession() {
-  if (!confirm('Finalizar e salvar essa sessão no histórico?')) return;
   const current = getCurrentSession();
   if (!current.exercises.length) {
     alert('Nenhuma série registrada. Volte e registre antes de finalizar.');
     return;
   }
+  // Calcular duração
+  const duration = current.startTime ? Math.round((Date.now() - current.startTime) / 60000) : null;
+  // Pedir energia e obs
+  const energy = prompt('Energia da sessão (1-10):', '8');
+  if (energy === null) return;
+  const obs = prompt('Observações (opcional):', '');
+
+  current.duration = duration;
+  current.energy = parseInt(energy) || 8;
+  current.obs = obs || '';
+  current.finishedAt = Date.now();
+
   state.data.sessions.push(current);
   state.data.currentSession = null;
   saveData();
+
+  // Gerar e mostrar resumo
+  state.summaryText = generateSummary(current);
+  state.showSummary = true;
+  stopSessionTimer();
   state.screen = 'home';
   render();
 }
@@ -339,6 +562,32 @@ function updateTimerUI() {
   }
 }
 
+function startSessionTimer() {
+  const current = getCurrentSession();
+  if (!current.startTime) {
+    current.startTime = Date.now();
+    saveData();
+  }
+  if (state.sessionTimerInterval) clearInterval(state.sessionTimerInterval);
+  state.sessionTimerInterval = setInterval(() => {
+    state.sessionElapsed = Math.round((Date.now() - current.startTime) / 1000);
+    updateSessionTimerUI();
+  }, 1000);
+}
+
+function stopSessionTimer() {
+  if (state.sessionTimerInterval) clearInterval(state.sessionTimerInterval);
+  state.sessionTimerInterval = null;
+  state.sessionElapsed = 0;
+}
+
+function updateSessionTimerUI() {
+  const el = document.getElementById('session-timer-display');
+  if (!el) return;
+  const mm = Math.floor(state.sessionElapsed / 60);
+  el.textContent = `⏱ ${mm} min`;
+}
+
 function isAmrapSet(ex, setIdx) {
   const t = ex.technique.toUpperCase();
   if (t.includes('AMRAP NO ÚLTIMO') || t.includes('AMRAP NO 5')) return setIdx === ex.sets - 1;
@@ -355,6 +604,23 @@ function exportData() {
   a.click();
 }
 
+function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      if (navigator.vibrate) navigator.vibrate(50);
+      alert('Resumo copiado!');
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('Resumo copiado!');
+  }
+}
+
 // ============ RENDER ============
 
 function renderHome() {
@@ -366,20 +632,55 @@ function renderHome() {
     <div class="header">
       <div class="h-label">Gerson — PPL 6x</div>
       <div class="h-title">Treino do dia</div>
-      <div class="h-meta">${state.data.sessions.length} sessões registradas</div>
+      <div class="h-meta"><span>${state.data.sessions.length} sessões registradas</span></div>
+    </div>
+    <div class="nav-tabs">
+      <button class="nav-tab ${state.homeTab === 'today' ? 'active' : ''}" onclick="setHomeTab('today')">Hoje</button>
+      <button class="nav-tab ${state.homeTab === 'choose' ? 'active' : ''}" onclick="setHomeTab('choose')">Trocar treino</button>
+      <button class="nav-tab" onclick="goHistory()">Histórico</button>
+      <button class="nav-tab" onclick="goPRs()">PRs</button>
     </div>
     <div class="content">
-      ${DAYS_ORDER.map(key => `
-        <div class="day-card ${suggestedDay === key ? 'today' : ''}" onclick="selectDay('${key}')">
-          <div>
-            <h3>${PROGRAM[key].name}</h3>
-            <p>${PROGRAM[key].subtitle} · ${PROGRAM[key].duration}min</p>
-          </div>
-          ${suggestedDay === key ? '<div class="today-badge">HOJE</div>' : ''}
-        </div>
-      `).join('')}
-      <button class="btn-secondary" onclick="goHistory()">📊 Histórico & Exportar</button>
+      ${state.homeTab === 'today' ? renderTodayTab(suggestedDay) : renderChooseTab(suggestedDay)}
     </div>
+  `;
+}
+
+function renderTodayTab(suggestedDay) {
+  if (!suggestedDay) {
+    return `
+      <div class="empty">
+        Hoje é descanso. Que tal escolher outro treino?
+      </div>
+      <button class="btn-primary" onclick="setHomeTab('choose')">Escolher treino</button>
+    `;
+  }
+  const dayInfo = PROGRAM[suggestedDay];
+  return `
+    <div class="day-card today" onclick="selectDay('${suggestedDay}')">
+      <div>
+        <div class="today-badge">HOJE — INICIAR</div>
+        <h3 style="margin-top:4px">${dayInfo.name}</h3>
+        <p>${dayInfo.subtitle} · ${dayInfo.duration}min</p>
+      </div>
+      <div style="font-size:24px;color:var(--green)">→</div>
+    </div>
+    <button class="btn-secondary" onclick="setHomeTab('choose')">Quero fazer outro treino</button>
+  `;
+}
+
+function renderChooseTab(suggestedDay) {
+  return `
+    <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Escolha qualquer treino. A rotina sugerida não é obrigatória.</div>
+    ${DAYS_ORDER.map(key => `
+      <div class="day-card ${suggestedDay === key ? 'today' : ''}" onclick="selectDay('${key}')">
+        <div>
+          <h3>${PROGRAM[key].name}</h3>
+          <p>${PROGRAM[key].subtitle} · ${PROGRAM[key].duration}min</p>
+        </div>
+        ${suggestedDay === key ? '<div class="today-badge">SUGERIDO</div>' : '<div style="font-size:18px;color:var(--text3)">→</div>'}
+      </div>
+    `).join('')}
   `;
 }
 
@@ -387,6 +688,7 @@ function renderSession() {
   const session = PROGRAM[state.selectedDay];
   const today = new Date().toISOString().slice(0, 10).split('-').reverse().join('/');
   const current = getCurrentSession();
+  const elapsed = current.startTime ? Math.round((Date.now() - current.startTime) / 60000) : 0;
 
   return `
     <div class="header">
@@ -396,7 +698,10 @@ function renderSession() {
       </div>
       <div class="h-label">${session.subtitle}</div>
       <div class="h-title">${session.name}</div>
-      <div class="h-meta">~${session.duration} min · ${today}</div>
+      <div class="h-meta">
+        <span>~${session.duration} min · ${today}</span>
+        <span class="session-timer" id="session-timer-display">⏱ ${elapsed} min</span>
+      </div>
     </div>
     <div class="content">
       <div class="warmup">
@@ -404,7 +709,7 @@ function renderSession() {
           <div class="warmup-title">🔥 Aquecimento</div>
           <div style="font-size:11px;color:var(--text3)" id="warmup-chevron">▼</div>
         </div>
-        <div class="warmup-body" id="warmup-body">
+        <div class="warmup-body" id="warmup-body" style="display:none">
           <div class="warmup-section">Geral (5min)</div>
           ${session.warmup.general.map(i => `<div class="warmup-item">• ${i}</div>`).join('')}
           <div class="warmup-section">Rampa</div>
@@ -418,34 +723,74 @@ function renderSession() {
 }
 
 function renderExercise(ex, exIdx, current) {
+  const subKey = `${state.selectedDay}-${ex.id}`;
+  const activeSub = state.data.exerciseSubs[subKey];
+  const displayName = activeSub || ex.name;
   const exEntry = current.exercises.find(e => e.id === ex.id);
   const completedSets = exEntry ? exEntry.sets : [];
   const allDone = completedSets.filter(Boolean).length === ex.sets;
-  const lastWeight = getLastWeightForExercise(state.selectedDay, ex.id);
+  const lastSet = getLastSetForExercise(state.selectedDay, ex.id);
+  const progressInd = getProgressIndicator(ex.id);
+  const stagnation = getStagnationAlert(ex.id);
+  const pr = getPRForExercise(ex.id);
+
+  let arrowHtml = '';
+  if (progressInd === 'up') arrowHtml = '<span class="progress-arrow up">↑</span>';
+  else if (progressInd === 'down') arrowHtml = '<span class="progress-arrow down">↓</span>';
+  else if (progressInd === 'flat') arrowHtml = '<span class="progress-arrow flat">→</span>';
 
   let setsHtml = '';
   for (let i = 0; i < ex.sets; i++) {
     setsHtml += renderSet(ex, i, completedSets[i], isAmrapSet(ex, i));
   }
 
+  const showSubBox = state.showSubFor === ex.id;
+
   return `
     <div class="ex-card">
       <div class="ex-header" onclick="toggleEx('${ex.id}')">
         <div class="ex-num ${allDone ? 'done' : ''}">${allDone ? '✓' : exIdx + 1}</div>
         <div class="ex-info">
-          <div class="ex-name">${ex.name}</div>
-          <div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.technique}</div>
+          <div class="ex-name-row">
+            <div class="ex-name">${displayName}</div>
+            ${arrowHtml}
+          </div>
+          <div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.technique}${activeSub ? ` · <em style="color:var(--accent)">substituto</em>` : ''}</div>
         </div>
         <div class="ex-chevron" id="chevron-${ex.id}">${exIdx === 0 ? '▲' : '▼'}</div>
       </div>
       <div class="ex-body" id="body-${ex.id}" ${exIdx !== 0 ? 'style="display:none"' : ''}>
+        ${stagnation ? `<div class="alert-box ${stagnation.type === 'red' ? 'red' : ''}">${stagnation.text}</div>` : ''}
         <div class="ex-note">${ex.note}</div>
         <div class="ex-stats">
-          Última: ${lastWeight ? lastWeight.kg + 'kg × ' + lastWeight.reps : '—'} ·
-          Meta S1: <strong>${ex.metaS1}kg</strong>
+          <span>Última: <strong>${lastSet ? lastSet.kg + 'kg × ' + lastSet.reps : '—'}</strong></span>
+          <span>Meta: <strong>${ex.metaS1}kg</strong></span>
+          ${pr && pr.maxLoad ? `<span>PR: <strong>${pr.maxLoad}kg × ${pr.maxLoadReps}</strong></span>` : ''}
         </div>
+        <div class="sub-toggle" onclick="event.stopPropagation(); toggleSub('${ex.id}')">
+          🔁 ${showSubBox ? 'Fechar substitutos' : 'Trocar exercício'}
+        </div>
+        ${showSubBox ? renderSubBox(ex, subKey, activeSub) : ''}
         ${setsHtml}
       </div>
+    </div>
+  `;
+}
+
+function renderSubBox(ex, subKey, activeSub) {
+  return `
+    <div class="sub-box">
+      <div class="sub-box-title">Substituir por:</div>
+      <div class="sub-option ${!activeSub ? 'active' : ''}" onclick="event.stopPropagation(); selectSub('${subKey}', null)">
+        <span>${ex.name}</span>
+        <span class="sub-rank">${!activeSub ? 'ATUAL' : 'ORIGINAL'}</span>
+      </div>
+      ${ex.subs.map((sub, i) => `
+        <div class="sub-option ${activeSub === sub ? 'active' : ''}" onclick="event.stopPropagation(); selectSub('${subKey}', '${sub.replace(/'/g, "\\'")}')">
+          <span>${sub}</span>
+          <span class="sub-rank">${activeSub === sub ? 'ATUAL' : 'OPÇÃO ' + (i + 1)}</span>
+        </div>
+      `).join('')}
     </div>
   `;
 }
@@ -512,31 +857,38 @@ function renderHistory() {
     <div class="header">
       <button class="btn-back" onclick="goHome()">← Voltar</button>
       <div class="h-title" style="margin-top:8px">Histórico</div>
-      <div class="h-meta">${sessions.length} sessões registradas</div>
+      <div class="h-meta"><span>${sessions.length} sessões registradas</span></div>
     </div>
     <div class="content">
       <button class="btn-secondary" onclick="exportData()" style="margin-top:0;margin-bottom:16px">↓ Exportar dados (JSON)</button>
       ${sessions.length === 0 ? '<div class="empty">Nenhuma sessão finalizada ainda</div>' : ''}
-      ${sessions.map(s => {
+      ${sessions.map((s, idx) => {
         const totalSets = s.exercises.reduce((a, e) => a + (e.sets ? e.sets.filter(Boolean).length : 0), 0);
+        const totalVol = s.exercises.reduce((a, e) => {
+          if (!e.sets) return a;
+          return a + e.sets.filter(Boolean).reduce((b, st) => b + st.kg * st.reps, 0);
+        }, 0);
         return `
           <div class="history-card">
             <div class="history-head">
               <div class="history-name">${DAY_LABELS[s.day]}</div>
               <div class="history-date">${s.date.split('-').reverse().join('/')}</div>
             </div>
-            <div class="history-meta">${s.exercises.length} exerc · ${totalSets} séries</div>
+            <div class="history-meta">${s.exercises.length} exerc · ${totalSets} séries · ${Math.round(totalVol).toLocaleString('pt-BR')} kg · ${s.duration || '?'}min · energia ${s.energy || '?'}/10</div>
             ${s.exercises.map(e => {
               const exDef = PROGRAM[s.day] && PROGRAM[s.day].exercises.find(x => x.id === e.id);
               const completed = e.sets ? e.sets.filter(Boolean) : [];
               if (!exDef || !completed.length) return '';
               return `
                 <div class="history-ex">
-                  <strong>${exDef.name}:</strong>
+                  <strong>${e.subUsed || exDef.name}:</strong>
                   ${completed.map(c => c.kg + '×' + c.reps + '@' + c.rpe).join(' · ')}
                 </div>
               `;
             }).join('')}
+            <div class="history-actions">
+              <button class="btn-mini" onclick='showSummaryFor(${idx})'>📋 Gerar resumo</button>
+            </div>
           </div>
         `;
       }).join('')}
@@ -544,17 +896,101 @@ function renderHistory() {
   `;
 }
 
+function renderPRs() {
+  // Coletar PRs de todos exercícios
+  const allExs = [];
+  DAYS_ORDER.forEach(dayKey => {
+    PROGRAM[dayKey].exercises.forEach(ex => {
+      const pr = getPRForExercise(ex.id);
+      if (pr && pr.maxLoad > 0) {
+        allExs.push({ name: ex.name, day: DAY_LABELS[dayKey], pr });
+      }
+    });
+  });
+
+  return `
+    <div class="header">
+      <button class="btn-back" onclick="goHome()">← Voltar</button>
+      <div class="h-title" style="margin-top:8px">Personal Records</div>
+      <div class="h-meta"><span>${allExs.length} exercícios com PR registrado</span></div>
+    </div>
+    <div class="content">
+      ${allExs.length === 0 ? '<div class="empty">Treine algumas sessões para começar a ver seus PRs aqui</div>' : ''}
+      ${allExs.map(item => `
+        <div class="pr-card">
+          <div class="pr-ex-name">${item.name} <span class="pr-badge">${item.day}</span></div>
+          <div class="pr-grid">
+            <div class="pr-item">
+              <div class="pr-item-label">Carga máxima</div>
+              <div class="pr-item-value">${item.pr.maxLoad}kg × ${item.pr.maxLoadReps}</div>
+              <div class="pr-item-sub">${item.pr.maxLoadDate.split('-').reverse().join('/')}</div>
+            </div>
+            <div class="pr-item">
+              <div class="pr-item-label">Volume máximo</div>
+              <div class="pr-item-value">${Math.round(item.pr.maxVolume).toLocaleString('pt-BR')} kg</div>
+              <div class="pr-item-sub">${item.pr.maxVolumeDate.split('-').reverse().join('/')}</div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderSummaryModal() {
+  return `
+    <div class="summary-modal" onclick="closeSummary()">
+      <div class="summary-content" onclick="event.stopPropagation()">
+        <div class="summary-head">
+          <div class="summary-title">📋 Resumo da sessão</div>
+          <button class="btn-close" onclick="closeSummary()">×</button>
+        </div>
+        <div class="summary-text" id="summary-text">${state.summaryText}</div>
+        <div class="summary-actions">
+          <button class="btn-primary" onclick="copyToClipboard(document.getElementById('summary-text').textContent)" style="margin:0">📋 Copiar</button>
+          <button class="btn-secondary" onclick="closeSummary()" style="margin:0">Fechar</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function render() {
   const app = document.getElementById('app');
-  if (state.screen === 'home') app.innerHTML = renderHome();
-  else if (state.screen === 'session') app.innerHTML = renderSession();
-  else if (state.screen === 'history') app.innerHTML = renderHistory();
+  let main = '';
+  if (state.screen === 'home') main = renderHome();
+  else if (state.screen === 'session') main = renderSession();
+  else if (state.screen === 'history') main = renderHistory();
+  else if (state.screen === 'prs') main = renderPRs();
+  app.innerHTML = main + (state.showSummary ? renderSummaryModal() : '');
 }
 
 // ============ ACTIONS ============
-function selectDay(key) { state.selectedDay = key; state.screen = 'session'; render(); }
-function goHome() { state.screen = 'home'; if (state.restInterval) { clearInterval(state.restInterval); state.restInterval = null; } state.restTimer = null; render(); }
+function selectDay(key) {
+  state.selectedDay = key;
+  state.screen = 'session';
+  state.showSubFor = null;
+  render();
+  // Iniciar cronômetro de sessão
+  setTimeout(() => startSessionTimer(), 100);
+}
+
+function goHome() {
+  state.screen = 'home';
+  state.homeTab = 'today';
+  if (state.restInterval) { clearInterval(state.restInterval); state.restInterval = null; }
+  state.restTimer = null;
+  stopSessionTimer();
+  render();
+}
+
 function goHistory() { state.screen = 'history'; render(); }
+function goPRs() { state.screen = 'prs'; render(); }
+
+function setHomeTab(tab) {
+  state.homeTab = tab;
+  render();
+}
 
 function toggleWarmup() {
   const body = document.getElementById('warmup-body');
@@ -568,6 +1004,22 @@ function toggleEx(id) {
   const chev = document.getElementById('chevron-' + id);
   if (body.style.display === 'none') { body.style.display = 'block'; chev.textContent = '▲'; }
   else { body.style.display = 'none'; chev.textContent = '▼'; }
+}
+
+function toggleSub(exId) {
+  state.showSubFor = state.showSubFor === exId ? null : exId;
+  render();
+}
+
+function selectSub(subKey, subName) {
+  if (subName === null) {
+    delete state.data.exerciseSubs[subKey];
+  } else {
+    state.data.exerciseSubs[subKey] = subName;
+  }
+  saveData();
+  state.showSubFor = null;
+  render();
 }
 
 function saveSet(exId, setIdx, restDuration) {
@@ -585,6 +1037,20 @@ function saveSet(exId, setIdx, restDuration) {
   logSet(exId, setIdx, { kg: parseFloat(kg), reps: parseInt(reps), rpe: parseInt(rpe) });
   if (navigator.vibrate) navigator.vibrate(50);
   startRest(restDuration);
+}
+
+function showSummaryFor(sessionIdx) {
+  const sessions = [...state.data.sessions].reverse();
+  const session = sessions[sessionIdx];
+  if (!session) return;
+  state.summaryText = generateSummary(session);
+  state.showSummary = true;
+  render();
+}
+
+function closeSummary() {
+  state.showSummary = false;
+  render();
 }
 
 // ============ INIT ============
