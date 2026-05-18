@@ -3,13 +3,13 @@
 <head>
  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
+
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-title" content="GersonGains">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0A0A0C">
-  
+
   <title>Treino Gerson</title>
 <style>
   :root {
@@ -72,7 +72,8 @@
   .progress-arrow.flat { color: var(--yellow); }
   .progress-arrow.down { color: var(--red); }
   .ex-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
-  .ex-chevron { font-size: 12px; color: var(--text3); }
+  .ex-chevron { font-size: 12px; color: var(--text3); transition: transform 0.2s; }
+  .ex-chevron.open { transform: rotate(180deg); }
   .ex-body { padding: 0 14px 14px; border-top: 1px solid var(--border); }
   .ex-note { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: var(--text2); margin: 12px 0; line-height: 1.5; }
   .ex-stats { font-size: 11px; color: var(--text3); margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
@@ -93,6 +94,13 @@
   .type-btn.t-feeder.active { color: var(--text2); background: var(--bg3); border-color: var(--text2); }
   .type-btn.t-valida.active { color: var(--green); background: var(--green-bg); border-color: var(--green); }
   .type-btn.t-avancada.active { color: var(--orange); background: var(--orange-bg); border-color: var(--orange); }
+
+  /* Seletor de técnica avançada */
+  .tec-selector { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; padding: 8px; background: var(--orange-bg); border: 1px dashed var(--orange); border-radius: 8px; }
+  .tec-selector-label { width: 100%; font-size: 10px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .tec-btn { padding: 5px 10px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2); font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text2); }
+  .tec-btn.active { color: white; background: var(--orange); border-color: var(--orange); }
+  .tec-tag { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 8px; background: var(--orange); color: white; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
 
   .set-row { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
   .set-row.done.t-aquec { background: var(--blue-bg); }
@@ -118,6 +126,8 @@
   .set-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; align-items: end; }
   .field-label { font-size: 10px; color: var(--text3); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
   .field-input { width: 100%; background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; padding: 10px 8px; color: var(--text); font-size: 16px; font-weight: 700; text-align: center; }
+  .field-input.warn { border-color: var(--yellow); background: var(--yellow-bg); }
+  .field-input.danger { border-color: var(--red); background: var(--red-bg); }
   .btn-save { background: var(--accent); color: white; border: none; border-radius: 6px; padding: 0 16px; height: 40px; font-size: 13px; font-weight: 700; cursor: pointer; }
 
   .add-set-row { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
@@ -167,6 +177,32 @@
   .btn-close { background: var(--bg3); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; color: var(--text2); }
   .summary-text { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; color: var(--text); white-space: pre-wrap; line-height: 1.6; max-height: 60vh; overflow-y: auto; }
   .summary-actions { display: flex; gap: 8px; margin-top: 12px; }
+
+  /* ====== CALENDÁRIO ====== */
+  .cal-nav { display: flex; align-items: center; justify-content: space-between; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; }
+  .cal-nav-btn { background: var(--bg3); border: 1px solid var(--border); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .cal-nav-title { font-size: 15px; font-weight: 700; color: var(--text); text-transform: capitalize; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 10px; margin-bottom: 12px; }
+  .cal-weekday { text-align: center; font-size: 10px; font-weight: 700; color: var(--text3); padding: 6px 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  .cal-day { aspect-ratio: 1 / 1; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--text2); background: transparent; border: 1px solid transparent; cursor: default; position: relative; }
+  .cal-day.has-session { cursor: pointer; }
+  .cal-day.empty { color: var(--text3); opacity: 0.3; }
+  .cal-day.today { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+  .cal-day.push { background: var(--red-bg); color: var(--red); }
+  .cal-day.pull { background: var(--blue-bg); color: var(--blue); }
+  .cal-day.legs { background: var(--purple-bg); color: var(--purple); }
+  .cal-day.today.push, .cal-day.today.pull, .cal-day.today.legs { border-color: var(--accent); }
+  .cal-day-tag { font-size: 8px; font-weight: 700; margin-top: 1px; opacity: 0.85; letter-spacing: 0.03em; }
+  .cal-legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--text3); padding: 0 4px 12px; }
+  .cal-legend-item { display: flex; align-items: center; gap: 4px; }
+  .cal-legend-sw { width: 12px; height: 12px; border-radius: 3px; }
+  .cal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+  .cal-stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; }
+  .cal-stat-num { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .cal-stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+  .cal-streak { background: linear-gradient(135deg, var(--accent), #d4a853); color: white; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+  .cal-streak-num { font-size: 28px; font-weight: 800; }
+  .cal-streak-label { font-size: 11px; opacity: 0.95; text-transform: uppercase; letter-spacing: 0.06em; }
 </style>
 </head>
 <body>
@@ -179,8 +215,20 @@ const SET_TYPES = {
   avancada: { label: 'Avançada', rest: 90, countsVolume: true }
 };
 
+// Catálogo de técnicas avançadas
+const TECNICAS = {
+  ds:       { label: 'Drop Set',     hint: 'Cargas decrescentes sem descanso' },
+  rp:       { label: 'Rest-Pause',   hint: '10-15s pausa e continua até falha' },
+  lp:       { label: 'Partials',     hint: 'Parciais no estiramento após falha' },
+  myo:      { label: 'Myo-Reps',     hint: 'Ativação + 3-5 mini-sets de 3-5 reps' },
+  cluster:  { label: 'Cluster',      hint: 'Pausas intra-série programadas' },
+  iso:      { label: 'Iso-Hold',     hint: 'Isometria estática no final' },
+  slowecc:  { label: 'Excêntr. Lenta', hint: 'Descida controlada 4-6s' },
+  forced:   { label: 'Forced Reps',  hint: 'Reps assistidas até falha total' }
+};
+
 const PROGRAM = {
-  'push-a': { name: 'Push A', subtitle: 'Força · Peito-dominante', duration: 65,
+  'push-a': { name: 'Push A', subtitle: 'Força · Peito-dominante', duration: 65, group: 'push',
     warmup: { general: ['3min bike leve', 'Band pull-apart 2x15', 'Rot externa mini-band 2x12', 'Círculos de ombro'], rampa: '1º exerc: leve x12 / 50% x8 / 75% x5 / 92% x2' },
     exercises: [
       { id: 'pa1', name: 'Chest Press Inclinado', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', note: '15s intra-set, 2-3min entre clusters. Ref: PR 105kg x10 @RPE9 (05/26)', metaS1: 105, subs: ['Supino Incl Halter 30°', 'Supino Máquina'] },
@@ -191,7 +239,7 @@ const PROGRAM = {
       { id: 'pa6', name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', technique: 'MYO no último', note: 'Último: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações', metaS1: 12, subs: ['Elev Lateral Cabo', 'Elev Lateral Máquina'] },
       { id: 'pa7', name: 'Tríceps Corda', sets: 3, reps: '12-15', technique: 'DROP no último', note: 'Último: até falha + (-25%) AMRAP. Ref: 55kg', metaS1: 55, subs: ['Tríceps Pulley Barra', 'Tríceps Testa Barra W'] }
     ]},
-  'pull-a': { name: 'Pull A', subtitle: 'Força · Dorso-dominante', duration: 68,
+  'pull-a': { name: 'Pull A', subtitle: 'Força · Dorso-dominante', duration: 68, group: 'pull',
     warmup: { general: ['3min bike leve', 'Cat-camel 10', 'T-spine rotação 8/lado', 'Dead hang 20s'], rampa: 'T-bar: leve x10 / 50% x8 / 75% x5 / 90% x2' },
     exercises: [
       { id: 'pla1', name: 'T-Bar (Cavalinho)', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', note: '15s intra-set, cotovelo baixo. Ref: 55kg', metaS1: 55, subs: ['Remada Máquina Fechada', 'Remada Serrote Halter'] },
@@ -202,7 +250,7 @@ const PROGRAM = {
       { id: 'pla6', name: 'Rosca Scott Máquina', sets: 3, reps: '8-10', technique: 'MYO no último', note: 'Substituto da rosca direta. Ref: 77,5kg', metaS1: 77.5, subs: ['Rosca Direta Barra W', 'Rosca Concentrada'] },
       { id: 'pla7', name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', technique: 'DROP no último', note: 'Último: falha + (-25%) AMRAP', metaS1: 16, subs: ['Rosca Direta Halter', 'Rosca Corda Polia'] }
     ]},
-  'legs-a': { name: 'Legs A', subtitle: 'Força · Quadríceps-dominante', duration: 70,
+  'legs-a': { name: 'Legs A', subtitle: 'Força · Quadríceps-dominante', duration: 70, group: 'legs',
     warmup: { general: ['5min bike (subindo intensidade)', '90/90 hip 8/lado', 'Dorsiflexão parede 10/lado', 'Agachamento profundo 30s'], rampa: 'Hack: leve x10 / 40% x8 / 60% x5 / 80% x3 / 90% x1' },
     exercises: [
       { id: 'la1', name: 'Hack Squat', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', note: '20s intra-set, ROM profundo. Ref Bodytech: 60kg', metaS1: 60, subs: ['Leg Press 45°', 'Agachamento Smith'] },
@@ -212,7 +260,7 @@ const PROGRAM = {
       { id: 'la5', name: 'Mesa Flexora', sets: 3, reps: '10-12', technique: 'MYO no último', note: 'Pico de contração, ROM total. Ref: 36kg', metaS1: 36, subs: ['Cadeira Flexora', 'Flexora em Pé'] },
       { id: 'la6', name: 'Panturrilha em Pé', sets: 4, reps: '10-12', technique: 'DROP + 2s alongado', note: 'Pausa 2s no alongamento. Ref: 130kg PR', metaS1: 130, subs: ['Panturrilha Sentado', 'Panturrilha Leg Press'] }
     ]},
-  'push-b': { name: 'Push B', subtitle: 'Hipertrofia · Volume metabólico', duration: 67,
+  'push-b': { name: 'Push B', subtitle: 'Hipertrofia · Volume metabólico', duration: 67, group: 'push',
     warmup: { general: ['3min bike leve', 'Band pull-apart 2x15', 'Rot externa mini-band 2x12'], rampa: '1º exerc: halter leve x10 / 50% x8 / 75% x5' },
     exercises: [
       { id: 'pb1', name: 'Supino Incl Halter 45°', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP', metaS1: 30, subs: ['Supino Incl Halter 30°', 'Chest Press Inclinado'] },
@@ -223,7 +271,7 @@ const PROGRAM = {
       { id: 'pb6', name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', technique: 'SF + cotovelo alto', note: 'Cotovelo apontando teto, stretch', metaS1: 20, subs: ['Tríceps Francês Halter', 'Tríceps Pulley Barra'] },
       { id: 'pb7', name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', technique: 'MYO no último', note: 'Pegada supinada, unilateral', metaS1: 20, subs: ['Tríceps Corda', 'Tríceps Francês Unilateral'] }
     ]},
-  'pull-b': { name: 'Pull B', subtitle: 'Hipertrofia · Largura', duration: 65,
+  'pull-b': { name: 'Pull B', subtitle: 'Hipertrofia · Largura', duration: 65, group: 'pull',
     warmup: { general: ['3min bike leve', 'Cat-camel 10', 'T-spine rotação 8/lado', 'Dead hang 20s'], rampa: 'Puxada: leve x12 / 50% x8 / 75% x5' },
     exercises: [
       { id: 'plb1', name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', technique: 'DP + ROM total', note: 'Pega larga. Ref: 60kg (hold execução)', metaS1: 60, subs: ['Pulldown Neutro', 'Pulldown Reto'] },
@@ -234,7 +282,7 @@ const PROGRAM = {
       { id: 'plb6', name: 'Rosca Alt Banco Inclinado', sets: 3, reps: '10-12', technique: 'SF', note: 'Stretch focus, supinar no início', metaS1: 16, subs: ['Rosca Concentrada', 'Rosca Scott'] },
       { id: 'plb7', name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', technique: 'MYO no último', note: 'Pico de contração. Ref: 77,5kg → 65-70%', metaS1: 55, subs: ['Rosca Direta Barra W', 'Rosca Concentrada'] }
     ]},
-  'legs-b': { name: 'Legs B', subtitle: 'Posterior + Metabólico', duration: 70,
+  'legs-b': { name: 'Legs B', subtitle: 'Posterior + Metabólico', duration: 70, group: 'legs',
     warmup: { general: ['5min bike (subindo intensidade)', '90/90 hip 8/lado', 'Dorsiflexão parede 10/lado'], rampa: 'Stiff: halter leve x10 / 50% x8 / 75% x5' },
     exercises: [
       { id: 'lb1', name: 'Stiff Halter', sets: 4, reps: '6-8', technique: 'SF + AMRAP no último', note: 'Excêntrica 3s, hip hinge. Ref: 56kg', metaS1: 56, subs: ['Stiff Barra', 'Levantamento Terra Romeno'] },
@@ -255,11 +303,57 @@ let state = {
   screen: 'home', selectedDay: 'push-a', data: loadData(),
   restTimer: null, restInterval: null, restRemaining: 0, restTotal: 0,
   sessionTimerInterval: null, showSubFor: null,
-  showSummary: false, summaryText: '', homeTab: 'today', editingSet: null
+  showSummary: false, summaryText: '', homeTab: 'today', editingSet: null,
+  // BUGFIX: estado de abertura de exercício persistente entre renders
+  openExercises: {},
+  // CALENDÁRIO: ano-mês atualmente visível (formato YYYY-MM)
+  calCursor: new Date().toISOString().slice(0, 7),
+  // DETALHE DE SESSÃO (do calendário): índice da sessão clicada
+  calDetailSessionIdx: null
+};
+
+// HISTÓRICO EMBUTIDO — backup de 18/05/2026 (Gerson)
+// Carregado automaticamente apenas se a flag SEED_KEY não estiver setada.
+const SEED_KEY = 'gerson_treino_seeded_v1';
+const SEED_DATA = {
+  "sessions": [
+    { "day": "legs-a", "date": "2026-05-17",
+      "exercises": [
+        { "id": "la1", "sets": [{ "kg": 80, "reps": 10, "rpe": 9, "type": "valida" }, { "kg": 80, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 90, "reps": 10, "rpe": 10, "type": "valida" }] },
+        { "id": "la2", "sets": [{ "kg": 220, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 250, "reps": 11, "rpe": 8, "type": "valida" }, { "kg": 265, "reps": 10, "rpe": 9, "type": "valida" }] },
+        { "id": "la3", "sets": [{ "kg": 80, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 120, "reps": 10, "rpe": 10, "type": "valida" }, { "kg": 80, "reps": 9, "rpe": 10, "type": "avancada" }, { "kg": 60, "reps": 10, "rpe": 10, "type": "avancada" }] },
+        { "id": "la4", "sets": [{ "kg": 60, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 72, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 72, "reps": 10, "rpe": 9, "type": "valida" }] },
+        { "id": "la5", "sets": [{ "kg": 45, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 54, "reps": 10, "rpe": 9, "type": "valida" }, { "kg": 54, "reps": 5, "rpe": 10, "type": "avancada" }, { "kg": 54, "reps": 5, "rpe": 10, "type": "avancada" }] }
+      ],
+      "startTime": 1779052708765, "duration": 6, "energy": 9, "obs": "Excelente treino. Sai com sentimento de dever comprido ", "finishedAt": 1779053113293
+    },
+    { "day": "push-a", "date": "2026-05-18",
+      "exercises": [
+        { "id": "pa1", "sets": [{ "kg": 90, "reps": 10, "rpe": 9, "type": "valida" }, { "kg": 107.5, "reps": 4, "rpe": 9, "type": "valida" }, { "kg": 107.5, "reps": 4, "rpe": 10, "type": "valida" }, { "kg": 107.5, "reps": 4, "rpe": 10, "type": "valida" }, { "kg": 107.5, "reps": 3, "rpe": 10, "type": "valida" }, { "kg": 80, "reps": 6, "rpe": 10, "type": "avancada" }] },
+        { "id": "pa2", "sets": [{ "kg": 70, "reps": 10, "rpe": 7, "type": "feeder" }, { "kg": 90, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 100, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 107.5, "reps": 10, "rpe": 9, "type": "valida" }] },
+        { "id": "pa3", "sets": [{ "kg": 32, "reps": 8, "rpe": 9, "type": "valida" }, { "kg": 32, "reps": 9, "rpe": 9, "type": "valida" }, { "kg": 32, "reps": 10, "rpe": 10, "type": "valida" }] },
+        { "id": "pa4", "sets": [{ "kg": 20, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 25, "reps": 15, "rpe": 9, "type": "valida" }, { "kg": 30, "reps": 12, "rpe": 9, "type": "valida" }] },
+        { "id": "pa5", "sets": [{ "kg": 45, "reps": 13, "rpe": 8, "type": "valida" }, { "kg": 55, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 60, "reps": 8, "rpe": 9, "type": "valida" }] },
+        { "id": "pa6", "sets": [{ "kg": 12, "reps": 20, "rpe": 8, "type": "valida" }, { "kg": 15, "reps": 14, "rpe": 9, "type": "valida" }, { "kg": 16, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 16, "reps": 5, "rpe": 10, "type": "avancada" }, { "kg": 16, "reps": 3, "rpe": 10, "type": "avancada" }] },
+        { "id": "pa7", "sets": [{ "kg": 45, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 50, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 55, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 15, "reps": 40, "rpe": 10, "type": "avancada" }, { "kg": 30, "reps": 12, "rpe": 10, "type": "avancada" }] }
+      ],
+      "startTime": 1779095808165, "duration": 68, "energy": 9, "obs": "Excelente", "finishedAt": 1779099873520
+    }
+  ],
+  "currentSession": null,
+  "exerciseSubs": { "push-a-pa7": "Tríceps Pulley Barra" }
 };
 
 function loadData() {
   try {
+    // Se ainda não foi feito o seed inicial, embute o backup e marca a flag
+    const seeded = localStorage.getItem(SEED_KEY);
+    if (!seeded) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_DATA));
+      localStorage.setItem(SEED_KEY, '1');
+      return JSON.parse(JSON.stringify(SEED_DATA)); // clona pra não compartilhar referência
+    }
+
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
     const old = localStorage.getItem('gerson_treino_v3') || localStorage.getItem('gerson_treino_v2');
@@ -276,6 +370,58 @@ function loadData() {
     }
     return { sessions: [], currentSession: null, exerciseSubs: {} };
   } catch { return { sessions: [], currentSession: null, exerciseSubs: {} }; }
+}
+
+// Cria identificador único de sessão para dedupe
+function sessionKey(s) {
+  return `${s.day}_${s.date}_${s.finishedAt || s.startTime || ''}`;
+}
+
+// IMPORTAR backup: faz merge inteligente sem duplicar sessões
+function importBackup(jsonText) {
+  try {
+    const parsed = JSON.parse(jsonText);
+    if (!parsed.sessions || !Array.isArray(parsed.sessions)) {
+      alert('Arquivo inválido. Esperado: JSON com campo "sessions".');
+      return;
+    }
+    const existingKeys = new Set(state.data.sessions.map(sessionKey));
+    let added = 0, skipped = 0;
+    parsed.sessions.forEach(s => {
+      if (existingKeys.has(sessionKey(s))) { skipped++; return; }
+      // Normaliza tipo de série antigo
+      if (s.exercises) s.exercises.forEach(e => {
+        if (e.sets) e.sets = e.sets.map(st => st ? { ...st, type: st.type || 'valida' } : null);
+      });
+      state.data.sessions.push(s);
+      added++;
+    });
+    // Ordena cronologicamente
+    state.data.sessions.sort((a, b) => (a.date + (a.finishedAt || 0)).localeCompare(b.date + (b.finishedAt || 0)));
+    // Mescla substitutos (backup novo prevalece em conflito)
+    if (parsed.exerciseSubs) {
+      state.data.exerciseSubs = { ...state.data.exerciseSubs, ...parsed.exerciseSubs };
+    }
+    saveData();
+    alert(`✓ Importação concluída.\n\nAdicionadas: ${added} sessões\nIgnoradas (já existiam): ${skipped}`);
+    render();
+  } catch (err) {
+    alert('Erro ao ler arquivo: ' + err.message);
+  }
+}
+
+function triggerImport() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json,application/json';
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => importBackup(ev.target.result);
+    reader.readAsText(file);
+  };
+  input.click();
 }
 
 function saveData() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data)); } catch {} }
@@ -400,6 +546,20 @@ function checkPRsInSession(session) {
   return prs;
 }
 
+// Conta séries RPE 9+ já registradas na sessão atual (qualquer exercício)
+function countRPE9InCurrentSession() {
+  const current = state.data.currentSession;
+  if (!current || !current.exercises) return 0;
+  let count = 0;
+  current.exercises.forEach(e => {
+    if (!e.sets) return;
+    e.sets.forEach(s => {
+      if (s && !s.pending && s.rpe >= 9) count++;
+    });
+  });
+  return count;
+}
+
 function generateSummary(session) {
   const program = PROGRAM[session.day];
   const dateBr = session.date.split('-').reverse().join('/');
@@ -421,7 +581,8 @@ function generateSummary(session) {
     let exVol = 0;
     allSets.forEach((s, i) => {
       const typeLabel = SET_TYPES[s.type]?.label || 'Válida';
-      txt += `  S${i + 1} [${typeLabel}]: ${s.kg}kg × ${s.reps} reps @RPE ${s.rpe}\n`;
+      const tecLabel = s.tecnica && TECNICAS[s.tecnica] ? ` (${TECNICAS[s.tecnica].label})` : '';
+      txt += `  S${i + 1} [${typeLabel}${tecLabel}]: ${s.kg}kg × ${s.reps} reps @RPE ${s.rpe}\n`;
       if (s.rpe >= 9) setsRPE9plus++;
       if (SET_TYPES[s.type]?.countsVolume) { exVol += s.kg * s.reps; totalValidSets++; }
     });
@@ -432,7 +593,7 @@ function generateSummary(session) {
   txt += `---\nRESUMO DA SESSÃO\n`;
   txt += `Volume total válido: ${Math.round(totalVolume).toLocaleString('pt-BR')} kg\n`;
   txt += `Séries válidas: ${totalValidSets}\n`;
-  txt += `Sets RPE 9+: ${setsRPE9plus}\n`;
+  txt += `Sets RPE 9+: ${setsRPE9plus}${setsRPE9plus > 2 ? '  ⚠ acima do limite (2)' : ''}\n`;
   if (prs.length) { txt += `PRs batidos:\n`; prs.forEach(p => txt += `  ✓ ${p}\n`); }
   else { txt += `PRs batidos: nenhum nesta sessão\n`; }
   if (obs) txt += `\nObs: ${obs}\n`;
@@ -460,6 +621,8 @@ function addSetToExercise(exId, type) {
     current.exercises.push(exEntry);
   }
   exEntry.sets.push({ pending: true, type: type });
+  // Garante que o card fica aberto após adicionar série
+  state.openExercises[exId] = true;
   saveData();
   render();
 }
@@ -472,10 +635,15 @@ function removeSetFromExercise(exId, setIdx) {
   exEntry.sets.splice(setIdx, 1);
   saveData();
   state.editingSet = null;
+  state.openExercises[exId] = true;
   render();
 }
 
-function editSet(exId, setIdx) { state.editingSet = `${exId}-${setIdx}`; render(); }
+function editSet(exId, setIdx) {
+  state.editingSet = `${exId}-${setIdx}`;
+  state.openExercises[exId] = true;
+  render();
+}
 
 function finishSession() {
   const current = getCurrentSession();
@@ -498,6 +666,7 @@ function finishSession() {
   saveData();
   state.summaryText = generateSummary(current);
   state.showSummary = true;
+  state.openExercises = {};
   stopSessionTimer();
   state.screen = 'home';
   render();
@@ -628,12 +797,15 @@ function renderHome() {
     </div>
     <div class="nav-tabs">
       <button class="nav-tab ${state.homeTab === 'today' ? 'active' : ''}" onclick="setHomeTab('today')">Hoje</button>
-      <button class="nav-tab ${state.homeTab === 'choose' ? 'active' : ''}" onclick="setHomeTab('choose')">Trocar treino</button>
+      <button class="nav-tab ${state.homeTab === 'choose' ? 'active' : ''}" onclick="setHomeTab('choose')">Trocar</button>
+      <button class="nav-tab ${state.homeTab === 'cal' ? 'active' : ''}" onclick="setHomeTab('cal')">📅 Calendário</button>
       <button class="nav-tab" onclick="goHistory()">Histórico</button>
       <button class="nav-tab" onclick="goPRs()">PRs</button>
     </div>
     <div class="content">
-      ${state.homeTab === 'today' ? renderTodayTab(suggestedDay) : renderChooseTab(suggestedDay)}
+      ${state.homeTab === 'today' ? renderTodayTab(suggestedDay) :
+        state.homeTab === 'choose' ? renderChooseTab(suggestedDay) :
+        renderCalendarTab()}
     </div>
   `;
 }
@@ -668,10 +840,114 @@ function renderChooseTab(suggestedDay) {
   `;
 }
 
+// ============ CALENDÁRIO ============
+function renderCalendarTab() {
+  const [yearStr, monthStr] = state.calCursor.split('-');
+  const year = parseInt(yearStr), month = parseInt(monthStr);
+  const firstDay = new Date(year, month - 1, 1);
+  const lastDay = new Date(year, month, 0);
+  const daysInMonth = lastDay.getDate();
+  const startWeekday = firstDay.getDay(); // 0=Dom
+  const todayISO = new Date().toISOString().slice(0, 10);
+
+  // Mapa de sessões por data (YYYY-MM-DD) → array de sessões
+  const sessionsByDate = {};
+  state.data.sessions.forEach((s, idx) => {
+    if (!sessionsByDate[s.date]) sessionsByDate[s.date] = [];
+    sessionsByDate[s.date].push({ session: s, idx });
+  });
+
+  // Stats do mês
+  let monthSessions = 0, monthVolume = 0, monthDuration = 0;
+  state.data.sessions.forEach(s => {
+    if (s.date.startsWith(state.calCursor)) {
+      monthSessions++;
+      monthDuration += s.duration || 0;
+      s.exercises.forEach(e => {
+        if (!e.sets) return;
+        e.sets.forEach(st => {
+          if (st && (st.type === 'valida' || st.type === 'avancada')) monthVolume += st.kg * st.reps;
+        });
+      });
+    }
+  });
+
+  // Streak (dias consecutivos com pelo menos uma sessão, contando para trás a partir de hoje)
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    const iso = d.toISOString().slice(0, 10);
+    if (sessionsByDate[iso]) streak++;
+    else if (i > 0) break;
+  }
+
+  const monthName = firstDay.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+
+  let cells = '';
+  // Células vazias antes do dia 1
+  for (let i = 0; i < startWeekday; i++) cells += `<div class="cal-day empty"></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const iso = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const daySessions = sessionsByDate[iso] || [];
+    const isToday = iso === todayISO;
+    let cls = 'cal-day';
+    let tag = '';
+    if (daySessions.length) {
+      const groups = daySessions.map(s => PROGRAM[s.session.day]?.group).filter(Boolean);
+      // Se múltiplas sessões no dia, prioriza a primeira
+      const grp = groups[0];
+      if (grp) cls += ' ' + grp + ' has-session';
+      tag = daySessions.map(s => DAY_LABELS[s.session.day]?.split(' ')[1] || '').join('/');
+    }
+    if (isToday) cls += ' today';
+    const onclick = daySessions.length ? `onclick="openCalDay('${iso}')"` : '';
+    cells += `<div class="${cls}" ${onclick}><div>${d}</div>${tag ? `<div class="cal-day-tag">${tag}</div>` : ''}</div>`;
+  }
+
+  return `
+    ${streak > 0 ? `
+      <div class="cal-streak">
+        <div>
+          <div class="cal-streak-label">🔥 Streak</div>
+          <div class="cal-streak-num">${streak} ${streak === 1 ? 'dia' : 'dias'}</div>
+        </div>
+        <div style="text-align:right;font-size:11px;opacity:0.9">consecutivos<br>treinando</div>
+      </div>
+    ` : ''}
+
+    <div class="cal-stats">
+      <div class="cal-stat"><div class="cal-stat-num">${monthSessions}</div><div class="cal-stat-label">Sessões</div></div>
+      <div class="cal-stat"><div class="cal-stat-num">${Math.round(monthVolume / 1000)}t</div><div class="cal-stat-label">Volume</div></div>
+      <div class="cal-stat"><div class="cal-stat-num">${monthDuration}min</div><div class="cal-stat-label">Tempo</div></div>
+    </div>
+
+    <div class="cal-nav">
+      <button class="cal-nav-btn" onclick="calNav(-1)">‹</button>
+      <div class="cal-nav-title">${monthName}</div>
+      <button class="cal-nav-btn" onclick="calNav(1)">›</button>
+    </div>
+
+    <div class="cal-grid">
+      <div class="cal-weekday">D</div><div class="cal-weekday">S</div><div class="cal-weekday">T</div>
+      <div class="cal-weekday">Q</div><div class="cal-weekday">Q</div><div class="cal-weekday">S</div><div class="cal-weekday">S</div>
+      ${cells}
+    </div>
+
+    <div class="cal-legend">
+      <div class="cal-legend-item"><span class="cal-legend-sw" style="background:var(--red-bg)"></span>Push</div>
+      <div class="cal-legend-item"><span class="cal-legend-sw" style="background:var(--blue-bg)"></span>Pull</div>
+      <div class="cal-legend-item"><span class="cal-legend-sw" style="background:var(--purple-bg)"></span>Legs</div>
+    </div>
+  `;
+}
+
 function renderSession() {
   const session = PROGRAM[state.selectedDay];
   const today = new Date().toISOString().slice(0, 10).split('-').reverse().join('/');
   const current = getCurrentSession();
+  const rpe9Count = countRPE9InCurrentSession();
   return `
     <div class="header">
       <div class="h-row">
@@ -680,7 +956,7 @@ function renderSession() {
       </div>
       <div class="h-label">${session.subtitle}</div>
       <div class="h-title">${session.name}</div>
-      <div class="h-meta">~${session.duration} min · ${today}</div>
+      <div class="h-meta">~${session.duration} min · ${today}${rpe9Count > 0 ? ` · ${rpe9Count} RPE9+` : ''}</div>
       <div class="session-clock">
         <div>
           <div class="clock-label">⏱ Tempo de treino</div>
@@ -690,6 +966,7 @@ function renderSession() {
       </div>
     </div>
     <div class="content">
+      ${rpe9Count >= 2 ? `<div class="alert-box ${rpe9Count >= 3 ? 'red' : ''}">${rpe9Count >= 3 ? '🚫' : '⚠'} ${rpe9Count} séries RPE 9+ nesta sessão. Limite recomendado: 2. ${rpe9Count >= 3 ? 'Você passou do limite — considere baixar a próxima.' : 'A próxima vai estourar.'}</div>` : ''}
       <div class="warmup">
         <div class="warmup-header" onclick="toggleWarmup()">
           <div class="warmup-title">🔥 Aquecimento</div>
@@ -726,7 +1003,10 @@ function renderExercise(ex, exIdx, current) {
   else if (progressInd === 'down') arrowHtml = '<span class="progress-arrow down">↓</span>';
   else if (progressInd === 'flat') arrowHtml = '<span class="progress-arrow flat">→</span>';
 
-  // Renderizar sets existentes; se não tem sets ainda, criar slots de "válida" padrão
+  // BUGFIX: estado de abertura agora vem do state, não de hardcoded
+  // Default: primeiro exercício aberto se ainda não foi tocado nada
+  const isOpen = state.openExercises[ex.id] === true;
+
   let setsToRender = allSets.length > 0 ? allSets : Array(ex.sets).fill(null).map(() => ({ pending: true, type: 'valida' }));
   if (allSets.length === 0) {
     if (!exEntry) {
@@ -749,9 +1029,9 @@ function renderExercise(ex, exIdx, current) {
           <div class="ex-name-row"><div class="ex-name">${displayName}</div>${arrowHtml}</div>
           <div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.technique}${activeSub ? ' · <em style="color:var(--accent)">substituto</em>' : ''}</div>
         </div>
-        <div class="ex-chevron" id="chevron-${ex.id}">${exIdx === 0 ? '▲' : '▼'}</div>
+        <div class="ex-chevron ${isOpen ? 'open' : ''}">▼</div>
       </div>
-      <div class="ex-body" id="body-${ex.id}" ${exIdx !== 0 ? 'style="display:none"' : ''}>
+      <div class="ex-body" ${isOpen ? '' : 'style="display:none"'}>
         ${stagnation ? `<div class="alert-box ${stagnation.type === 'red' ? 'red' : ''}">${stagnation.text}</div>` : ''}
         <div class="ex-note">${ex.note}</div>
         <div class="ex-stats">
@@ -798,11 +1078,11 @@ function renderSet(ex, setIdx, setData, allSets) {
   const isEditing = state.editingSet === editKey;
   const saved = setData && !setData.pending && setData.kg !== undefined;
   const type = setData ? setData.type : 'valida';
+  const tecnica = setData ? setData.tecnica : null;
   const kg = saved ? setData.kg : '';
   const reps = saved ? setData.reps : '';
   const rpe = saved ? setData.rpe : '';
 
-  // AMRAP só aparece no último set planejado de tipo válida/avançada
   const validSetIndices = allSets.map((s, i) => (s && (s.type === 'valida' || s.type === 'avancada')) ? i : -1).filter(i => i !== -1);
   const isLastValid = validSetIndices.length && validSetIndices[validSetIndices.length - 1] === setIdx;
   const isAmrap = (type === 'valida' || type === 'avancada') && isLastValid && ex.technique.toUpperCase().includes('AMRAP');
@@ -811,12 +1091,27 @@ function renderSet(ex, setIdx, setData, allSets) {
     <button class="type-btn t-${t} ${type === t ? 'active' : ''}" onclick="event.stopPropagation(); setSetType('${ex.id}', ${setIdx}, '${t}')">${SET_TYPES[t].label}</button>
   `).join('');
 
+  // Seletor de técnica (só aparece se tipo === avançada)
+  let tecSelectorHtml = '';
+  if (type === 'avancada' && !saved) {
+    const tecBtns = Object.keys(TECNICAS).map(k => `
+      <button class="tec-btn ${tecnica === k ? 'active' : ''}" onclick="event.stopPropagation(); setSetTecnica('${ex.id}', ${setIdx}, '${k}')">${TECNICAS[k].label}</button>
+    `).join('');
+    tecSelectorHtml = `
+      <div class="tec-selector">
+        <div class="tec-selector-label">Qual técnica avançada?</div>
+        ${tecBtns}
+      </div>
+    `;
+  }
+
   if (saved && !isEditing) {
+    const tecBadge = (type === 'avancada' && tecnica && TECNICAS[tecnica]) ? `<span class="tec-tag">${TECNICAS[tecnica].label}</span>` : '';
     return `
       <div class="set-row done t-${type}">
         <div class="set-head">
           <div class="set-num">${setIdx + 1}</div>
-          <span class="set-type-tag t-${type}">${SET_TYPES[type].label}</span>
+          <span class="set-type-tag t-${type}">${SET_TYPES[type].label}</span>${tecBadge}
           <div class="set-label"><strong>${kg}kg × ${reps}</strong> @RPE ${rpe}${isAmrap ? ' <span class="amrap-tag">· AMRAP</span>' : ''}</div>
           <button class="btn-edit" onclick="editSet('${ex.id}', ${setIdx})" title="Editar">✏️</button>
           <button class="btn-edit" onclick="removeSetFromExercise('${ex.id}', ${setIdx})" title="Excluir" style="color:var(--red)">🗑</button>
@@ -834,6 +1129,7 @@ function renderSet(ex, setIdx, setData, allSets) {
         <button class="btn-edit" onclick="removeSetFromExercise('${ex.id}', ${setIdx})" title="Excluir" style="color:var(--red)">🗑</button>
       </div>
       <div class="type-selector">${typeBtns}</div>
+      ${tecSelectorHtml}
       <div class="set-grid">
         <div><div class="field-label">KG</div><input type="number" inputmode="decimal" class="field-input" id="kg-${ex.id}-${setIdx}" value="${kg}"></div>
         <div><div class="field-label">Reps</div><input type="number" inputmode="numeric" class="field-input" id="reps-${ex.id}-${setIdx}" value="${reps}"></div>
@@ -880,7 +1176,10 @@ function renderHistory() {
       <div class="h-meta">${sessions.length} sessões registradas</div>
     </div>
     <div class="content">
-      <button class="btn-secondary" onclick="exportData()" style="margin-top:0;margin-bottom:16px">↓ Exportar dados (JSON)</button>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button class="btn-secondary" onclick="exportData()" style="margin-top:0">↓ Exportar (JSON)</button>
+        <button class="btn-secondary" onclick="triggerImport()" style="margin-top:0">↑ Importar (JSON)</button>
+      </div>
       ${sessions.length === 0 ? '<div class="empty">Nenhuma sessão finalizada ainda</div>' : ''}
       ${sessions.map((s, idx) => {
         const totalSets = s.exercises.reduce((a, e) => a + (e.sets ? e.sets.filter(Boolean).length : 0), 0);
@@ -902,7 +1201,10 @@ function renderHistory() {
               return `
                 <div class="history-ex">
                   <strong>${e.subUsed || exDef.name}:</strong>
-                  ${completed.map(c => `${c.kg}×${c.reps}@${c.rpe}${c.type && c.type !== 'valida' ? `[${SET_TYPES[c.type]?.label || c.type}]` : ''}`).join(' · ')}
+                  ${completed.map(c => {
+                    const tec = c.tecnica && TECNICAS[c.tecnica] ? `[${TECNICAS[c.tecnica].label}]` : (c.type && c.type !== 'valida' ? `[${SET_TYPES[c.type]?.label || c.type}]` : '');
+                    return `${c.kg}×${c.reps}@${c.rpe}${tec}`;
+                  }).join(' · ')}
                 </div>
               `;
             }).join('')}
@@ -985,6 +1287,9 @@ function selectDay(key) {
   state.screen = 'session';
   state.showSubFor = null;
   state.editingSet = null;
+  // Abre primeiro exercício por padrão ao entrar
+  const firstExId = PROGRAM[key].exercises[0]?.id;
+  state.openExercises = firstExId ? { [firstExId]: true } : {};
   render();
   setTimeout(() => startSessionTimer(), 100);
 }
@@ -1008,14 +1313,17 @@ function toggleWarmup() {
   else { body.style.display = 'none'; chev.textContent = '▼'; }
 }
 
+// BUGFIX: toggleEx agora mexe no STATE, não no DOM diretamente
 function toggleEx(id) {
-  const body = document.getElementById('body-' + id);
-  const chev = document.getElementById('chevron-' + id);
-  if (body.style.display === 'none') { body.style.display = 'block'; chev.textContent = '▲'; }
-  else { body.style.display = 'none'; chev.textContent = '▼'; }
+  state.openExercises[id] = !state.openExercises[id];
+  render();
 }
 
-function toggleSub(exId) { state.showSubFor = state.showSubFor === exId ? null : exId; render(); }
+function toggleSub(exId) {
+  state.showSubFor = state.showSubFor === exId ? null : exId;
+  state.openExercises[exId] = true; // mantém aberto
+  render();
+}
 
 function selectSub(subKey, subName) {
   if (subName === null) delete state.data.exerciseSubs[subKey];
@@ -1034,7 +1342,26 @@ function setSetType(exId, setIdx, type) {
   }
   while (exEntry.sets.length <= setIdx) exEntry.sets.push(null);
   const existing = exEntry.sets[setIdx] || { pending: true };
-  exEntry.sets[setIdx] = { ...existing, type: type };
+  // Se trocou tipo, mas não é mais "avançada", limpa a técnica
+  const newSet = { ...existing, type: type };
+  if (type !== 'avancada') delete newSet.tecnica;
+  exEntry.sets[setIdx] = newSet;
+  state.openExercises[exId] = true;
+  saveData();
+  render();
+}
+
+// Seletor de técnica avançada
+function setSetTecnica(exId, setIdx, tecnicaKey) {
+  const current = getCurrentSession();
+  let exEntry = current.exercises.find(e => e.id === exId);
+  if (!exEntry) return;
+  while (exEntry.sets.length <= setIdx) exEntry.sets.push(null);
+  const existing = exEntry.sets[setIdx] || { pending: true, type: 'avancada' };
+  // Toggle: se já era essa técnica, desmarca
+  const newTecnica = existing.tecnica === tecnicaKey ? null : tecnicaKey;
+  exEntry.sets[setIdx] = { ...existing, tecnica: newTecnica };
+  state.openExercises[exId] = true;
   saveData();
   render();
 }
@@ -1046,13 +1373,55 @@ function saveSet(exId, setIdx) {
   const kg = kgEl.value, reps = repsEl.value, rpe = rpeEl.value;
   if (!kg || !reps || !rpe) { alert('Preencha kg, reps e RPE'); return; }
   if (parseInt(rpe) < 1 || parseInt(rpe) > 10) { alert('RPE entre 1 e 10'); return; }
+
+  const kgNum = parseFloat(kg);
+  const repsNum = parseInt(reps);
+  const rpeNum = parseInt(rpe);
+
+  // VALIDAÇÃO: Jump de carga >5kg vs última válida do mesmo exercício
   const current = getCurrentSession();
   const exEntry = current.exercises.find(e => e.id === exId);
   const existing = exEntry?.sets[setIdx];
   const type = existing?.type || 'valida';
-  logSet(exId, setIdx, { kg: parseFloat(kg), reps: parseInt(reps), rpe: parseInt(rpe), type: type });
+
+  // Pega última série válida/avançada anterior a esta no mesmo exercício (sessão atual + última sessão histórica)
+  let prevWeight = null;
+  if (exEntry && exEntry.sets) {
+    for (let i = setIdx - 1; i >= 0; i--) {
+      const s = exEntry.sets[i];
+      if (s && !s.pending && s.kg !== undefined && (s.type === 'valida' || s.type === 'avancada')) {
+        prevWeight = s.kg; break;
+      }
+    }
+  }
+  if (prevWeight === null) {
+    const lastHist = getLastSetForExercise(state.selectedDay, exId);
+    if (lastHist) prevWeight = lastHist.kg;
+  }
+
+  if (prevWeight !== null && (type === 'valida' || type === 'avancada')) {
+    const jump = kgNum - prevWeight;
+    if (jump > 5) {
+      const ok = confirm(`⚠ Salto de carga: ${prevWeight}kg → ${kgNum}kg (+${jump.toFixed(1)}kg).\n\nSua regra é progressão máx de 5kg sem confirmação. Continuar?`);
+      if (!ok) return;
+    }
+  }
+
+  // VALIDAÇÃO: RPE 9+ excessivo
+  const currentRPE9 = countRPE9InCurrentSession();
+  // se for editar, descontar o RPE antigo dessa mesma série
+  let adjustedRPE9 = currentRPE9;
+  if (existing && existing.rpe >= 9 && !existing.pending) adjustedRPE9 = Math.max(0, currentRPE9 - 1);
+
+  if (rpeNum >= 9 && adjustedRPE9 >= 2) {
+    const ok = confirm(`⚠ Você já tem ${adjustedRPE9} séries RPE 9+ nesta sessão. Limite recomendado: 2.\n\nRegistrar esta também?`);
+    if (!ok) return;
+  }
+
+  logSet(exId, setIdx, { kg: kgNum, reps: repsNum, rpe: rpeNum, type: type, tecnica: existing?.tecnica || null });
   if (navigator.vibrate) navigator.vibrate(50);
   state.editingSet = null;
+  state.openExercises[exId] = true;
   startRest(SET_TYPES[type].rest);
 }
 
@@ -1067,7 +1436,24 @@ function showSummaryFor(sessionIdx) {
   render();
 }
 
-function closeSummary() { state.showSummary = false; render(); }
+function closeSummary() { state.showSummary = false; state.calDetailSessionIdx = null; render(); }
+
+// ============ CALENDÁRIO — handlers ============
+function calNav(delta) {
+  const [y, m] = state.calCursor.split('-').map(Number);
+  const d = new Date(y, m - 1 + delta, 1);
+  state.calCursor = d.toISOString().slice(0, 7);
+  render();
+}
+
+function openCalDay(iso) {
+  // Encontra primeira sessão dessa data (índice no array original)
+  const idx = state.data.sessions.findIndex(s => s.date === iso);
+  if (idx < 0) return;
+  // showSummaryFor usa índice da lista REVERSA do histórico — convertemos
+  const reverseIdx = state.data.sessions.length - 1 - idx;
+  showSummaryFor(reverseIdx);
+}
 
 render();
 </script>
