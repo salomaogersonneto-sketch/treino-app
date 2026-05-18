@@ -178,31 +178,76 @@
   .summary-text { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; color: var(--text); white-space: pre-wrap; line-height: 1.6; max-height: 60vh; overflow-y: auto; }
   .summary-actions { display: flex; gap: 8px; margin-top: 12px; }
 
-  /* ====== CALENDÁRIO ====== */
-  .cal-nav { display: flex; align-items: center; justify-content: space-between; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; }
-  .cal-nav-btn { background: var(--bg3); border: 1px solid var(--border); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .cal-nav-title { font-size: 15px; font-weight: 700; color: var(--text); text-transform: capitalize; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 10px; margin-bottom: 12px; }
-  .cal-weekday { text-align: center; font-size: 10px; font-weight: 700; color: var(--text3); padding: 6px 0; text-transform: uppercase; letter-spacing: 0.05em; }
-  .cal-day { aspect-ratio: 1 / 1; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--text2); background: transparent; border: 1px solid transparent; cursor: default; position: relative; }
-  .cal-day.has-session { cursor: pointer; }
-  .cal-day.empty { color: var(--text3); opacity: 0.3; }
-  .cal-day.today { border-color: var(--accent); color: var(--accent); font-weight: 700; }
-  .cal-day.push { background: var(--red-bg); color: var(--red); }
-  .cal-day.pull { background: var(--blue-bg); color: var(--blue); }
-  .cal-day.legs { background: var(--purple-bg); color: var(--purple); }
-  .cal-day.today.push, .cal-day.today.pull, .cal-day.today.legs { border-color: var(--accent); }
-  .cal-day-tag { font-size: 8px; font-weight: 700; margin-top: 1px; opacity: 0.85; letter-spacing: 0.03em; }
-  .cal-legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--text3); padding: 0 4px 12px; }
-  .cal-legend-item { display: flex; align-items: center; gap: 4px; }
-  .cal-legend-sw { width: 12px; height: 12px; border-radius: 3px; }
-  .cal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
-  .cal-stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; }
-  .cal-stat-num { font-size: 18px; font-weight: 700; color: var(--accent); }
-  .cal-stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
-  .cal-streak { background: linear-gradient(135deg, var(--accent), #d4a853); color: white; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-  .cal-streak-num { font-size: 28px; font-weight: 800; }
-  .cal-streak-label { font-size: 11px; opacity: 0.95; text-transform: uppercase; letter-spacing: 0.06em; }
+  /* ====== CALENDÁRIO (mobile-first redesign v2) ====== */
+  .cal2-streak { display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: white; border-radius: 10px; padding: 9px 12px; margin-bottom: 10px; }
+  .cal2-streak-l { display: flex; align-items: center; gap: 8px; }
+  .cal2-streak-icon { font-size: 16px; }
+  .cal2-streak-num { font-weight: 700; font-size: 13px; }
+  .cal2-streak-r { font-size: 10px; opacity: 0.92; text-align: right; }
+
+  .cal2-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px; }
+  .cal2-stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+  .cal2-stat-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+  .cal2-stat-val { font-size: 18px; font-weight: 700; color: var(--text); margin-top: 2px; }
+
+  .cal2-nav { display: flex; align-items: center; justify-content: space-between; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; margin-bottom: 6px; }
+  .cal2-nav-btn { background: transparent; border: none; color: var(--accent); font-size: 22px; font-weight: 700; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+  .cal2-nav-btn:active { background: var(--bg3); }
+  .cal2-nav-title { font-weight: 700; font-size: 14px; text-transform: capitalize; color: var(--text); }
+
+  .cal2-grid-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin-bottom: 8px; }
+  .cal2-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 4px; }
+  .cal2-weekdays > div { text-align: center; font-size: 10px; color: var(--text3); font-weight: 700; padding: 4px 0; }
+  .cal2-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .cal2-day { aspect-ratio: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; color: var(--text2); font-size: 13px; background: transparent; cursor: default; }
+  .cal2-day.has { cursor: pointer; }
+  .cal2-day.push { background: var(--red-bg); color: #A32D2D; font-weight: 700; }
+  .cal2-day.pull { background: var(--blue-bg); color: #0C447C; font-weight: 700; }
+  .cal2-day.legs { background: var(--purple-bg); color: #3C3489; font-weight: 700; }
+  .cal2-day.cardio-only { background: var(--yellow-bg); color: #7a5d00; font-weight: 700; }
+  .cal2-day.today { border: 1.5px solid var(--accent); }
+  .cal2-num { line-height: 1; }
+  .cal2-dots { display: flex; gap: 2px; margin-top: 2px; }
+  .cal2-dot { width: 4px; height: 4px; border-radius: 50%; display: inline-block; }
+  .dot-push { background: var(--red); }
+  .dot-pull { background: var(--blue); }
+  .dot-legs { background: var(--purple); }
+  .dot-cardio { background: var(--yellow); }
+
+  .cal2-legend { display: flex; justify-content: space-around; gap: 4px; flex-wrap: wrap; padding: 4px 4px 8px; }
+  .cal2-leg-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--text3); }
+  .cal2-leg-sw { width: 10px; height: 10px; border-radius: 2px; }
+  .cal2-leg-cardio { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
+
+  /* ====== CARDIO ====== */
+  .cardio-btn-row { display: flex; gap: 8px; margin-top: 12px; }
+  .cardio-tile { flex: 1; background: var(--yellow-bg); border: 1px solid var(--yellow); border-radius: 10px; padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .cardio-tile .ct-icon { font-size: 22px; }
+  .cardio-tile .ct-text { flex: 1; }
+  .cardio-tile .ct-title { font-size: 13px; font-weight: 700; color: #7a5d00; }
+  .cardio-tile .ct-sub { font-size: 10px; color: var(--text3); margin-top: 1px; }
+
+  .cardio-form-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
+  .cardio-form { background: var(--bg2); width: 100%; max-width: 720px; max-height: 90vh; overflow-y: auto; border-radius: 16px 16px 0 0; padding: 16px; }
+  .cardio-form-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .cardio-form-title { font-size: 16px; font-weight: 700; color: var(--text); }
+  .cardio-types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 14px; }
+  .cardio-type-btn { padding: 10px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); cursor: pointer; text-align: center; font-size: 12px; font-weight: 600; color: var(--text2); display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .cardio-type-btn .ctb-icon { font-size: 20px; }
+  .cardio-type-btn.active { background: var(--yellow-bg); border-color: var(--yellow); color: #7a5d00; }
+  .cardio-field { margin-bottom: 12px; }
+  .cardio-field-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 4px; }
+  .cardio-field-input { width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; font-size: 15px; font-weight: 700; color: var(--text); text-align: center; }
+  .cardio-field-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--text); resize: vertical; min-height: 60px; font-family: inherit; }
+  .cardio-intensity-row { display: flex; gap: 4px; }
+  .ci-btn { flex: 1; padding: 8px 0; border: 1px solid var(--border); border-radius: 6px; background: var(--bg2); font-size: 12px; font-weight: 700; cursor: pointer; color: var(--text2); }
+  .ci-btn.active { background: var(--yellow); color: white; border-color: var(--yellow); }
+
+  /* ====== NOTAS ESTRUTURADAS PÓS-SESSÃO ====== */
+  .notes-row { display: flex; gap: 6px; margin-bottom: 10px; }
+  .notes-toggle { flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text2); text-align: center; }
+  .notes-toggle.yes { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+  .notes-toggle.no { background: var(--green-bg); border-color: var(--green); color: var(--green); }
 </style>
 </head>
 <body>
@@ -226,6 +271,18 @@ const TECNICAS = {
   slowecc:  { label: 'Excêntr. Lenta', hint: 'Descida controlada 4-6s' },
   forced:   { label: 'Forced Reps',  hint: 'Reps assistidas até falha total' }
 };
+
+// Catálogo de tipos de cardio
+const CARDIO_TYPES = {
+  esteira_inc: { label: 'Esteira Inclinada', icon: '⛰️' },
+  corrida:     { label: 'Corrida',           icon: '🏃' },
+  caminhada:   { label: 'Caminhada',         icon: '🚶' },
+  bike:        { label: 'Bike',              icon: '🚴' },
+  escada:      { label: 'Escada (Stair)',    icon: '🪜' },
+  eliptico:    { label: 'Elíptico',          icon: '🌀' },
+  outros:      { label: 'Outros',            icon: '💧' }
+};
+const CARDIO_WEEKLY_CAP = 3;
 
 const PROGRAM = {
   'push-a': { name: 'Push A', subtitle: 'Força · Peito-dominante', duration: 65, group: 'push',
@@ -309,7 +366,11 @@ let state = {
   // CALENDÁRIO: ano-mês atualmente visível (formato YYYY-MM)
   calCursor: new Date().toISOString().slice(0, 7),
   // DETALHE DE SESSÃO (do calendário): índice da sessão clicada
-  calDetailSessionIdx: null
+  calDetailSessionIdx: null,
+  // CARDIO — form modal aberto?
+  cardioForm: null, // { tipo, duracao, intensidade, obs }
+  // NOTAS pós-sessão — em vez do prompt antigo
+  finishForm: null  // { duration, energy, dorArticular, sono6h, motivacao, obs }
 };
 
 // HISTÓRICO EMBUTIDO — backup de 18/05/2026 (Gerson)
@@ -349,13 +410,19 @@ function loadData() {
     // Se ainda não foi feito o seed inicial, embute o backup e marca a flag
     const seeded = localStorage.getItem(SEED_KEY);
     if (!seeded) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_DATA));
+      const seed = JSON.parse(JSON.stringify(SEED_DATA));
+      if (!seed.cardios) seed.cardios = [];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
       localStorage.setItem(SEED_KEY, '1');
-      return JSON.parse(JSON.stringify(SEED_DATA)); // clona pra não compartilhar referência
+      return seed;
     }
 
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (!d.cardios) d.cardios = [];
+      return d;
+    }
     const old = localStorage.getItem('gerson_treino_v3') || localStorage.getItem('gerson_treino_v2');
     if (old) {
       const parsed = JSON.parse(old);
@@ -366,10 +433,10 @@ function loadData() {
           });
         });
       }
-      return { sessions: parsed.sessions || [], currentSession: null, exerciseSubs: parsed.exerciseSubs || {} };
+      return { sessions: parsed.sessions || [], currentSession: null, exerciseSubs: parsed.exerciseSubs || {}, cardios: [] };
     }
-    return { sessions: [], currentSession: null, exerciseSubs: {} };
-  } catch { return { sessions: [], currentSession: null, exerciseSubs: {} }; }
+    return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] };
+  } catch { return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] }; }
 }
 
 // Cria identificador único de sessão para dedupe
@@ -389,21 +456,33 @@ function importBackup(jsonText) {
     let added = 0, skipped = 0;
     parsed.sessions.forEach(s => {
       if (existingKeys.has(sessionKey(s))) { skipped++; return; }
-      // Normaliza tipo de série antigo
       if (s.exercises) s.exercises.forEach(e => {
         if (e.sets) e.sets = e.sets.map(st => st ? { ...st, type: st.type || 'valida' } : null);
       });
       state.data.sessions.push(s);
       added++;
     });
-    // Ordena cronologicamente
     state.data.sessions.sort((a, b) => (a.date + (a.finishedAt || 0)).localeCompare(b.date + (b.finishedAt || 0)));
-    // Mescla substitutos (backup novo prevalece em conflito)
+
+    // Mescla cardios
+    let cardiosAdded = 0, cardiosSkipped = 0;
+    if (parsed.cardios && Array.isArray(parsed.cardios)) {
+      if (!state.data.cardios) state.data.cardios = [];
+      const cardioKey = c => `${c.date}_${c.tipo}_${c.createdAt || ''}`;
+      const existingCardios = new Set(state.data.cardios.map(cardioKey));
+      parsed.cardios.forEach(c => {
+        if (existingCardios.has(cardioKey(c))) { cardiosSkipped++; return; }
+        state.data.cardios.push(c);
+        cardiosAdded++;
+      });
+      state.data.cardios.sort((a, b) => a.date.localeCompare(b.date));
+    }
+
     if (parsed.exerciseSubs) {
       state.data.exerciseSubs = { ...state.data.exerciseSubs, ...parsed.exerciseSubs };
     }
     saveData();
-    alert(`✓ Importação concluída.\n\nAdicionadas: ${added} sessões\nIgnoradas (já existiam): ${skipped}`);
+    alert(`✓ Importação concluída.\n\nSessões adicionadas: ${added} (ignoradas: ${skipped})\nCardios adicionados: ${cardiosAdded} (ignorados: ${cardiosSkipped})`);
     render();
   } catch (err) {
     alert('Erro ao ler arquivo: ' + err.message);
@@ -596,6 +675,26 @@ function generateSummary(session) {
   txt += `Sets RPE 9+: ${setsRPE9plus}${setsRPE9plus > 2 ? '  ⚠ acima do limite (2)' : ''}\n`;
   if (prs.length) { txt += `PRs batidos:\n`; prs.forEach(p => txt += `  ✓ ${p}\n`); }
   else { txt += `PRs batidos: nenhum nesta sessão\n`; }
+
+  // Notas estruturadas
+  if (session.notes) {
+    const n = session.notes;
+    txt += `\n--- AUTO-AVALIAÇÃO ---\n`;
+    if (n.dorArticular !== null && n.dorArticular !== undefined) txt += `Dor articular: ${n.dorArticular ? 'SIM ⚠' : 'não'}\n`;
+    if (n.sono6h !== null && n.sono6h !== undefined) txt += `Sono <6h: ${n.sono6h ? 'SIM ⚠' : 'não'}\n`;
+    if (n.motivacao) txt += `Motivação: ${n.motivacao}/5\n`;
+  }
+
+  // Cardios do mesmo dia
+  const sameDayCardios = (state.data.cardios || []).filter(c => c.date === session.date);
+  if (sameDayCardios.length) {
+    txt += `\n--- CARDIO DO DIA ---\n`;
+    sameDayCardios.forEach(c => {
+      const tipoLabel = CARDIO_TYPES[c.tipo]?.label || c.tipo;
+      txt += `${tipoLabel}: ${c.duracao}min @ intensidade ${c.intensidade}/10${c.incline ? ' · ' + c.incline : ''}\n`;
+    });
+  }
+
   if (obs) txt += `\nObs: ${obs}\n`;
   return txt;
 }
@@ -646,30 +745,7 @@ function editSet(exId, setIdx) {
 }
 
 function finishSession() {
-  const current = getCurrentSession();
-  const hasAnySet = current.exercises.some(e => e.sets && e.sets.some(s => s && !s.pending && s.kg !== undefined));
-  if (!hasAnySet) { alert('Nenhuma série registrada.'); return; }
-  const duration = current.startTime ? Math.round((Date.now() - current.startTime) / 60000) : null;
-  const energy = prompt('Energia da sessão (1-10):', '8');
-  if (energy === null) return;
-  const obs = prompt('Observações (opcional):', '');
-  current.duration = duration;
-  current.energy = parseInt(energy) || 8;
-  current.obs = obs || '';
-  current.finishedAt = Date.now();
-  current.exercises.forEach(e => {
-    if (e.sets) e.sets = e.sets.filter(s => s && !s.pending && s.kg !== undefined);
-  });
-  current.exercises = current.exercises.filter(e => e.sets && e.sets.length);
-  state.data.sessions.push(current);
-  state.data.currentSession = null;
-  saveData();
-  state.summaryText = generateSummary(current);
-  state.showSummary = true;
-  state.openExercises = {};
-  stopSessionTimer();
-  state.screen = 'home';
-  render();
+  openFinishForm();
 }
 
 function startRest(duration) {
@@ -784,6 +860,251 @@ function copyToClipboard(text) {
   }
 }
 
+// ============ CARDIO ============
+function countCardiosInWeek() {
+  const today = new Date();
+  const weekStart = new Date(today);
+  weekStart.setDate(today.getDate() - today.getDay());
+  weekStart.setHours(0, 0, 0, 0);
+  return (state.data.cardios || []).filter(c => {
+    const cd = new Date(c.date + 'T12:00:00');
+    return cd >= weekStart;
+  }).length;
+}
+
+function isLegDayToday() {
+  const todayISO = new Date().toISOString().slice(0, 10);
+  return state.data.sessions.some(s => s.date === todayISO && PROGRAM[s.day]?.group === 'legs');
+}
+
+function cardioStatusText() {
+  const week = countCardiosInWeek();
+  const cap = CARDIO_WEEKLY_CAP;
+  let txt = `${week}/${cap} esta semana`;
+  if (isLegDayToday()) txt += ' · dia de perna: 15-20min';
+  return txt;
+}
+
+function openCardioForm() {
+  state.cardioForm = { tipo: 'escada', duracao: 25, intensidade: 7, obs: '', incline: '' };
+  render();
+}
+
+function closeCardioForm() { state.cardioForm = null; render(); }
+
+function setCardioField(field, value) {
+  if (!state.cardioForm) return;
+  state.cardioForm[field] = value;
+  render();
+}
+
+function saveCardio() {
+  if (!state.cardioForm) return;
+  const f = state.cardioForm;
+  if (!f.tipo) { alert('Escolha um tipo de cardio'); return; }
+  const dur = parseInt(f.duracao);
+  if (!dur || dur < 1) { alert('Duração inválida'); return; }
+  const week = countCardiosInWeek();
+  if (week >= CARDIO_WEEKLY_CAP) {
+    const ok = confirm(`⚠ Você já fez ${week} cardios esta semana. Cap recomendado: ${CARDIO_WEEKLY_CAP}.\n\nRegistrar mesmo assim?`);
+    if (!ok) return;
+  }
+  if (!state.data.cardios) state.data.cardios = [];
+  state.data.cardios.push({
+    date: new Date().toISOString().slice(0, 10),
+    tipo: f.tipo,
+    duracao: dur,
+    intensidade: parseInt(f.intensidade) || 7,
+    incline: f.incline || '',
+    obs: f.obs || '',
+    createdAt: Date.now()
+  });
+  saveData();
+  state.cardioForm = null;
+  if (navigator.vibrate) navigator.vibrate(50);
+  alert('✓ Cardio registrado');
+  render();
+}
+
+function renderCardioForm() {
+  const f = state.cardioForm;
+  if (!f) return '';
+  const typeBtns = Object.keys(CARDIO_TYPES).map(k => `
+    <button class="cardio-type-btn ${f.tipo === k ? 'active' : ''}" onclick="setCardioField('tipo', '${k}')">
+      <div class="ctb-icon">${CARDIO_TYPES[k].icon}</div>
+      <div>${CARDIO_TYPES[k].label}</div>
+    </button>
+  `).join('');
+  const intensityBtns = [1,2,3,4,5,6,7,8,9,10].map(n => `
+    <button class="ci-btn ${f.intensidade === n ? 'active' : ''}" onclick="setCardioField('intensidade', ${n})">${n}</button>
+  `).join('');
+  const legHint = isLegDayToday() ? '<div style="background:var(--yellow-bg);border-left:3px solid var(--yellow);padding:8px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#7a5d00;margin-bottom:12px">⚠ Dia de perna hoje — sugestão: 15-20min para gerir fadiga cumulativa</div>' : '';
+  return `
+    <div class="cardio-form-overlay" onclick="closeCardioForm()">
+      <div class="cardio-form" onclick="event.stopPropagation()">
+        <div class="cardio-form-head">
+          <div class="cardio-form-title">🏃 Registrar cardio</div>
+          <button class="btn-close" onclick="closeCardioForm()">×</button>
+        </div>
+        ${legHint}
+        <div class="cardio-field-label">Tipo</div>
+        <div class="cardio-types-grid">${typeBtns}</div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Duração (min)</div>
+          <input type="number" inputmode="numeric" class="cardio-field-input" id="cardio-duracao" value="${f.duracao}" onchange="setCardioField('duracao', this.value)">
+        </div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Intensidade (1-10)</div>
+          <div class="cardio-intensity-row">${intensityBtns}</div>
+        </div>
+
+        ${f.tipo === 'esteira_inc' || f.tipo === 'escada' ? `
+          <div class="cardio-field">
+            <div class="cardio-field-label">Inclinação / Nível (opcional)</div>
+            <input type="text" class="cardio-field-input" id="cardio-incline" value="${f.incline || ''}" placeholder="Ex: 12% ou nível 8" onchange="setCardioField('incline', this.value)">
+          </div>
+        ` : ''}
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Observações</div>
+          <textarea class="cardio-field-textarea" placeholder="opcional" onchange="setCardioField('obs', this.value)">${f.obs || ''}</textarea>
+        </div>
+
+        <button class="btn-primary" onclick="saveCardio()" style="margin-top:6px">Salvar cardio</button>
+      </div>
+    </div>
+  `;
+}
+
+// ============ AVISO DE TÉCNICA AVANÇADA SOMANDO ============
+// Detecta quando você adicionou séries avançadas além das válidas prescritas (em vez de substituir)
+function getAvancadaWarning(ex, exEntry) {
+  if (!exEntry || !exEntry.sets) return null;
+  const validSets = exEntry.sets.filter(s => s && !s.pending && s.kg !== undefined && s.type === 'valida').length;
+  const avancadaSets = exEntry.sets.filter(s => s && !s.pending && s.kg !== undefined && s.type === 'avancada').length;
+  // Se já tem >= séries prescritas como válidas E ainda assim adicionou avançadas, está SOMANDO
+  if (validSets >= ex.sets && avancadaSets > 0) {
+    return {
+      text: `⚠ Você já fez ${validSets} válidas (prescrito: ${ex.sets}) + ${avancadaSets} avançada${avancadaSets > 1 ? 's' : ''}. Técnica avançada SUBSTITUI volume, não soma — considere parar.`,
+      type: 'red'
+    };
+  }
+  return null;
+}
+
+// ============ FINALIZAR SESSÃO — Notas estruturadas ============
+function openFinishForm() {
+  const current = getCurrentSession();
+  const hasAnySet = current.exercises.some(e => e.sets && e.sets.some(s => s && !s.pending && s.kg !== undefined));
+  if (!hasAnySet) { alert('Nenhuma série registrada.'); return; }
+  const duration = current.startTime ? Math.round((Date.now() - current.startTime) / 60000) : null;
+  state.finishForm = {
+    duration: duration,
+    energy: 8,
+    dorArticular: null,  // null | true | false
+    sono6h: null,
+    motivacao: 4,
+    obs: ''
+  };
+  render();
+}
+
+function closeFinishForm() { state.finishForm = null; render(); }
+
+function setFinishField(field, value) {
+  if (!state.finishForm) return;
+  state.finishForm[field] = value;
+  render();
+}
+
+function confirmFinishSession() {
+  const f = state.finishForm;
+  if (!f) return;
+  if (f.energy === null || f.energy === undefined) { alert('Defina a energia'); return; }
+  const current = getCurrentSession();
+  current.duration = f.duration;
+  current.energy = parseInt(f.energy) || 8;
+  current.obs = f.obs || '';
+  current.notes = {
+    dorArticular: f.dorArticular,
+    sono6h: f.sono6h,
+    motivacao: f.motivacao
+  };
+  current.finishedAt = Date.now();
+  current.exercises.forEach(e => {
+    if (e.sets) e.sets = e.sets.filter(s => s && !s.pending && s.kg !== undefined);
+  });
+  current.exercises = current.exercises.filter(e => e.sets && e.sets.length);
+  state.data.sessions.push(current);
+  state.data.currentSession = null;
+  saveData();
+  state.summaryText = generateSummary(current);
+  state.showSummary = true;
+  state.openExercises = {};
+  state.finishForm = null;
+  stopSessionTimer();
+  state.screen = 'home';
+  render();
+}
+
+function renderFinishForm() {
+  const f = state.finishForm;
+  if (!f) return '';
+  const energyBtns = [1,2,3,4,5,6,7,8,9,10].map(n => `
+    <button class="ci-btn ${f.energy === n ? 'active' : ''}" onclick="setFinishField('energy', ${n})">${n}</button>
+  `).join('');
+  const motBtns = [1,2,3,4,5].map(n => `
+    <button class="ci-btn ${f.motivacao === n ? 'active' : ''}" onclick="setFinishField('motivacao', ${n})">${n}</button>
+  `).join('');
+  return `
+    <div class="cardio-form-overlay" onclick="closeFinishForm()">
+      <div class="cardio-form" onclick="event.stopPropagation()">
+        <div class="cardio-form-head">
+          <div class="cardio-form-title">✅ Finalizar sessão</div>
+          <button class="btn-close" onclick="closeFinishForm()">×</button>
+        </div>
+
+        <div style="font-size:12px;color:var(--text3);margin-bottom:12px">${f.duration ? f.duration + ' min de treino' : ''}</div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Energia da sessão (1-10)</div>
+          <div class="cardio-intensity-row">${energyBtns}</div>
+        </div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Sentiu dor articular?</div>
+          <div class="notes-row">
+            <button class="notes-toggle ${f.dorArticular === false ? 'no' : ''}" onclick="setFinishField('dorArticular', false)">Não</button>
+            <button class="notes-toggle ${f.dorArticular === true ? 'yes' : ''}" onclick="setFinishField('dorArticular', true)">Sim</button>
+          </div>
+        </div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Dormiu menos de 6h?</div>
+          <div class="notes-row">
+            <button class="notes-toggle ${f.sono6h === false ? 'no' : ''}" onclick="setFinishField('sono6h', false)">Não</button>
+            <button class="notes-toggle ${f.sono6h === true ? 'yes' : ''}" onclick="setFinishField('sono6h', true)">Sim</button>
+          </div>
+        </div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Motivação (1-5)</div>
+          <div class="cardio-intensity-row">${motBtns}</div>
+        </div>
+
+        <div class="cardio-field">
+          <div class="cardio-field-label">Observações livres</div>
+          <textarea class="cardio-field-textarea" placeholder="opcional" onchange="setFinishField('obs', this.value)">${f.obs || ''}</textarea>
+        </div>
+
+        <button class="btn-primary" onclick="confirmFinishSession()" style="margin-top:6px">Finalizar</button>
+      </div>
+    </div>
+  `;
+}
+
 // ============ RENDER ============
 function renderHome() {
   const dayOfWeek = new Date().getDay();
@@ -811,8 +1132,19 @@ function renderHome() {
 }
 
 function renderTodayTab(suggestedDay) {
+  const cardioBtn = `
+    <div class="cardio-btn-row">
+      <div class="cardio-tile" onclick="openCardioForm()">
+        <div class="ct-icon">🏃</div>
+        <div class="ct-text">
+          <div class="ct-title">+ Registrar cardio</div>
+          <div class="ct-sub">${cardioStatusText()}</div>
+        </div>
+      </div>
+    </div>
+  `;
   if (!suggestedDay) {
-    return `<div class="empty">Hoje é descanso.</div><button class="btn-primary" onclick="setHomeTab('choose')">Escolher treino</button>`;
+    return `<div class="empty">Hoje é descanso.</div><button class="btn-primary" onclick="setHomeTab('choose')">Escolher treino</button>${cardioBtn}`;
   }
   const dayInfo = PROGRAM[suggestedDay];
   return `
@@ -825,6 +1157,7 @@ function renderTodayTab(suggestedDay) {
       <div style="font-size:24px;color:var(--green)">→</div>
     </div>
     <button class="btn-secondary" onclick="setHomeTab('choose')">Quero fazer outro treino</button>
+    ${cardioBtn}
   `;
 }
 
@@ -837,28 +1170,42 @@ function renderChooseTab(suggestedDay) {
         ${suggestedDay === key ? '<div class="today-badge">SUGERIDO</div>' : '<div style="font-size:18px;color:var(--text3)">→</div>'}
       </div>
     `).join('')}
+    <div class="cardio-btn-row">
+      <div class="cardio-tile" onclick="openCardioForm()">
+        <div class="ct-icon">🏃</div>
+        <div class="ct-text">
+          <div class="ct-title">+ Registrar cardio</div>
+          <div class="ct-sub">${cardioStatusText()}</div>
+        </div>
+      </div>
+    </div>
   `;
 }
 
-// ============ CALENDÁRIO ============
+// ============ CALENDÁRIO (mobile-first, redesigned) ============
 function renderCalendarTab() {
   const [yearStr, monthStr] = state.calCursor.split('-');
   const year = parseInt(yearStr), month = parseInt(monthStr);
   const firstDay = new Date(year, month - 1, 1);
   const lastDay = new Date(year, month, 0);
   const daysInMonth = lastDay.getDate();
-  const startWeekday = firstDay.getDay(); // 0=Dom
+  const startWeekday = firstDay.getDay();
   const todayISO = new Date().toISOString().slice(0, 10);
 
-  // Mapa de sessões por data (YYYY-MM-DD) → array de sessões
   const sessionsByDate = {};
   state.data.sessions.forEach((s, idx) => {
     if (!sessionsByDate[s.date]) sessionsByDate[s.date] = [];
     sessionsByDate[s.date].push({ session: s, idx });
   });
 
+  const cardiosByDate = {};
+  (state.data.cardios || []).forEach((c, idx) => {
+    if (!cardiosByDate[c.date]) cardiosByDate[c.date] = [];
+    cardiosByDate[c.date].push({ cardio: c, idx });
+  });
+
   // Stats do mês
-  let monthSessions = 0, monthVolume = 0, monthDuration = 0;
+  let monthSessions = 0, monthVolume = 0, monthDuration = 0, monthCardios = 0, monthCardioMin = 0;
   state.data.sessions.forEach(s => {
     if (s.date.startsWith(state.calCursor)) {
       monthSessions++;
@@ -871,74 +1218,117 @@ function renderCalendarTab() {
       });
     }
   });
+  (state.data.cardios || []).forEach(c => {
+    if (c.date.startsWith(state.calCursor)) {
+      monthCardios++;
+      monthCardioMin += c.duracao || 0;
+    }
+  });
 
-  // Streak (dias consecutivos com pelo menos uma sessão, contando para trás a partir de hoje)
+  // Streak
   let streak = 0;
   const today = new Date();
   for (let i = 0; i < 365; i++) {
     const d = new Date(today);
     d.setDate(today.getDate() - i);
     const iso = d.toISOString().slice(0, 10);
-    if (sessionsByDate[iso]) streak++;
+    if (sessionsByDate[iso] || cardiosByDate[iso]) streak++;
     else if (i > 0) break;
   }
+
+  // Sessões da semana atual (domingo→sábado)
+  const weekStart = new Date(today);
+  weekStart.setDate(today.getDate() - today.getDay());
+  weekStart.setHours(0, 0, 0, 0);
+  let weekSessions = 0, weekCardios = 0;
+  state.data.sessions.forEach(s => {
+    const sd = new Date(s.date + 'T12:00:00');
+    if (sd >= weekStart) weekSessions++;
+  });
+  (state.data.cardios || []).forEach(c => {
+    const cd = new Date(c.date + 'T12:00:00');
+    if (cd >= weekStart) weekCardios++;
+  });
 
   const monthName = firstDay.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
 
   let cells = '';
-  // Células vazias antes do dia 1
-  for (let i = 0; i < startWeekday; i++) cells += `<div class="cal-day empty"></div>`;
+  for (let i = 0; i < startWeekday; i++) cells += `<div class="cal2-day"></div>`;
   for (let d = 1; d <= daysInMonth; d++) {
     const iso = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     const daySessions = sessionsByDate[iso] || [];
+    const dayCardios = cardiosByDate[iso] || [];
     const isToday = iso === todayISO;
-    let cls = 'cal-day';
-    let tag = '';
+    let cls = 'cal2-day';
+    if (daySessions.length || dayCardios.length) cls += ' has';
     if (daySessions.length) {
-      const groups = daySessions.map(s => PROGRAM[s.session.day]?.group).filter(Boolean);
-      // Se múltiplas sessões no dia, prioriza a primeira
-      const grp = groups[0];
-      if (grp) cls += ' ' + grp + ' has-session';
-      tag = daySessions.map(s => DAY_LABELS[s.session.day]?.split(' ')[1] || '').join('/');
+      const grp = PROGRAM[daySessions[0].session.day]?.group;
+      if (grp) cls += ' ' + grp;
+    } else if (dayCardios.length) {
+      cls += ' cardio-only';
     }
     if (isToday) cls += ' today';
-    const onclick = daySessions.length ? `onclick="openCalDay('${iso}')"` : '';
-    cells += `<div class="${cls}" ${onclick}><div>${d}</div>${tag ? `<div class="cal-day-tag">${tag}</div>` : ''}</div>`;
+
+    // Pontos: 1 por sessão de força + 1 amarelo se tem cardio
+    let dots = '';
+    daySessions.forEach(s => {
+      const grp = PROGRAM[s.session.day]?.group || 'gray';
+      dots += `<span class="cal2-dot dot-${grp}"></span>`;
+    });
+    if (dayCardios.length) dots += `<span class="cal2-dot dot-cardio"></span>`;
+
+    const onclick = (daySessions.length || dayCardios.length) ? `onclick="openCalDay('${iso}')"` : '';
+    cells += `<div class="${cls}" ${onclick}><div class="cal2-num">${d}</div>${dots ? `<div class="cal2-dots">${dots}</div>` : ''}</div>`;
   }
 
   return `
     ${streak > 0 ? `
-      <div class="cal-streak">
-        <div>
-          <div class="cal-streak-label">🔥 Streak</div>
-          <div class="cal-streak-num">${streak} ${streak === 1 ? 'dia' : 'dias'}</div>
+      <div class="cal2-streak">
+        <div class="cal2-streak-l">
+          <span class="cal2-streak-icon">🔥</span>
+          <span class="cal2-streak-num">${streak} ${streak === 1 ? 'dia' : 'dias'} seguidos</span>
         </div>
-        <div style="text-align:right;font-size:11px;opacity:0.9">consecutivos<br>treinando</div>
+        <div class="cal2-streak-r">${weekSessions}/6 força · ${weekCardios}/${CARDIO_WEEKLY_CAP} cardio</div>
       </div>
     ` : ''}
 
-    <div class="cal-stats">
-      <div class="cal-stat"><div class="cal-stat-num">${monthSessions}</div><div class="cal-stat-label">Sessões</div></div>
-      <div class="cal-stat"><div class="cal-stat-num">${Math.round(monthVolume / 1000)}t</div><div class="cal-stat-label">Volume</div></div>
-      <div class="cal-stat"><div class="cal-stat-num">${monthDuration}min</div><div class="cal-stat-label">Tempo</div></div>
+    <div class="cal2-stats">
+      <div class="cal2-stat">
+        <div class="cal2-stat-label">Sessões</div>
+        <div class="cal2-stat-val">${monthSessions}</div>
+      </div>
+      <div class="cal2-stat">
+        <div class="cal2-stat-label">Volume</div>
+        <div class="cal2-stat-val">${Math.round(monthVolume / 1000)}t</div>
+      </div>
+      <div class="cal2-stat">
+        <div class="cal2-stat-label">Tempo força</div>
+        <div class="cal2-stat-val">${monthDuration}min</div>
+      </div>
+      <div class="cal2-stat">
+        <div class="cal2-stat-label">Cardio</div>
+        <div class="cal2-stat-val">${monthCardioMin}min</div>
+      </div>
     </div>
 
-    <div class="cal-nav">
-      <button class="cal-nav-btn" onclick="calNav(-1)">‹</button>
-      <div class="cal-nav-title">${monthName}</div>
-      <button class="cal-nav-btn" onclick="calNav(1)">›</button>
+    <div class="cal2-nav">
+      <button class="cal2-nav-btn" onclick="calNav(-1)">‹</button>
+      <div class="cal2-nav-title">${monthName}</div>
+      <button class="cal2-nav-btn" onclick="calNav(1)">›</button>
     </div>
 
-    <div class="cal-grid">
-      <div class="cal-weekday">D</div><div class="cal-weekday">S</div><div class="cal-weekday">T</div>
-      <div class="cal-weekday">Q</div><div class="cal-weekday">Q</div><div class="cal-weekday">S</div><div class="cal-weekday">S</div>
-      ${cells}
+    <div class="cal2-grid-wrap">
+      <div class="cal2-weekdays">
+        <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
+      </div>
+      <div class="cal2-grid">${cells}</div>
     </div>
 
-    <div class="cal-legend">
-      <div class="cal-legend-item"><span class="cal-legend-sw" style="background:var(--red-bg)"></span>Push</div>
-      <div class="cal-legend-item"><span class="cal-legend-sw" style="background:var(--blue-bg)"></span>Pull</div>
-      <div class="cal-legend-item"><span class="cal-legend-sw" style="background:var(--purple-bg)"></span>Legs</div>
+    <div class="cal2-legend">
+      <span class="cal2-leg-item"><span class="cal2-leg-sw" style="background:var(--red-bg)"></span>Push</span>
+      <span class="cal2-leg-item"><span class="cal2-leg-sw" style="background:var(--blue-bg)"></span>Pull</span>
+      <span class="cal2-leg-item"><span class="cal2-leg-sw" style="background:var(--purple-bg)"></span>Legs</span>
+      <span class="cal2-leg-item"><span class="cal2-leg-sw cal2-leg-cardio"></span>cardio</span>
     </div>
   `;
 }
@@ -1020,6 +1410,7 @@ function renderExercise(ex, exIdx, current) {
   setsToRender.forEach((s, i) => { setsHtml += renderSet(ex, i, s, setsToRender); });
 
   const showSubBox = state.showSubFor === ex.id;
+  const avancadaWarn = getAvancadaWarning(ex, exEntry);
 
   return `
     <div class="ex-card">
@@ -1033,6 +1424,7 @@ function renderExercise(ex, exIdx, current) {
       </div>
       <div class="ex-body" ${isOpen ? '' : 'style="display:none"'}>
         ${stagnation ? `<div class="alert-box ${stagnation.type === 'red' ? 'red' : ''}">${stagnation.text}</div>` : ''}
+        ${avancadaWarn ? `<div class="alert-box ${avancadaWarn.type === 'red' ? 'red' : ''}">${avancadaWarn.text}</div>` : ''}
         <div class="ex-note">${ex.note}</div>
         <div class="ex-stats">
           <span>Última: <strong>${lastSet ? lastSet.kg + 'kg × ' + lastSet.reps : '—'}</strong></span>
@@ -1278,7 +1670,10 @@ function render() {
   else if (state.screen === 'session') main = renderSession();
   else if (state.screen === 'history') main = renderHistory();
   else if (state.screen === 'prs') main = renderPRs();
-  app.innerHTML = main + (state.showSummary ? renderSummaryModal() : '');
+  app.innerHTML = main
+    + (state.cardioForm ? renderCardioForm() : '')
+    + (state.finishForm ? renderFinishForm() : '')
+    + (state.showSummary ? renderSummaryModal() : '');
   if (state.screen === 'session') updateSessionClock();
 }
 
@@ -1447,12 +1842,29 @@ function calNav(delta) {
 }
 
 function openCalDay(iso) {
-  // Encontra primeira sessão dessa data (índice no array original)
   const idx = state.data.sessions.findIndex(s => s.date === iso);
-  if (idx < 0) return;
-  // showSummaryFor usa índice da lista REVERSA do histórico — convertemos
-  const reverseIdx = state.data.sessions.length - 1 - idx;
-  showSummaryFor(reverseIdx);
+  if (idx >= 0) {
+    const reverseIdx = state.data.sessions.length - 1 - idx;
+    showSummaryFor(reverseIdx);
+    return;
+  }
+  // Sem sessão de força — mostra só os cardios
+  const dayCardios = (state.data.cardios || []).filter(c => c.date === iso);
+  if (!dayCardios.length) return;
+  const dateBr = iso.split('-').reverse().join('/');
+  let txt = `CARDIO — ${dateBr}\n\n`;
+  dayCardios.forEach((c, i) => {
+    const tipoLabel = CARDIO_TYPES[c.tipo]?.label || c.tipo;
+    txt += `${i + 1}. ${tipoLabel}\n`;
+    txt += `   Duração: ${c.duracao}min\n`;
+    txt += `   Intensidade: ${c.intensidade}/10\n`;
+    if (c.incline) txt += `   Inclinação/Nível: ${c.incline}\n`;
+    if (c.obs) txt += `   Obs: ${c.obs}\n`;
+    txt += '\n';
+  });
+  state.summaryText = txt;
+  state.showSummary = true;
+  render();
 }
 
 render();
