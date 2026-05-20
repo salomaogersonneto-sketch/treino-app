@@ -537,7 +537,22 @@ function triggerImport() {
   input.click();
 }
 
-function saveData() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data)); } catch {} }
+function saveData() {
+  try {
+    const json = JSON.stringify(state.data);
+    localStorage.setItem(STORAGE_KEY, json);
+    // Verifica se salvou de verdade
+    const check = localStorage.getItem(STORAGE_KEY);
+    if (!check) console.warn('GSN: saveData falhou — localStorage não persistiu');
+  } catch (err) {
+    console.warn('GSN: saveData erro:', err);
+    // Tenta limpar currentSession se estiver muito grande
+    try {
+      const slim = { ...state.data, currentSession: null };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(slim));
+    } catch {}
+  }
+}
 
 function getLastSession(dayKey) { return [...state.data.sessions].reverse().find(s => s.day === dayKey); }
 
@@ -2465,12 +2480,15 @@ render();
 </script>
 
 <script>
-// Registro do Service Worker — garante PWA offline e localStorage persistente
+// Registro do Service Worker — escopo correto para GitHub Pages (/treino-app/)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('SW registrado:', reg.scope))
-      .catch(err => console.warn('SW falhou:', err));
+    // Detecta automaticamente o base path (funciona em qualquer subpath)
+    const swPath = new URL('sw.js', document.baseURI).href;
+    const scope = new URL('./', document.baseURI).href;
+    navigator.serviceWorker.register(swPath, { scope })
+      .then(reg => console.log('SW registrado, scope:', reg.scope))
+      .catch(err => console.warn('SW erro:', err));
   });
 }
 </script>
