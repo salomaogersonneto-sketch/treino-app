@@ -441,20 +441,27 @@ const SEED_DATA = {
 
 function loadData() {
   try {
-    // Se ainda não foi feito o seed inicial, embute o backup e marca a flag
     const seeded = localStorage.getItem(SEED_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY);
+
+    // LOG DIAGNÓSTICO — remove após confirmar fix
+    console.log('GSN loadData:', { seeded, hasRaw: !!raw, rawLen: raw?.length });
+
     if (!seeded) {
       const seed = JSON.parse(JSON.stringify(SEED_DATA));
       if (!seed.cardios) seed.cardios = [];
       localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
       localStorage.setItem(SEED_KEY, '1');
+      // Confirma que salvou
+      const check = localStorage.getItem(SEED_KEY);
+      console.log('GSN seed aplicado, flag salva:', check);
       return seed;
     }
 
-    const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const d = JSON.parse(raw);
       if (!d.cardios) d.cardios = [];
+      console.log('GSN dados carregados, sessões:', d.sessions?.length);
       return d;
     }
     const old = localStorage.getItem('gerson_treino_v3') || localStorage.getItem('gerson_treino_v2');
@@ -470,7 +477,10 @@ function loadData() {
       return { sessions: parsed.sessions || [], currentSession: null, exerciseSubs: parsed.exerciseSubs || {}, cardios: [] };
     }
     return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] };
-  } catch { return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] }; }
+  } catch(err) {
+    console.error('GSN loadData erro:', err);
+    return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] };
+  }
 }
 
 // Cria identificador único de sessão para dedupe
@@ -1394,6 +1404,19 @@ function renderHome() {
   const dayOfWeek = new Date().getDay();
   const dayMap = { 1: 'push-a', 2: 'pull-a', 3: 'legs-a', 4: 'push-b', 5: 'pull-b', 6: 'legs-b' };
   const suggestedDay = dayMap[dayOfWeek];
+
+  // DIAGNÓSTICO TEMPORÁRIO — mostra estado do localStorage
+  const seeded = localStorage.getItem(SEED_KEY);
+  const raw = localStorage.getItem(STORAGE_KEY);
+  const diagBanner = `
+    <div style="background:#1a1a1a;color:#0f0;font-family:monospace;font-size:10px;padding:8px 12px;margin-bottom:8px;border-radius:8px;line-height:1.6">
+      <div>SEED_KEY: ${seeded || 'NULL'}</div>
+      <div>STORAGE: ${raw ? 'OK (' + raw.length + ' chars)' : 'NULL'}</div>
+      <div>SESSIONS: ${state.data.sessions?.length || 0}</div>
+      <div>HORA: ${new Date().toLocaleTimeString('pt-BR')}</div>
+    </div>
+  `;
+
   return `
     <div class="header">
       <div class="h-label">GSN Training — PPL 6x</div>
@@ -1409,6 +1432,7 @@ function renderHome() {
       <button class="nav-tab" onclick="goPRs()">PRs</button>
     </div>
     <div class="content">
+      ${diagBanner}
       ${state.homeTab === 'today' ? renderTodayTab(suggestedDay) :
         state.homeTab === 'choose' ? renderChooseTab(suggestedDay) :
         state.homeTab === 'charts' ? renderChartsTab() :
