@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
- <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="apple-mobile-web-app-title" content="GSN Training">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0A0A0C">
-
-  <title>GSN Training</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="GSN Training">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0A0A0C">
+<title>GSN Training</title>
 <style>
   :root {
     --bg: #fafaf7; --bg2: #ffffff; --bg3: #f0ede5;
@@ -26,2494 +23,695 @@
     --orange: #d96b1f; --orange-bg: #fdeed8;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; padding-bottom: 130px; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; padding-bottom: 40px; }
   input[type="number"] { -moz-appearance: textfield; }
   input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-  .header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 14px 16px; position: sticky; top: 0; z-index: 30; }
-  .h-row { display: flex; align-items: center; justify-content: space-between; }
-  .btn-back { background: transparent; border: none; color: var(--accent); font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px 0; }
-  .btn-finish { background: var(--accent); border: none; color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; }
-  .h-label { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-top: 8px; }
+  .header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 14px 16px 0; position: sticky; top: 0; z-index: 30; }
+  .h-label { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
   .h-title { font-size: 22px; font-weight: 700; color: var(--text); margin-top: 2px; }
-  .h-meta { font-size: 11px; color: var(--text3); margin-top: 4px; }
+  .h-sub { font-size: 12px; color: var(--text3); margin-top: 4px; margin-bottom: 12px; }
 
-  .session-clock { background: linear-gradient(135deg, var(--accent), #d4a853); color: white; padding: 10px 14px; border-radius: 10px; margin-top: 10px; display: flex; align-items: center; justify-content: space-between; }
-  .clock-display { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .clock-label { font-size: 11px; opacity: 0.9; letter-spacing: 0.08em; text-transform: uppercase; }
+  .tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex-shrink: 0; padding: 10px 14px; border: none; background: transparent; color: var(--text3); font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
   .content { padding: 16px; max-width: 720px; margin: 0 auto; }
+  .section { display: none; }
+  .section.active { display: block; animation: fade 0.2s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
-  .nav-tabs { display: flex; gap: 6px; padding: 12px 16px 0; background: var(--bg2); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 25; overflow-x: auto; }
-  .nav-tab { flex-shrink: 0; padding: 8px 14px 10px; border: none; background: transparent; color: var(--text3); font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  h2 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  h3 { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin: 20px 0 8px; }
+  p { color: var(--text2); margin-bottom: 10px; }
 
-  .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-  .day-card.today { background: var(--green-bg); border-color: var(--green); }
-  .day-card h3 { font-size: 15px; font-weight: 700; color: var(--text); }
-  .day-card p { font-size: 11px; color: var(--text3); margin-top: 2px; }
-  .today-badge { font-size: 10px; color: var(--green); font-weight: 700; letter-spacing: 0.1em; }
-
-  .warmup { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
-  .warmup-header { padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-  .warmup-title { font-size: 13px; font-weight: 700; color: var(--blue); }
-  .warmup-body { padding: 0 14px 14px; border-top: 1px solid var(--border); }
-  .warmup-section { font-size: 10px; color: var(--text3); margin-top: 10px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
-  .warmup-item { font-size: 13px; color: var(--text2); padding: 3px 0; }
+  .day-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+  .day-btn { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; cursor: pointer; text-align: left; }
+  .day-btn.active { border-color: var(--accent); background: var(--accent-bg); }
+  .day-btn-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .day-btn.active .day-btn-name { color: var(--accent); }
+  .day-btn-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+  .day-btn-tag { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 8px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tag-push { background: var(--red-bg); color: var(--red); }
+  .tag-pull { background: var(--blue-bg); color: var(--blue); }
+  .tag-legs { background: var(--purple-bg); color: var(--purple); }
 
   .ex-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
   .ex-header { padding: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-  .ex-num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); flex-shrink: 0; }
-  .ex-num.done { background: var(--green); color: white; border-color: var(--green); }
+  .ex-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-bg); border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
   .ex-info { flex: 1; min-width: 0; }
-  .ex-name-row { display: flex; align-items: center; gap: 6px; }
   .ex-name { font-size: 15px; font-weight: 700; color: var(--text); }
-  .progress-arrow { font-size: 14px; }
-  .progress-arrow.up { color: var(--green); }
-  .progress-arrow.flat { color: var(--yellow); }
-  .progress-arrow.down { color: var(--red); }
   .ex-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
   .ex-chevron { font-size: 12px; color: var(--text3); transition: transform 0.2s; }
   .ex-chevron.open { transform: rotate(180deg); }
-  .ex-body { padding: 0 14px 14px; border-top: 1px solid var(--border); }
-  .ex-note { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: var(--text2); margin: 12px 0; line-height: 1.5; }
-  .ex-stats { font-size: 11px; color: var(--text3); margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
-  .ex-stats strong { color: var(--accent); font-weight: 700; }
-  .alert-box { background: var(--yellow-bg); border-left: 3px solid var(--yellow); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: #7a5d00; margin-bottom: 10px; }
-  .alert-box.red { background: var(--red-bg); border-left-color: var(--red); color: #8a2018; }
+  .ex-body { padding: 0 14px 14px; border-top: 1px solid var(--border); display: none; }
+  .ex-body.open { display: block; }
 
-  .sub-toggle { background: var(--bg3); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 11px; color: var(--text2); cursor: pointer; margin-bottom: 10px; display: inline-block; font-weight: 600; }
-  .sub-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 10px; }
-  .sub-box-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--text3); margin-bottom: 6px; }
-  .sub-option { padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; cursor: pointer; font-size: 13px; color: var(--text); background: var(--bg2); display: flex; justify-content: space-between; align-items: center; }
-  .sub-option.active { border-color: var(--accent); background: var(--accent-bg); font-weight: 700; }
-  .sub-rank { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .ex-detail-row { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+  .ex-detail { background: var(--bg); border-radius: 8px; padding: 8px 10px; flex: 1; min-width: 80px; }
+  .ex-detail-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+  .ex-detail-val { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 2px; }
 
-  .type-selector { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
-  .type-btn { padding: 4px 10px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2); font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text3); }
-  .type-btn.t-aquec.active { color: var(--blue); background: var(--blue-bg); border-color: var(--blue); }
-  .type-btn.t-feeder.active { color: var(--text2); background: var(--bg3); border-color: var(--text2); }
-  .type-btn.t-valida.active { color: var(--green); background: var(--green-bg); border-color: var(--green); }
-  .type-btn.t-avancada.active { color: var(--orange); background: var(--orange-bg); border-color: var(--orange); }
+  .muscle-block { margin: 12px 0; }
+  .muscle-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 6px; }
+  .muscle-pills { display: flex; gap: 4px; flex-wrap: wrap; }
+  .muscle-pill { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+  .muscle-pill.primary { background: var(--accent); color: white; }
+  .muscle-pill.secondary { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
 
-  /* Seletor de técnica avançada */
-  .tec-selector { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; padding: 8px; background: var(--orange-bg); border: 1px dashed var(--orange); border-radius: 8px; }
-  .tec-selector-label { width: 100%; font-size: 10px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
-  .tec-btn { padding: 5px 10px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2); font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text2); }
-  .tec-btn.active { color: white; background: var(--orange); border-color: var(--orange); }
-  .tec-tag { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 8px; background: var(--orange); color: white; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .note-box { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 12px; color: var(--text2); margin: 12px 0; line-height: 1.5; }
+  .tech-tag { display: inline-block; background: var(--orange-bg); color: var(--orange); padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
 
-  .set-row { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
-  .set-row.done.t-aquec { background: var(--blue-bg); }
-  .set-row.done.t-feeder { background: var(--bg3); }
-  .set-row.done.t-valida { background: var(--green-bg); }
-  .set-row.done.t-avancada { background: var(--orange-bg); }
-  .set-row.done .set-num { color: white; }
-  .set-row.done.t-aquec .set-num { background: var(--blue); }
-  .set-row.done.t-feeder .set-num { background: var(--text2); }
-  .set-row.done.t-valida .set-num { background: var(--green); }
-  .set-row.done.t-avancada .set-num { background: var(--orange); }
-  .set-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-  .set-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); flex-shrink: 0; }
-  .set-label { font-size: 12px; color: var(--text2); flex: 1; min-width: 60px; }
-  .amrap-tag { color: var(--accent); font-weight: 700; }
-  .set-type-tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .set-type-tag.t-aquec { background: var(--blue-bg); color: var(--blue); }
-  .set-type-tag.t-feeder { background: var(--bg3); color: var(--text2); }
-  .set-type-tag.t-valida { background: var(--green-bg); color: var(--green); }
-  .set-type-tag.t-avancada { background: var(--orange-bg); color: var(--orange); }
-  .btn-edit { background: transparent; border: none; color: var(--text3); cursor: pointer; padding: 4px 6px; font-size: 14px; }
+  .subs-block { margin-top: 12px; }
+  .subs-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 6px; }
+  .sub-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 5px; font-size: 13px; color: var(--text); }
+  .sub-rank { font-size: 9px; font-weight: 700; color: var(--text3); background: var(--bg3); border-radius: 6px; padding: 2px 6px; flex-shrink: 0; }
 
-  .set-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; align-items: end; }
-  .field-label { font-size: 10px; color: var(--text3); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
-  .field-input { width: 100%; background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; padding: 10px 8px; color: var(--text); font-size: 16px; font-weight: 700; text-align: center; }
-  .field-input.warn { border-color: var(--yellow); background: var(--yellow-bg); }
-  .field-input.danger { border-color: var(--red); background: var(--red-bg); }
-  .btn-save { background: var(--accent); color: white; border: none; border-radius: 6px; padding: 0 16px; height: 40px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .tbl-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: 8px; overflow: hidden; font-size: 12px; }
+  th { background: var(--text); color: white; text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 700; }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: var(--bg); }
 
-  .add-set-row { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
-  .btn-add-set { flex: 1; background: var(--bg2); border: 1px dashed var(--border2); color: var(--text2); padding: 8px 4px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; min-width: 70px; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .pill.green { background: var(--green-bg); color: var(--green); }
+  .pill.yellow { background: var(--yellow-bg); color: var(--yellow); }
+  .pill.red { background: var(--red-bg); color: var(--red); }
 
-  .timer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--border); padding: 12px 16px; z-index: 50; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); }
-  .timer-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 720px; margin: 0 auto; }
-  .timer-display { font-size: 28px; font-weight: 700; color: var(--accent); min-width: 70px; font-variant-numeric: tabular-nums; }
-  .timer-display.done { color: var(--green); }
-  .timer-bar-wrap { flex: 1; }
-  .timer-bar-bg { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-  .timer-bar { height: 100%; background: var(--accent); transition: width 1s linear; }
-  .timer-bar.done { background: var(--green); }
-  .timer-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
-  .btn-skip { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
-  .timer-quick { display: flex; gap: 4px; margin-top: 8px; max-width: 720px; margin-left: auto; margin-right: auto; }
-  .quick-btn { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text2); padding: 6px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; }
+  .callout { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 14px; margin: 14px 0; font-size: 13px; line-height: 1.55; color: var(--text2); }
+  .callout.green { background: var(--green-bg); border-left-color: var(--green); }
+  .callout.red { background: var(--red-bg); border-left-color: var(--red); }
+  .callout.blue { background: var(--blue-bg); border-left-color: var(--blue); }
+  .callout strong { color: var(--text); }
 
-  .btn-secondary { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--accent); padding: 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 12px; }
-  .btn-primary { width: 100%; background: var(--accent); border: none; color: white; padding: 14px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; }
+  .cardio-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .cardio-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .cardio-icon { font-size: 26px; }
+  .cardio-card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .cardio-card-goal { font-size: 11px; color: var(--text3); }
+  .cardio-params { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px; }
+  .cardio-param { background: var(--bg); border-radius: 8px; padding: 8px 10px; }
+  .cardio-param-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+  .cardio-param-val { font-size: 15px; font-weight: 700; color: var(--accent); margin-top: 2px; }
 
-  .history-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
-  .history-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .history-name { font-size: 15px; font-weight: 700; color: var(--text); }
-  .history-date { font-size: 11px; color: var(--text3); }
-  .history-meta { font-size: 11px; color: var(--text3); }
-  .history-ex { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text2); }
-  .history-ex strong { color: var(--accent); }
-  .history-actions { display: flex; gap: 8px; margin-top: 10px; }
-  .btn-mini { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text2); padding: 8px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; }
-  .btn-mini-red { flex: 1; background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 8px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; }
-  .cardio-hist-card { background: var(--yellow-bg); border: 1px solid var(--yellow); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
-  .cardio-hist-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-  .cardio-hist-name { font-size: 14px; font-weight: 700; color: #7a5d00; }
-  .cardio-hist-date { font-size: 11px; color: var(--text3); }
-  .cardio-hist-meta { font-size: 11px; color: var(--text2); }
-  .hist-section-title { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin: 16px 0 8px; }
+  .tech-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+  .tech-card-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .tech-card-sub { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .tech-card p { font-size: 13px; margin-bottom: 6px; }
+  .tech-how { background: var(--bg); border-radius: 8px; padding: 10px; font-size: 12px; color: var(--text2); margin-top: 8px; }
+  .tech-how strong { color: var(--text); }
 
-  .empty { text-align: center; color: var(--text3); padding: 60px 20px; font-size: 14px; }
+  .calc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin: 14px 0; }
+  .calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .calc-row label { font-size: 13px; color: var(--text); flex: 1; font-weight: 600; }
+  .calc-input { width: 100px; padding: 10px; border: 1px solid var(--border2); border-radius: 8px; font-size: 16px; font-weight: 700; text-align: center; color: var(--text); background: var(--bg); }
+  .calc-seg { display: flex; gap: 4px; margin-bottom: 12px; }
+  .calc-seg-btn { flex: 1; padding: 8px 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); font-size: 11px; font-weight: 700; cursor: pointer; color: var(--text2); }
+  .calc-seg-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .calc-result { background: var(--accent-bg); border-radius: 10px; padding: 4px 14px; margin-top: 10px; }
+  .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 13px; border-bottom: 1px solid rgba(184,137,46,0.15); }
+  .calc-result-row:last-child { border-bottom: none; }
+  .calc-result-label { color: var(--text2); }
+  .calc-result-val { font-weight: 700; color: var(--accent); font-size: 16px; }
+  .calc-result-val.big { font-size: 20px; color: var(--green); }
 
-  .pr-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
-  .pr-ex-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .pr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .pr-item { background: var(--bg); border-radius: 8px; padding: 10px; }
-  .pr-item-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 4px; }
-  .pr-item-value { font-size: 18px; font-weight: 700; color: var(--accent); }
-  .pr-item-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
-  .pr-badge { display: inline-block; background: var(--purple-bg); color: var(--purple); padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-left: 6px; }
-  .pr-1rm { display: flex; align-items: center; justify-content: space-between; background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
-  .pr-1rm-label { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
-  .pr-1rm-value { font-size: 20px; font-weight: 800; color: var(--accent); }
-  .pr-chart-toggle { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 7px; border-radius: 7px; font-size: 11px; font-weight: 700; cursor: pointer; margin-top: 8px; }
-  .pr-chart-wrap { margin-top: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 6px 6px; overflow: hidden; }
-  .chart-svg { width: 100%; display: block; }
-  .chart-tooltip { position: fixed; background: var(--text); color: white; padding: 5px 9px; border-radius: 6px; font-size: 11px; font-weight: 700; pointer-events: none; z-index: 200; white-space: nowrap; transition: opacity 0.1s; }
+  .footer-note { font-size: 11px; color: var(--text3); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); line-height: 1.6; }
+  ul.bullets { margin: 8px 0 12px 18px; }
+  ul.bullets li { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
 
-  .summary-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
-  .summary-content { background: var(--bg2); width: 100%; max-width: 720px; max-height: 90vh; border-radius: 16px 16px 0 0; padding: 16px; overflow-y: auto; }
-  .summary-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .summary-title { font-size: 16px; font-weight: 700; color: var(--text); }
-  .btn-close { background: var(--bg3); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; color: var(--text2); }
-  .summary-text { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; color: var(--text); white-space: pre-wrap; line-height: 1.6; max-height: 60vh; overflow-y: auto; }
-  .summary-actions { display: flex; gap: 8px; margin-top: 12px; }
+  /* ===== CARGAS ===== */
+  .cargas-intro { background: var(--blue-bg); border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; padding: 10px 12px; font-size: 12px; color: var(--text2); margin-bottom: 14px; line-height: 1.5; }
+  .cargas-intro strong { color: var(--text); }
+  .cargas-group { margin-bottom: 20px; }
+  .cargas-group-title { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .carga-row { display: flex; align-items: center; gap: 10px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 6px; }
+  .carga-row.edited { border-color: var(--green); background: var(--green-bg); }
+  .carga-nome { flex: 1; font-size: 13px; font-weight: 600; color: var(--text); min-width: 0; }
+  .carga-input-wrap { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+  .carga-input { width: 72px; padding: 8px 6px; border: 1px solid var(--border2); border-radius: 8px; font-size: 16px; font-weight: 700; text-align: center; color: var(--text); background: var(--bg); }
+  .carga-input:focus { border-color: var(--accent); outline: none; }
+  .carga-unit { font-size: 11px; color: var(--text3); font-weight: 600; }
+  .carga-del { background: transparent; border: none; color: var(--text3); font-size: 16px; cursor: pointer; padding: 4px; flex-shrink: 0; }
 
-  /* ====== CALENDÁRIO (mobile-first redesign v2) ====== */
-  .cal2-streak { display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: white; border-radius: 10px; padding: 9px 12px; margin-bottom: 10px; }
-  .cal2-streak-l { display: flex; align-items: center; gap: 8px; }
-  .cal2-streak-icon { font-size: 16px; }
-  .cal2-streak-num { font-weight: 700; font-size: 13px; }
-  .cal2-streak-r { font-size: 10px; opacity: 0.92; text-align: right; }
+  .cargas-actions { display: flex; gap: 8px; margin-top: 16px; margin-bottom: 20px; }
+  .btn-save-url { flex: 2; background: var(--accent); color: white; border: none; border-radius: 10px; padding: 14px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .btn-copy-url { flex: 1; background: var(--bg2); color: var(--accent); border: 1px solid var(--accent); border-radius: 10px; padding: 14px; font-size: 13px; font-weight: 700; cursor: pointer; }
 
-  .cal2-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px; }
-  .cal2-stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
-  .cal2-stat-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
-  .cal2-stat-val { font-size: 18px; font-weight: 700; color: var(--text); margin-top: 2px; }
+  .add-ex-box { background: var(--bg2); border: 1px dashed var(--border2); border-radius: 10px; padding: 12px; margin-top: 8px; }
+  .add-ex-row { display: flex; gap: 8px; align-items: center; }
+  .add-ex-input { flex: 1; padding: 10px 12px; border: 1px solid var(--border2); border-radius: 8px; font-size: 14px; color: var(--text); background: var(--bg); }
+  .btn-add-ex { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
 
-  .cal2-nav { display: flex; align-items: center; justify-content: space-between; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; margin-bottom: 6px; }
-  .cal2-nav-btn { background: transparent; border: none; color: var(--accent); font-size: 22px; font-weight: 700; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-  .cal2-nav-btn:active { background: var(--bg3); }
-  .cal2-nav-title { font-weight: 700; font-size: 14px; text-transform: capitalize; color: var(--text); }
-
-  .cal2-grid-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin-bottom: 8px; }
-  .cal2-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 4px; }
-  .cal2-weekdays > div { text-align: center; font-size: 10px; color: var(--text3); font-weight: 700; padding: 4px 0; }
-  .cal2-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
-  .cal2-day { aspect-ratio: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; color: var(--text2); font-size: 13px; background: transparent; cursor: default; }
-  .cal2-day.has { cursor: pointer; }
-  .cal2-day.push { background: var(--red-bg); color: #A32D2D; font-weight: 700; }
-  .cal2-day.pull { background: var(--blue-bg); color: #0C447C; font-weight: 700; }
-  .cal2-day.legs { background: var(--purple-bg); color: #3C3489; font-weight: 700; }
-  .cal2-day.cardio-only { background: var(--yellow-bg); color: #7a5d00; font-weight: 700; }
-  .cal2-day.today { border: 1.5px solid var(--accent); }
-  .cal2-num { line-height: 1; }
-  .cal2-dots { display: flex; gap: 2px; margin-top: 2px; }
-  .cal2-dot { width: 4px; height: 4px; border-radius: 50%; display: inline-block; }
-  .dot-push { background: var(--red); }
-  .dot-pull { background: var(--blue); }
-  .dot-legs { background: var(--purple); }
-  .dot-cardio { background: var(--yellow); }
-
-  .cal2-legend { display: flex; justify-content: space-around; gap: 4px; flex-wrap: wrap; padding: 4px 4px 8px; }
-  .cal2-leg-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--text3); }
-  .cal2-leg-sw { width: 10px; height: 10px; border-radius: 2px; }
-  .cal2-leg-cardio { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
-
-  /* ====== ABA GRÁFICOS ====== */
-  .charts-section { margin-bottom: 20px; }
-  .charts-section-title { font-size: 12px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-  .chart-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
-  .chart-card-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-  .chart-card-sub { font-size: 10px; color: var(--text3); font-weight: 400; }
-  .chart-empty { text-align: center; color: var(--text3); padding: 24px; font-size: 12px; }
-  .ex-picker { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
-  .ex-pick-btn { padding: 5px 10px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); font-size: 11px; font-weight: 600; cursor: pointer; color: var(--text2); white-space: nowrap; }
-  .ex-pick-btn.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
-  .chart-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 10px; color: var(--text3); margin-top: 6px; padding: 0 2px; }
-  .chart-legend-item { display: flex; align-items: center; gap: 4px; }
-  .chart-legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-  .chart-legend-line { width: 14px; height: 2px; display: inline-block; border-radius: 2px; }
-  .chart-legend-dash { width: 14px; height: 0; display: inline-block; border-top: 2px dashed; }
-  .cardio-btn-row { display: flex; gap: 8px; margin-top: 12px; }
-  .cardio-tile { flex: 1; background: var(--yellow-bg); border: 1px solid var(--yellow); border-radius: 10px; padding: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-  .cardio-tile .ct-icon { font-size: 22px; }
-  .cardio-tile .ct-text { flex: 1; }
-  .cardio-tile .ct-title { font-size: 13px; font-weight: 700; color: #7a5d00; }
-  .cardio-tile .ct-sub { font-size: 10px; color: var(--text3); margin-top: 1px; }
-
-  .cardio-form-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
-  .cardio-form { background: var(--bg2); width: 100%; max-width: 720px; max-height: 90vh; overflow-y: auto; border-radius: 16px 16px 0 0; padding: 16px; }
-  .cardio-form-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .cardio-form-title { font-size: 16px; font-weight: 700; color: var(--text); }
-  .cardio-types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 14px; }
-  .cardio-type-btn { padding: 10px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); cursor: pointer; text-align: center; font-size: 12px; font-weight: 600; color: var(--text2); display: flex; flex-direction: column; align-items: center; gap: 3px; }
-  .cardio-type-btn .ctb-icon { font-size: 20px; }
-  .cardio-type-btn.active { background: var(--yellow-bg); border-color: var(--yellow); color: #7a5d00; }
-  .cardio-field { margin-bottom: 12px; }
-  .cardio-field-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 4px; }
-  .cardio-field-input { width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; font-size: 15px; font-weight: 700; color: var(--text); text-align: center; }
-  .cardio-field-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--text); resize: vertical; min-height: 60px; font-family: inherit; }
-  .cardio-intensity-row { display: flex; gap: 4px; }
-  .ci-btn { flex: 1; padding: 8px 0; border: 1px solid var(--border); border-radius: 6px; background: var(--bg2); font-size: 12px; font-weight: 700; cursor: pointer; color: var(--text2); }
-  .ci-btn.active { background: var(--yellow); color: white; border-color: var(--yellow); }
-
-  /* ====== NOTAS ESTRUTURADAS PÓS-SESSÃO ====== */
-  .notes-row { display: flex; gap: 6px; margin-bottom: 10px; }
-  .notes-toggle { flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text2); text-align: center; }
-  .notes-toggle.yes { background: var(--red-bg); border-color: var(--red); color: var(--red); }
-  .notes-toggle.no { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+  .url-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: var(--text3); word-break: break-all; margin-top: 10px; display: none; line-height: 1.6; }
+  .url-box.show { display: block; }
+  .url-tip { font-size: 11px; color: var(--blue); margin-top: 6px; }
 </style>
 </head>
 <body>
-<div id="app"></div>
+<div class="header">
+  <div class="h-label">GSN Training</div>
+  <div class="h-title">Manual de Treino</div>
+  <div class="h-sub">PPL 6x · Bodytech · base científica Jeff Nippard</div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="treinos">Treinos</button>
+    <button class="tab" data-tab="split">Split</button>
+    <button class="tab" data-tab="cardio">Cardio</button>
+    <button class="tab" data-tab="tecnicas">Técnicas</button>
+    <button class="tab" data-tab="macros">Macros</button>
+    <button class="tab" data-tab="ciencia">Ciência</button>
+    <button class="tab" data-tab="cargas">⚖️ Cargas</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section active" id="treinos">
+    <div class="day-grid" id="day-grid"></div>
+    <div id="day-detail"></div>
+  </div>
+
+  <div class="section" id="split">
+    <h2>Como funciona o Split</h2>
+    <p>Rotação PPL 6x — cada músculo é treinado 2x por semana, frequência ótima segundo o Nippard (volume distribuído em pelo menos 2 sessões).</p>
+    <div class="callout"><strong>Rotação de 8 dias:</strong> Pull A → Legs Q → Push B → OFF → Pull B → Legs P → Push A → OFF</div>
+    <h3>Lógica A vs B</h3>
+    <ul class="bullets">
+      <li><strong>Versão A (Força):</strong> compostos pesados, faixa 4-8 reps, cluster + AMRAP no primeiro exercício</li>
+      <li><strong>Versão B (Hipertrofia):</strong> volume metabólico, faixa 8-15, mais finalizadores (drop, myo)</li>
+    </ul>
+    <h3>Frequência por músculo</h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>Músculo</th><th>Sessões/semana</th></tr>
+      <tr><td>Peito</td><td>2× (Push A + Push B)</td></tr>
+      <tr><td>Costas</td><td>2× (Pull A + Pull B)</td></tr>
+      <tr><td>Quadríceps</td><td>2× (Legs A + Legs B)</td></tr>
+      <tr><td>Posteriores</td><td>2× (Legs A + Legs B)</td></tr>
+      <tr><td>Ombros</td><td>2× (Push A + Push B)</td></tr>
+      <tr><td>Bíceps</td><td>2× (Pull A + Pull B)</td></tr>
+      <tr><td>Tríceps</td><td>2× (Push A + Push B)</td></tr>
+    </table></div>
+    <div class="callout green"><strong>Split PPL 6x está alinhado com o Nippard</strong> — distribui 2x/semana por músculo. Não mudar.</div>
+  </div>
+
+  <div class="section" id="cardio">
+    <h2>Cardio sem matar gains</h2>
+    <p>Modelos baseados na ciência do Nippard (zona 2, ≤30min, ≤3x/sem). Zona 2 = 60-70% da FC máxima — você consegue conversar enquanto faz.</p>
+    <div id="cardio-cards"></div>
+    <h3>Regras de ouro</h3>
+    <div class="callout blue"><ul class="bullets" style="margin-top:0">
+      <li><strong>Máximo 3x/semana, até 30 min.</strong> Acima começa a interferir na hipertrofia.</li>
+      <li><strong>6h+ separado do treino de força.</strong> Nunca antes do peso no mesmo dia.</li>
+      <li><strong>Dia de perna:</strong> reduzir para 15-20 min ou pular.</li>
+      <li><strong>Zona 2 &gt; HIIT.</strong> Baixa intensidade não atrapalha gains e melhora recuperação.</li>
+    </ul></div>
+  </div>
+
+  <div class="section" id="tecnicas">
+    <h2>Técnicas Avançadas</h2>
+    <p>Cada técnica é um <em>finalizador</em> — última série, máquina isolada e estável. Uma por exercício, máximo uma por sessão. Nunca empilhar.</p>
+    <div id="tech-cards"></div>
+  </div>
+
+  <div class="section" id="macros">
+    <h2>Calculadora de Macros</h2>
+    <p>Baseada na ciência do Nippard. Entra peso e % de gordura, sai a meta completa.</p>
+    <div class="calc">
+      <div class="calc-row"><label for="m-peso">Peso total (kg)</label><input type="number" id="m-peso" class="calc-input" value="100" min="40" max="200"></div>
+      <div class="calc-row"><label for="m-bf">% Gordura corporal</label><input type="number" id="m-bf" class="calc-input" value="10" min="3" max="40" step="0.5"></div>
+      <div class="calc-row" style="font-size:12px;color:var(--text3)"><label>Massa magra (LBM)</label><span id="m-lbm" style="font-weight:700;color:var(--accent)">90 kg</span></div>
+      <div class="muscle-label">Objetivo</div>
+      <div class="calc-seg" id="m-goal">
+        <button class="calc-seg-btn" data-goal="cut">Cutting</button>
+        <button class="calc-seg-btn active" data-goal="recomp">Recomp</button>
+        <button class="calc-seg-btn" data-goal="bulk">Bulk leve</button>
+      </div>
+      <div class="muscle-label">Nível de atividade</div>
+      <div class="calc-seg" id="m-act">
+        <button class="calc-seg-btn" data-act="1.375">Leve</button>
+        <button class="calc-seg-btn active" data-act="1.55">Moderado</button>
+        <button class="calc-seg-btn" data-act="1.725">Intenso</button>
+      </div>
+      <div class="calc-result" id="m-result"></div>
+    </div>
+    <div class="callout"><strong>Sua meta documentada:</strong> ~3.100 kcal, 250g proteína, 60-70g gordura, ~460g carbo. Os números acima usam seu perfil (100kg, 10% BF) como base.</div>
+    <div class="callout green"><strong>Proteína:</strong> 250g está no centro da sua faixa funcional (220-280g). Com apoio hormonal, 2,5g/kg de peso é o alvo.</div>
+    <h3>Distribuição sugerida</h3>
+    <p id="m-dist"></p>
+  </div>
+
+  <div class="section" id="ciencia">
+    <h2>Princípios (Nippard)</h2>
+    <h3>Volume ótimo</h3>
+    <p>Relação volume × hipertrofia é uma curva em U invertido. Pouco não estimula, muito prejudica recuperação.</p>
+    <div class="callout"><strong>Janela ideal:</strong> 10-20 séries válidas por grupo muscular por semana, em pelo menos 2 sessões.</div>
+    <div class="callout red"><strong>Teto por sessão:</strong> 6-8 séries para um músculo. Acima vira <em>junk volume</em>.</div>
+    <h3>Esforço (RIR / RPE)</h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>RIR</th><th>RPE</th><th>Quando usar</th></tr>
+      <tr><td>0 (falha)</td><td>10</td><td>Última série de finalizador — máx 1-2x/sessão</td></tr>
+      <tr><td>1 rep</td><td>9</td><td>Sets pesados de composto principal</td></tr>
+      <tr><td>2 reps</td><td>8</td><td>Maior parte do treino</td></tr>
+      <tr><td>3 reps</td><td>7</td><td>Aquecimento / calibração</td></tr>
+    </table></div>
+    <div class="callout green"><strong>Reps de 3 a 30 produzem hipertrofia similar</strong> se o set é levado perto da falha. A faixa 6-12 é conveniência, não regra.</div>
+    <h3>Descanso entre séries</h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>Tipo</th><th>Descanso</th></tr>
+      <tr><td>Composto pesado</td><td>3-5 min</td></tr>
+      <tr><td>Isolador máquina/halter</td><td>1-2 min</td></tr>
+      <tr><td>Finalizador (drop/RP)</td><td>0-30s entre drops</td></tr>
+    </table></div>
+    <div class="callout red">Encurtar descanso reduz volume válido e prejudica hipertrofia.</div>
+    <h3>Seleção de exercícios</h3>
+    <ul class="bullets">
+      <li><strong>Alta tensão no estiramento</strong> — onde mais hipertrofia acontece</li>
+      <li><strong>Permite progressão simples</strong> — adicionar reps ou peso sem retrabalho</li>
+      <li><strong>Não dói</strong> — desconforto fora de fadiga muscular = exercício errado</li>
+      <li><strong>50-70% compostos + 30-50% isoladores</strong> — composto primeiro</li>
+    </ul>
+    <div class="footer-note">Baseado em: Schoenfeld et al. (2017), Krieger (junk volume), Helms et al. (RIR), Wilson et al. (interferência cardio). Aplicado ao protocolo PPL 6x (Bodytech).</div>
+  </div>
+
+  <div class="section" id="cargas">
+    <h2>Caderno de Cargas</h2>
+    <div class="cargas-intro">
+      <strong>Como funciona:</strong> edite os pesos e clique em "Gerar link". Salve o link nos favoritos do Safari — ele carrega seus pesos automaticamente na próxima abertura. Sem app, sem cadastro, sem problema de iOS.
+    </div>
+    <div class="cargas-actions">
+      <button class="btn-save-url" onclick="gerarLink()">🔗 Gerar link com meus pesos</button>
+      <button class="btn-copy-url" onclick="copiarLink()">Copiar</button>
+    </div>
+    <div class="url-box" id="url-box">
+      <div id="url-text"></div>
+      <div class="url-tip">↑ Copie esse link e salve nos Favoritos do Safari. Na próxima vez que abrir por ele, seus pesos já estarão lá.</div>
+    </div>
+    <div id="cargas-list"></div>
+    <div class="cargas-group">
+      <div class="cargas-group-title">➕ Adicionar exercício livre</div>
+      <div class="add-ex-box">
+        <div class="add-ex-row">
+          <input type="text" class="add-ex-input" id="add-ex-nome" placeholder="Nome do exercício">
+          <button class="btn-add-ex" onclick="adicionarExercicio()">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <script>
-const SET_TYPES = {
-  aquec: { label: 'Aquec', rest: 30, countsVolume: false },
-  feeder: { label: 'Feeder', rest: 60, countsVolume: false },
-  valida: { label: 'Válida', rest: 120, countsVolume: true },
-  avancada: { label: 'Avançada', rest: 90, countsVolume: true }
-};
-
-// Catálogo de técnicas avançadas
-const TECNICAS = {
-  ds:       { label: 'Drop Set',     hint: 'Cargas decrescentes sem descanso' },
-  rp:       { label: 'Rest-Pause',   hint: '10-15s pausa e continua até falha' },
-  lp:       { label: 'Partials',     hint: 'Parciais no estiramento após falha' },
-  myo:      { label: 'Myo-Reps',     hint: 'Ativação + 3-5 mini-sets de 3-5 reps' },
-  cluster:  { label: 'Cluster',      hint: 'Pausas intra-série programadas' },
-  iso:      { label: 'Iso-Hold',     hint: 'Isometria estática no final' },
-  slowecc:  { label: 'Excêntr. Lenta', hint: 'Descida controlada 4-6s' },
-  forced:   { label: 'Forced Reps',  hint: 'Reps assistidas até falha total' }
-};
-
-// Catálogo de tipos de cardio
-const CARDIO_TYPES = {
-  esteira_inc: { label: 'Esteira Inclinada', icon: '⛰️' },
-  corrida:     { label: 'Corrida',           icon: '🏃' },
-  caminhada:   { label: 'Caminhada',         icon: '🚶' },
-  bike:        { label: 'Bike',              icon: '🚴' },
-  escada:      { label: 'Escada (Stair)',    icon: '🪜' },
-  eliptico:    { label: 'Elíptico',          icon: '🌀' },
-  outros:      { label: 'Outros',            icon: '💧' }
-};
-const CARDIO_WEEKLY_CAP = 3;
-
 const PROGRAM = {
-  'push-a': { name: 'Push A', subtitle: 'Força · Peito-dominante', duration: 65, group: 'push',
-    warmup: { general: ['3min bike leve', 'Band pull-apart 2x15', 'Rot externa mini-band 2x12', 'Círculos de ombro'], rampa: '1º exerc: leve x12 / 50% x8 / 75% x5 / 92% x2' },
+  'push-a': { name: 'Push A', sub: 'Força · Peito-dominante', dur: 65, tag: 'push',
     exercises: [
-      { id: 'pa1', name: 'Chest Press Inclinado', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', note: '15s intra-set, 2-3min entre clusters. Ref: PR 105kg x10 @RPE9 (05/26)', metaS1: 105, subs: ['Supino Incl Halter 30°', 'Supino Máquina'] },
-      { id: 'pa2', name: 'Supino Máquina', sets: 4, reps: '6-8', technique: 'DP', note: 'Double progression. Ref atual: 95kg', metaS1: 95, subs: ['Chest Press Inclinado', 'Supino Incl Halter 30°'] },
-      { id: 'pa3', name: 'Supino Incl Halter 30°', sets: 3, reps: '8-10', technique: 'DP + SF', note: 'Stretch focus 2s na descida', metaS1: 32, subs: ['Chest Press Inclinado', 'Supino Smith'] },
-      { id: 'pa4', name: 'Cross Over Alta→Baixa', sets: 3, reps: '10-12', technique: 'Squeeze 1s', note: 'Pode trocar por Pec Dec 100kg se preferir', metaS1: 15, subs: ['Pec Dec (Crucifixo Máq)', 'Crucifixo Incl Halter'] },
-      { id: 'pa5', name: 'Desenv Militar Máquina', sets: 3, reps: '8-10', technique: 'DP', note: 'Calibrar Bodytech na primeira sessão', metaS1: 50, subs: ['Desenv Halter Sentado', 'Arnold Press'] },
-      { id: 'pa6', name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', technique: 'MYO no último', note: 'Último: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações', metaS1: 12, subs: ['Elev Lateral Cabo', 'Elev Lateral Máquina'] },
-      { id: 'pa7', name: 'Tríceps Corda', sets: 3, reps: '12-15', technique: 'DROP no último', note: 'Último: até falha + (-25%) AMRAP. Ref: 55kg', metaS1: 55, subs: ['Tríceps Pulley Barra', 'Tríceps Testa Barra W'] }
+      { name: 'Chest Press Inclinado', sets: 5, reps: '4', tech: 'Cluster + AMRAP no 5º', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Inclinado Halter 30°', 'Supino Máquina', 'Supino Smith Inclinado'], note: '15s intra-set, 2-3min entre clusters' },
+      { name: 'Supino Máquina', sets: 4, reps: '6-8', tech: 'Dupla progressão', primary: ['Peitoral'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Chest Press Inclinado', 'Supino Inclinado Halter', 'Supino Smith'], note: 'Adicionar reps antes de adicionar carga' },
+      { name: 'Supino Inclinado Halter 30°', sets: 3, reps: '8-10', tech: 'Stretch focus', primary: ['Peitoral superior'], secondary: ['Deltoide anterior'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado', 'Crucifixo Inclinado'], note: '2s na descida, foco no estiramento' },
+      { name: 'Cross Over Alta→Baixa', sets: 3, reps: '10-12', tech: 'Squeeze 1s', primary: ['Peitoral inferior'], secondary: ['Peitoral'], subs: ['Pec Dec (Crucifixo Máq)', 'Crucifixo Inclinado Halter', 'Cross Over Baixa→Alta'], note: 'Apertar 1s no ponto de contração. Pode trocar por Pec Dec 100kg' },
+      { name: 'Desenvolvimento Militar Máquina', sets: 3, reps: '8-10', tech: 'Dupla progressão', primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Halter Sentado', 'Arnold Press', 'Desenvolvimento Smith'], note: 'Calibrar Bodytech' },
+      { name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', tech: 'Myo-reps no último', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Cabo', 'Elevação Lateral Máquina', 'Elevação Lateral Inclinado'], note: 'Último: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações' },
+      { name: 'Tríceps Corda', sets: 3, reps: '12-15', tech: 'Drop no último', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Pulley Barra', 'Tríceps Testa Barra W', 'Tríceps Francês'], note: 'Último: falha + (-25%) AMRAP' }
     ]},
-  'pull-a': { name: 'Pull A', subtitle: 'Força · Dorso-dominante', duration: 68, group: 'pull',
-    warmup: { general: ['3min bike leve', 'Cat-camel 10', 'T-spine rotação 8/lado', 'Dead hang 20s'], rampa: 'T-bar: leve x10 / 50% x8 / 75% x5 / 90% x2' },
+  'pull-a': { name: 'Pull A', sub: 'Força · Dorso-dominante', dur: 68, tag: 'pull',
     exercises: [
-      { id: 'pla1', name: 'T-Bar (Cavalinho)', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', note: '15s intra-set, cotovelo baixo. Ref: 55kg', metaS1: 55, subs: ['Remada Máquina Fechada', 'Remada Serrote Halter'] },
-      { id: 'pla2', name: 'Pulldown Neutro', sets: 4, reps: '6-8', technique: 'DP + contração 1s', note: 'Pega neutra, contração no peito. Ref: 65kg', metaS1: 65, subs: ['Puxada Aberta Pronada', 'Pulldown Reto'] },
-      { id: 'pla3', name: 'Remada Serrote Halter', sets: 3, reps: '8-10/lado', technique: 'ROM total', note: 'Unilateral, puxar até o quadril', metaS1: 28, subs: ['T-Bar', 'Remada Máquina Fechada'] },
-      { id: 'pla4', name: 'Pullover Polia Alta', sets: 3, reps: '12-15', technique: 'SF', note: 'Braço estendido, stretch máximo', metaS1: 50, subs: ['Pulldown Reto', 'Cross Over Inverso'] },
-      { id: 'pla5', name: 'Face Pull Corda', sets: 3, reps: '15-20', technique: 'Rotação externa', note: 'Cotovelos altos, abrir bem', metaS1: 25, subs: ['Crucifixo Inverso', 'Remada Alta Corda'] },
-      { id: 'pla6', name: 'Rosca Scott Máquina', sets: 3, reps: '8-10', technique: 'MYO no último', note: 'Substituto da rosca direta. Ref: 77,5kg', metaS1: 77.5, subs: ['Rosca Direta Barra W', 'Rosca Concentrada'] },
-      { id: 'pla7', name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', technique: 'DROP no último', note: 'Último: falha + (-25%) AMRAP', metaS1: 16, subs: ['Rosca Direta Halter', 'Rosca Corda Polia'] }
+      { name: 'T-Bar (Cavalinho)', sets: 5, reps: '4', tech: 'Cluster + AMRAP no 5º', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio', 'Bíceps'], subs: ['Remada Máquina Fechada', 'Remada Serrote Halter', 'Remada Baixa'], note: '15s intra-set, cotovelo baixo' },
+      { name: 'Pulldown Neutro', sets: 4, reps: '6-8', tech: 'Dupla progressão + contração 1s', primary: ['Dorsal'], secondary: ['Bíceps', 'Romboides'], subs: ['Puxada Aberta Pronada', 'Pulldown Reto', 'Puxada Supinada'], note: 'Pega neutra, contração no peito' },
+      { name: 'Remada Serrote Halter', sets: 3, reps: '8-10/lado', tech: 'ROM total', primary: ['Dorsal'], secondary: ['Romboides', 'Bíceps'], subs: ['T-Bar', 'Remada Máquina Fechada', 'Remada Baixa Unilateral'], note: 'Unilateral, puxar até o quadril' },
+      { name: 'Pullover Polia Alta', sets: 3, reps: '12-15', tech: 'Stretch focus', primary: ['Dorsal'], secondary: ['Peitoral', 'Serrátil'], subs: ['Pulldown Reto', 'Cross Over Inverso', 'Pullover Halter'], note: 'Braço estendido, stretch máximo. Cotovelo TRAVADO' },
+      { name: 'Face Pull Corda', sets: 3, reps: '15-20', tech: 'Rotação externa', primary: ['Deltoide posterior'], secondary: ['Romboides', 'Trapézio'], subs: ['Crucifixo Inverso', 'Remada Alta Corda', 'Reverse Pec Deck'], note: 'Cotovelos altos, abrir bem' },
+      { name: 'Rosca Scott Máquina', sets: 3, reps: '8-10', tech: 'Myo-reps no último', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Direta Barra W', 'Rosca Concentrada', 'Rosca Scott Halter'], note: 'Substituto da rosca direta' },
+      { name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', tech: 'Drop no último', primary: ['Braquial', 'Braquiorradial'], secondary: ['Bíceps'], subs: ['Rosca Direta Halter', 'Rosca Corda Polia', 'Rosca Martelo Cabo'], note: 'Último: falha + (-25%) AMRAP' }
     ]},
-  'legs-a': { name: 'Legs A', subtitle: 'Força · Quadríceps-dominante', duration: 70, group: 'legs',
-    warmup: { general: ['5min bike (subindo intensidade)', '90/90 hip 8/lado', 'Dorsiflexão parede 10/lado', 'Agachamento profundo 30s'], rampa: 'Hack: leve x10 / 40% x8 / 60% x5 / 80% x3 / 90% x1' },
+  'legs-a': { name: 'Legs A', sub: 'Força · Quadríceps-dominante', dur: 70, tag: 'legs',
     exercises: [
-      { id: 'la1', name: 'Hack Squat', sets: 5, reps: '4', technique: 'CLUSTER + AMRAP no 5º', note: '20s intra-set, ROM profundo. Ref Bodytech: 60kg', metaS1: 60, subs: ['Leg Press 45°', 'Agachamento Smith'] },
-      { id: 'la2', name: 'Leg Press 45° Pés Baixos', sets: 4, reps: '8-10', technique: 'ROM profundo', note: 'Sem travar joelho. Ref Bodytech: 110kg', metaS1: 110, subs: ['Hack Squat', 'Leg Press Vertical'] },
-      { id: 'la3', name: 'Cadeira Extensora', sets: 3, reps: '12-15', technique: 'RP no último', note: 'Último: falha + 15s + reps. Ref: 120kg PR', metaS1: 120, subs: ['Cadeira Extensora Unilateral', 'Leg Press Pés Altos'] },
-      { id: 'la4', name: 'Stiff Halter', sets: 3, reps: '8-10', technique: 'SF + RIR 2', note: 'Excêntrica 3s, hip hinge limpo. Ref: 56kg', metaS1: 56, subs: ['Stiff Barra', 'Levantamento Terra Romeno'] },
-      { id: 'la5', name: 'Mesa Flexora', sets: 3, reps: '10-12', technique: 'MYO no último', note: 'Pico de contração, ROM total. Ref: 36kg', metaS1: 36, subs: ['Cadeira Flexora', 'Flexora em Pé'] },
-      { id: 'la6', name: 'Panturrilha em Pé', sets: 4, reps: '10-12', technique: 'DROP + 2s alongado', note: 'Pausa 2s no alongamento. Ref: 130kg PR', metaS1: 130, subs: ['Panturrilha Sentado', 'Panturrilha Leg Press'] }
+      { name: 'Hack Squat', sets: 5, reps: '4', tech: 'Cluster + AMRAP no 5º', primary: ['Quadríceps'], secondary: ['Glúteo', 'Adutores'], subs: ['Leg Press 45°', 'Agachamento Smith', 'Leg Press Vertical'], note: '20s intra-set, ROM profundo' },
+      { name: 'Leg Press 45° Pés Baixos', sets: 4, reps: '8-10', tech: 'ROM profundo', primary: ['Quadríceps'], secondary: ['Glúteo'], subs: ['Hack Squat', 'Leg Press Vertical', 'Agachamento Smith'], note: 'Sem travar joelho' },
+      { name: 'Cadeira Extensora', sets: 3, reps: '12-15', tech: 'Rest-pause no último', primary: ['Quadríceps'], secondary: [], subs: ['Cadeira Extensora Unilateral', 'Leg Press Pés Altos', 'Sissy Squat'], note: 'Último: falha + 15s + reps' },
+      { name: 'Stiff Halter', sets: 3, reps: '8-10', tech: 'Stretch focus + RIR 2', primary: ['Posteriores', 'Glúteo'], secondary: ['Lombar'], subs: ['Stiff Barra', 'Levantamento Terra Romeno', 'Stiff Smith'], note: 'Excêntrica 3s, hip hinge limpo' },
+      { name: 'Mesa Flexora', sets: 3, reps: '10-12', tech: 'Myo-reps no último', primary: ['Posteriores'], secondary: ['Panturrilha'], subs: ['Cadeira Flexora (sentada)', 'Flexora em Pé', 'Flexora Unilateral'], note: 'Pico de contração, ROM total. Nippard sugere flexora SENTADA (55% mais ganho)' },
+      { name: 'Panturrilha em Pé', sets: 4, reps: '10-12', tech: 'Drop + 2s alongado', primary: ['Gastrocnêmio'], secondary: ['Sóleo'], subs: ['Panturrilha Sentado', 'Panturrilha Leg Press', 'Panturrilha Smith'], note: 'Pausa 2s no alongamento' }
     ]},
-  'push-b': { name: 'Push B', subtitle: 'Hipertrofia · Volume metabólico', duration: 67, group: 'push',
-    warmup: { general: ['3min bike leve', 'Band pull-apart 2x15', 'Rot externa mini-band 2x12'], rampa: '1º exerc: halter leve x10 / 50% x8 / 75% x5' },
+  'push-b': { name: 'Push B', sub: 'Hipertrofia · Volume metabólico', dur: 67, tag: 'push',
     exercises: [
-      { id: 'pb1', name: 'Supino Incl Halter 45°', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP', metaS1: 30, subs: ['Supino Incl Halter 30°', 'Chest Press Inclinado'] },
-      { id: 'pb2', name: 'Chest Press Reto Máquina', sets: 3, reps: '10-12', technique: 'Squeeze', note: 'Foco em squeeze no topo. Ref: 95kg → usar 75-80%', metaS1: 75, subs: ['Supino Máquina', 'Supino Incl Halter 30°'] },
-      { id: 'pb3', name: 'Peck Deck (Crucifixo Máq)', sets: 3, reps: '12-15', technique: 'MYO no último', note: 'Pico de contração 1-2s. Ref: 100kg', metaS1: 100, subs: ['Cross Over Alta→Baixa', 'Crucifixo Incl Halter'] },
-      { id: 'pb4', name: 'Desenv Halter Sentado', sets: 4, reps: '8-10', technique: 'ROM completo', note: 'Descida até paralelo ao chão', metaS1: 24, subs: ['Desenv Militar Máquina', 'Arnold Press'] },
-      { id: 'pb5', name: 'Elev Lateral Cabo Inclinado', sets: 4, reps: '12-15', technique: 'DROP DUPLO', note: 'Último: -25% AMRAP, -25% AMRAP', metaS1: 10, subs: ['Elev Lateral Halter', 'Elev Lateral Máquina'] },
-      { id: 'pb6', name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', technique: 'SF + cotovelo alto', note: 'Cotovelo apontando teto, stretch', metaS1: 20, subs: ['Tríceps Francês Halter', 'Tríceps Pulley Barra'] },
-      { id: 'pb7', name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', technique: 'MYO no último', note: 'Pegada supinada, unilateral', metaS1: 20, subs: ['Tríceps Corda', 'Tríceps Francês Unilateral'] }
+      { name: 'Supino Inclinado Halter 45°', sets: 4, reps: '8-10', tech: 'Cluster-drop no 4º', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Inclinado Halter 30°', 'Chest Press Inclinado', 'Supino Smith Inclinado'], note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP' },
+      { name: 'Chest Press Reto Máquina', sets: 3, reps: '10-12', tech: 'Squeeze', primary: ['Peitoral'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Máquina', 'Supino Inclinado Halter', 'Crucifixo Máquina'], note: 'Foco em squeeze no topo' },
+      { name: 'Peck Deck (Crucifixo Máq)', sets: 3, reps: '12-15', tech: 'Myo-reps no último', primary: ['Peitoral'], secondary: [], subs: ['Cross Over Alta→Baixa', 'Crucifixo Inclinado Halter', 'Cross Over Médio'], note: 'Pico de contração 1-2s' },
+      { name: 'Desenvolvimento Halter Sentado', sets: 4, reps: '8-10', tech: 'ROM completo', primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Militar Máquina', 'Arnold Press', 'Desenvolvimento Smith'], note: 'Descida até paralelo ao chão' },
+      { name: 'Elevação Lateral Cabo Inclinado', sets: 4, reps: '12-15', tech: 'Drop duplo', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Halter', 'Elevação Lateral Máquina', 'Elevação Lateral Unilateral'], note: 'Último: -25% AMRAP, -25% AMRAP' },
+      { name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', tech: 'Stretch focus + cotovelo alto', primary: ['Tríceps (cabeça longa)'], secondary: [], subs: ['Tríceps Francês Halter', 'Tríceps Pulley Barra', 'Tríceps Testa Halter'], note: 'Cotovelo apontando teto' },
+      { name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', tech: 'Myo-reps no último', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Corda', 'Tríceps Francês Unilateral', 'Tríceps Pulley Barra'], note: 'Pegada supinada, unilateral' }
     ]},
-  'pull-b': { name: 'Pull B', subtitle: 'Hipertrofia · Largura', duration: 65, group: 'pull',
-    warmup: { general: ['3min bike leve', 'Cat-camel 10', 'T-spine rotação 8/lado', 'Dead hang 20s'], rampa: 'Puxada: leve x12 / 50% x8 / 75% x5' },
+  'pull-b': { name: 'Pull B', sub: 'Hipertrofia · Largura', dur: 65, tag: 'pull',
     exercises: [
-      { id: 'plb1', name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', technique: 'DP + ROM total', note: 'Pega larga. Ref: 60kg (hold execução)', metaS1: 60, subs: ['Pulldown Neutro', 'Pulldown Reto'] },
-      { id: 'plb2', name: 'Remada Baixa Peg Aberta', sets: 4, reps: '8-10', technique: 'AMRAP no último', note: 'Pega aberta, cotovelos abertos', metaS1: 75, subs: ['Remada Máquina Fechada', 'T-Bar'] },
-      { id: 'plb3', name: 'Pulldown Pega Fechada', sets: 3, reps: '10-12', technique: 'RP no último', note: 'Último: falha + 15s + reps. Ref: 50kg', metaS1: 50, subs: ['Pulldown Neutro', 'Puxada Supinada'] },
-      { id: 'plb4', name: 'Remada Baixa Triângulo', sets: 3, reps: '10-12', technique: 'Squeeze 1s', note: 'Apertar escápulas 1s', metaS1: 60, subs: ['Remada Máquina Fechada', 'Remada Serrote Halter'] },
-      { id: 'plb5', name: 'Crucifixo Inverso', sets: 3, reps: '12-15', technique: 'DROP no último', note: 'Pico contração 1-2s. Ref: 107,5kg', metaS1: 107.5, subs: ['Face Pull Corda', 'Remada Alta Corda'] },
-      { id: 'plb6', name: 'Rosca Alt Banco Inclinado', sets: 3, reps: '10-12', technique: 'SF', note: 'Stretch focus, supinar no início', metaS1: 16, subs: ['Rosca Concentrada', 'Rosca Scott'] },
-      { id: 'plb7', name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', technique: 'MYO no último', note: 'Pico de contração. Ref: 77,5kg → 65-70%', metaS1: 55, subs: ['Rosca Direta Barra W', 'Rosca Concentrada'] }
+      { name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', tech: 'Dupla progressão + ROM total', primary: ['Dorsal'], secondary: ['Bíceps', 'Romboides'], subs: ['Pulldown Neutro', 'Pulldown Reto', 'Puxada Supinada'], note: 'Pega larga' },
+      { name: 'Remada Baixa Pega Aberta', sets: 4, reps: '8-10', tech: 'AMRAP no último', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio', 'Bíceps'], subs: ['Remada Máquina Fechada', 'T-Bar', 'Remada Serrote'], note: 'Pega aberta, cotovelos abertos' },
+      { name: 'Pulldown Pega Fechada', sets: 3, reps: '10-12', tech: 'Rest-pause no último', primary: ['Dorsal'], secondary: ['Bíceps'], subs: ['Pulldown Neutro', 'Puxada Supinada', 'Pulldown Reto'], note: 'Último: falha + 15s + reps' },
+      { name: 'Remada Baixa Triângulo', sets: 3, reps: '10-12', tech: 'Squeeze 1s', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio'], subs: ['Remada Máquina Fechada', 'Remada Serrote Halter', 'Remada Baixa Aberta'], note: 'Apertar escápulas 1s' },
+      { name: 'Crucifixo Inverso', sets: 3, reps: '12-15', tech: 'Drop no último', primary: ['Deltoide posterior'], secondary: ['Romboides'], subs: ['Face Pull Corda', 'Remada Alta Corda', 'Reverse Pec Deck'], note: 'Pico contração 1-2s' },
+      { name: 'Rosca Alternada Banco Inclinado', sets: 3, reps: '10-12', tech: 'Stretch focus', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Concentrada', 'Rosca Scott', 'Rosca Direta Halter'], note: 'Stretch focus, supinar no início' },
+      { name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', tech: 'Myo-reps no último', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Direta Barra W', 'Rosca Concentrada', 'Rosca Scott Halter'], note: 'Pico de contração' }
     ]},
-  'legs-b': { name: 'Legs B', subtitle: 'Posterior + Metabólico', duration: 70, group: 'legs',
-    warmup: { general: ['5min bike (subindo intensidade)', '90/90 hip 8/lado', 'Dorsiflexão parede 10/lado'], rampa: 'Stiff: halter leve x10 / 50% x8 / 75% x5' },
+  'legs-b': { name: 'Legs B', sub: 'Posterior + Metabólico', dur: 70, tag: 'legs',
     exercises: [
-      { id: 'lb1', name: 'Stiff Halter', sets: 4, reps: '6-8', technique: 'SF + AMRAP no último', note: 'Excêntrica 3s, hip hinge. Ref: 56kg', metaS1: 56, subs: ['Stiff Barra', 'Levantamento Terra Romeno'] },
-      { id: 'lb2', name: 'Hack Squat Pés Altos', sets: 4, reps: '8-10', technique: 'CLUSTER-DROP no 4º', note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP. Ref: 60kg', metaS1: 50, subs: ['Leg Press Pés Altos', 'Agachamento Smith Pés Altos'] },
-      { id: 'lb3', name: 'Mesa Flexora Deitada', sets: 3, reps: '10-12', technique: 'RP no último', note: 'Último: falha + 15s + reps. Ref: 36kg', metaS1: 36, subs: ['Cadeira Flexora', 'Mesa Flexora'] },
-      { id: 'lb4', name: 'Cadeira Abdutora', sets: 3, reps: '15-20', technique: 'MYO + tronco à frente', note: 'Inclinar tronco para frente p/ glúteo médio', metaS1: 60, subs: ['Glúteo Máquina', 'Abdução Polia'] },
-      { id: 'lb5', name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', technique: 'Excêntrica controlada', note: 'Descida controlada 2s', metaS1: 18, subs: ['Búlgaro Halter', 'Avanço Smith'] },
-      { id: 'lb6', name: 'Panturrilha Sentado', sets: 4, reps: '15-20', technique: 'DROP + 2s alongado', note: 'Pausa 2s no alongamento. Ref: 130kg', metaS1: 50, subs: ['Panturrilha em Pé', 'Panturrilha Leg Press'] },
-      { id: 'lb7', name: 'Abdominal Pulley', sets: 3, reps: '12-15', technique: 'Crunch completo', note: 'Curvar coluna, não dobrar quadril', metaS1: 40, subs: ['Crunch Máquina', 'Prancha Abdominal'] }
+      { name: 'Stiff Halter', sets: 4, reps: '6-8', tech: 'Stretch focus + AMRAP no último', primary: ['Posteriores', 'Glúteo'], secondary: ['Lombar'], subs: ['Stiff Barra', 'Levantamento Terra Romeno', 'Stiff Smith'], note: 'Excêntrica 3s, hip hinge' },
+      { name: 'Hack Squat Pés Altos', sets: 4, reps: '8-10', tech: 'Cluster-drop no 4º', primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Leg Press Pés Altos', 'Agachamento Smith Pés Altos', 'Leg Press 45°'], note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP' },
+      { name: 'Mesa Flexora Deitada', sets: 3, reps: '10-12', tech: 'Rest-pause no último', primary: ['Posteriores'], secondary: ['Panturrilha'], subs: ['Cadeira Flexora (sentada)', 'Mesa Flexora', 'Flexora Unilateral'], note: 'Último: falha + 15s + reps' },
+      { name: 'Cadeira Abdutora', sets: 3, reps: '15-20', tech: 'Myo-reps + tronco à frente', primary: ['Glúteo médio'], secondary: ['Glúteo máximo'], subs: ['Glúteo Máquina', 'Abdução Polia', 'Hip Thrust Máquina'], note: 'Inclinar tronco p/ frente p/ glúteo médio' },
+      { name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', tech: 'Excêntrica controlada', primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Búlgaro Halter', 'Avanço Smith', 'Leg Press Unilateral'], note: 'Descida controlada 2s' },
+      { name: 'Panturrilha Sentado', sets: 4, reps: '15-20', tech: 'Drop + 2s alongado', primary: ['Sóleo'], secondary: ['Gastrocnêmio'], subs: ['Panturrilha em Pé', 'Panturrilha Leg Press', 'Panturrilha Smith'], note: 'Pausa 2s no alongamento' },
+      { name: 'Abdominal Pulley', sets: 3, reps: '12-15', tech: 'Crunch completo', primary: ['Reto abdominal'], secondary: ['Oblíquos'], subs: ['Crunch Máquina', 'Prancha', 'Elevação de Pernas'], note: 'Curvar coluna, não dobrar quadril' }
     ]}
 };
-
 const DAYS_ORDER = ['push-a', 'pull-a', 'legs-a', 'push-b', 'pull-b', 'legs-b'];
-const DAY_LABELS = { 'push-a': 'Push A', 'pull-a': 'Pull A', 'legs-a': 'Legs A', 'push-b': 'Push B', 'pull-b': 'Pull B', 'legs-b': 'Legs B' };
-const STORAGE_KEY = 'gerson_treino_v4';
 
-let state = {
-  screen: 'home', selectedDay: 'push-a', data: loadData(),
-  restTimer: null, restInterval: null, restRemaining: 0, restTotal: 0,
-  sessionTimerInterval: null, showSubFor: null,
-  showSummary: false, summaryText: '', homeTab: 'today', editingSet: null,
-  // BUGFIX: estado de abertura de exercício persistente entre renders
-  openExercises: {},
-  // CALENDÁRIO: ano-mês atualmente visível (formato YYYY-MM)
-  calCursor: new Date().toISOString().slice(0, 7),
-  // DETALHE DE SESSÃO (do calendário): índice da sessão clicada
-  calDetailSessionIdx: null,
-  // CARDIO — form modal aberto?
-  cardioForm: null, // { tipo, duracao, intensidade, obs } ou { _editIdx, ... } pra edição
-  // NOTAS pós-sessão — em vez do prompt antigo
-  finishForm: null,  // { duration, energy, dorArticular, sono6h, motivacao, obs }
-  // EDIÇÃO de sessão finalizada (metadados)
-  editSessionIdx: null,  // índice no array state.data.sessions
-  // GRÁFICOS — exercício selecionado no picker da aba Gráficos
-  openCharts: {},
-  selectedChartEx: null
-};
+const CARDIOS = [
+  { icon: '⛰️', title: 'Esteira Inclinada — Zona 2', goal: 'Queima de gordura sem perder gains', params: [
+    { label: 'Inclinação', val: '8-12%' }, { label: 'Velocidade', val: '5,0-6,0 km/h' },
+    { label: 'Tempo', val: '25-30 min' }, { label: 'FC alvo', val: '60-70% FCM' }
+  ], note: 'Padrão-ouro: zona 2 real, baixo impacto, não interfere na recuperação das pernas como correr.' },
+  { icon: '🪜', title: 'Escada (Stairclimber)', goal: 'Condicionamento + queima', params: [
+    { label: 'Nível', val: '6-9' }, { label: 'Ritmo', val: 'Constante, conversável' },
+    { label: 'Tempo', val: '20-25 min' }, { label: 'FC alvo', val: '60-70% FCM' }
+  ], note: 'Cuidado em dia de perna — recruta quadríceps e glúteo. Reduzir para 15 min ou pular se treinou Legs.' },
+  { icon: '🚴', title: 'Bike — Zona 2', goal: 'Recuperação ativa + queima', params: [
+    { label: 'Resistência', val: 'Moderada' }, { label: 'RPM', val: '70-85' },
+    { label: 'Tempo', val: '25-30 min' }, { label: 'FC alvo', val: '60-70% FCM' }
+  ], note: 'Menor impacto articular de todos. Boa para dias de descanso ou recuperação ativa.' },
+  { icon: '🚶', title: 'Caminhada (geral)', goal: 'Baixo impacto, NEAT', params: [
+    { label: 'Inclinação', val: '0-5%' }, { label: 'Velocidade', val: '5,5-6,5 km/h' },
+    { label: 'Tempo', val: '30-40 min' }, { label: 'FC alvo', val: '55-65% FCM' }
+  ], note: 'Pode passar de 30 min porque a intensidade é muito baixa — não conta como interferência.' },
+  { icon: '🌀', title: 'Elíptico', goal: 'Cardio sem impacto', params: [
+    { label: 'Resistência', val: 'Moderada' }, { label: 'Ritmo', val: 'Constante' },
+    { label: 'Tempo', val: '25-30 min' }, { label: 'FC alvo', val: '60-70% FCM' }
+  ], note: 'Trabalha membros superiores e inferiores sem impacto. Alternativa à esteira.' },
+  { icon: '🏃', title: 'Corrida (com parcimônia)', goal: 'Só se gostar de correr', params: [
+    { label: 'Tipo', val: 'Contínuo leve' }, { label: 'Ritmo', val: 'Conversável' },
+    { label: 'Tempo', val: 'máx 25 min' }, { label: 'Frequência', val: 'máx 2x/sem' }
+  ], note: 'Maior interferência nas pernas. Se gosta de correr, mantenha curto e nunca em dia de perna.' }
+];
 
-// HISTÓRICO EMBUTIDO — backup de 18/05/2026 (Gerson)
-// Carregado automaticamente apenas se a flag SEED_KEY não estiver setada.
-const SEED_KEY = 'gerson_treino_seeded_v1';
-const SEED_DATA = {
-  "sessions": [
-    { "day": "legs-a", "date": "2026-05-17",
-      "exercises": [
-        { "id": "la1", "sets": [{ "kg": 80, "reps": 10, "rpe": 9, "type": "valida" }, { "kg": 80, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 90, "reps": 10, "rpe": 10, "type": "valida" }] },
-        { "id": "la2", "sets": [{ "kg": 220, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 250, "reps": 11, "rpe": 8, "type": "valida" }, { "kg": 265, "reps": 10, "rpe": 9, "type": "valida" }] },
-        { "id": "la3", "sets": [{ "kg": 80, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 120, "reps": 10, "rpe": 10, "type": "valida" }, { "kg": 80, "reps": 9, "rpe": 10, "type": "avancada" }, { "kg": 60, "reps": 10, "rpe": 10, "type": "avancada" }] },
-        { "id": "la4", "sets": [{ "kg": 60, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 72, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 72, "reps": 10, "rpe": 9, "type": "valida" }] },
-        { "id": "la5", "sets": [{ "kg": 45, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 54, "reps": 10, "rpe": 9, "type": "valida" }, { "kg": 54, "reps": 5, "rpe": 10, "type": "avancada" }, { "kg": 54, "reps": 5, "rpe": 10, "type": "avancada" }] }
-      ],
-      "startTime": 1779052708765, "duration": 6, "energy": 9, "obs": "Excelente treino. Sai com sentimento de dever comprido ", "finishedAt": 1779053113293
-    },
-    { "day": "push-a", "date": "2026-05-18",
-      "exercises": [
-        { "id": "pa1", "sets": [{ "kg": 90, "reps": 10, "rpe": 9, "type": "valida" }, { "kg": 107.5, "reps": 4, "rpe": 9, "type": "valida" }, { "kg": 107.5, "reps": 4, "rpe": 10, "type": "valida" }, { "kg": 107.5, "reps": 4, "rpe": 10, "type": "valida" }, { "kg": 107.5, "reps": 3, "rpe": 10, "type": "valida" }, { "kg": 80, "reps": 6, "rpe": 10, "type": "avancada" }] },
-        { "id": "pa2", "sets": [{ "kg": 70, "reps": 10, "rpe": 7, "type": "feeder" }, { "kg": 90, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 100, "reps": 10, "rpe": 8, "type": "valida" }, { "kg": 107.5, "reps": 10, "rpe": 9, "type": "valida" }] },
-        { "id": "pa3", "sets": [{ "kg": 32, "reps": 8, "rpe": 9, "type": "valida" }, { "kg": 32, "reps": 9, "rpe": 9, "type": "valida" }, { "kg": 32, "reps": 10, "rpe": 10, "type": "valida" }] },
-        { "id": "pa4", "sets": [{ "kg": 20, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 25, "reps": 15, "rpe": 9, "type": "valida" }, { "kg": 30, "reps": 12, "rpe": 9, "type": "valida" }] },
-        { "id": "pa5", "sets": [{ "kg": 45, "reps": 13, "rpe": 8, "type": "valida" }, { "kg": 55, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 60, "reps": 8, "rpe": 9, "type": "valida" }] },
-        { "id": "pa6", "sets": [{ "kg": 12, "reps": 20, "rpe": 8, "type": "valida" }, { "kg": 15, "reps": 14, "rpe": 9, "type": "valida" }, { "kg": 16, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 16, "reps": 5, "rpe": 10, "type": "avancada" }, { "kg": 16, "reps": 3, "rpe": 10, "type": "avancada" }] },
-        { "id": "pa7", "sets": [{ "kg": 45, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 50, "reps": 15, "rpe": 8, "type": "valida" }, { "kg": 55, "reps": 12, "rpe": 9, "type": "valida" }, { "kg": 15, "reps": 40, "rpe": 10, "type": "avancada" }, { "kg": 30, "reps": 12, "rpe": 10, "type": "avancada" }] }
-      ],
-      "startTime": 1779095808165, "duration": 68, "energy": 9, "obs": "Excelente", "finishedAt": 1779099873520
-    }
-  ],
-  "currentSession": null,
-  "exerciseSubs": { "push-a-pa7": "Tríceps Pulley Barra" }
-};
+const TECNICAS = [
+  { name: 'Drop Set', sub: 'Cargas decrescentes sem descanso', desc: 'Leva a série até a falha, reduz a carga em 20-25% e continua imediatamente, até falhar de novo.', how: '<strong>Como fazer:</strong> Falha na carga de trabalho → tira ~25% do peso → AMRAP → opcionalmente repete mais um drop. Total de 1-2 drops.' },
+  { name: 'Rest-Pause', sub: 'Pausa curta e continua', desc: 'Leva à falha, descansa 10-15 segundos no aparelho, continua com a mesma carga até falhar de novo.', how: '<strong>Como fazer:</strong> Falha → 10-15s de pausa (respirações profundas) → continua mesma carga → mais reps. Pode repetir 2-3 mini-pausas.' },
+  { name: 'Myo-Reps', sub: 'Ativação + mini-séries', desc: 'Uma série de ativação perto da falha, seguida de várias mini-séries curtas com descansos mínimos. Eficiente em tempo.', how: '<strong>Como fazer:</strong> Set de ativação (12-20 reps, RIR 1-2) → 3-5 respirações → 3-5 reps → repete o ciclo 3-5 vezes.' },
+  { name: 'Cluster Set', sub: 'Pausas intra-série programadas', desc: 'Divide uma série pesada em blocos curtos com micro-pausas, permitindo mais reps com carga alta mantendo qualidade.', how: '<strong>Como fazer:</strong> Ex: 5 reps pesadas → 15-20s de pausa → mais 5 reps → pausa → repete. Acumula volume com carga alta.' },
+  { name: 'Cluster-Drop', sub: 'Combinação cluster + drop', desc: 'Faz o bloco de reps pesadas e na falha aplica drops sucessivos. Usado no 4º exercício do Push B / Legs B.', how: '<strong>Como fazer:</strong> 8 reps na carga → -25% AMRAP → -25% AMRAP. Combina força e fadiga metabólica numa série.' },
+  { name: 'Stretch Focus (SF)', sub: 'Ênfase no estiramento', desc: 'Controla a excêntrica e enfatiza a posição alongada do músculo, onde mais hipertrofia acontece (Nippard).', how: '<strong>Como fazer:</strong> Excêntrica de 2-3s, pausa breve na posição alongada, sem rebote. Foco em sentir o estiramento.' },
+  { name: 'AMRAP', sub: 'As Many Reps As Possible', desc: 'Última série levada ao máximo de repetições com boa forma. Mede progresso e gera estímulo final.', how: '<strong>Como fazer:</strong> Na última série, em vez de parar no alvo, continua até a falha técnica. Registra as reps para acompanhar progresso.' }
+];
 
-function loadData() {
-  try {
-    const seeded = localStorage.getItem(SEED_KEY);
-    const raw = localStorage.getItem(STORAGE_KEY);
+let currentDay = 'push-a';
+let openEx = {};
 
-    // LOG DIAGNÓSTICO — remove após confirmar fix
-    console.log('GSN loadData:', { seeded, hasRaw: !!raw, rawLen: raw?.length });
-
-    if (!seeded) {
-      const seed = JSON.parse(JSON.stringify(SEED_DATA));
-      if (!seed.cardios) seed.cardios = [];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
-      localStorage.setItem(SEED_KEY, '1');
-      // Confirma que salvou
-      const check = localStorage.getItem(SEED_KEY);
-      console.log('GSN seed aplicado, flag salva:', check);
-      return seed;
-    }
-
-    if (raw) {
-      const d = JSON.parse(raw);
-      if (!d.cardios) d.cardios = [];
-      console.log('GSN dados carregados, sessões:', d.sessions?.length);
-      return d;
-    }
-    const old = localStorage.getItem('gerson_treino_v3') || localStorage.getItem('gerson_treino_v2');
-    if (old) {
-      const parsed = JSON.parse(old);
-      if (parsed.sessions) {
-        parsed.sessions.forEach(s => {
-          s.exercises?.forEach(e => {
-            if (e.sets) e.sets = e.sets.map(st => st ? { ...st, type: st.type || 'valida' } : null);
-          });
-        });
-      }
-      return { sessions: parsed.sessions || [], currentSession: null, exerciseSubs: parsed.exerciseSubs || {}, cardios: [] };
-    }
-    return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] };
-  } catch(err) {
-    console.error('GSN loadData erro:', err);
-    return { sessions: [], currentSession: null, exerciseSubs: {}, cardios: [] };
-  }
-}
-
-// Cria identificador único de sessão para dedupe
-function sessionKey(s) {
-  return `${s.day}_${s.date}_${s.finishedAt || s.startTime || ''}`;
-}
-
-// IMPORTAR backup: faz merge inteligente sem duplicar sessões
-function importBackup(jsonText) {
-  try {
-    const parsed = JSON.parse(jsonText);
-    if (!parsed.sessions || !Array.isArray(parsed.sessions)) {
-      alert('Arquivo inválido. Esperado: JSON com campo "sessions".');
-      return;
-    }
-    const existingKeys = new Set(state.data.sessions.map(sessionKey));
-    let added = 0, skipped = 0;
-    parsed.sessions.forEach(s => {
-      if (existingKeys.has(sessionKey(s))) { skipped++; return; }
-      if (s.exercises) s.exercises.forEach(e => {
-        if (e.sets) e.sets = e.sets.map(st => st ? { ...st, type: st.type || 'valida' } : null);
-      });
-      state.data.sessions.push(s);
-      added++;
-    });
-    state.data.sessions.sort((a, b) => (a.date + (a.finishedAt || 0)).localeCompare(b.date + (b.finishedAt || 0)));
-
-    // Mescla cardios
-    let cardiosAdded = 0, cardiosSkipped = 0;
-    if (parsed.cardios && Array.isArray(parsed.cardios)) {
-      if (!state.data.cardios) state.data.cardios = [];
-      const cardioKey = c => `${c.date}_${c.tipo}_${c.createdAt || ''}`;
-      const existingCardios = new Set(state.data.cardios.map(cardioKey));
-      parsed.cardios.forEach(c => {
-        if (existingCardios.has(cardioKey(c))) { cardiosSkipped++; return; }
-        state.data.cardios.push(c);
-        cardiosAdded++;
-      });
-      state.data.cardios.sort((a, b) => a.date.localeCompare(b.date));
-    }
-
-    if (parsed.exerciseSubs) {
-      state.data.exerciseSubs = { ...state.data.exerciseSubs, ...parsed.exerciseSubs };
-    }
-    saveData();
-    alert(`✓ Importação concluída.\n\nSessões adicionadas: ${added} (ignoradas: ${skipped})\nCardios adicionados: ${cardiosAdded} (ignorados: ${cardiosSkipped})`);
-    render();
-  } catch (err) {
-    alert('Erro ao ler arquivo: ' + err.message);
-  }
-}
-
-function triggerImport() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json,application/json';
-  input.onchange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => importBackup(ev.target.result);
-    reader.readAsText(file);
-  };
-  input.click();
-}
-
-function saveData() {
-  try {
-    const json = JSON.stringify(state.data);
-    localStorage.setItem(STORAGE_KEY, json);
-    // Verifica se salvou de verdade
-    const check = localStorage.getItem(STORAGE_KEY);
-    if (!check) console.warn('GSN: saveData falhou — localStorage não persistiu');
-  } catch (err) {
-    console.warn('GSN: saveData erro:', err);
-    // Tenta limpar currentSession se estiver muito grande
-    try {
-      const slim = { ...state.data, currentSession: null };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(slim));
-    } catch {}
-  }
-}
-
-function getLastSession(dayKey) { return [...state.data.sessions].reverse().find(s => s.day === dayKey); }
-
-function getCurrentSession() {
-  const today = new Date().toISOString().slice(0, 10);
-  if (state.data.currentSession && state.data.currentSession.day === state.selectedDay && state.data.currentSession.date === today) {
-    return state.data.currentSession;
-  }
-  state.data.currentSession = { day: state.selectedDay, date: today, exercises: [], startTime: Date.now() };
-  return state.data.currentSession;
-}
-
-function getValidSets(ex) {
-  return ex && ex.sets ? ex.sets.filter(s => s && !s.pending && s.kg !== undefined && (s.type === 'valida' || s.type === 'avancada')) : [];
-}
-
-function getLastSetForExercise(dayKey, exId) {
-  const last = getLastSession(dayKey);
-  if (!last) return null;
-  const ex = last.exercises.find(e => e.id === exId);
-  const valid = getValidSets(ex);
-  if (!valid.length) return null;
-  return valid[valid.length - 1];
-}
-
-function getExerciseHistory(exId) {
-  const history = [];
-  state.data.sessions.forEach(s => {
-    const ex = s.exercises.find(e => e.id === exId);
-    if (ex) {
-      const valid = getValidSets(ex);
-      if (valid.length) history.push({ date: s.date, sets: valid });
-    }
-  });
-  return history;
-}
-
-function getProgressIndicator(exId) {
-  const history = getExerciseHistory(exId);
-  if (history.length < 2) return null;
-  const last = history[history.length - 1];
-  const prev = history[history.length - 2];
-  const lastMax = Math.max(...last.sets.map(s => s.kg));
-  const prevMax = Math.max(...prev.sets.map(s => s.kg));
-  if (lastMax > prevMax) return 'up';
-  if (lastMax < prevMax) return 'down';
-  const lastReps = last.sets.reduce((a, s) => a + s.reps, 0);
-  const prevReps = prev.sets.reduce((a, s) => a + s.reps, 0);
-  if (lastReps > prevReps) return 'up';
-  if (lastReps < prevReps) return 'down';
-  return 'flat';
-}
-
-function getStagnationAlert(exId) {
-  const history = getExerciseHistory(exId);
-  if (history.length < 3) return null;
-  const last3 = history.slice(-3);
-  const maxes = last3.map(h => Math.max(...h.sets.map(s => s.kg)));
-  if (maxes[0] === maxes[1] && maxes[1] === maxes[2]) {
-    return { type: 'yellow', text: '⚠ Estagnado há 3 sessões — considerar deload ou variação' };
-  }
-  if (history.length >= 2) {
-    const last = last3[last3.length - 1];
-    const prev = last3[last3.length - 2];
-    const lastMax = Math.max(...last.sets.map(s => s.kg));
-    const prevMax = Math.max(...prev.sets.map(s => s.kg));
-    const lastReps = last.sets.reduce((a, s) => a + s.reps, 0);
-    const prevReps = prev.sets.reduce((a, s) => a + s.reps, 0);
-    if (lastMax === prevMax && lastReps < prevReps) {
-      return { type: 'red', text: '↓ Reps caíram na última sessão — considerar manter carga e consolidar' };
-    }
-  }
-  return null;
-}
-
-function getPRForExercise(exId) {
-  const history = getExerciseHistory(exId);
-  if (!history.length) return null;
-  let maxLoad = 0, maxLoadReps = 0, maxLoadDate = '', maxVolume = 0, maxVolumeDate = '';
-  history.forEach(h => {
-    const sessionMaxLoad = Math.max(...h.sets.map(s => s.kg));
-    if (sessionMaxLoad > maxLoad) {
-      maxLoad = sessionMaxLoad;
-      const topSet = h.sets.find(s => s.kg === sessionMaxLoad);
-      maxLoadReps = topSet.reps;
-      maxLoadDate = h.date;
-    }
-    const sessionVol = h.sets.reduce((a, s) => a + s.kg * s.reps, 0);
-    if (sessionVol > maxVolume) { maxVolume = sessionVol; maxVolumeDate = h.date; }
-  });
-  return { maxLoad, maxLoadReps, maxLoadDate, maxVolume, maxVolumeDate };
-}
-
-// ============ 1RM E GRÁFICO DE PROGRESSÃO ============
-
-// Fórmula de Epley: kg × (1 + reps/30)
-function calc1RM(kg, reps) {
-  if (reps === 1) return kg;
-  return Math.round(kg * (1 + reps / 30));
-}
-
-// Retorna o 1RM estimado máximo de um histórico de exercício
-function getBest1RM(exId) {
-  const history = getExerciseHistory(exId);
-  if (!history.length) return null;
-  let best = 0;
-  history.forEach(h => {
-    h.sets.forEach(s => {
-      const est = calc1RM(s.kg, s.reps);
-      if (est > best) best = est;
-    });
-  });
-  return best > 0 ? best : null;
-}
-
-// Gráfico SVG puro — linha de carga máxima por sessão
-function renderProgressChart(exId, exName) {
-  const history = getExerciseHistory(exId);
-  if (history.length < 2) return `<div style="text-align:center;color:var(--text3);padding:20px;font-size:12px">Mínimo 2 sessões para exibir o gráfico</div>`;
-
-  const W = 320, H = 140;
-  const PAD = { top: 16, right: 12, bottom: 28, left: 38 };
-  const chartW = W - PAD.left - PAD.right;
-  const chartH = H - PAD.top - PAD.bottom;
-
-  // Dados: carga máxima e 1RM estimado por sessão
-  const points = history.map(h => {
-    const maxKg = Math.max(...h.sets.map(s => s.kg));
-    const bestSet = h.sets.reduce((best, s) => calc1RM(s.kg, s.reps) > calc1RM(best.kg, best.reps) ? s : best, h.sets[0]);
-    const est1rm = calc1RM(bestSet.kg, bestSet.reps);
-    return { date: h.date, maxKg, est1rm };
-  });
-
-  const allVals = points.flatMap(p => [p.maxKg, p.est1rm]);
-  const minVal = Math.floor(Math.min(...allVals) * 0.95);
-  const maxVal = Math.ceil(Math.max(...allVals) * 1.05);
-
-  const xScale = i => PAD.left + (i / (points.length - 1)) * chartW;
-  const yScale = v => PAD.top + chartH - ((v - minVal) / (maxVal - minVal)) * chartH;
-
-  // Linhas de grid Y (4 linhas)
-  const gridLines = [0, 1, 2, 3].map(i => {
-    const v = minVal + (i / 3) * (maxVal - minVal);
-    const y = yScale(v);
-    return `
-      <line x1="${PAD.left}" y1="${y}" x2="${W - PAD.right}" y2="${y}" stroke="#e5e1d8" stroke-width="0.8"/>
-      <text x="${PAD.left - 4}" y="${y + 4}" text-anchor="end" font-size="9" fill="#999">${Math.round(v)}</text>
-    `;
+function renderDayGrid() {
+  document.getElementById('day-grid').innerHTML = DAYS_ORDER.map(key => {
+    const d = PROGRAM[key];
+    return `<div class="day-btn ${key === currentDay ? 'active' : ''}" onclick="selectDay('${key}')">
+      <div class="day-btn-name">${d.name}</div><div class="day-btn-sub">${d.sub}</div>
+      <span class="day-btn-tag tag-${d.tag}">${d.tag.toUpperCase()}</span></div>`;
   }).join('');
-
-  // Eixo X — datas (só primeira e última se muitos pontos)
-  let xLabels = '';
-  if (points.length <= 6) {
-    points.forEach((p, i) => {
-      const label = p.date.slice(5).replace('-', '/');
-      xLabels += `<text x="${xScale(i)}" y="${H - 4}" text-anchor="middle" font-size="9" fill="#999">${label}</text>`;
-    });
-  } else {
-    [[0, points[0]], [points.length - 1, points[points.length - 1]]].forEach(([i, p]) => {
-      const label = p.date.slice(5).replace('-', '/');
-      xLabels += `<text x="${xScale(i)}" y="${H - 4}" text-anchor="middle" font-size="9" fill="#999">${label}</text>`;
-    });
-  }
-
-  // Polyline — carga real
-  const lineLoad = points.map((p, i) => `${xScale(i)},${yScale(p.maxKg)}`).join(' ');
-  // Polyline — 1RM estimado (tracejado)
-  const line1rm = points.map((p, i) => `${xScale(i)},${yScale(p.est1rm)}`).join(' ');
-
-  // Pontos interativos
-  const dots = points.map((p, i) => {
-    const x = xScale(i), y = yScale(p.maxKg), y1 = yScale(p.est1rm);
-    const dateBr = p.date.slice(5).replace('-', '/');
-    return `
-      <circle cx="${x}" cy="${y}" r="4" fill="var(--accent)" stroke="white" stroke-width="1.5"
-        onmouseover="showChartTip(event,'${dateBr}: ${p.maxKg}kg')"
-        onmouseleave="hideChartTip()"
-        ontouchstart="showChartTip(event,'${dateBr}: ${p.maxKg}kg')" />
-      <circle cx="${x}" cy="${y1}" r="3" fill="white" stroke="var(--purple)" stroke-width="1.5"
-        onmouseover="showChartTip(event,'${dateBr}: 1RM ~${p.est1rm}kg')"
-        onmouseleave="hideChartTip()"
-        ontouchstart="showChartTip(event,'${dateBr}: 1RM ~${p.est1rm}kg')" />
-    `;
-  }).join('');
-
-  return `
-    <div class="pr-chart-wrap">
-      <div style="display:flex;gap:12px;font-size:10px;color:var(--text3);margin-bottom:6px;padding:0 4px">
-        <span><span style="display:inline-block;width:12px;height:3px;background:var(--accent);border-radius:2px;vertical-align:middle;margin-right:3px"></span>Carga real</span>
-        <span><span style="display:inline-block;width:12px;height:2px;border-top:2px dashed var(--purple);vertical-align:middle;margin-right:3px"></span>1RM estimado</span>
-      </div>
-      <svg class="chart-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-        ${gridLines}
-        ${xLabels}
-        <polyline points="${lineLoad}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
-        <polyline points="${line1rm}" fill="none" stroke="var(--purple)" stroke-width="1.5" stroke-dasharray="4,3" stroke-linejoin="round"/>
-        ${dots}
-      </svg>
-    </div>
-  `;
 }
 
-function showChartTip(e, text) {
-  let tip = document.getElementById('chart-tooltip');
-  if (!tip) {
-    tip = document.createElement('div');
-    tip.id = 'chart-tooltip';
-    tip.className = 'chart-tooltip';
-    document.body.appendChild(tip);
-  }
-  tip.textContent = text;
-  tip.style.opacity = '1';
-  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-  tip.style.left = (clientX + 10) + 'px';
-  tip.style.top = (clientY - 30) + 'px';
+function renderDayDetail() {
+  const d = PROGRAM[currentDay];
+  document.getElementById('day-detail').innerHTML = `
+    <h2>${d.name}</h2>
+    <p style="margin-bottom:14px">${d.sub} · ~${d.dur} min · ${d.exercises.length} exercícios</p>
+    ${d.exercises.map((ex, i) => {
+      const exKey = currentDay + '-' + i;
+      const isOpen = openEx[exKey];
+      return `<div class="ex-card">
+        <div class="ex-header" onclick="toggleEx('${exKey}')">
+          <div class="ex-num">${i + 1}</div>
+          <div class="ex-info"><div class="ex-name">${ex.name}</div><div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.tech}</div></div>
+          <div class="ex-chevron ${isOpen ? 'open' : ''}">▼</div>
+        </div>
+        <div class="ex-body ${isOpen ? 'open' : ''}">
+          <div class="ex-detail-row">
+            <div class="ex-detail"><div class="ex-detail-label">Séries × Reps</div><div class="ex-detail-val">${ex.sets} × ${ex.reps}</div></div>
+            <div class="ex-detail"><div class="ex-detail-label">Técnica</div><div class="ex-detail-val" style="font-size:11px">${ex.tech}</div></div>
+          </div>
+          <div class="muscle-block"><div class="muscle-label">Músculos trabalhados</div>
+            <div class="muscle-pills">
+              ${ex.primary.map(m => `<span class="muscle-pill primary">${m}</span>`).join('')}
+              ${ex.secondary.map(m => `<span class="muscle-pill secondary">${m}</span>`).join('')}
+            </div></div>
+          <div class="muscle-block"><div class="muscle-label">Técnica avançada</div><span class="tech-tag">${ex.tech}</span></div>
+          ${ex.note ? `<div class="note-box">${ex.note}</div>` : ''}
+          <div class="subs-block"><div class="subs-label">Substitutos</div>
+            ${ex.subs.map((s, si) => `<div class="sub-item"><span class="sub-rank">${si + 1}</span>${s}</div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+    }).join('')}`;
 }
 
-function hideChartTip() {
-  const tip = document.getElementById('chart-tooltip');
-  if (tip) tip.style.opacity = '0';
+function selectDay(key) { currentDay = key; openEx = {}; renderDayGrid(); renderDayDetail(); }
+function toggleEx(exKey) { openEx[exKey] = !openEx[exKey]; renderDayDetail(); }
+
+function renderCardios() {
+  document.getElementById('cardio-cards').innerHTML = CARDIOS.map(c => `
+    <div class="cardio-card">
+      <div class="cardio-card-head"><div class="cardio-icon">${c.icon}</div>
+        <div><div class="cardio-card-title">${c.title}</div><div class="cardio-card-goal">${c.goal}</div></div></div>
+      <div class="cardio-params">${c.params.map(p => `<div class="cardio-param"><div class="cardio-param-label">${p.label}</div><div class="cardio-param-val">${p.val}</div></div>`).join('')}</div>
+      <div class="note-box" style="margin:0">${c.note}</div>
+    </div>`).join('');
 }
 
-function toggleChart(exId) {
-  state.openCharts[exId] = !state.openCharts[exId];
-  render();
+function renderTecnicas() {
+  document.getElementById('tech-cards').innerHTML = TECNICAS.map(t => `
+    <div class="tech-card"><div class="tech-card-title">${t.name}</div><div class="tech-card-sub">${t.sub}</div>
+      <p>${t.desc}</p><div class="tech-how">${t.how}</div></div>`).join('');
 }
 
-function checkPRsInSession(session) {
-  const prs = [];
-  session.exercises.forEach(ex => {
-    const valid = getValidSets(ex);
-    if (!valid.length) return;
-    const exDef = PROGRAM[session.day]?.exercises.find(x => x.id === ex.id);
-    if (!exDef) return;
-    const allHistory = getExerciseHistory(ex.id).filter(h => h.date !== session.date);
-    const sessionMaxLoad = Math.max(...valid.map(s => s.kg));
-    const sessionVolume = valid.reduce((a, s) => a + s.kg * s.reps, 0);
-    let prevMaxLoad = 0, prevMaxVolume = 0;
-    allHistory.forEach(h => {
-      const m = Math.max(...h.sets.map(s => s.kg));
-      if (m > prevMaxLoad) prevMaxLoad = m;
-      const v = h.sets.reduce((a, s) => a + s.kg * s.reps, 0);
-      if (v > prevMaxVolume) prevMaxVolume = v;
-    });
-    if (sessionMaxLoad > prevMaxLoad && prevMaxLoad > 0) {
-      const topSet = valid.find(s => s.kg === sessionMaxLoad);
-      prs.push(`${exDef.name}: PR carga ${sessionMaxLoad}kg × ${topSet.reps} reps`);
-    }
-    if (sessionVolume > prevMaxVolume && prevMaxVolume > 0) {
-      prs.push(`${exDef.name}: PR volume ${Math.round(sessionVolume)} kg`);
-    }
+let macroGoal = 'recomp';
+let macroAct = 1.55;
+
+function calcMacros() {
+  const peso = parseFloat(document.getElementById('m-peso').value) || 100;
+  const bf = parseFloat(document.getElementById('m-bf').value) || 10;
+  const lbm = peso * (1 - bf / 100);
+  document.getElementById('m-lbm').textContent = lbm.toFixed(1) + ' kg';
+  const bmr = 370 + 21.6 * lbm;
+  const tdee = bmr * macroAct;
+  let cal, calLabel;
+  if (macroGoal === 'cut') { cal = tdee - 500; calLabel = 'Cutting (-500)'; }
+  else if (macroGoal === 'bulk') { cal = tdee + 300; calLabel = 'Bulk leve (+300)'; }
+  else { cal = tdee; calLabel = 'Recomp (manutenção)'; }
+  const prot = Math.round(peso * 2.5);
+  const fat = Math.round(peso * 0.8);
+  const carb = Math.round((cal - prot * 4 - fat * 9) / 4);
+  document.getElementById('m-result').innerHTML = `
+    <div class="calc-result-row"><span class="calc-result-label">TDEE (gasto diário)</span><span class="calc-result-val">${Math.round(tdee).toLocaleString('pt-BR')} kcal</span></div>
+    <div class="calc-result-row"><span class="calc-result-label">${calLabel}</span><span class="calc-result-val big">${Math.round(cal).toLocaleString('pt-BR')} kcal</span></div>
+    <div class="calc-result-row"><span class="calc-result-label">Proteína · 2,5 g/kg</span><span class="calc-result-val">${prot} g</span></div>
+    <div class="calc-result-row"><span class="calc-result-label">Gordura · 0,8 g/kg</span><span class="calc-result-val">${fat} g</span></div>
+    <div class="calc-result-row"><span class="calc-result-label">Carboidrato · resto</span><span class="calc-result-val">${carb} g</span></div>`;
+  const protPerMeal = Math.round(prot / 5);
+  document.getElementById('m-dist').textContent = `5 refeições × ${protPerMeal}g de proteína = ${prot}g. Cada uma acima do estímulo máximo de MPS (~40g), mas o excedente contribui no balanço diário.`;
+}
+
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  return prs;
+});
+document.getElementById('m-goal').addEventListener('click', e => {
+  if (!e.target.dataset.goal) return;
+  macroGoal = e.target.dataset.goal;
+  document.querySelectorAll('#m-goal .calc-seg-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active'); calcMacros();
+});
+document.getElementById('m-act').addEventListener('click', e => {
+  if (!e.target.dataset.act) return;
+  macroAct = parseFloat(e.target.dataset.act);
+  document.querySelectorAll('#m-act .calc-seg-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active'); calcMacros();
+});
+document.getElementById('m-peso').addEventListener('input', calcMacros);
+document.getElementById('m-bf').addEventListener('input', calcMacros);
+
+renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
+
+// ============ CARGAS ============
+// Lista de exercícios agrupados por dia
+const CARGAS_GRUPOS = [
+  { label: 'Push A — Força', exs: ['Chest Press Inclinado','Supino Máquina','Supino Inclinado Halter 30°','Cross Over Alta→Baixa','Desenvolvimento Militar Máquina','Elevação Lateral Halter','Tríceps Corda'] },
+  { label: 'Pull A — Força', exs: ['T-Bar (Cavalinho)','Pulldown Neutro','Remada Serrote Halter','Pullover Polia Alta','Face Pull Corda','Rosca Scott Máquina','Rosca Martelo Halter'] },
+  { label: 'Legs A — Quadríceps', exs: ['Hack Squat','Leg Press 45° Pés Baixos','Cadeira Extensora','Stiff Halter','Mesa Flexora','Panturrilha em Pé'] },
+  { label: 'Push B — Hipertrofia', exs: ['Supino Inclinado Halter 45°','Chest Press Reto Máquina','Peck Deck (Crucifixo Máq)','Desenvolvimento Halter Sentado','Elevação Lateral Cabo Inclinado','Tríceps Testa Barra W','Tríceps Pulley Inverso'] },
+  { label: 'Pull B — Hipertrofia', exs: ['Puxada Pronada Aberta','Remada Baixa Pega Aberta','Pulldown Pega Fechada','Remada Baixa Triângulo','Crucifixo Inverso','Rosca Alternada Banco Inclinado','Rosca Scott Máquina (B)'] },
+  { label: 'Legs B — Posterior', exs: ['Stiff Halter (B)','Hack Squat Pés Altos','Mesa Flexora Deitada','Cadeira Abdutora','Avanço Passada Halter','Panturrilha Sentado','Abdominal Pulley'] }
+];
+
+// Estado: { nome: kg } — começa vazio, carrega da URL se disponível
+let cargasState = {};
+let cargasExtras = []; // exercícios livres adicionados
+
+function cargasKey(nome) { return nome.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_À-ÿ]/g, ''); }
+
+function loadCargasFromURL() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('p');
+    if (!raw) return;
+    const json = decodeURIComponent(escape(atob(raw)));
+    const decoded = JSON.parse(json);
+    if (decoded.c) cargasState = decoded.c;
+    if (decoded.e && Array.isArray(decoded.e)) cargasExtras = decoded.e;
+  } catch(e) { console.warn('GSN cargas URL erro:', e); }
 }
 
-// Conta séries RPE 9+ já registradas na sessão atual (qualquer exercício)
-function countRPE9InCurrentSession() {
-  const current = state.data.currentSession;
-  if (!current || !current.exercises) return 0;
-  let count = 0;
-  current.exercises.forEach(e => {
-    if (!e.sets) return;
-    e.sets.forEach(s => {
-      if (s && !s.pending && s.rpe >= 9) count++;
-    });
-  });
-  return count;
+function buildURL() {
+  const payload = { c: cargasState, e: cargasExtras };
+  const json = JSON.stringify(payload);
+  const encoded = btoa(unescape(encodeURIComponent(json)));
+  const base = window.location.origin + window.location.pathname;
+  return base + '?p=' + encoded + '#cargas';
 }
 
-function generateSummary(session) {
-  const program = PROGRAM[session.day];
-  const dateBr = session.date.split('-').reverse().join('/');
-  const duration = session.duration || '?';
-  const energy = session.energy || '?';
-  const obs = session.obs || '';
-  const prs = checkPRsInSession(session);
-  let totalVolume = 0, setsRPE9plus = 0, totalValidSets = 0;
-
-  let txt = `${program.name.toUpperCase()} — ${dateBr} — ${duration}min — energia ${energy}/10\n\n`;
-
-  session.exercises.forEach(ex => {
-    const allSets = ex.sets ? ex.sets.filter(s => s && !s.pending && s.kg !== undefined) : [];
-    if (!allSets.length) return;
-    const exDef = program.exercises.find(x => x.id === ex.id);
-    if (!exDef) return;
-    const name = ex.subUsed || exDef.name;
-    txt += `${name.toUpperCase()} (${exDef.sets}x${exDef.reps})\n`;
-    let exVol = 0;
-    allSets.forEach((s, i) => {
-      const typeLabel = SET_TYPES[s.type]?.label || 'Válida';
-      const tecLabel = s.tecnica && TECNICAS[s.tecnica] ? ` (${TECNICAS[s.tecnica].label})` : '';
-      txt += `  S${i + 1} [${typeLabel}${tecLabel}]: ${s.kg}kg × ${s.reps} reps @RPE ${s.rpe}\n`;
-      if (s.rpe >= 9) setsRPE9plus++;
-      if (SET_TYPES[s.type]?.countsVolume) { exVol += s.kg * s.reps; totalValidSets++; }
-    });
-    totalVolume += exVol;
-    txt += `  Volume válido: ${Math.round(exVol).toLocaleString('pt-BR')} kg\n\n`;
-  });
-
-  txt += `---\nRESUMO DA SESSÃO\n`;
-  txt += `Volume total válido: ${Math.round(totalVolume).toLocaleString('pt-BR')} kg\n`;
-  txt += `Séries válidas: ${totalValidSets}\n`;
-  txt += `Sets RPE 9+: ${setsRPE9plus}${setsRPE9plus > 2 ? '  ⚠ acima do limite (2)' : ''}\n`;
-  if (prs.length) { txt += `PRs batidos:\n`; prs.forEach(p => txt += `  ✓ ${p}\n`); }
-  else { txt += `PRs batidos: nenhum nesta sessão\n`; }
-
-  // Notas estruturadas
-  if (session.notes) {
-    const n = session.notes;
-    txt += `\n--- AUTO-AVALIAÇÃO ---\n`;
-    if (n.dorArticular !== null && n.dorArticular !== undefined) txt += `Dor articular: ${n.dorArticular ? 'SIM ⚠' : 'não'}\n`;
-    if (n.sono6h !== null && n.sono6h !== undefined) txt += `Sono <6h: ${n.sono6h ? 'SIM ⚠' : 'não'}\n`;
-    if (n.motivacao) txt += `Motivação: ${n.motivacao}/5\n`;
-  }
-
-  // Cardios do mesmo dia
-  const sameDayCardios = (state.data.cardios || []).filter(c => c.date === session.date);
-  if (sameDayCardios.length) {
-    txt += `\n--- CARDIO DO DIA ---\n`;
-    sameDayCardios.forEach(c => {
-      const tipoLabel = CARDIO_TYPES[c.tipo]?.label || c.tipo;
-      txt += `${tipoLabel}: ${c.duracao}min @ intensidade ${c.intensidade}/10${c.incline ? ' · ' + c.incline : ''}\n`;
-    });
-  }
-
-  if (obs) txt += `\nObs: ${obs}\n`;
-  return txt;
+function gerarLink() {
+  const url = buildURL();
+  document.getElementById('url-text').textContent = url;
+  document.getElementById('url-box').classList.add('show');
 }
 
-function logSet(exId, setIdx, setData) {
-  const current = getCurrentSession();
-  let exEntry = current.exercises.find(e => e.id === exId);
-  if (!exEntry) {
-    exEntry = { id: exId, sets: [], subUsed: state.data.exerciseSubs[`${state.selectedDay}-${exId}`] || null };
-    current.exercises.push(exEntry);
-  }
-  while (exEntry.sets.length <= setIdx) exEntry.sets.push(null);
-  exEntry.sets[setIdx] = setData;
-  if (!current.startTime) current.startTime = Date.now();
-  saveData();
-}
-
-function addSetToExercise(exId, type) {
-  const current = getCurrentSession();
-  let exEntry = current.exercises.find(e => e.id === exId);
-  if (!exEntry) {
-    exEntry = { id: exId, sets: [], subUsed: state.data.exerciseSubs[`${state.selectedDay}-${exId}`] || null };
-    current.exercises.push(exEntry);
-  }
-  exEntry.sets.push({ pending: true, type: type });
-  // Garante que o card fica aberto após adicionar série
-  state.openExercises[exId] = true;
-  saveData();
-  render();
-}
-
-function removeSetFromExercise(exId, setIdx) {
-  if (!confirm('Excluir esta série?')) return;
-  const current = getCurrentSession();
-  const exEntry = current.exercises.find(e => e.id === exId);
-  if (!exEntry) return;
-  exEntry.sets.splice(setIdx, 1);
-  saveData();
-  state.editingSet = null;
-  state.openExercises[exId] = true;
-  render();
-}
-
-function editSet(exId, setIdx) {
-  state.editingSet = `${exId}-${setIdx}`;
-  state.openExercises[exId] = true;
-  render();
-}
-
-function finishSession() {
-  openFinishForm();
-}
-
-function startRest(duration) {
-  state.restTotal = duration;
-  state.restRemaining = duration;
-  if (state.restInterval) clearInterval(state.restInterval);
-  state.restInterval = setInterval(() => {
-    state.restRemaining--;
-    if (state.restRemaining <= 0) {
-      clearInterval(state.restInterval);
-      state.restInterval = null;
-      if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
-    }
-    updateTimerUI();
-  }, 1000);
-  state.restTimer = duration;
-  render();
-}
-
-function stopRest() {
-  if (state.restInterval) clearInterval(state.restInterval);
-  state.restInterval = null;
-  state.restTimer = null;
-  state.restRemaining = 0; state.restTotal = 0;
-  render();
-}
-
-function adjustRest(seconds) {
-  state.restRemaining = seconds;
-  state.restTotal = seconds;
-  if (state.restInterval) clearInterval(state.restInterval);
-  state.restInterval = setInterval(() => {
-    state.restRemaining--;
-    if (state.restRemaining <= 0) {
-      clearInterval(state.restInterval);
-      state.restInterval = null;
-      if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
-    }
-    updateTimerUI();
-  }, 1000);
-  updateTimerUI();
-}
-
-function updateTimerUI() {
-  const el = document.getElementById('timer-display');
-  const bar = document.getElementById('timer-bar');
-  if (!el) return;
-  const mm = Math.floor(state.restRemaining / 60);
-  const ss = state.restRemaining % 60;
-  el.textContent = String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0');
-  const pct = ((state.restTotal - state.restRemaining) / state.restTotal) * 100;
-  if (bar) bar.style.width = pct + '%';
-  if (state.restRemaining === 0) {
-    el.classList.add('done');
-    if (bar) bar.classList.add('done');
-  } else {
-    el.classList.remove('done');
-    if (bar) bar.classList.remove('done');
-  }
-}
-
-function startSessionTimer() {
-  const current = getCurrentSession();
-  if (!current.startTime) { current.startTime = Date.now(); saveData(); }
-  if (state.sessionTimerInterval) clearInterval(state.sessionTimerInterval);
-  state.sessionTimerInterval = setInterval(updateSessionClock, 1000);
-  updateSessionClock();
-}
-
-function stopSessionTimer() {
-  if (state.sessionTimerInterval) clearInterval(state.sessionTimerInterval);
-  state.sessionTimerInterval = null;
-}
-
-function updateSessionClock() {
-  const el = document.getElementById('session-clock-display');
-  if (!el) return;
-  const current = state.data.currentSession;
-  if (!current || !current.startTime) return;
-  const elapsed = Math.floor((Date.now() - current.startTime) / 1000);
-  const hh = Math.floor(elapsed / 3600);
-  const mm = Math.floor((elapsed % 3600) / 60);
-  const ss = elapsed % 60;
-  el.textContent = hh > 0
-    ? `${hh}:${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`
-    : `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
-}
-
-function exportData() {
-  const blob = new Blob([JSON.stringify(state.data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'treino-backup-' + new Date().toISOString().slice(0, 10) + '.json';
-  a.click();
-}
-
-function copyToClipboard(text) {
+function copiarLink() {
+  const url = buildURL();
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => {
-      if (navigator.vibrate) navigator.vibrate(50);
-      alert('Resumo copiado!');
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Link copiado! Cole nos Favoritos do Safari.');
     });
   } else {
     const ta = document.createElement('textarea');
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
+    ta.value = url;
+    document.body.appendChild(ta); ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
-    alert('Resumo copiado!');
+    alert('Link copiado!');
   }
 }
 
-// ============ CARDIO ============
-function countCardiosInWeek() {
-  const today = new Date();
-  const weekStart = new Date(today);
-  weekStart.setDate(today.getDate() - today.getDay());
-  weekStart.setHours(0, 0, 0, 0);
-  return (state.data.cardios || []).filter(c => {
-    const cd = new Date(c.date + 'T12:00:00');
-    return cd >= weekStart;
-  }).length;
+function updateCarga(nome, val) {
+  const num = parseFloat(val);
+  if (val === '' || isNaN(num)) { delete cargasState[nome]; }
+  else { cargasState[nome] = num; }
+  // Marca a linha visualmente
+  const row = document.getElementById('row-' + cargasKey(nome));
+  if (row) row.classList.toggle('edited', !!cargasState[nome]);
 }
 
-function isLegDayToday() {
-  const todayISO = new Date().toISOString().slice(0, 10);
-  return state.data.sessions.some(s => s.date === todayISO && PROGRAM[s.day]?.group === 'legs');
+function adicionarExercicio() {
+  const input = document.getElementById('add-ex-nome');
+  const nome = input.value.trim();
+  if (!nome) return;
+  if (cargasExtras.includes(nome)) { alert('Exercício já existe'); return; }
+  cargasExtras.push(nome);
+  input.value = '';
+  renderCargas();
 }
 
-function cardioStatusText() {
-  const week = countCardiosInWeek();
-  const cap = CARDIO_WEEKLY_CAP;
-  let txt = `${week}/${cap} esta semana`;
-  if (isLegDayToday()) txt += ' · dia de perna: 15-20min';
-  return txt;
+function removerExtra(nome) {
+  cargasExtras = cargasExtras.filter(e => e !== nome);
+  delete cargasState[nome];
+  renderCargas();
 }
 
-function openCardioForm() {
-  state.cardioForm = { tipo: 'escada', duracao: 25, intensidade: 7, obs: '', incline: '' };
-  render();
-}
-
-function closeCardioForm() { state.cardioForm = null; render(); }
-
-function setCardioField(field, value) {
-  if (!state.cardioForm) return;
-  state.cardioForm[field] = value;
-  render();
-}
-
-function saveCardio() {
-  if (!state.cardioForm) return;
-  const f = state.cardioForm;
-  if (!f.tipo) { alert('Escolha um tipo de cardio'); return; }
-  const dur = parseInt(f.duracao);
-  if (!dur || dur < 1) { alert('Duração inválida'); return; }
-
-  if (!state.data.cardios) state.data.cardios = [];
-
-  // Modo edição
-  if (f._editIdx !== undefined && f._editIdx !== null) {
-    const c = state.data.cardios[f._editIdx];
-    if (!c) return;
-    c.tipo = f.tipo;
-    c.duracao = dur;
-    c.intensidade = parseInt(f.intensidade) || 7;
-    c.incline = f.incline || '';
-    c.obs = f.obs || '';
-    saveData();
-    state.cardioForm = null;
-    if (navigator.vibrate) navigator.vibrate(50);
-    render();
-    return;
-  }
-
-  // Modo criação
-  const week = countCardiosInWeek();
-  if (week >= CARDIO_WEEKLY_CAP) {
-    const ok = confirm(`⚠ Você já fez ${week} cardios esta semana. Cap recomendado: ${CARDIO_WEEKLY_CAP}.\n\nRegistrar mesmo assim?`);
-    if (!ok) return;
-  }
-  state.data.cardios.push({
-    date: new Date().toISOString().slice(0, 10),
-    tipo: f.tipo,
-    duracao: dur,
-    intensidade: parseInt(f.intensidade) || 7,
-    incline: f.incline || '',
-    obs: f.obs || '',
-    createdAt: Date.now()
-  });
-  saveData();
-  state.cardioForm = null;
-  if (navigator.vibrate) navigator.vibrate(50);
-  alert('✓ Cardio registrado');
-  render();
-}
-
-function renderCardioForm() {
-  const f = state.cardioForm;
-  if (!f) return '';
-  const typeBtns = Object.keys(CARDIO_TYPES).map(k => `
-    <button class="cardio-type-btn ${f.tipo === k ? 'active' : ''}" onclick="setCardioField('tipo', '${k}')">
-      <div class="ctb-icon">${CARDIO_TYPES[k].icon}</div>
-      <div>${CARDIO_TYPES[k].label}</div>
-    </button>
-  `).join('');
-  const intensityBtns = [1,2,3,4,5,6,7,8,9,10].map(n => `
-    <button class="ci-btn ${f.intensidade === n ? 'active' : ''}" onclick="setCardioField('intensidade', ${n})">${n}</button>
-  `).join('');
-  const legHint = isLegDayToday() ? '<div style="background:var(--yellow-bg);border-left:3px solid var(--yellow);padding:8px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#7a5d00;margin-bottom:12px">⚠ Dia de perna hoje — sugestão: 15-20min para gerir fadiga cumulativa</div>' : '';
-  return `
-    <div class="cardio-form-overlay" onclick="closeCardioForm()">
-      <div class="cardio-form" onclick="event.stopPropagation()">
-        <div class="cardio-form-head">
-          <div class="cardio-form-title">${f._editIdx !== undefined && f._editIdx !== null ? '✏️ Editar cardio' : '🏃 Registrar cardio'}</div>
-          <button class="btn-close" onclick="closeCardioForm()">×</button>
+function renderCargas() {
+  let html = '';
+  CARGAS_GRUPOS.forEach(grupo => {
+    html += `<div class="cargas-group"><div class="cargas-group-title">${grupo.label}</div>`;
+    grupo.exs.forEach(nome => {
+      const key = cargasKey(nome);
+      const val = cargasState[nome] || '';
+      html += `<div class="carga-row ${val ? 'edited' : ''}" id="row-${key}">
+        <div class="carga-nome">${nome}</div>
+        <div class="carga-input-wrap">
+          <input type="number" inputmode="decimal" class="carga-input" value="${val}" placeholder="—"
+            onchange="updateCarga('${nome.replace(/'/g,"\\'")}', this.value)"
+            oninput="updateCarga('${nome.replace(/'/g,"\\'")}', this.value)">
+          <span class="carga-unit">kg</span>
         </div>
-        ${legHint}
-        <div class="cardio-field-label">Tipo</div>
-        <div class="cardio-types-grid">${typeBtns}</div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Duração (min)</div>
-          <input type="number" inputmode="numeric" class="cardio-field-input" id="cardio-duracao" value="${f.duracao}" onchange="setCardioField('duracao', this.value)">
-        </div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Intensidade (1-10)</div>
-          <div class="cardio-intensity-row">${intensityBtns}</div>
-        </div>
-
-        ${f.tipo === 'esteira_inc' || f.tipo === 'escada' ? `
-          <div class="cardio-field">
-            <div class="cardio-field-label">Inclinação / Nível (opcional)</div>
-            <input type="text" class="cardio-field-input" id="cardio-incline" value="${f.incline || ''}" placeholder="Ex: 12% ou nível 8" onchange="setCardioField('incline', this.value)">
-          </div>
-        ` : ''}
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Observações</div>
-          <textarea class="cardio-field-textarea" placeholder="opcional" onchange="setCardioField('obs', this.value)">${f.obs || ''}</textarea>
-        </div>
-
-        <button class="btn-primary" onclick="saveCardio()" style="margin-top:6px">${f._editIdx !== undefined && f._editIdx !== null ? 'Salvar alterações' : 'Salvar cardio'}</button>
-      </div>
-    </div>
-  `;
-}
-
-// ============ AVISO DE TÉCNICA AVANÇADA SOMANDO ============
-// Detecta quando você adicionou séries avançadas além das válidas prescritas (em vez de substituir)
-function getAvancadaWarning(ex, exEntry) {
-  if (!exEntry || !exEntry.sets) return null;
-  const validSets = exEntry.sets.filter(s => s && !s.pending && s.kg !== undefined && s.type === 'valida').length;
-  const avancadaSets = exEntry.sets.filter(s => s && !s.pending && s.kg !== undefined && s.type === 'avancada').length;
-  // Se já tem >= séries prescritas como válidas E ainda assim adicionou avançadas, está SOMANDO
-  if (validSets >= ex.sets && avancadaSets > 0) {
-    return {
-      text: `⚠ Você já fez ${validSets} válidas (prescrito: ${ex.sets}) + ${avancadaSets} avançada${avancadaSets > 1 ? 's' : ''}. Técnica avançada SUBSTITUI volume, não soma — considere parar.`,
-      type: 'red'
-    };
-  }
-  return null;
-}
-
-// ============ FINALIZAR SESSÃO — Notas estruturadas ============
-function openFinishForm() {
-  const current = getCurrentSession();
-  const hasAnySet = current.exercises.some(e => e.sets && e.sets.some(s => s && !s.pending && s.kg !== undefined));
-  if (!hasAnySet) { alert('Nenhuma série registrada.'); return; }
-  const duration = current.startTime ? Math.round((Date.now() - current.startTime) / 60000) : null;
-  state.finishForm = {
-    duration: duration,
-    energy: 8,
-    dorArticular: null,  // null | true | false
-    sono6h: null,
-    motivacao: 4,
-    obs: ''
-  };
-  render();
-}
-
-function closeFinishForm() { state.finishForm = null; render(); }
-
-function setFinishField(field, value) {
-  if (!state.finishForm) return;
-  state.finishForm[field] = value;
-  render();
-}
-
-function confirmFinishSession() {
-  const f = state.finishForm;
-  if (!f) return;
-  if (f.energy === null || f.energy === undefined) { alert('Defina a energia'); return; }
-
-  // Modo edição de sessão existente
-  if (f._editMode && state.editSessionIdx !== null && state.editSessionIdx !== undefined) {
-    confirmEditSession();
-    return;
-  }
-
-  // Modo finalizar sessão nova
-  const current = getCurrentSession();
-  current.duration = f.duration;
-  current.energy = parseInt(f.energy) || 8;
-  current.obs = f.obs || '';
-  current.notes = {
-    dorArticular: f.dorArticular,
-    sono6h: f.sono6h,
-    motivacao: f.motivacao
-  };
-  current.finishedAt = Date.now();
-  current.exercises.forEach(e => {
-    if (e.sets) e.sets = e.sets.filter(s => s && !s.pending && s.kg !== undefined);
-  });
-  current.exercises = current.exercises.filter(e => e.sets && e.sets.length);
-  state.data.sessions.push(current);
-  state.data.currentSession = null;
-  saveData();
-  state.summaryText = generateSummary(current);
-  state.showSummary = true;
-  state.openExercises = {};
-  state.finishForm = null;
-  stopSessionTimer();
-  state.screen = 'home';
-  render();
-}
-
-function renderFinishForm() {
-  const f = state.finishForm;
-  if (!f) return '';
-  const energyBtns = [1,2,3,4,5,6,7,8,9,10].map(n => `
-    <button class="ci-btn ${f.energy === n ? 'active' : ''}" onclick="setFinishField('energy', ${n})">${n}</button>
-  `).join('');
-  const motBtns = [1,2,3,4,5].map(n => `
-    <button class="ci-btn ${f.motivacao === n ? 'active' : ''}" onclick="setFinishField('motivacao', ${n})">${n}</button>
-  `).join('');
-  return `
-    <div class="cardio-form-overlay" onclick="closeFinishForm()">
-      <div class="cardio-form" onclick="event.stopPropagation()">
-        <div class="cardio-form-head">
-          <div class="cardio-form-title">${f._editMode ? '✏️ Editar sessão' : '✅ Finalizar sessão'}</div>
-          <button class="btn-close" onclick="closeFinishForm()">×</button>
-        </div>
-
-        <div style="font-size:12px;color:var(--text3);margin-bottom:12px">${f.duration ? f.duration + ' min de treino' : ''}</div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Energia da sessão (1-10)</div>
-          <div class="cardio-intensity-row">${energyBtns}</div>
-        </div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Sentiu dor articular?</div>
-          <div class="notes-row">
-            <button class="notes-toggle ${f.dorArticular === false ? 'no' : ''}" onclick="setFinishField('dorArticular', false)">Não</button>
-            <button class="notes-toggle ${f.dorArticular === true ? 'yes' : ''}" onclick="setFinishField('dorArticular', true)">Sim</button>
-          </div>
-        </div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Dormiu menos de 6h?</div>
-          <div class="notes-row">
-            <button class="notes-toggle ${f.sono6h === false ? 'no' : ''}" onclick="setFinishField('sono6h', false)">Não</button>
-            <button class="notes-toggle ${f.sono6h === true ? 'yes' : ''}" onclick="setFinishField('sono6h', true)">Sim</button>
-          </div>
-        </div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Motivação (1-5)</div>
-          <div class="cardio-intensity-row">${motBtns}</div>
-        </div>
-
-        <div class="cardio-field">
-          <div class="cardio-field-label">Observações livres</div>
-          <textarea class="cardio-field-textarea" placeholder="opcional" onchange="setFinishField('obs', this.value)">${f.obs || ''}</textarea>
-        </div>
-
-        <button class="btn-primary" onclick="confirmFinishSession()" style="margin-top:6px">${f._editMode ? 'Salvar alterações' : 'Finalizar'}</button>
-      </div>
-    </div>
-  `;
-}
-
-// ============ EXCLUSÃO E EDIÇÃO — SESSÕES E CARDIO ============
-
-function deleteSession(realIdx) {
-  const s = state.data.sessions[realIdx];
-  if (!s) return;
-  const dateBr = s.date.split('-').reverse().join('/');
-  if (!confirm(`Excluir a sessão ${DAY_LABELS[s.day]} de ${dateBr}?\n\nEsta ação não pode ser desfeita.`)) return;
-  state.data.sessions.splice(realIdx, 1);
-  saveData();
-  render();
-}
-
-function openEditSession(realIdx) {
-  const s = state.data.sessions[realIdx];
-  if (!s) return;
-  state.editSessionIdx = realIdx;
-  state.finishForm = {
-    _editMode: true,
-    duration: s.duration || null,
-    energy: s.energy || 8,
-    dorArticular: s.notes?.dorArticular ?? null,
-    sono6h: s.notes?.sono6h ?? null,
-    motivacao: s.notes?.motivacao || 4,
-    obs: s.obs || ''
-  };
-  render();
-}
-
-function confirmEditSession() {
-  const f = state.finishForm;
-  const idx = state.editSessionIdx;
-  if (!f || idx === null || idx === undefined) return;
-  const s = state.data.sessions[idx];
-  if (!s) return;
-  s.duration = f.duration;
-  s.energy = parseInt(f.energy) || 8;
-  s.obs = f.obs || '';
-  s.notes = {
-    dorArticular: f.dorArticular,
-    sono6h: f.sono6h,
-    motivacao: f.motivacao
-  };
-  saveData();
-  state.finishForm = null;
-  state.editSessionIdx = null;
-  render();
-}
-
-function deleteCardio(realIdx) {
-  const c = (state.data.cardios || [])[realIdx];
-  if (!c) return;
-  const tipoLabel = CARDIO_TYPES[c.tipo]?.label || c.tipo;
-  const dateBr = c.date.split('-').reverse().join('/');
-  if (!confirm(`Excluir ${tipoLabel} de ${dateBr} (${c.duracao}min)?\n\nEsta ação não pode ser desfeita.`)) return;
-  state.data.cardios.splice(realIdx, 1);
-  saveData();
-  render();
-}
-
-function openEditCardio(realIdx) {
-  const c = (state.data.cardios || [])[realIdx];
-  if (!c) return;
-  state.cardioForm = {
-    _editIdx: realIdx,
-    tipo: c.tipo,
-    duracao: c.duracao,
-    intensidade: c.intensidade || 7,
-    incline: c.incline || '',
-    obs: c.obs || ''
-  };
-  render();
-}
-
-// ============ RENDER ============
-function renderHome() {
-  const dayOfWeek = new Date().getDay();
-  const dayMap = { 1: 'push-a', 2: 'pull-a', 3: 'legs-a', 4: 'push-b', 5: 'pull-b', 6: 'legs-b' };
-  const suggestedDay = dayMap[dayOfWeek];
-
-  // DIAGNÓSTICO TEMPORÁRIO — mostra estado do localStorage
-  const seeded = localStorage.getItem(SEED_KEY);
-  const raw = localStorage.getItem(STORAGE_KEY);
-  const diagBanner = `
-    <div style="background:#1a1a1a;color:#0f0;font-family:monospace;font-size:10px;padding:8px 12px;margin-bottom:8px;border-radius:8px;line-height:1.6">
-      <div>SEED_KEY: ${seeded || 'NULL'}</div>
-      <div>STORAGE: ${raw ? 'OK (' + raw.length + ' chars)' : 'NULL'}</div>
-      <div>SESSIONS: ${state.data.sessions?.length || 0}</div>
-      <div>HORA: ${new Date().toLocaleTimeString('pt-BR')}</div>
-    </div>
-  `;
-
-  return `
-    <div class="header">
-      <div class="h-label">GSN Training — PPL 6x</div>
-      <div class="h-title">Treino do dia</div>
-      <div class="h-meta">${state.data.sessions.length} sessões registradas</div>
-    </div>
-    <div class="nav-tabs">
-      <button class="nav-tab ${state.homeTab === 'today' ? 'active' : ''}" onclick="setHomeTab('today')">Hoje</button>
-      <button class="nav-tab ${state.homeTab === 'choose' ? 'active' : ''}" onclick="setHomeTab('choose')">Trocar</button>
-      <button class="nav-tab ${state.homeTab === 'cal' ? 'active' : ''}" onclick="setHomeTab('cal')">📅 Calendário</button>
-      <button class="nav-tab ${state.homeTab === 'charts' ? 'active' : ''}" onclick="setHomeTab('charts')">📊 Gráficos</button>
-      <button class="nav-tab" onclick="goHistory()">Histórico</button>
-      <button class="nav-tab" onclick="goPRs()">PRs</button>
-    </div>
-    <div class="content">
-      ${diagBanner}
-      ${state.homeTab === 'today' ? renderTodayTab(suggestedDay) :
-        state.homeTab === 'choose' ? renderChooseTab(suggestedDay) :
-        state.homeTab === 'charts' ? renderChartsTab() :
-        renderCalendarTab()}
-    </div>
-  `;
-}
-
-function renderTodayTab(suggestedDay) {
-  const cardioBtn = `
-    <div class="cardio-btn-row">
-      <div class="cardio-tile" onclick="openCardioForm()">
-        <div class="ct-icon">🏃</div>
-        <div class="ct-text">
-          <div class="ct-title">+ Registrar cardio</div>
-          <div class="ct-sub">${cardioStatusText()}</div>
-        </div>
-      </div>
-    </div>
-  `;
-  if (!suggestedDay) {
-    return `<div class="empty">Hoje é descanso.</div><button class="btn-primary" onclick="setHomeTab('choose')">Escolher treino</button>${cardioBtn}`;
-  }
-  const dayInfo = PROGRAM[suggestedDay];
-  return `
-    <div class="day-card today" onclick="selectDay('${suggestedDay}')">
-      <div>
-        <div class="today-badge">HOJE — INICIAR</div>
-        <h3 style="margin-top:4px">${dayInfo.name}</h3>
-        <p>${dayInfo.subtitle} · ${dayInfo.duration}min</p>
-      </div>
-      <div style="font-size:24px;color:var(--green)">→</div>
-    </div>
-    <button class="btn-secondary" onclick="setHomeTab('choose')">Quero fazer outro treino</button>
-    ${cardioBtn}
-  `;
-}
-
-function renderChooseTab(suggestedDay) {
-  return `
-    <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Escolha qualquer treino.</div>
-    ${DAYS_ORDER.map(key => `
-      <div class="day-card ${suggestedDay === key ? 'today' : ''}" onclick="selectDay('${key}')">
-        <div><h3>${PROGRAM[key].name}</h3><p>${PROGRAM[key].subtitle} · ${PROGRAM[key].duration}min</p></div>
-        ${suggestedDay === key ? '<div class="today-badge">SUGERIDO</div>' : '<div style="font-size:18px;color:var(--text3)">→</div>'}
-      </div>
-    `).join('')}
-    <div class="cardio-btn-row">
-      <div class="cardio-tile" onclick="openCardioForm()">
-        <div class="ct-icon">🏃</div>
-        <div class="ct-text">
-          <div class="ct-title">+ Registrar cardio</div>
-          <div class="ct-sub">${cardioStatusText()}</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// ============ ABA GRÁFICOS ============
-
-// Agrupa cardios por semana ISO (YYYY-WNN)
-function getISOWeek(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  const jan4 = new Date(d.getFullYear(), 0, 4);
-  const startOfWeek = new Date(jan4);
-  startOfWeek.setDate(jan4.getDate() - jan4.getDay() + 1);
-  const weekNum = Math.ceil(((d - startOfWeek) / 86400000 + 1) / 7);
-  return `${d.getFullYear()}-W${String(weekNum).padStart(2, '0')}`;
-}
-
-function weekLabel(isoWeek) {
-  // Retorna "DD/MM" da segunda-feira da semana
-  const [year, w] = isoWeek.split('-W');
-  const jan4 = new Date(parseInt(year), 0, 4);
-  const monday = new Date(jan4);
-  monday.setDate(jan4.getDate() - jan4.getDay() + 1 + (parseInt(w) - 1) * 7);
-  return `${String(monday.getDate()).padStart(2,'0')}/${String(monday.getMonth()+1).padStart(2,'0')}`;
-}
-
-function renderChartsTab() {
-  return `
-    <div class="charts-section">
-      <div class="charts-section-title">🏃 Cardio</div>
-      ${renderCardioChart()}
-    </div>
-    <div class="charts-section">
-      <div class="charts-section-title">💪 Volume semanal por grupo</div>
-      ${renderVolumeChart()}
-    </div>
-    <div class="charts-section">
-      <div class="charts-section-title">📈 Progressão por exercício</div>
-      ${renderExPickerChart()}
-    </div>
-  `;
-}
-
-function renderCardioChart() {
-  const cardios = state.data.cardios || [];
-  if (!cardios.length) return `<div class="chart-card"><div class="chart-empty">Nenhum cardio registrado ainda</div></div>`;
-
-  // Dados por sessão (linha)
-  const sessions = [...cardios].sort((a, b) => a.date.localeCompare(b.date));
-
-  // Dados por semana (barras)
-  const weekMap = {};
-  cardios.forEach(c => {
-    const w = getISOWeek(c.date);
-    weekMap[w] = (weekMap[w] || 0) + (c.duracao || 0);
-  });
-  const weeks = Object.keys(weekMap).sort();
-
-  const W = 320, H = 150;
-  const PAD = { top: 16, right: 12, bottom: 28, left: 38 };
-  const chartW = W - PAD.left - PAD.right;
-  const chartH = H - PAD.top - PAD.bottom;
-
-  // === GRÁFICO 1: minutos por sessão (linha) ===
-  const maxMin = Math.max(...sessions.map(s => s.duracao || 0), 30);
-  const yS = v => PAD.top + chartH - (v / (maxMin * 1.1)) * chartH;
-  const xS = i => PAD.left + (sessions.length > 1 ? (i / (sessions.length - 1)) * chartW : chartW / 2);
-
-  const gridLines1 = [0, 1, 2, 3].map(i => {
-    const v = Math.round((maxMin * 1.1 / 3) * i);
-    const y = yS(v);
-    return `<line x1="${PAD.left}" y1="${y}" x2="${W - PAD.right}" y2="${y}" stroke="#e5e1d8" stroke-width="0.8"/>
-            <text x="${PAD.left - 4}" y="${y + 4}" text-anchor="end" font-size="9" fill="#999">${v}</text>`;
-  }).join('');
-
-  const linePts1 = sessions.map((s, i) => `${xS(i)},${yS(s.duracao || 0)}`).join(' ');
-  const dots1 = sessions.map((s, i) => {
-    const dateBr = s.date.slice(5).replace('-', '/');
-    const tipo = CARDIO_TYPES[s.tipo]?.label || s.tipo;
-    return `<circle cx="${xS(i)}" cy="${yS(s.duracao||0)}" r="4" fill="var(--yellow)" stroke="white" stroke-width="1.5"
-      onmouseover="showChartTip(event,'${dateBr}: ${s.duracao}min (${tipo})')" onmouseleave="hideChartTip()"
-      ontouchstart="showChartTip(event,'${dateBr}: ${s.duracao}min (${tipo})')" />`;
-  }).join('');
-
-  // Labels eixo X (sessão)
-  let xLabels1 = '';
-  const step1 = sessions.length <= 6 ? 1 : Math.ceil(sessions.length / 5);
-  sessions.forEach((s, i) => {
-    if (i % step1 === 0 || i === sessions.length - 1) {
-      xLabels1 += `<text x="${xS(i)}" y="${H - 4}" text-anchor="middle" font-size="9" fill="#999">${s.date.slice(5).replace('-', '/')}</text>`;
-    }
-  });
-
-  const svgSessions = `
-    <svg class="chart-svg" viewBox="0 0 ${W} ${H}">
-      ${gridLines1}${xLabels1}
-      <polyline points="${linePts1}" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linejoin="round"/>
-      ${dots1}
-    </svg>`;
-
-  // === GRÁFICO 2: minutos por semana (barras) ===
-  const maxWeek = Math.max(...Object.values(weekMap), 30);
-  const barW = weeks.length > 0 ? Math.min(28, chartW / weeks.length - 4) : 20;
-  const xW = i => PAD.left + (i + 0.5) * (chartW / weeks.length);
-  const yW = v => PAD.top + chartH - (v / (maxWeek * 1.1)) * chartH;
-  const barHFn = v => (v / (maxWeek * 1.1)) * chartH;
-
-  const gridLines2 = [0, 1, 2, 3].map(i => {
-    const v = Math.round((maxWeek * 1.1 / 3) * i);
-    const y = yW(v);
-    return `<line x1="${PAD.left}" y1="${y}" x2="${W - PAD.right}" y2="${y}" stroke="#e5e1d8" stroke-width="0.8"/>
-            <text x="${PAD.left - 4}" y="${y + 4}" text-anchor="end" font-size="9" fill="#999">${v}</text>`;
-  }).join('');
-
-  // Linha de cap (3x/sem × 30min = 90min como referência visual)
-  const capMin = CARDIO_WEEKLY_CAP * 30;
-  const yCap = yW(capMin);
-  const capLine = capMin <= maxWeek * 1.1
-    ? `<line x1="${PAD.left}" y1="${yCap}" x2="${W - PAD.right}" y2="${yCap}" stroke="var(--red)" stroke-width="1" stroke-dasharray="3,2"/>
-       <text x="${W - PAD.right + 2}" y="${yCap + 4}" font-size="8" fill="var(--red)">cap</text>`
-    : '';
-
-  const bars = weeks.map((w, i) => {
-    const v = weekMap[w];
-    const bh = barHFn(v);
-    const x = xW(i) - barW / 2;
-    const y = yW(v);
-    const label = weekLabel(w);
-    const color = v >= capMin ? 'var(--red)' : 'var(--yellow)';
-    return `
-      <rect x="${x}" y="${y}" width="${barW}" height="${bh}" fill="${color}" rx="2" opacity="0.85"
-        onmouseover="showChartTip(event,'Sem ${label}: ${v}min')" onmouseleave="hideChartTip()"
-        ontouchstart="showChartTip(event,'Sem ${label}: ${v}min')" />
-      <text x="${xW(i)}" y="${H - 4}" text-anchor="middle" font-size="8" fill="#999">${label}</text>`;
-  }).join('');
-
-  const svgWeeks = `
-    <svg class="chart-svg" viewBox="0 0 ${W} ${H}">
-      ${gridLines2}${capLine}${bars}
-    </svg>`;
-
-  return `
-    <div class="chart-card">
-      <div class="chart-card-title">Por sessão <span class="chart-card-sub">(min)</span></div>
-      ${svgSessions}
-      <div class="chart-legend">
-        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--yellow)"></span>Duração (min)</div>
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-card-title">Por semana <span class="chart-card-sub">(min acumulados · vermelho = acima do cap)</span></div>
-      ${svgWeeks}
-    </div>
-  `;
-}
-
-function renderVolumeChart() {
-  const sessions = state.data.sessions;
-  if (!sessions.length) return `<div class="chart-card"><div class="chart-empty">Nenhuma sessão registrada ainda</div></div>`;
-
-  // Agrega volume por semana e por grupo
-  const weekGroups = {}; // { 'YYYY-WNN': { push: 0, pull: 0, legs: 0 } }
-  sessions.forEach(s => {
-    const w = getISOWeek(s.date);
-    const grp = PROGRAM[s.day]?.group;
-    if (!grp) return;
-    if (!weekGroups[w]) weekGroups[w] = { push: 0, pull: 0, legs: 0 };
-    s.exercises.forEach(e => {
-      if (!e.sets) return;
-      e.sets.forEach(st => {
-        if (st && (st.type === 'valida' || st.type === 'avancada')) {
-          weekGroups[w][grp] = (weekGroups[w][grp] || 0) + st.kg * st.reps;
-        }
-      });
+      </div>`;
     });
+    html += '</div>';
   });
 
-  const weeks = Object.keys(weekGroups).sort();
-  if (!weeks.length) return `<div class="chart-card"><div class="chart-empty">Dados insuficientes</div></div>`;
-
-  const W = 320, H = 160;
-  const PAD = { top: 16, right: 12, bottom: 28, left: 44 };
-  const chartW = W - PAD.left - PAD.right;
-  const chartH = H - PAD.top - PAD.bottom;
-
-  const maxVol = Math.max(...weeks.map(w => {
-    const g = weekGroups[w];
-    return (g.push || 0) + (g.pull || 0) + (g.legs || 0);
-  }));
-
-  const barW = Math.min(32, chartW / weeks.length - 6);
-  const xW = i => PAD.left + (i + 0.5) * (chartW / weeks.length);
-  const scale = v => (v / (maxVol * 1.1)) * chartH;
-
-  const COLORS = { push: '#c0392b', pull: '#2c6ea4', legs: '#7a4cad' };
-
-  const gridLines = [0, 1, 2, 3].map(i => {
-    const v = Math.round((maxVol * 1.1 / 3) * i);
-    const y = PAD.top + chartH - scale(v);
-    const label = v >= 1000 ? `${Math.round(v/1000)}t` : `${v}`;
-    return `<line x1="${PAD.left}" y1="${y}" x2="${W - PAD.right}" y2="${y}" stroke="#e5e1d8" stroke-width="0.8"/>
-            <text x="${PAD.left - 4}" y="${y + 4}" text-anchor="end" font-size="9" fill="#999">${label}</text>`;
-  }).join('');
-
-  const bars = weeks.map((w, i) => {
-    const g = weekGroups[w];
-    const groups = ['legs', 'pull', 'push']; // ordem de empilhamento (baixo pra cima)
-    let yOffset = PAD.top + chartH;
-    const label = weekLabel(w);
-    let rects = groups.map(grp => {
-      const v = g[grp] || 0;
-      if (!v) return '';
-      const bh = scale(v);
-      yOffset -= bh;
-      const total = (g.push||0)+(g.pull||0)+(g.legs||0);
-      return `<rect x="${xW(i) - barW/2}" y="${yOffset}" width="${barW}" height="${bh}"
-        fill="${COLORS[grp]}" rx="2" opacity="0.85"
-        onmouseover="showChartTip(event,'${label} ${grp}: ${Math.round(v).toLocaleString('pt-BR')}kg')"
-        onmouseleave="hideChartTip()"
-        ontouchstart="showChartTip(event,'${label} ${grp}: ${Math.round(v).toLocaleString('pt-BR')}kg')" />`;
-    }).join('');
-    rects += `<text x="${xW(i)}" y="${H - 4}" text-anchor="middle" font-size="8" fill="#999">${label}</text>`;
-    return rects;
-  }).join('');
-
-  return `
-    <div class="chart-card">
-      <div class="chart-card-title">Volume semanal <span class="chart-card-sub">(kg válido · empilhado)</span></div>
-      <svg class="chart-svg" viewBox="0 0 ${W} ${H}">
-        ${gridLines}${bars}
-      </svg>
-      <div class="chart-legend">
-        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:${COLORS.push}"></span>Push</div>
-        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:${COLORS.pull}"></span>Pull</div>
-        <div class="chart-legend-item"><span class="chart-legend-dot" style="background:${COLORS.legs}"></span>Legs</div>
-      </div>
-    </div>
-  `;
-}
-
-function renderExPickerChart() {
-  // Monta lista de exercícios com histórico
-  const exsWithHistory = [];
-  DAYS_ORDER.forEach(dayKey => {
-    PROGRAM[dayKey].exercises.forEach(ex => {
-      const h = getExerciseHistory(ex.id);
-      if (h.length >= 2) exsWithHistory.push({ id: ex.id, name: ex.name, day: DAY_LABELS[dayKey] });
+  if (cargasExtras.length) {
+    html += `<div class="cargas-group"><div class="cargas-group-title">Exercícios livres</div>`;
+    cargasExtras.forEach(nome => {
+      const key = cargasKey(nome);
+      const val = cargasState[nome] || '';
+      html += `<div class="carga-row ${val ? 'edited' : ''}" id="row-${key}">
+        <div class="carga-nome">${nome}</div>
+        <div class="carga-input-wrap">
+          <input type="number" inputmode="decimal" class="carga-input" value="${val}" placeholder="—"
+            onchange="updateCarga('${nome.replace(/'/g,"\\'")}', this.value)"
+            oninput="updateCarga('${nome.replace(/'/g,"\\'")}', this.value)">
+          <span class="carga-unit">kg</span>
+        </div>
+        <button class="carga-del" onclick="removerExtra('${nome.replace(/'/g,"\\'")}')">🗑</button>
+      </div>`;
     });
-  });
-
-  if (!exsWithHistory.length) return `<div class="chart-card"><div class="chart-empty">Mínimo 2 sessões por exercício para exibir progressão</div></div>`;
-
-  // Se nenhum selecionado, pega o primeiro
-  const selId = state.selectedChartEx || exsWithHistory[0].id;
-  const selEx = exsWithHistory.find(e => e.id === selId) || exsWithHistory[0];
-
-  const picker = exsWithHistory.map(e => `
-    <button class="ex-pick-btn ${e.id === selId ? 'active' : ''}" onclick="selectChartEx('${e.id}')">${e.name.split(' ').slice(0,2).join(' ')}</button>
-  `).join('');
-
-  const chart = renderProgressChart(selId, selEx.name);
-
-  return `
-    <div class="chart-card">
-      <div class="chart-card-title">${selEx.name} <span class="chart-card-sub">${selEx.day}</span></div>
-      <div class="ex-picker">${picker}</div>
-      ${chart}
-      <div class="chart-legend">
-        <div class="chart-legend-item"><span class="chart-legend-line" style="background:var(--accent)"></span>Carga real</div>
-        <div class="chart-legend-item"><span class="chart-legend-dash" style="border-color:var(--purple)"></span>1RM estimado</div>
-      </div>
-    </div>
-  `;
-}
-
-function selectChartEx(exId) {
-  state.selectedChartEx = exId;
-  render();
-}
-function renderCalendarTab() {
-  const [yearStr, monthStr] = state.calCursor.split('-');
-  const year = parseInt(yearStr), month = parseInt(monthStr);
-  const firstDay = new Date(year, month - 1, 1);
-  const lastDay = new Date(year, month, 0);
-  const daysInMonth = lastDay.getDate();
-  const startWeekday = firstDay.getDay();
-  const todayISO = new Date().toISOString().slice(0, 10);
-
-  const sessionsByDate = {};
-  state.data.sessions.forEach((s, idx) => {
-    if (!sessionsByDate[s.date]) sessionsByDate[s.date] = [];
-    sessionsByDate[s.date].push({ session: s, idx });
-  });
-
-  const cardiosByDate = {};
-  (state.data.cardios || []).forEach((c, idx) => {
-    if (!cardiosByDate[c.date]) cardiosByDate[c.date] = [];
-    cardiosByDate[c.date].push({ cardio: c, idx });
-  });
-
-  // Stats do mês
-  let monthSessions = 0, monthVolume = 0, monthDuration = 0, monthCardios = 0, monthCardioMin = 0;
-  state.data.sessions.forEach(s => {
-    if (s.date.startsWith(state.calCursor)) {
-      monthSessions++;
-      monthDuration += s.duration || 0;
-      s.exercises.forEach(e => {
-        if (!e.sets) return;
-        e.sets.forEach(st => {
-          if (st && (st.type === 'valida' || st.type === 'avancada')) monthVolume += st.kg * st.reps;
-        });
-      });
-    }
-  });
-  (state.data.cardios || []).forEach(c => {
-    if (c.date.startsWith(state.calCursor)) {
-      monthCardios++;
-      monthCardioMin += c.duracao || 0;
-    }
-  });
-
-  // Streak
-  let streak = 0;
-  const today = new Date();
-  for (let i = 0; i < 365; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    const iso = d.toISOString().slice(0, 10);
-    if (sessionsByDate[iso] || cardiosByDate[iso]) streak++;
-    else if (i > 0) break;
+    html += '</div>';
   }
 
-  // Sessões da semana atual (domingo→sábado)
-  const weekStart = new Date(today);
-  weekStart.setDate(today.getDate() - today.getDay());
-  weekStart.setHours(0, 0, 0, 0);
-  let weekSessions = 0, weekCardios = 0;
-  state.data.sessions.forEach(s => {
-    const sd = new Date(s.date + 'T12:00:00');
-    if (sd >= weekStart) weekSessions++;
-  });
-  (state.data.cardios || []).forEach(c => {
-    const cd = new Date(c.date + 'T12:00:00');
-    if (cd >= weekStart) weekCardios++;
-  });
-
-  const monthName = firstDay.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
-
-  let cells = '';
-  for (let i = 0; i < startWeekday; i++) cells += `<div class="cal2-day"></div>`;
-  for (let d = 1; d <= daysInMonth; d++) {
-    const iso = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-    const daySessions = sessionsByDate[iso] || [];
-    const dayCardios = cardiosByDate[iso] || [];
-    const isToday = iso === todayISO;
-    let cls = 'cal2-day';
-    if (daySessions.length || dayCardios.length) cls += ' has';
-    if (daySessions.length) {
-      const grp = PROGRAM[daySessions[0].session.day]?.group;
-      if (grp) cls += ' ' + grp;
-    } else if (dayCardios.length) {
-      cls += ' cardio-only';
-    }
-    if (isToday) cls += ' today';
-
-    // Pontos: 1 por sessão de força + 1 amarelo se tem cardio
-    let dots = '';
-    daySessions.forEach(s => {
-      const grp = PROGRAM[s.session.day]?.group || 'gray';
-      dots += `<span class="cal2-dot dot-${grp}"></span>`;
-    });
-    if (dayCardios.length) dots += `<span class="cal2-dot dot-cardio"></span>`;
-
-    const onclick = (daySessions.length || dayCardios.length) ? `onclick="openCalDay('${iso}')"` : '';
-    cells += `<div class="${cls}" ${onclick}><div class="cal2-num">${d}</div>${dots ? `<div class="cal2-dots">${dots}</div>` : ''}</div>`;
-  }
-
-  return `
-    ${streak > 0 ? `
-      <div class="cal2-streak">
-        <div class="cal2-streak-l">
-          <span class="cal2-streak-icon">🔥</span>
-          <span class="cal2-streak-num">${streak} ${streak === 1 ? 'dia' : 'dias'} seguidos</span>
-        </div>
-        <div class="cal2-streak-r">${weekSessions}/6 força · ${weekCardios}/${CARDIO_WEEKLY_CAP} cardio</div>
-      </div>
-    ` : ''}
-
-    <div class="cal2-stats">
-      <div class="cal2-stat">
-        <div class="cal2-stat-label">Sessões</div>
-        <div class="cal2-stat-val">${monthSessions}</div>
-      </div>
-      <div class="cal2-stat">
-        <div class="cal2-stat-label">Volume</div>
-        <div class="cal2-stat-val">${Math.round(monthVolume / 1000)}t</div>
-      </div>
-      <div class="cal2-stat">
-        <div class="cal2-stat-label">Tempo força</div>
-        <div class="cal2-stat-val">${monthDuration}min</div>
-      </div>
-      <div class="cal2-stat">
-        <div class="cal2-stat-label">Cardio</div>
-        <div class="cal2-stat-val">${monthCardioMin}min</div>
-      </div>
-    </div>
-
-    <div class="cal2-nav">
-      <button class="cal2-nav-btn" onclick="calNav(-1)">‹</button>
-      <div class="cal2-nav-title">${monthName}</div>
-      <button class="cal2-nav-btn" onclick="calNav(1)">›</button>
-    </div>
-
-    <div class="cal2-grid-wrap">
-      <div class="cal2-weekdays">
-        <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
-      </div>
-      <div class="cal2-grid">${cells}</div>
-    </div>
-
-    <div class="cal2-legend">
-      <span class="cal2-leg-item"><span class="cal2-leg-sw" style="background:var(--red-bg)"></span>Push</span>
-      <span class="cal2-leg-item"><span class="cal2-leg-sw" style="background:var(--blue-bg)"></span>Pull</span>
-      <span class="cal2-leg-item"><span class="cal2-leg-sw" style="background:var(--purple-bg)"></span>Legs</span>
-      <span class="cal2-leg-item"><span class="cal2-leg-sw cal2-leg-cardio"></span>cardio</span>
-    </div>
-  `;
+  document.getElementById('cargas-list').innerHTML = html;
 }
 
-function renderSession() {
-  const session = PROGRAM[state.selectedDay];
-  const today = new Date().toISOString().slice(0, 10).split('-').reverse().join('/');
-  const current = getCurrentSession();
-  const rpe9Count = countRPE9InCurrentSession();
-  return `
-    <div class="header">
-      <div class="h-row">
-        <button class="btn-back" onclick="goHome()">← Voltar</button>
-        <button class="btn-finish" onclick="finishSession()">Finalizar</button>
-      </div>
-      <div class="h-label">${session.subtitle}</div>
-      <div class="h-title">${session.name}</div>
-      <div class="h-meta">~${session.duration} min · ${today}${rpe9Count > 0 ? ` · ${rpe9Count} RPE9+` : ''}</div>
-      <div class="session-clock">
-        <div>
-          <div class="clock-label">⏱ Tempo de treino</div>
-          <div class="clock-display" id="session-clock-display">00:00</div>
-        </div>
-        <div style="font-size:24px">💪</div>
-      </div>
-    </div>
-    <div class="content">
-      ${rpe9Count >= 2 ? `<div class="alert-box ${rpe9Count >= 3 ? 'red' : ''}">${rpe9Count >= 3 ? '🚫' : '⚠'} ${rpe9Count} séries RPE 9+ nesta sessão. Limite recomendado: 2. ${rpe9Count >= 3 ? 'Você passou do limite — considere baixar a próxima.' : 'A próxima vai estourar.'}</div>` : ''}
-      <div class="warmup">
-        <div class="warmup-header" onclick="toggleWarmup()">
-          <div class="warmup-title">🔥 Aquecimento</div>
-          <div style="font-size:11px;color:var(--text3)" id="warmup-chevron">▼</div>
-        </div>
-        <div class="warmup-body" id="warmup-body" style="display:none">
-          <div class="warmup-section">Geral (5min)</div>
-          ${session.warmup.general.map(i => `<div class="warmup-item">• ${i}</div>`).join('')}
-          <div class="warmup-section">Rampa</div>
-          <div class="warmup-item">${session.warmup.rampa}</div>
-        </div>
-      </div>
-      ${session.exercises.map((ex, idx) => renderExercise(ex, idx, current)).join('')}
-    </div>
-    ${state.restTimer !== null ? renderTimer() : ''}
-  `;
+loadCargasFromURL();
+
+// Pré-popular com histórico (mai/2026) — só aplica se não veio da URL
+if (Object.keys(cargasState).length === 0) {
+  cargasState = {
+    // Push A
+    'Chest Press Inclinado': 107.5,
+    'Supino Máquina': 107.5,
+    'Supino Inclinado Halter 30°': 32,
+    'Cross Over Alta→Baixa': 30,
+    'Desenvolvimento Militar Máquina': 60,
+    'Elevação Lateral Halter': 16,
+    'Tríceps Corda': 55,
+    // Pull A
+    'T-Bar (Cavalinho)': 62,
+    'Pulldown Neutro': 65,
+    'Puxada Pronada Aberta': 95,
+    'Pulldown Reto': 47,
+    'Crucifixo Inverso': 85,
+    'Rosca Scott Máquina': 82,
+    'Rosca Martelo Halter': 16,
+    // Pull B
+    'Remada Baixa Pega Aberta': 120,
+    'Rosca Scott Máquina (B)': 82,
+    // Legs A
+    'Hack Squat': 90,
+    'Leg Press 45° Pés Baixos': 265,
+    'Cadeira Extensora': 120,
+    'Stiff Halter': 72,
+    'Mesa Flexora': 54,
+    'Panturrilha em Pé': 135,
+    // Push B
+    'Peck Deck (Crucifixo Máq)': 100,
+    // Legs B
+    'Stiff Halter (B)': 72,
+    'Panturrilha Sentado': 130
+  };
 }
+renderCargas();
 
-function renderExercise(ex, exIdx, current) {
-  const subKey = `${state.selectedDay}-${ex.id}`;
-  const activeSub = state.data.exerciseSubs[subKey];
-  const displayName = activeSub || ex.name;
-  const exEntry = current.exercises.find(e => e.id === ex.id);
-  const allSets = exEntry ? exEntry.sets : [];
-  const completedValid = allSets.filter(s => s && !s.pending && s.kg !== undefined && (s.type === 'valida' || s.type === 'avancada')).length;
-  const allDone = completedValid >= ex.sets;
-  const lastSet = getLastSetForExercise(state.selectedDay, ex.id);
-  const progressInd = getProgressIndicator(ex.id);
-  const stagnation = getStagnationAlert(ex.id);
-  const pr = getPRForExercise(ex.id);
-
-  let arrowHtml = '';
-  if (progressInd === 'up') arrowHtml = '<span class="progress-arrow up">↑</span>';
-  else if (progressInd === 'down') arrowHtml = '<span class="progress-arrow down">↓</span>';
-  else if (progressInd === 'flat') arrowHtml = '<span class="progress-arrow flat">→</span>';
-
-  // BUGFIX: estado de abertura agora vem do state, não de hardcoded
-  // Default: primeiro exercício aberto se ainda não foi tocado nada
-  const isOpen = state.openExercises[ex.id] === true;
-
-  let setsToRender = allSets.length > 0 ? allSets : Array(ex.sets).fill(null).map(() => ({ pending: true, type: 'valida' }));
-  if (allSets.length === 0) {
-    if (!exEntry) {
-      const newEx = { id: ex.id, sets: setsToRender, subUsed: activeSub };
-      current.exercises.push(newEx);
-      saveData();
-    }
-  }
-
-  let setsHtml = '';
-  setsToRender.forEach((s, i) => { setsHtml += renderSet(ex, i, s, setsToRender); });
-
-  const showSubBox = state.showSubFor === ex.id;
-  const avancadaWarn = getAvancadaWarning(ex, exEntry);
-
-  return `
-    <div class="ex-card">
-      <div class="ex-header" onclick="toggleEx('${ex.id}')">
-        <div class="ex-num ${allDone ? 'done' : ''}">${allDone ? '✓' : exIdx + 1}</div>
-        <div class="ex-info">
-          <div class="ex-name-row"><div class="ex-name">${displayName}</div>${arrowHtml}</div>
-          <div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.technique}${activeSub ? ' · <em style="color:var(--accent)">substituto</em>' : ''}</div>
-        </div>
-        <div class="ex-chevron ${isOpen ? 'open' : ''}">▼</div>
-      </div>
-      <div class="ex-body" ${isOpen ? '' : 'style="display:none"'}>
-        ${stagnation ? `<div class="alert-box ${stagnation.type === 'red' ? 'red' : ''}">${stagnation.text}</div>` : ''}
-        ${avancadaWarn ? `<div class="alert-box ${avancadaWarn.type === 'red' ? 'red' : ''}">${avancadaWarn.text}</div>` : ''}
-        <div class="ex-note">${ex.note}</div>
-        <div class="ex-stats">
-          <span>Última: <strong>${lastSet ? lastSet.kg + 'kg × ' + lastSet.reps : '—'}</strong></span>
-          <span>Meta: <strong>${ex.metaS1}kg</strong></span>
-          ${pr && pr.maxLoad ? `<span>PR: <strong>${pr.maxLoad}kg × ${pr.maxLoadReps}</strong></span>` : ''}
-          ${(() => { const rm = getBest1RM(ex.id); return rm ? `<span>1RM est: <strong>~${rm}kg</strong></span>` : ''; })()}
-        </div>
-        <div class="sub-toggle" onclick="event.stopPropagation(); toggleSub('${ex.id}')">
-          🔁 ${showSubBox ? 'Fechar substitutos' : 'Trocar exercício'}
-        </div>
-        ${showSubBox ? renderSubBox(ex, subKey, activeSub) : ''}
-        ${setsHtml}
-        <div class="add-set-row">
-          <button class="btn-add-set" onclick="addSetToExercise('${ex.id}', 'aquec')">+ Aquec</button>
-          <button class="btn-add-set" onclick="addSetToExercise('${ex.id}', 'feeder')">+ Feeder</button>
-          <button class="btn-add-set" onclick="addSetToExercise('${ex.id}', 'valida')">+ Válida</button>
-          <button class="btn-add-set" onclick="addSetToExercise('${ex.id}', 'avancada')">+ Avançada</button>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderSubBox(ex, subKey, activeSub) {
-  return `
-    <div class="sub-box">
-      <div class="sub-box-title">Substituir por:</div>
-      <div class="sub-option ${!activeSub ? 'active' : ''}" onclick="event.stopPropagation(); selectSub('${subKey}', null)">
-        <span>${ex.name}</span>
-        <span class="sub-rank">${!activeSub ? 'ATUAL' : 'ORIGINAL'}</span>
-      </div>
-      ${ex.subs.map((sub, i) => `
-        <div class="sub-option ${activeSub === sub ? 'active' : ''}" onclick="event.stopPropagation(); selectSub('${subKey}', '${sub.replace(/'/g, "\\'")}')">
-          <span>${sub}</span>
-          <span class="sub-rank">${activeSub === sub ? 'ATUAL' : 'OPÇÃO ' + (i + 1)}</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function renderSet(ex, setIdx, setData, allSets) {
-  const editKey = `${ex.id}-${setIdx}`;
-  const isEditing = state.editingSet === editKey;
-  const saved = setData && !setData.pending && setData.kg !== undefined;
-  const type = setData ? setData.type : 'valida';
-  const tecnica = setData ? setData.tecnica : null;
-  const kg = saved ? setData.kg : '';
-  const reps = saved ? setData.reps : '';
-  const rpe = saved ? setData.rpe : '';
-
-  const validSetIndices = allSets.map((s, i) => (s && (s.type === 'valida' || s.type === 'avancada')) ? i : -1).filter(i => i !== -1);
-  const isLastValid = validSetIndices.length && validSetIndices[validSetIndices.length - 1] === setIdx;
-  const isAmrap = (type === 'valida' || type === 'avancada') && isLastValid && ex.technique.toUpperCase().includes('AMRAP');
-
-  const typeBtns = Object.keys(SET_TYPES).map(t => `
-    <button class="type-btn t-${t} ${type === t ? 'active' : ''}" onclick="event.stopPropagation(); setSetType('${ex.id}', ${setIdx}, '${t}')">${SET_TYPES[t].label}</button>
-  `).join('');
-
-  // Seletor de técnica (só aparece se tipo === avançada)
-  let tecSelectorHtml = '';
-  if (type === 'avancada' && !saved) {
-    const tecBtns = Object.keys(TECNICAS).map(k => `
-      <button class="tec-btn ${tecnica === k ? 'active' : ''}" onclick="event.stopPropagation(); setSetTecnica('${ex.id}', ${setIdx}, '${k}')">${TECNICAS[k].label}</button>
-    `).join('');
-    tecSelectorHtml = `
-      <div class="tec-selector">
-        <div class="tec-selector-label">Qual técnica avançada?</div>
-        ${tecBtns}
-      </div>
-    `;
-  }
-
-  if (saved && !isEditing) {
-    const tecBadge = (type === 'avancada' && tecnica && TECNICAS[tecnica]) ? `<span class="tec-tag">${TECNICAS[tecnica].label}</span>` : '';
-    return `
-      <div class="set-row done t-${type}">
-        <div class="set-head">
-          <div class="set-num">${setIdx + 1}</div>
-          <span class="set-type-tag t-${type}">${SET_TYPES[type].label}</span>${tecBadge}
-          <div class="set-label"><strong>${kg}kg × ${reps}</strong> @RPE ${rpe}${isAmrap ? ' <span class="amrap-tag">· AMRAP</span>' : ''}</div>
-          <button class="btn-edit" onclick="editSet('${ex.id}', ${setIdx})" title="Editar">✏️</button>
-          <button class="btn-edit" onclick="removeSetFromExercise('${ex.id}', ${setIdx})" title="Excluir" style="color:var(--red)">🗑</button>
-        </div>
-      </div>
-    `;
-  }
-
-  return `
-    <div class="set-row">
-      <div class="set-head">
-        <div class="set-num">${setIdx + 1}</div>
-        <div class="set-label">Série ${setIdx + 1}${isAmrap ? ' <span class="amrap-tag">· AMRAP</span>' : ''}</div>
-        ${isEditing ? `<button class="btn-edit" onclick="cancelEdit()" title="Cancelar">↩</button>` : ''}
-        <button class="btn-edit" onclick="removeSetFromExercise('${ex.id}', ${setIdx})" title="Excluir" style="color:var(--red)">🗑</button>
-      </div>
-      <div class="type-selector">${typeBtns}</div>
-      ${tecSelectorHtml}
-      <div class="set-grid">
-        <div><div class="field-label">KG</div><input type="number" inputmode="decimal" class="field-input" id="kg-${ex.id}-${setIdx}" value="${kg}"></div>
-        <div><div class="field-label">Reps</div><input type="number" inputmode="numeric" class="field-input" id="reps-${ex.id}-${setIdx}" value="${reps}"></div>
-        <div><div class="field-label">RPE</div><input type="number" inputmode="numeric" min="1" max="10" class="field-input" id="rpe-${ex.id}-${setIdx}" value="${rpe}"></div>
-        <button class="btn-save" onclick="saveSet('${ex.id}', ${setIdx})">${isEditing ? '✓' : 'OK'}</button>
-      </div>
-    </div>
-  `;
-}
-
-function renderTimer() {
-  const mm = Math.floor(state.restRemaining / 60);
-  const ss = state.restRemaining % 60;
-  const pct = state.restTotal > 0 ? ((state.restTotal - state.restRemaining) / state.restTotal) * 100 : 0;
-  return `
-    <div class="timer">
-      <div class="timer-row">
-        <div class="timer-display ${state.restRemaining === 0 ? 'done' : ''}" id="timer-display">
-          ${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}
-        </div>
-        <div class="timer-bar-wrap">
-          <div class="timer-bar-bg"><div class="timer-bar ${state.restRemaining === 0 ? 'done' : ''}" id="timer-bar" style="width:${pct}%"></div></div>
-          <div class="timer-label">Descanso</div>
-        </div>
-        <button class="btn-skip" onclick="stopRest()">Pular</button>
-      </div>
-      <div class="timer-quick">
-        <button class="quick-btn" onclick="adjustRest(30)">30s</button>
-        <button class="quick-btn" onclick="adjustRest(60)">1min</button>
-        <button class="quick-btn" onclick="adjustRest(90)">1:30</button>
-        <button class="quick-btn" onclick="adjustRest(120)">2min</button>
-        <button class="quick-btn" onclick="adjustRest(180)">3min</button>
-      </div>
-    </div>
-  `;
-}
-
-function renderHistory() {
-  const sessions = [...state.data.sessions].reverse();
-  const cardios = [...(state.data.cardios || [])].reverse();
-  return `
-    <div class="header">
-      <button class="btn-back" onclick="goHome()">← Voltar</button>
-      <div class="h-title" style="margin-top:8px">Histórico</div>
-      <div class="h-meta">${sessions.length} sessões · ${cardios.length} cardios</div>
-    </div>
-    <div class="content">
-      <div style="display:flex;gap:8px;margin-bottom:16px">
-        <button class="btn-secondary" onclick="exportData()" style="margin-top:0">↓ Exportar</button>
-        <button class="btn-secondary" onclick="triggerImport()" style="margin-top:0">↑ Importar</button>
-      </div>
-
-      <div class="hist-section-title">💪 Sessões de força</div>
-      ${sessions.length === 0 ? '<div class="empty">Nenhuma sessão finalizada ainda</div>' : ''}
-      ${sessions.map((s, idx) => {
-        const realIdx = state.data.sessions.length - 1 - idx;
-        const totalSets = s.exercises.reduce((a, e) => a + (e.sets ? e.sets.filter(Boolean).length : 0), 0);
-        const totalVol = s.exercises.reduce((a, e) => {
-          if (!e.sets) return a;
-          return a + e.sets.filter(st => st && (st.type === 'valida' || st.type === 'avancada')).reduce((b, st) => b + st.kg * st.reps, 0);
-        }, 0);
-        const notesHtml = s.notes ? (() => {
-          const n = s.notes;
-          const parts = [];
-          if (n.dorArticular) parts.push('⚠ dor articular');
-          if (n.sono6h) parts.push('⚠ sono <6h');
-          if (n.motivacao) parts.push(`motivação ${n.motivacao}/5`);
-          return parts.length ? `<div style="font-size:10px;color:var(--text3);margin-top:2px">${parts.join(' · ')}</div>` : '';
-        })() : '';
-        return `
-          <div class="history-card">
-            <div class="history-head">
-              <div class="history-name">${DAY_LABELS[s.day]}</div>
-              <div class="history-date">${s.date.split('-').reverse().join('/')}</div>
-            </div>
-            <div class="history-meta">${s.exercises.length} exerc · ${totalSets} séries · ${Math.round(totalVol).toLocaleString('pt-BR')} kg vol · ${s.duration || '?'}min · energia ${s.energy || '?'}/10</div>
-            ${notesHtml}
-            ${s.exercises.map(e => {
-              const exDef = PROGRAM[s.day] && PROGRAM[s.day].exercises.find(x => x.id === e.id);
-              const completed = e.sets ? e.sets.filter(Boolean) : [];
-              if (!exDef || !completed.length) return '';
-              return `
-                <div class="history-ex">
-                  <strong>${e.subUsed || exDef.name}:</strong>
-                  ${completed.map(c => {
-                    const tec = c.tecnica && TECNICAS[c.tecnica] ? `[${TECNICAS[c.tecnica].label}]` : (c.type && c.type !== 'valida' ? `[${SET_TYPES[c.type]?.label || c.type}]` : '');
-                    return `${c.kg}×${c.reps}@${c.rpe}${tec}`;
-                  }).join(' · ')}
-                </div>
-              `;
-            }).join('')}
-            <div class="history-actions">
-              <button class="btn-mini" onclick="showSummaryFor(${idx})">📋 Resumo</button>
-              <button class="btn-mini" onclick="openEditSession(${realIdx})">✏️ Editar</button>
-              <button class="btn-mini-red" onclick="deleteSession(${realIdx})">🗑 Excluir</button>
-            </div>
-          </div>
-        `;
-      }).join('')}
-
-      <div class="hist-section-title">🏃 Cardios</div>
-      ${cardios.length === 0 ? '<div class="empty" style="padding:20px">Nenhum cardio registrado ainda</div>' : ''}
-      ${cardios.map((c, idx) => {
-        const realIdx = (state.data.cardios || []).length - 1 - idx;
-        const tipoLabel = CARDIO_TYPES[c.tipo]?.label || c.tipo;
-        const tipoIcon = CARDIO_TYPES[c.tipo]?.icon || '💧';
-        return `
-          <div class="cardio-hist-card">
-            <div class="cardio-hist-head">
-              <div class="cardio-hist-name">${tipoIcon} ${tipoLabel}</div>
-              <div class="cardio-hist-date">${c.date.split('-').reverse().join('/')}</div>
-            </div>
-            <div class="cardio-hist-meta">${c.duracao}min · intensidade ${c.intensidade}/10${c.incline ? ' · ' + c.incline : ''}${c.obs ? ' · ' + c.obs : ''}</div>
-            <div class="history-actions">
-              <button class="btn-mini" onclick="openEditCardio(${realIdx})">✏️ Editar</button>
-              <button class="btn-mini-red" onclick="deleteCardio(${realIdx})">🗑 Excluir</button>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
-}
-
-function renderPRs() {
-  const allExs = [];
-  DAYS_ORDER.forEach(dayKey => {
-    PROGRAM[dayKey].exercises.forEach(ex => {
-      const pr = getPRForExercise(ex.id);
-      const best1rm = getBest1RM(ex.id);
-      if (pr && pr.maxLoad > 0) allExs.push({ id: ex.id, name: ex.name, day: DAY_LABELS[dayKey], pr, best1rm });
-    });
-  });
-  return `
-    <div class="header">
-      <button class="btn-back" onclick="goHome()">← Voltar</button>
-      <div class="h-title" style="margin-top:8px">PRs & Progressão</div>
-      <div class="h-meta">${allExs.length} exercícios com PR registrado</div>
-    </div>
-    <div class="content">
-      ${allExs.length === 0 ? '<div class="empty">Treine algumas sessões para começar a ver seus PRs</div>' : ''}
-      ${allExs.map(item => `
-        <div class="pr-card">
-          <div class="pr-ex-name">${item.name} <span class="pr-badge">${item.day}</span></div>
-          ${item.best1rm ? `
-            <div class="pr-1rm">
-              <div class="pr-1rm-label">1RM estimado (Epley)</div>
-              <div class="pr-1rm-value">~${item.best1rm} kg</div>
-            </div>
-          ` : ''}
-          <div class="pr-grid">
-            <div class="pr-item">
-              <div class="pr-item-label">Carga máxima</div>
-              <div class="pr-item-value">${item.pr.maxLoad}kg × ${item.pr.maxLoadReps}</div>
-              <div class="pr-item-sub">${item.pr.maxLoadDate.split('-').reverse().join('/')}</div>
-            </div>
-            <div class="pr-item">
-              <div class="pr-item-label">Volume máximo</div>
-              <div class="pr-item-value">${Math.round(item.pr.maxVolume).toLocaleString('pt-BR')} kg</div>
-              <div class="pr-item-sub">${item.pr.maxVolumeDate.split('-').reverse().join('/')}</div>
-            </div>
-          </div>
-          <button class="pr-chart-toggle" onclick="toggleChart('${item.id}')">
-            ${state.openCharts[item.id] ? '▲ Fechar gráfico' : '📈 Ver progressão'}
-          </button>
-          ${state.openCharts[item.id] ? renderProgressChart(item.id, item.name) : ''}
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function renderSummaryModal() {
-  return `
-    <div class="summary-modal" onclick="closeSummary()">
-      <div class="summary-content" onclick="event.stopPropagation()">
-        <div class="summary-head">
-          <div class="summary-title">📋 Resumo da sessão</div>
-          <button class="btn-close" onclick="closeSummary()">×</button>
-        </div>
-        <div class="summary-text" id="summary-text">${state.summaryText.replace(/</g, '&lt;')}</div>
-        <div class="summary-actions">
-          <button class="btn-primary" onclick="copyToClipboard(state.summaryText)" style="margin:0">📋 Copiar</button>
-          <button class="btn-secondary" onclick="closeSummary()" style="margin:0">Fechar</button>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function render() {
-  const app = document.getElementById('app');
-  let main = '';
-  if (state.screen === 'home') main = renderHome();
-  else if (state.screen === 'session') main = renderSession();
-  else if (state.screen === 'history') main = renderHistory();
-  else if (state.screen === 'prs') main = renderPRs();
-  app.innerHTML = main
-    + (state.cardioForm ? renderCardioForm() : '')
-    + (state.finishForm ? renderFinishForm() : '')
-    + (state.showSummary ? renderSummaryModal() : '');
-  if (state.screen === 'session') updateSessionClock();
-}
-
-function selectDay(key) {
-  state.selectedDay = key;
-  state.screen = 'session';
-  state.showSubFor = null;
-  state.editingSet = null;
-  // Abre primeiro exercício por padrão ao entrar
-  const firstExId = PROGRAM[key].exercises[0]?.id;
-  state.openExercises = firstExId ? { [firstExId]: true } : {};
-  render();
-  setTimeout(() => startSessionTimer(), 100);
-}
-
-function goHome() {
-  state.screen = 'home'; state.homeTab = 'today'; state.editingSet = null;
-  if (state.restInterval) { clearInterval(state.restInterval); state.restInterval = null; }
-  state.restTimer = null;
-  stopSessionTimer();
-  render();
-}
-
-function goHistory() { state.screen = 'history'; render(); }
-function goPRs() { state.screen = 'prs'; render(); }
-function setHomeTab(tab) { state.homeTab = tab; render(); }
-
-function toggleWarmup() {
-  const body = document.getElementById('warmup-body');
-  const chev = document.getElementById('warmup-chevron');
-  if (body.style.display === 'none') { body.style.display = 'block'; chev.textContent = '▲'; }
-  else { body.style.display = 'none'; chev.textContent = '▼'; }
-}
-
-// BUGFIX: toggleEx agora mexe no STATE, não no DOM diretamente
-function toggleEx(id) {
-  state.openExercises[id] = !state.openExercises[id];
-  render();
-}
-
-function toggleSub(exId) {
-  state.showSubFor = state.showSubFor === exId ? null : exId;
-  state.openExercises[exId] = true; // mantém aberto
-  render();
-}
-
-function selectSub(subKey, subName) {
-  if (subName === null) delete state.data.exerciseSubs[subKey];
-  else state.data.exerciseSubs[subKey] = subName;
-  saveData();
-  state.showSubFor = null;
-  render();
-}
-
-function setSetType(exId, setIdx, type) {
-  const current = getCurrentSession();
-  let exEntry = current.exercises.find(e => e.id === exId);
-  if (!exEntry) {
-    exEntry = { id: exId, sets: [], subUsed: state.data.exerciseSubs[`${state.selectedDay}-${exId}`] || null };
-    current.exercises.push(exEntry);
-  }
-  while (exEntry.sets.length <= setIdx) exEntry.sets.push(null);
-  const existing = exEntry.sets[setIdx] || { pending: true };
-  // Se trocou tipo, mas não é mais "avançada", limpa a técnica
-  const newSet = { ...existing, type: type };
-  if (type !== 'avancada') delete newSet.tecnica;
-  exEntry.sets[setIdx] = newSet;
-  state.openExercises[exId] = true;
-  saveData();
-  render();
-}
-
-// Seletor de técnica avançada
-function setSetTecnica(exId, setIdx, tecnicaKey) {
-  const current = getCurrentSession();
-  let exEntry = current.exercises.find(e => e.id === exId);
-  if (!exEntry) return;
-  while (exEntry.sets.length <= setIdx) exEntry.sets.push(null);
-  const existing = exEntry.sets[setIdx] || { pending: true, type: 'avancada' };
-  // Toggle: se já era essa técnica, desmarca
-  const newTecnica = existing.tecnica === tecnicaKey ? null : tecnicaKey;
-  exEntry.sets[setIdx] = { ...existing, tecnica: newTecnica };
-  state.openExercises[exId] = true;
-  saveData();
-  render();
-}
-
-function saveSet(exId, setIdx) {
-  const kgEl = document.getElementById('kg-' + exId + '-' + setIdx);
-  const repsEl = document.getElementById('reps-' + exId + '-' + setIdx);
-  const rpeEl = document.getElementById('rpe-' + exId + '-' + setIdx);
-  const kg = kgEl.value, reps = repsEl.value, rpe = rpeEl.value;
-  if (!kg || !reps || !rpe) { alert('Preencha kg, reps e RPE'); return; }
-  if (parseInt(rpe) < 1 || parseInt(rpe) > 10) { alert('RPE entre 1 e 10'); return; }
-
-  const kgNum = parseFloat(kg);
-  const repsNum = parseInt(reps);
-  const rpeNum = parseInt(rpe);
-
-  // VALIDAÇÃO: Jump de carga >5kg vs última válida do mesmo exercício
-  const current = getCurrentSession();
-  const exEntry = current.exercises.find(e => e.id === exId);
-  const existing = exEntry?.sets[setIdx];
-  const type = existing?.type || 'valida';
-
-  // Pega última série válida/avançada anterior a esta no mesmo exercício (sessão atual + última sessão histórica)
-  let prevWeight = null;
-  if (exEntry && exEntry.sets) {
-    for (let i = setIdx - 1; i >= 0; i--) {
-      const s = exEntry.sets[i];
-      if (s && !s.pending && s.kg !== undefined && (s.type === 'valida' || s.type === 'avancada')) {
-        prevWeight = s.kg; break;
-      }
-    }
-  }
-  if (prevWeight === null) {
-    const lastHist = getLastSetForExercise(state.selectedDay, exId);
-    if (lastHist) prevWeight = lastHist.kg;
-  }
-
-  if (prevWeight !== null && (type === 'valida' || type === 'avancada')) {
-    const jump = kgNum - prevWeight;
-    if (jump > 5) {
-      const ok = confirm(`⚠ Salto de carga: ${prevWeight}kg → ${kgNum}kg (+${jump.toFixed(1)}kg).\n\nSua regra é progressão máx de 5kg sem confirmação. Continuar?`);
-      if (!ok) return;
-    }
-  }
-
-  // VALIDAÇÃO: RPE 9+ excessivo
-  const currentRPE9 = countRPE9InCurrentSession();
-  // se for editar, descontar o RPE antigo dessa mesma série
-  let adjustedRPE9 = currentRPE9;
-  if (existing && existing.rpe >= 9 && !existing.pending) adjustedRPE9 = Math.max(0, currentRPE9 - 1);
-
-  if (rpeNum >= 9 && adjustedRPE9 >= 2) {
-    const ok = confirm(`⚠ Você já tem ${adjustedRPE9} séries RPE 9+ nesta sessão. Limite recomendado: 2.\n\nRegistrar esta também?`);
-    if (!ok) return;
-  }
-
-  logSet(exId, setIdx, { kg: kgNum, reps: repsNum, rpe: rpeNum, type: type, tecnica: existing?.tecnica || null });
-  if (navigator.vibrate) navigator.vibrate(50);
-  state.editingSet = null;
-  state.openExercises[exId] = true;
-  startRest(SET_TYPES[type].rest);
-}
-
-function cancelEdit() { state.editingSet = null; render(); }
-
-function showSummaryFor(sessionIdx) {
-  const sessions = [...state.data.sessions].reverse();
-  const session = sessions[sessionIdx];
-  if (!session) return;
-  state.summaryText = generateSummary(session);
-  state.showSummary = true;
-  render();
-}
-
-function closeSummary() { state.showSummary = false; state.calDetailSessionIdx = null; render(); }
-
-// ============ CALENDÁRIO — handlers ============
-function calNav(delta) {
-  const [y, m] = state.calCursor.split('-').map(Number);
-  const d = new Date(y, m - 1 + delta, 1);
-  state.calCursor = d.toISOString().slice(0, 7);
-  render();
-}
-
-function openCalDay(iso) {
-  const idx = state.data.sessions.findIndex(s => s.date === iso);
-  if (idx >= 0) {
-    const reverseIdx = state.data.sessions.length - 1 - idx;
-    showSummaryFor(reverseIdx);
-    return;
-  }
-  // Sem sessão de força — mostra só os cardios
-  const dayCardios = (state.data.cardios || []).filter(c => c.date === iso);
-  if (!dayCardios.length) return;
-  const dateBr = iso.split('-').reverse().join('/');
-  let txt = `CARDIO — ${dateBr}\n\n`;
-  dayCardios.forEach((c, i) => {
-    const tipoLabel = CARDIO_TYPES[c.tipo]?.label || c.tipo;
-    txt += `${i + 1}. ${tipoLabel}\n`;
-    txt += `   Duração: ${c.duracao}min\n`;
-    txt += `   Intensidade: ${c.intensidade}/10\n`;
-    if (c.incline) txt += `   Inclinação/Nível: ${c.incline}\n`;
-    if (c.obs) txt += `   Obs: ${c.obs}\n`;
-    txt += '\n';
-  });
-  state.summaryText = txt;
-  state.showSummary = true;
-  render();
-}
-
-render();
-</script>
-
-<script>
-// Registro do Service Worker — escopo correto para GitHub Pages (/treino-app/)
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    // Detecta automaticamente o base path (funciona em qualquer subpath)
-    const swPath = new URL('sw.js', document.baseURI).href;
-    const scope = new URL('./', document.baseURI).href;
-    navigator.serviceWorker.register(swPath, { scope })
-      .then(reg => console.log('SW registrado, scope:', reg.scope))
-      .catch(err => console.warn('SW erro:', err));
-  });
+// Abre direto na aba Cargas se URL tem #cargas
+if (window.location.hash === '#cargas') {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelector('[data-tab="cargas"]').classList.add('active');
+  document.getElementById('cargas').classList.add('active');
 }
 </script>
 </body>
