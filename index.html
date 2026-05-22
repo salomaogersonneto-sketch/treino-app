@@ -167,6 +167,62 @@
   .url-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: var(--text3); word-break: break-all; margin-top: 10px; display: none; line-height: 1.6; }
   .url-box.show { display: block; }
   .url-tip { font-size: 11px; color: var(--blue); margin-top: 6px; }
+
+  /* ===== ALIMENTOS ===== */
+  .food-search-wrap { position: relative; margin-bottom: 12px; }
+  .food-search { width: 100%; padding: 10px 14px; border: 1px solid var(--border2); border-radius: 10px; font-size: 14px; color: var(--text); background: var(--bg2); }
+  .food-search:focus { border-color: var(--accent); outline: none; }
+  .food-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+  .food-tab { flex: 1; padding: 8px 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); font-size: 12px; font-weight: 700; cursor: pointer; color: var(--text2); text-align: center; }
+  .food-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .food-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+  .food-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .food-table th { background: var(--text); color: white; padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .food-table th.num { text-align: right; }
+  .food-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .food-table td.num { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .food-table tr:last-child td { border-bottom: none; }
+  .food-table tr:nth-child(even) td { background: var(--bg); }
+  .food-table tr.highlight td { background: var(--accent-bg); }
+  .food-name { font-weight: 600; color: var(--text); }
+  .food-cat { font-size: 9px; color: var(--text3); margin-top: 1px; }
+  .macro-bar { display: flex; height: 4px; border-radius: 2px; overflow: hidden; margin-top: 3px; gap: 1px; }
+  .bar-p { background: var(--green); }
+  .bar-c { background: var(--yellow); }
+  .bar-f { background: var(--orange); }
+  .food-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 6px; margin-left: 4px; }
+  .badge-fav { background: var(--accent); color: white; }
+  .badge-lean { background: var(--green-bg); color: var(--green); }
+  .food-note { font-size: 10px; color: var(--text3); padding: 4px 10px 8px; font-style: italic; }
+  .macro-legend { display: flex; gap: 12px; font-size: 10px; color: var(--text3); margin-bottom: 10px; flex-wrap: wrap; }
+  .macro-legend-item { display: flex; align-items: center; gap: 4px; }
+  .macro-legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  .cook-toggle { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; cursor: pointer; transition: all 0.15s; user-select: none; }
+  .cook-toggle.raw { background: var(--red-bg); color: var(--red); }
+  .cook-toggle.cooked { background: var(--green-bg); color: var(--green); }
+  .cook-fixed { font-size: 10px; color: var(--text3); padding: 2px 4px; }
+
+  /* ===== TREINO — CARD EXPANDIDO ===== */
+  .ex-main-badge { display: inline-block; background: var(--accent); color: white; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 6px; }
+  .ex-time-badge { display: inline-block; background: var(--bg3); color: var(--text3); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 8px; }
+  .ex-rest-badge { display: inline-block; background: var(--blue-bg); color: var(--blue); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 8px; }
+
+  .warmup-box { background: var(--blue-bg); border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 12px 0; font-size: 12px; color: var(--text2); line-height: 1.7; }
+  .warmup-box strong { color: var(--blue); }
+  .warmup-box .ramp-row { font-family: 'SF Mono', Menlo, monospace; font-size: 11px; margin-top: 4px; color: var(--text); }
+
+  .exec-box { margin: 12px 0; background: var(--bg); border-radius: 8px; padding: 10px 12px; }
+  .exec-box-title { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+  .exec-item { display: flex; gap: 8px; margin-bottom: 6px; font-size: 12px; line-height: 1.5; }
+  .exec-icon { flex-shrink: 0; font-size: 14px; width: 20px; text-align: center; }
+  .exec-text { color: var(--text2); }
+  .exec-text strong { color: var(--text); }
+  .exec-error { background: var(--red-bg); border-radius: 6px; padding: 6px 10px; font-size: 11px; color: var(--red); margin-top: 6px; display: flex; gap: 6px; align-items: flex-start; }
+
+  .tech-step-box { background: var(--orange-bg); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 12px 0; font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .tech-step-box strong { color: var(--orange); }
+  .tech-step-title { font-size: 10px; font-weight: 800; color: var(--orange); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -180,6 +236,7 @@
     <button class="tab" data-tab="cardio">Cardio</button>
     <button class="tab" data-tab="tecnicas">Técnicas</button>
     <button class="tab" data-tab="macros">Macros</button>
+    <button class="tab" data-tab="alimentos">🥩 Alimentos</button>
     <button class="tab" data-tab="ciencia">Ciência</button>
     <button class="tab" data-tab="cargas">⚖️ Cargas</button>
   </div>
@@ -294,6 +351,25 @@
     <div class="footer-note">Baseado em: Schoenfeld et al. (2017), Krieger (junk volume), Helms et al. (RIR), Wilson et al. (interferência cardio). Aplicado ao protocolo PPL 6x (Bodytech).</div>
   </div>
 
+  <div class="section" id="alimentos">
+    <h2>Tabela de Alimentos</h2>
+    <p>Macros por 100g do alimento cru/cozido conforme indicado. ⭐ = seus preferidos.</p>
+    <div class="macro-legend">
+      <div class="macro-legend-item"><span class="macro-legend-dot" style="background:var(--green)"></span>Proteína</div>
+      <div class="macro-legend-item"><span class="macro-legend-dot" style="background:var(--yellow)"></span>Carboidrato</div>
+      <div class="macro-legend-item"><span class="macro-legend-dot" style="background:var(--orange)"></span>Gordura</div>
+    </div>
+    <div class="food-search-wrap">
+      <input type="text" class="food-search" id="food-search" placeholder="🔍 Buscar alimento..." oninput="filterFood()">
+    </div>
+    <div class="food-tabs" id="food-tabs">
+      <button class="food-tab active" data-ftab="proteinas">🥩 Proteínas</button>
+      <button class="food-tab" data-ftab="carbos">🌾 Carboidratos</button>
+      <button class="food-tab" data-ftab="gorduras">🥑 Gorduras</button>
+    </div>
+    <div id="food-content"></div>
+  </div>
+
   <div class="section" id="cargas">
     <h2>Caderno de Cargas</h2>
     <div class="cargas-intro">
@@ -385,6 +461,442 @@ const PROGRAM = {
 };
 const DAYS_ORDER = ['push-a', 'pull-a', 'legs-a', 'push-b', 'pull-b', 'legs-b'];
 
+// Aquecimento por sessão
+const WARMUP = {
+  'push-a': {
+    geral: ['5min bike leve ou esteira 0% (aquece ombro sem pré-fadigar)', 'Band pull-apart 2×15 (ativação manguito)', 'Rotação externa mini-band 2×12', 'Círculos de ombro 10 cada sentido'],
+    ramp: '50%×12 → 70%×8 → 85%×4 → trabalho (aplica só no Chest Press Inclinado)'
+  },
+  'pull-a': {
+    geral: ['5min bike leve', 'Cat-camel 10 reps (mobilidade torácica)', 'T-spine rotação 8/lado', 'Dead hang 20-30s (descomprime lombar, ativa pegada)'],
+    ramp: '50%×10 → 70%×8 → 85%×4 → trabalho (aplica no T-Bar)'
+  },
+  'legs-a': {
+    geral: ['5min bike subindo intensidade (ativa quadríceps)', '90/90 hip stretch 8/lado', 'Dorsiflexão na parede 10/lado', 'Agachamento profundo bodyweight 30s pausa'],
+    ramp: '40%×10 → 60%×8 → 80%×4 → 90%×1 → trabalho (aplica no Hack Squat)'
+  },
+  'push-b': {
+    geral: ['5min bike leve', 'Band pull-apart 2×15', 'Rotação externa mini-band 2×12'],
+    ramp: '50%×10 → 70%×8 → 75%×5 → trabalho (aplica no Supino Inclinado Halter 45°)'
+  },
+  'pull-b': {
+    geral: ['5min bike leve', 'Cat-camel 10 reps', 'T-spine rotação 8/lado', 'Dead hang 20s'],
+    ramp: '50%×12 → 70%×8 → 75%×5 → trabalho (aplica na Puxada Pronada)'
+  },
+  'legs-b': {
+    geral: ['5min bike subindo intensidade', '90/90 hip stretch 8/lado', 'Dorsiflexão na parede 10/lado'],
+    ramp: '50%×10 → 70%×8 → 75%×5 → trabalho (aplica no Stiff Halter)'
+  }
+};
+
+// Execução técnica + erros comuns por exercício
+const EXEC_DATA = {
+  'Chest Press Inclinado': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> banco a 30-45°, pegada ligeiramente mais larga que os ombros, cotovelos 45° do tronco (não 90°)' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> 2-3s controlada, deixar o peito estufar — sente o estiramento no peitoral superior' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra pra cima e levemente pra dentro, como se fosse unir as mãos no topo' },
+      { icon: '🎯', text: '<strong>Foco:</strong> sentir o peitoral superior contrair no topo — não travar o cotovelo' }
+    ],
+    error: '❌ Erro comum: cotovelo muito aberto (90°) transfere esforço pro deltoide e sobrecarrega o ombro'
+  },
+  'Supino Máquina': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> costas coladas no encosto, pegada neutra ou pronada dependendo da máquina' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla até o ponto de estiramento máximo — sente o peitoral abrir' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra explosivo, squeeze no topo 1s' },
+      { icon: '🎯', text: '<strong>Foco:</strong> dupla progressão — adiciona reps antes de pular a carga' }
+    ],
+    error: '❌ Erro comum: subir a carga antes de fechar o range de reps com boa execução'
+  },
+  'Supino Inclinado Halter 30°': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> banco a 30° (não 45° — quanto mais baixo, mais peitoral; mais alto, mais deltoide)' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> 2s, cotovelos levemente abaixo dos ombros, sente estiramento no peito superior' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> arco suave dos halteres pra cima e pro centro' },
+      { icon: '🎯', text: '<strong>Foco:</strong> stretch focus — o estiramento é onde acontece mais hipertrofia' }
+    ],
+    error: '❌ Erro comum: banco muito inclinado (>45°) vira press de ombro, sai do peitoral'
+  },
+  'Cross Over Alta→Baixa': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> polia alta, ligeiramente à frente do corpo, tronco levemente inclinado pra frente' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> abre o braço controlado com leve flexão no cotovelo fixo' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> aduz o braço cruzando o centro e pra baixo — sente o peitoral inferior contrair' },
+      { icon: '🎯', text: '<strong>Foco:</strong> squeeze 1s no ponto de máxima contração — cotovelo ligeiramente flexionado durante todo o movimento' }
+    ],
+    error: '❌ Erro comum: dobrar demais o cotovelo e virar um press. É um fly — braço quase estendido'
+  },
+  'Desenvolvimento Militar Máquina': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> costas no encosto, pega na alça da máquina na altura dos ombros' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> até cotovelo na linha do ombro ou levemente abaixo — sente o estiramento no deltoide anterior' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra pra cima sem travar o cotovelo no topo' },
+      { icon: '🎯', text: '<strong>Foco:</strong> calibrar a máquina Bodytech — altura do assento importa muito' }
+    ],
+    error: '❌ Erro comum: assento alto demais → cotovelo sobe acima do ombro → sobrecarga no manguito'
+  },
+  'Elevação Lateral Halter': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pé firme, leve inclinação pra frente, halter levemente à frente do corpo (não colado na lateral)' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> cotovelo levemente dobrado, sobe até o cotovelo chegar na linha do ombro — nem mais' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla a descida — excêntrica é onde acontece o ganho' },
+      { icon: '🎯', text: '<strong>Myo-reps:</strong> ativação (15 reps @RIR1) → 5 respirações profundas → 3-5 reps → repete 3-4x' }
+    ],
+    error: '❌ Erro comum: jogar o ombro (usar impulso). Se precisa balançar, o peso está alto demais'
+  },
+  'Tríceps Corda': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> em pé perto da polia, cotovelo colado ao lado do corpo — não se afasta durante o movimento' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende o cotovelo completamente, abre as pontas da corda no final (rotação de punho)' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> controla a volta, não deixa o peso puxar rápido' },
+      { icon: '🎯', text: '<strong>Drop:</strong> falha na carga → remove 25% na hora → AMRAP até falhar de novo' }
+    ],
+    error: '❌ Erro comum: cotovelo se afasta do corpo — transfere esforço pro deltoide posterior'
+  },
+  'T-Bar (Cavalinho)': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> peito no apoio, cotovelo baixo (≈45° do tronco), pega pronada ou neutra' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente os braços — sente o dorsal no estiramento' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> puxa o cotovelo pra trás e pra baixo (não pra cima), termina com escápula retraída' },
+      { icon: '🎯', text: '<strong>Cluster:</strong> 4 reps pesadas → 15s pausa intra-set → mais 4 → pausa → repete. 5ª série: AMRAP' }
+    ],
+    error: '❌ Erro comum: cotovelo alto (>90°) → vira exercício de deltoide posterior, sai do dorsal'
+  },
+  'Pulldown Neutro': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pega neutra (palmas se olhando), joelhos sob o apoio, leve inclinação do tronco pra trás' },
+      { icon: '⬇️', text: '<strong>Descida da barra:</strong> puxa até tocar o alto do peito, cotovelo vem pra baixo e pra trás' },
+      { icon: '⬆️', text: '<strong>Volta:</strong> controla a extensão completa — sente o dorsal alongar' },
+      { icon: '🎯', text: '<strong>Foco:</strong> contração 1s no peito — apertar as escápulas pra baixo no ponto final' }
+    ],
+    error: '❌ Erro comum: inclinar demais o tronco e usar impulso. É puxada, não remada'
+  },
+  'Remada Serrote Halter': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> joelho e mão ipsilateral no banco, costas paralelas ao chão, halter pendurado' },
+      { icon: '⬆️', text: '<strong>Puxada:</strong> cotovelo vem direto pra trás e pra cima — termina no quadril, não na cintura' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente, sente o dorsal alongar no estiramento' },
+      { icon: '🎯', text: '<strong>Foco:</strong> ROM total — o "puxar até o quadril" é o que diferencia do movimento curto' }
+    ],
+    error: '❌ Erro comum: parar o movimento na altura do peito, perdendo metade do ROM'
+  },
+  'Pullover Polia Alta': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> de pé afastado da polia, cotovelo <strong>travado</strong> em leve flexão — não muda durante o movimento' },
+      { icon: '⬆️', text: '<strong>Posição inicial:</strong> braços pra cima e levemente à frente — sente o dorsal alongado' },
+      { icon: '⬇️', text: '<strong>Puxada:</strong> movimento vem TODO do ombro, braço desce até a coxa — cotovelo imóvel' },
+      { icon: '🎯', text: '<strong>Foco:</strong> isola o dorsal sem bíceps. Se o cotovelo dobrar, virou pulldown' }
+    ],
+    error: '❌ Erro comum: dobrar o cotovelo → exercício vira pulldown, perde o foco no dorsal'
+  },
+  'Face Pull Corda': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> polia na altura do rosto ou levemente acima, pega com os polegares pra baixo' },
+      { icon: '⬆️', text: '<strong>Puxada:</strong> cotovelos ALTOS (acima dos ombros), puxa até os punhos ficarem ao lado da cabeça' },
+      { icon: '🔄', text: '<strong>Final:</strong> abre bem os punhos pra trás — esse é o movimento de rotação externa que protege o ombro' },
+      { icon: '🎯', text: '<strong>Foco:</strong> sente o deltoide posterior e manguito rotador contrair — não o trapézio' }
+    ],
+    error: '❌ Erro comum: cotovelos baixos → vira remada alta, sobrecarrega trapézio e ombro'
+  },
+  'Rosca Scott Máquina': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> apoio do braço firme na almofada, pega no ponto que mantém tensão constante' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> flexiona até o antebraço ficar vertical — sem além disso (perde tensão)' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende quase completamente — 10° de flexão residual, não estende 100%' },
+      { icon: '🎯', text: '<strong>Myo-reps:</strong> 10 reps @RIR1 → 5 respirações → 3-4 reps → repete 3x' }
+    ],
+    error: '❌ Erro comum: subir o ombro no final da concêntrica para pegar mais reps — tira tensão do bíceps'
+  },
+  'Rosca Martelo Halter': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> em pé ou sentado, pega neutra (polegar pra cima), cotovelo colado ao corpo' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> flexiona até o antebraço ficar vertical, sem supinar o punho' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla, estende completamente para trabalhar o estiramento do braquial' },
+      { icon: '🎯', text: '<strong>Drop:</strong> falha → reduz 25% → AMRAP. Trabalha braquial e braquiorradial' }
+    ],
+    error: '❌ Erro comum: supinar o punho durante o movimento — vira rosca direta, sai do braquial'
+  },
+  'Hack Squat': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pés na largura dos ombros, levemente abertos, posição média-baixa na plataforma' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> profundo — coxas paralelas ou abaixo, joelhos seguem a direção dos pés' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra o chão, não trava o joelho no topo — mantém tensão' },
+      { icon: '🎯', text: '<strong>Cluster:</strong> 4 reps → 20s pausa intra-set → mais 4 → pausa → repete. 5ª série: AMRAP' }
+    ],
+    error: '❌ Erro comum: travamento do joelho no topo — perde tensão e sobrecarrega a articulação'
+  },
+  'Leg Press 45° Pés Baixos': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pés baixos na plataforma (embaixo do centro) — ativa mais o quadríceps' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> profundo, joelhos acompanham os pés, lombar não sai do apoio' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> sem travar o joelho — ROM completo mas com tensão contínua' },
+      { icon: '🎯', text: '<strong>Foco:</strong> ROM profundo é o diferencial — 90° de flexão ou mais' }
+    ],
+    error: '❌ Erro comum: lombar descolar do apoio na descida — sinal de que a amplitude está além do quadril permitir'
+  },
+  'Cadeira Extensora': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> joelhos no eixo da máquina, tornozelo encaixado no apoio, costas encostadas' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> estende completamente, squeeze no topo 1-2s (pico de contração)' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla até 90° ou além — estiramento do quadríceps' },
+      { icon: '🎯', text: '<strong>Rest-pause:</strong> falha → 15s de pausa (respira na posição estendida) → mais reps até falhar' }
+    ],
+    error: '❌ Erro comum: não estender completamente — perde o pico de contração onde o quadríceps mais trabalha'
+  },
+  'Stiff Halter': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pés na largura do quadril, joelho com leve flexão fixa — não muda' },
+      { icon: '⬇️', text: '<strong>Hip hinge:</strong> quadril vai pra trás (não dobra o joelho), halteres descem pela frente das coxas' },
+      { icon: '🎯', text: '<strong>Foco:</strong> sente isquiotibiais e glúteo no estiramento — costas RETAS, não encurvadas' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> quadril vai pra frente, glúteo contrai no topo. Excêntrica 3s' }
+    ],
+    error: '❌ Erro comum: curvar a lombar na descida — herniar em potencial. Costas neutras sempre'
+  },
+  'Mesa Flexora': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> deitado, joelhos no eixo da máquina, tornozelos encaixados, quadril encostado' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> flexiona até ~90-100°, squeeze no pico de contração 1s' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente — sente o alongamento nos isquiotibiais' },
+      { icon: '🎯', text: '<strong>Myo-reps:</strong> 12 reps @RIR1 → 5 respirações → 4-5 reps → repete 3x' }
+    ],
+    error: '❌ Erro comum: não estender completamente — perde o estiramento onde mais hipertrofia acontece'
+  },
+  'Panturrilha em Pé': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> ponta do pé no degrau, calcanhar abaixo do nível do degrau no estiramento' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> sobe o máximo possível, squeeze no topo' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> pausa 2s na posição alongada (calcanhar abaixo) — esse é o diferencial' },
+      { icon: '🎯', text: '<strong>Drop:</strong> falha → remove 25% → AMRAP com pausa 2s a cada rep' }
+    ],
+    error: '❌ Erro comum: não usar ROM completo — panturrilha responde muito a estiramento profundo'
+  },
+  'Supino Inclinado Halter 45°': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> banco a 45°, halteres na linha do esterno, cotovelo 45° do tronco' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla até sentir estiramento no peitoral superior e deltoide anterior' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra pra cima e levemente pro centro' },
+      { icon: '🎯', text: '<strong>Cluster-drop 4ª série:</strong> 8 reps → para → remove 25% → AMRAP → remove 25% → AMRAP' }
+    ],
+    error: '❌ Erro comum: deixar os halteres se separarem demais lateralmente — perde torque no peitoral'
+  },
+  'Chest Press Reto Máquina': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> costas no encosto, pega com cotovelo na linha do esterno' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra até quase estender, squeeze 1-2s no topo' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla até o ponto de estiramento do peitoral' },
+      { icon: '🎯', text: '<strong>Foco:</strong> squeeze — sentir o peitoral contrair no ponto de menor distância' }
+    ],
+    error: '❌ Erro comum: usar a carga dos Push A — esse é volume metabólico, 75% da carga máxima'
+  },
+  'Peck Deck (Crucifixo Máq)': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> cotovelo encaixado no apoio, ombro na linha do cotovelo' },
+      { icon: '⬆️', text: '<strong>Fechamento:</strong> aduz os braços até se encontrarem — pico de contração 1-2s' },
+      { icon: '⬇️', text: '<strong>Abertura:</strong> controla o movimento, não deixa o peso puxar — estiramento do peitoral' },
+      { icon: '🎯', text: '<strong>Myo-reps:</strong> 15 reps @RIR1 → 5 respirações → 4-5 reps → repete 3x' }
+    ],
+    error: '❌ Erro comum: deixar o ombro se jogar pra frente no estiramento — lesão de manguito em potencial'
+  },
+  'Desenvolvimento Halter Sentado': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> banco 90°, halteres na altura dos ombros, cotovelo 90°' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> até cotovelo na linha do ombro — paralelo ao chão ou levemente abaixo' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra pra cima, halteres se aproximam mas não se tocam' },
+      { icon: '🎯', text: '<strong>Foco:</strong> ROM completo — a descida até o paralelo é o diferencial do halter vs máquina' }
+    ],
+    error: '❌ Erro comum: descida parcial — perde o estiramento e o ROM que justifica o halter'
+  },
+  'Elevação Lateral Cabo Inclinado': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> segura na barra lateral ou coluna, corpo inclinado de lado, cabo do lado oposto' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> levanta o braço lateral até ficar paralelo ao chão, sente deltoide lateral' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla — excêntrica é onde acontece o ganho' },
+      { icon: '🎯', text: '<strong>Drop duplo:</strong> falha → remove 25% → AMRAP → remove 25% → AMRAP' }
+    ],
+    error: '❌ Erro comum: levantar acima do paralelo — trapézio assume e sai do deltoide'
+  },
+  'Tríceps Testa Barra W': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> deitado no banco, pega fechada na barra W, braços verticais' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> cotovelo dobra até a barra tocar próximo da testa — cotovelos apontam pro TETO' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> estende o cotovelo completamente' },
+      { icon: '🎯', text: '<strong>Stretch focus:</strong> cotovelo alto isola a cabeça longa do tríceps — é o diferencial' }
+    ],
+    error: '❌ Erro comum: cotovelo se abrir durante a descida — vira um press, sai do tríceps'
+  },
+  'Tríceps Pulley Inverso': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pega supinada (palma pra cima) na barra reta, cotovelo colado ao corpo' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente o cotovelo, sente a cabeça lateral do tríceps' },
+      { icon: '⬆️', text: '<strong>Volta:</strong> controla até 90° — não vai além' },
+      { icon: '🎯', text: '<strong>Myo-reps:</strong> 15 reps @RIR1 → 5 resp → 4 reps → repete 3x. Unilateral = mais foco' }
+    ],
+    error: '❌ Erro comum: pegar supino sem manter o cotovelo fixo — o cotovelo que se afasta tira a tensão'
+  },
+  'Puxada Pronada Aberta': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pega larga pronada, joelhos sob o apoio, leve inclinação do tronco' },
+      { icon: '⬇️', text: '<strong>Puxada:</strong> puxa até o alto do peito, cotovelos descem pra baixo e pra trás' },
+      { icon: '⬆️', text: '<strong>Volta:</strong> estende completamente — sente o dorsal alongar no estiramento total' },
+      { icon: '🎯', text: '<strong>Foco:</strong> ROM total — extensão completa no topo é onde a largura do dorsal é treinada' }
+    ],
+    error: '❌ Erro comum: puxada parcial — não extender completamente perde metade do estímulo'
+  },
+  'Remada Baixa Pega Aberta': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pega aberta na barra reta, cotovelos abertos (≈45-90° do tronco)' },
+      { icon: '⬆️', text: '<strong>Puxada:</strong> cotovelos vêm pra trás e pra fora — termina com escápulas retraídas' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente, tronco fica levemente à frente na posição inicial' },
+      { icon: '🎯', text: '<strong>AMRAP no último:</strong> na última série, depois das reps prescritas, continua até a falha técnica' }
+    ],
+    error: '❌ Erro comum: jogar o tronco pra trás — usa impulso e tira tensão do dorsal'
+  },
+  'Pulldown Pega Fechada': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> triangulo ou pega fechada, cotovelos apontam pra baixo durante o movimento' },
+      { icon: '⬇️', text: '<strong>Puxada:</strong> cotovelos vêm pra baixo próximos ao tronco — diferente da pega larga' },
+      { icon: '⬆️', text: '<strong>Volta:</strong> estende completamente — pega fechada permite ROM mais profundo' },
+      { icon: '🎯', text: '<strong>Rest-pause:</strong> falha → 15s pausa → mesma carga → mais reps até falhar' }
+    ],
+    error: '❌ Erro comum: inclinar o tronco demais pra trás para compensar carga alta'
+  },
+  'Remada Baixa Triângulo': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> triângulo fechado, cotovelos paralelos ao tronco durante o movimento' },
+      { icon: '⬆️', text: '<strong>Puxada:</strong> cotovelos vêm direto pra trás, squeeze das escápulas no final — 1s de pausa' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente, sente o estiramento no dorsal e romboides' },
+      { icon: '🎯', text: '<strong>Squeeze 1s:</strong> a pausa no ponto de contração máxima é o que diferencia esse exercício' }
+    ],
+    error: '❌ Erro comum: não fazer a pausa de 1s — sem a pausa, vira momentum, perde a tensão'
+  },
+  'Crucifixo Inverso': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> máquina de pec deck invertida ou deitado — cotovelo ligeiramente flexionado' },
+      { icon: '⬆️', text: '<strong>Abertura:</strong> abre os braços lateralmente e levemente pra cima — cotovelo na linha do ombro' },
+      { icon: '🎯', text: '<strong>Foco:</strong> pico de contração 1-2s — sente o deltoide posterior e romboides' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> controla o retorno — excêntrica conta tanto quanto a concêntrica' }
+    ],
+    error: '❌ Erro comum: levantar acima da linha do ombro — trapézio superior assume e sai do deltoide posterior'
+  },
+  'Rosca Alternada Banco Inclinado': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> banco inclinado a 60°, braços pendurados — máximo de estiramento do bíceps' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> supina o punho (gira pra fora) no início do movimento — ativa mais o bíceps' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente — o stretch máximo no banco inclinado é o ponto chave' },
+      { icon: '🎯', text: '<strong>Stretch focus:</strong> o banco inclinado cria estiramento que o banco reto não consegue' }
+    ],
+    error: '❌ Erro comum: não supinar o punho — perde ativação do bíceps braquial'
+  },
+  'Hack Squat Pés Altos': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> pés na parte alta da plataforma — ativa mais glúteo e posterior' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> profundo, quadril desce bem — joelho pode ultrapassar a ponta do pé com pés altos' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra pelo calcanhar — sente o glúteo contrair' },
+      { icon: '🎯', text: '<strong>Cluster-drop 4ª:</strong> 8 reps → -25% AMRAP → -25% AMRAP' }
+    ],
+    error: '❌ Erro comum: usar a mesma carga de pés baixos — pés altos muda o ângulo, recalibra'
+  },
+  'Mesa Flexora Deitada': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> deitado, tornozelos no apoio, quadril encostado na máquina' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> flexiona até ~90-100°, contração máxima 1s' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> estende completamente — estiramento total dos isquiotibiais' },
+      { icon: '🎯', text: '<strong>Rest-pause:</strong> falha → 15s pausa → mesma carga → mais reps' }
+    ],
+    error: '❌ Erro comum: quadril levantar na subida — usa os lombares, sai dos isquiotibiais'
+  },
+  'Cadeira Abdutora': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição especial:</strong> inclina o tronco pra frente ~30° — muda o vetor de força pro glúteo médio' },
+      { icon: '⬆️', text: '<strong>Abertura:</strong> abre as pernas, sente o glúteo médio (lado do quadril) contrair' },
+      { icon: '⬇️', text: '<strong>Fechamento:</strong> controla a volta — excêntrica do glúteo médio' },
+      { icon: '🎯', text: '<strong>Myo-reps:</strong> 20 reps @RIR1 → 5 resp → 5-6 reps → repete 3x' }
+    ],
+    error: '❌ Erro comum: tronco ereto — muda o vetor pro TFL (tensor fáscia lata), sai do glúteo médio'
+  },
+  'Avanço Passada Halter': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> passo longo, tronco ereto, halteres na lateral' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> 2s controlada — joelho da frente acima do tornozelo, joelho de trás quase no chão' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> empurra pela perna da frente, voltando à posição inicial' },
+      { icon: '🎯', text: '<strong>Foco:</strong> excêntrica controlada 2s é o que diferencia do avanço explosivo' }
+    ],
+    error: '❌ Erro comum: tronco inclinado pra frente — perde a ativação do glúteo e quadríceps'
+  },
+  'Panturrilha Sentado': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> joelhos a 90°, ponta dos pés no degrau, calcanhar livre pra baixo' },
+      { icon: '⬆️', text: '<strong>Subida:</strong> sobe o máximo, squeeze no topo' },
+      { icon: '⬇️', text: '<strong>Descida:</strong> pausa 2s com calcanhar abaixo do nível do degrau — estiramento do sóleo' },
+      { icon: '🎯', text: '<strong>Sóleo vs Gastro:</strong> joelho dobrado isola o sóleo (base da panturrilha)' }
+    ],
+    error: '❌ Erro comum: não pausar no estiramento — panturrilha e sóleo respondem muito à pausa alongada'
+  },
+  'Abdominal Pulley': {
+    steps: [
+      { icon: '📐', text: '<strong>Posição:</strong> joelhos no chão, corda atrás da cabeça ou nos ombros, quadril alto' },
+      { icon: '⬇️', text: '<strong>Crunch:</strong> CURVA A COLUNA — não é uma dobragem do quadril. Lombar arredonda' },
+      { icon: '⬆️', text: '<strong>Volta:</strong> estende controlado — resistência do peso mantém tensão' },
+      { icon: '🎯', text: '<strong>Foco:</strong> "Colar o umbigo no chão" mentalmente — é flexão de coluna, não inclinação' }
+    ],
+    error: '❌ Erro comum: inclinar o tronco sem curvar a coluna — usa os flexores do quadril, sai do reto abdominal'
+  }
+};
+
+// Passo a passo da técnica avançada aplicada ao exercício específico
+const TECH_STEPS = {
+  'Chest Press Inclinado': 'Cluster + AMRAP: 4 reps pesadas → <strong>15s de pausa</strong> (mãos na barra, respira) → mais 4 reps → pausa 15s → repete. Na 5ª série: faz o cluster completo e depois AMRAP até a falha técnica. Descanso entre clusters: 2-3min.',
+  'T-Bar (Cavalinho)': 'Cluster + AMRAP: 4 reps pesadas → <strong>15s de pausa intra-set</strong> → mais 4 → pausa → repete (5 blocos). 5ª série: cluster + AMRAP no final. Descanso entre séries: 3min.',
+  'Hack Squat': 'Cluster + AMRAP: 4 reps → <strong>20s de pausa</strong> (fica na máquina, respira) → mais 4 → pausa → repete. 5ª série: cluster completo + AMRAP. A pausa de 20s é maior que upper — perna precisa de mais recuperação.',
+  'Cadeira Extensora': 'Rest-pause: leva até a falha → <strong>15s de pausa</strong> na posição estendida (não larga o peso) → continua com a mesma carga até falhar de novo. Pode repetir a pausa 1-2x na mesma série.',
+  'Mesa Flexora': 'Myo-reps: <strong>série de ativação</strong> de 12 reps @RIR1 → 5 respirações profundas → 4-5 reps → 5 respirações → 4-5 reps → repete 3x. Para quando não conseguir mais 3 reps nos mini-sets.',
+  'Mesa Flexora Deitada': 'Rest-pause: falha → <strong>15s pausa</strong> → mesma carga → mais reps. Pode repetir 2x.',
+  'Panturrilha em Pé': 'Drop: falha na carga de trabalho → <strong>remove ~25%</strong> na hora → AMRAP com pausa 2s no estiramento a cada rep. Opcional: segundo drop (-25% de novo) se sobrar energia.',
+  'Panturrilha Sentado': 'Drop: falha → <strong>-25%</strong> → AMRAP com pausa 2s no estiramento. Foco na pausa — é o diferencial da panturrilha.',
+  'Supino Inclinado Halter 45°': 'Cluster-drop na 4ª série: 8 reps → <strong>pausa 15s</strong> → remove 25% → AMRAP → remove 25% → AMRAP. Séries 1-3 são normais.',
+  'Hack Squat Pés Altos': 'Cluster-drop na 4ª série: 8 reps → <strong>pausa 15s</strong> → remove 25% → AMRAP → remove 25% → AMRAP.',
+  'Peck Deck (Crucifixo Máq)': 'Myo-reps: <strong>15 reps @RIR1</strong> → 5 respirações → 4-5 reps → 5 respirações → 4-5 reps → repete 3-4x. Pico de contração 1-2s em cada rep dos mini-sets.',
+  'Rosca Scott Máquina': 'Myo-reps: <strong>10 reps @RIR1</strong> → 5 respirações → 3-4 reps → 5 resp → 3-4 reps → repete 3x.',
+  'Tríceps Corda': 'Drop: falha → <strong>remove 25%</strong> → AMRAP até a falha. Pode fazer 1-2 drops.',
+  'Rosca Martelo Halter': 'Drop: falha → <strong>reduce 25%</strong> → AMRAP. Último exercício, pode ir até o limite.',
+  'Elevação Lateral Halter': 'Myo-reps: <strong>ativação de 15 reps @RIR1</strong> → 5 respirações profundas → 3-5 reps → 5 resp → repete 3-5x. Para quando não conseguir mais 3 reps nos mini-sets.',
+  'Elevação Lateral Cabo Inclinado': 'Drop duplo: falha → <strong>-25% AMRAP</strong> → -25% AMRAP. Dois drops na mesma série.',
+  'Pulldown Pega Fechada': 'Rest-pause: falha → <strong>15s pausa</strong> → mesma carga → mais reps.',
+  'Crucifixo Inverso': 'Drop: falha → <strong>-25%</strong> → AMRAP com pico de contração 1s em cada rep.',
+  'Rosca Alternada Banco Inclinado': 'Stretch focus: <strong>excêntrica de 2-3s</strong> em cada rep, pausa de 1s no ponto de máximo estiramento. Não é sobre carga — é sobre tempo no estiramento.',
+  'Rosca Scott Máquina (B)': 'Myo-reps: <strong>12 reps @RIR1</strong> → 5 resp → 3-4 reps → repete 3x.',
+  'Pulldown Neutro': 'Dupla progressão: adiciona <strong>reps antes de carga</strong>. Ex: 65kg → faz até conseguir 8 reps em todas as séries com boa forma → sobe para 67.5kg.',
+  'Stiff Halter': 'Stretch focus + RIR2: <strong>excêntrica 3s</strong> em cada rep, pausa de 1s no ponto de máximo estiramento. Para nas séries com RIR2 — não leva à falha.',
+  'Cadeira Abdutora': 'Myo-reps com tronco à frente: <strong>20 reps @RIR1</strong> → 5 resp → 5-6 reps → repete 3x. O tronco inclinado é parte da técnica — não é opcional.',
+  'Tríceps Testa Barra W': 'Stretch focus: <strong>excêntrica 3s</strong> descendo até a barra tocar a testa, pausa 1s — sente o estiramento na cabeça longa do tríceps. Cotovelo alto durante todo o movimento.',
+  'Tríceps Pulley Inverso': 'Myo-reps: <strong>15 reps @RIR1</strong> → 5 resp → 4-5 reps → repete 3x.',
+  'Puxada Pronada Aberta': 'Dupla progressão + ROM total: <strong>adiciona reps antes de carga</strong>. ROM total = extensão completa no topo (sente o dorsal alongar) + puxada até o peito.',
+  'Remada Baixa Pega Aberta': 'AMRAP no último: séries 1-3 normais. Última série: faz as reps prescritas e <strong>continua até a falha técnica</strong> (forma quebrar).',
+  'Remada Baixa Triângulo': 'Squeeze 1s: <strong>pausa de 1s</strong> no ponto de máxima contração (escápulas retraídas). Não é um squeeze rápido — é uma pausa real.',
+  'Face Pull Corda': 'Rotação externa: o puxar é só metade. A <strong>abertura dos punhos pra trás</strong> no final é o movimento que protege e fortalece o ombro.',
+  'Pullover Polia Alta': 'Stretch focus: no início do movimento (braços pra cima), <strong>pausa 1s no estiramento máximo</strong> do dorsal antes de puxar.',
+  'Remada Serrote Halter': 'ROM total: foco especial na <strong>descida completa</strong> — estender o braço e sentir o dorsal along. A puxada até o quadril é o diferencial.',
+  'Leg Press 45° Pés Baixos': 'ROM profundo: <strong>desça até 90° ou mais</strong> de flexão no joelho. O ROM profundo no leg press é o que maximiza o quadríceps.',
+  'Avanço Passada Halter': 'Excêntrica controlada 2s: <strong>desça em 2 segundos contados</strong>. A excêntrica lenta aumenta o dano muscular e o estímulo.',
+  'Desenvolvimento Halter Sentado': 'ROM completo: <strong>desça até o cotovelo ficar paralelo ao chão</strong> (ou levemente abaixo). É esse ROM que diferencia o halter da máquina.',
+  'Chest Press Reto Máquina': 'Squeeze: <strong>pausa de 1-2s no ponto de máxima extensão</strong>. Sente o peitoral contrair ao máximo antes de soltar.',
+  'Supino Máquina': 'Dupla progressão: <strong>fecha o range de reps em todas as séries antes de subir a carga</strong>. Ex: 95kg, meta 4×6-8. Quando fizer 4×8 com boa forma → sobe pra 97.5kg.',
+  'Abdominal Pulley': 'Crunch completo: <strong>arredonda a lombar ativamente</strong> em cada rep. "Tenta colar o umbigo no peito" — não inclina, curva.'
+};
+
+// Tempo estimado por série (sets × (tempo médio por série + descanso))
+function calcExTime(sets, tech) {
+  const techLower = tech.toLowerCase();
+  let rest = 120; // padrão
+  if (techLower.includes('cluster')) rest = 180;
+  else if (techLower.includes('myo') || techLower.includes('drop') || techLower.includes('rest-pause')) rest = 90;
+  else if (techLower.includes('lateral') || techLower.includes('panturrilha') || techLower.includes('face pull')) rest = 75;
+  const seriesSec = 30; // ~30s por série
+  const total = sets * (seriesSec + rest);
+  return Math.round(total / 60);
+}
+
 const CARDIOS = [
   { icon: '⛰️', title: 'Esteira Inclinada — Zona 2', goal: 'Queima de gordura sem perder gains', params: [
     { label: 'Inclinação', val: '8-12%' }, { label: 'Velocidade', val: '5,0-6,0 km/h' },
@@ -436,30 +948,91 @@ function renderDayGrid() {
 
 function renderDayDetail() {
   const d = PROGRAM[currentDay];
+  const warmup = WARMUP[currentDay];
+  const totalTime = d.exercises.reduce((acc, ex) => acc + calcExTime(ex.sets, ex.tech), 0);
+
   document.getElementById('day-detail').innerHTML = `
     <h2>${d.name}</h2>
-    <p style="margin-bottom:14px">${d.sub} · ~${d.dur} min · ${d.exercises.length} exercícios</p>
+    <p style="margin-bottom:10px">${d.sub} · ~${d.dur} min · ${d.exercises.length} exercícios</p>
+
+    <!-- AQUECIMENTO -->
+    <div class="ex-card" style="margin-bottom:14px">
+      <div class="ex-header" onclick="toggleEx('${currentDay}-warmup')">
+        <div class="ex-num" style="background:var(--blue-bg);border-color:var(--blue);color:var(--blue)">🔥</div>
+        <div class="ex-info">
+          <div class="ex-name" style="color:var(--blue)">Aquecimento</div>
+          <div class="ex-meta">Geral + rampa do 1º exercício</div>
+        </div>
+        <div class="ex-chevron ${openEx[currentDay+'-warmup'] ? 'open' : ''}">▼</div>
+      </div>
+      <div class="ex-body ${openEx[currentDay+'-warmup'] ? 'open' : ''}">
+        <div class="warmup-box">
+          <strong>Geral (5 min antes):</strong><br>
+          ${warmup.geral.map(g => `• ${g}`).join('<br>')}
+          <div class="ramp-row" style="margin-top:8px"><strong>📈 Rampa:</strong> ${warmup.ramp}</div>
+        </div>
+      </div>
+    </div>
+
     ${d.exercises.map((ex, i) => {
       const exKey = currentDay + '-' + i;
       const isOpen = openEx[exKey];
+      const isMain = i === 0;
+      const execData = EXEC_DATA[ex.name];
+      const techStep = TECH_STEPS[ex.name];
+      const estMin = calcExTime(ex.sets, ex.tech);
+
       return `<div class="ex-card">
         <div class="ex-header" onclick="toggleEx('${exKey}')">
           <div class="ex-num">${i + 1}</div>
-          <div class="ex-info"><div class="ex-name">${ex.name}</div><div class="ex-meta">${ex.sets}×${ex.reps} · ${ex.tech}</div></div>
+          <div class="ex-info">
+            <div class="ex-name-row" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">
+              ${isMain ? '<span class="ex-main-badge">🏋️ Carga máxima</span>' : ''}
+              <div class="ex-name">${ex.name}</div>
+            </div>
+            <div class="ex-meta" style="margin-top:3px;display:flex;gap:5px;flex-wrap:wrap">
+              <span>${ex.sets}×${ex.reps}</span>
+              <span class="ex-time-badge">~${estMin}min</span>
+            </div>
+          </div>
           <div class="ex-chevron ${isOpen ? 'open' : ''}">▼</div>
         </div>
         <div class="ex-body ${isOpen ? 'open' : ''}">
+
+          <!-- MÚSCULOS + DETALHES -->
           <div class="ex-detail-row">
             <div class="ex-detail"><div class="ex-detail-label">Séries × Reps</div><div class="ex-detail-val">${ex.sets} × ${ex.reps}</div></div>
-            <div class="ex-detail"><div class="ex-detail-label">Técnica</div><div class="ex-detail-val" style="font-size:11px">${ex.tech}</div></div>
+            <div class="ex-detail"><div class="ex-detail-label">Descanso</div><div class="ex-detail-val" style="font-size:12px">${ex.tech.toLowerCase().includes('cluster') ? '2-3 min' : ex.tech.toLowerCase().includes('myo') || ex.tech.toLowerCase().includes('drop') ? '90s' : '2 min'}</div></div>
           </div>
-          <div class="muscle-block"><div class="muscle-label">Músculos trabalhados</div>
+          <div class="muscle-block"><div class="muscle-label">Músculos</div>
             <div class="muscle-pills">
               ${ex.primary.map(m => `<span class="muscle-pill primary">${m}</span>`).join('')}
               ${ex.secondary.map(m => `<span class="muscle-pill secondary">${m}</span>`).join('')}
-            </div></div>
-          <div class="muscle-block"><div class="muscle-label">Técnica avançada</div><span class="tech-tag">${ex.tech}</span></div>
+            </div>
+          </div>
+
+          <!-- COMO EXECUTAR -->
+          ${execData ? `
+          <div class="exec-box">
+            <div class="exec-box-title">Como executar</div>
+            ${execData.steps.map(s => `
+              <div class="exec-item">
+                <span class="exec-icon">${s.icon}</span>
+                <span class="exec-text">${s.text}</span>
+              </div>`).join('')}
+            ${execData.error ? `<div class="exec-error"><span>⚠️</span><span>${execData.error}</span></div>` : ''}
+          </div>` : ''}
+
+          <!-- TÉCNICA AVANÇADA APLICADA (só exercícios 2+) -->
+          ${techStep && !isMain ? `
+          <div class="tech-step-box">
+            <div class="tech-step-title">⚡ ${ex.tech} — passo a passo</div>
+            ${techStep}
+          </div>` : ''}
+
           ${ex.note ? `<div class="note-box">${ex.note}</div>` : ''}
+
+          <!-- SUBSTITUTOS -->
           <div class="subs-block"><div class="subs-label">Substitutos</div>
             ${ex.subs.map((s, si) => `<div class="sub-item"><span class="sub-rank">${si + 1}</span>${s}</div>`).join('')}
           </div>
@@ -538,7 +1111,217 @@ document.getElementById('m-act').addEventListener('click', e => {
 document.getElementById('m-peso').addEventListener('input', calcMacros);
 document.getElementById('m-bf').addEventListener('input', calcMacros);
 
-renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
+// ============ ALIMENTOS ============
+// Macros base = CRU por 100g (salvo laticínios, lata e suplementos que não têm versão crua relevante)
+// rawFactor: multiplicador pra converter cru→cozido nos macros (quando cozido concentra: >1; quando dilui: <1)
+// Exemplos: peixe cru perde ~25% peso ao grelhar → 100g cru vira 75g cozido → macros p/100g cozido = base × 1.33
+// Arroz cru absorve água: 100g cru vira ~280g cozido → macros p/100g cozido = base × 0.36
+// noRaw: alimentos que não têm estado "cru" relevante (já vêm processados, em lata, suplemento etc)
+const ALIMENTOS = {
+  proteinas: [
+    // PEIXES — base CRU
+    { nome: 'Tilápia', cat: 'Peixe', p: 26, c: 0, g: 2.7, fav: true, rawFactor: 1.33, note: 'Filé. Relação proteína/caloria excelente.' },
+    { nome: 'Pescada', cat: 'Peixe', p: 22, c: 0, g: 1.5, fav: true, rawFactor: 1.33, note: 'Filé. Muito magra, fácil de preparar.' },
+    { nome: 'Salmão', cat: 'Peixe', p: 25, c: 0, g: 13, rawFactor: 1.25, note: 'Filé. Rico em ômega-3.' },
+    { nome: 'Atum (natural)', cat: 'Peixe / Lata', p: 28, c: 0, g: 1, noRaw: true, note: 'Em água, escorrido. Já pronto.' },
+    { nome: 'Atum (óleo)', cat: 'Peixe / Lata', p: 25, c: 0, g: 8, noRaw: true, note: 'Em óleo, escorrido. Já pronto.' },
+    { nome: 'Sardinha (lata)', cat: 'Peixe / Lata', p: 22, c: 0, g: 11, noRaw: true, note: 'Em água, escorrida. Já pronto.' },
+    { nome: 'Bacalhau', cat: 'Peixe', p: 22, c: 0, g: 1.2, rawFactor: 1.3, note: 'Dessalgado.' },
+    { nome: 'Merluza', cat: 'Peixe', p: 18, c: 0, g: 1.2, rawFactor: 1.33, note: 'Filé.' },
+    { nome: 'Cação', cat: 'Peixe', p: 22, c: 0, g: 2, rawFactor: 1.33, note: 'Filé.' },
+    // CARNES — base CRU
+    { nome: 'Frango (peito)', cat: 'Frango', p: 23, c: 0, g: 1.7, fav: true, rawFactor: 1.35, note: 'Sem pele.' },
+    { nome: 'Frango (coxa s/ pele)', cat: 'Frango', p: 18, c: 0, g: 4.5, rawFactor: 1.3, note: 'Sem pele.' },
+    { nome: 'Patinho (moído)', cat: 'Bovina', p: 21, c: 0, g: 6, fav: true, rawFactor: 1.3, note: 'Corte magro de bovino.' },
+    { nome: 'Alcatra', cat: 'Bovina', p: 21, c: 0, g: 4, rawFactor: 1.25, note: 'Corte traseiro magro.' },
+    { nome: 'Contrafilé', cat: 'Bovina', p: 20, c: 0, g: 8, rawFactor: 1.25, note: '' },
+    { nome: 'Patinho inteiro', cat: 'Bovina', p: 22, c: 0, g: 4, rawFactor: 1.3, note: '' },
+    { nome: 'Coxão mole', cat: 'Bovina', p: 22, c: 0, g: 5, rawFactor: 1.3, note: '' },
+    { nome: 'Lagarto', cat: 'Bovina', p: 22, c: 0, g: 4, rawFactor: 1.3, note: 'Muito magro.' },
+    { nome: 'Fraldinha', cat: 'Bovina', p: 20, c: 0, g: 10, rawFactor: 1.25, note: '' },
+    { nome: 'Picanha', cat: 'Bovina', p: 19, c: 0, g: 18, rawFactor: 1.2, note: 'Alta em gordura.' },
+    // OVOS E LATICÍNIOS
+    { nome: 'Clara de Ovo', cat: 'Ovo', p: 11, c: 0.7, g: 0.2, noRaw: true, note: 'Crua ou cozida — macros iguais.' },
+    { nome: 'Ovo inteiro', cat: 'Ovo', p: 13, c: 1.1, g: 11, noRaw: true, note: 'Cozido ou frito — base igual.' },
+    { nome: 'Queijo Cottage', cat: 'Laticínio', p: 11, c: 3.4, g: 4, noRaw: true, note: 'Industrializado. Lanche fácil.' },
+    { nome: 'Iogurte Grego (nat.)', cat: 'Laticínio', p: 9, c: 4, g: 5, noRaw: true, note: 'Natural integral. Varia por marca.' },
+    { nome: 'Iogurte Grego 0%', cat: 'Laticínio', p: 10, c: 4, g: 0.4, noRaw: true, note: 'Desnatado. Boa opção pré-cama.' },
+    { nome: 'Queijo Minas', cat: 'Laticínio', p: 17, c: 3, g: 10, noRaw: true, note: 'Frescal.' },
+    { nome: 'Leite desnatado', cat: 'Laticínio', p: 3.5, c: 5, g: 0.1, noRaw: true, note: 'Por 100ml.' },
+    // SUPLEMENTOS
+    { nome: 'Whey Protein (isolado)', cat: 'Suplemento', p: 90, c: 2, g: 1, fav: true, noRaw: true, note: 'Por 100g de pó. Checar rótulo.' },
+    { nome: 'Whey Protein (concentrado)', cat: 'Suplemento', p: 75, c: 8, g: 5, fav: true, noRaw: true, note: 'Por 100g de pó.' },
+    { nome: 'Caseína', cat: 'Suplemento', p: 80, c: 4, g: 2, noRaw: true, note: 'Por 100g de pó. Ideal pré-cama.' },
+    { nome: 'Albumina', cat: 'Suplemento', p: 85, c: 2, g: 0.5, noRaw: true, note: 'Por 100g de pó.' },
+    { nome: 'Camarão', cat: 'Frutos do mar', p: 20, c: 0.2, g: 0.3, rawFactor: 1.2, note: 'Proteína magríssima.' },
+    { nome: 'Peru (peito)', cat: 'Ave', p: 24, c: 0, g: 1, rawFactor: 1.3, note: 'Sem pele. Ainda mais magro que frango.' },
+    { nome: 'Lombo suíno', cat: 'Suína', p: 20, c: 0, g: 3.5, rawFactor: 1.25, note: '' },
+  ],
+  carbos: [
+    // TUBÉRCULOS — base CRU; cozido absorve pouca água
+    { nome: 'Batata-doce', cat: 'Tubérculo', p: 1.6, c: 24, g: 0.1, rawFactor: 0.8, note: 'IG moderado, rico em fibras.' },
+    { nome: 'Batata inglesa', cat: 'Tubérculo', p: 2, c: 20, g: 0.1, rawFactor: 0.75, note: '' },
+    { nome: 'Mandioca (macaxeira)', cat: 'Tubérculo', p: 1, c: 38, g: 0.3, rawFactor: 0.72, note: 'Alta em amido.' },
+    { nome: 'Inhame', cat: 'Tubérculo', p: 1.5, c: 30, g: 0.2, rawFactor: 0.78, note: 'Boa opção regional.' },
+    // CEREAIS E GRÃOS — base CRU (absorvem muita água ao cozinhar)
+    { nome: 'Arroz branco', cat: 'Cereal', p: 7, c: 77, g: 0.6, rawFactor: 0.36, note: 'Absorve ~3× o peso em água.' },
+    { nome: 'Arroz integral', cat: 'Cereal', p: 7.5, c: 72, g: 2, rawFactor: 0.38, note: 'Mais fibra, IG menor.' },
+    { nome: 'Aveia (flocos)', cat: 'Cereal', p: 13, c: 66, g: 7, rawFactor: 0.45, note: 'Crua = pó ou flocos. Cozida = mingau.' },
+    { nome: 'Quinoa', cat: 'Cereal', p: 14, c: 64, g: 6, rawFactor: 0.38, note: 'Proteína completa.' },
+    { nome: 'Macarrão (integral)', cat: 'Massas', p: 13, c: 68, g: 2, rawFactor: 0.42, note: 'IG menor que tradicional.' },
+    { nome: 'Macarrão (comum)', cat: 'Massas', p: 12, c: 74, g: 1.5, rawFactor: 0.4, note: '' },
+    { nome: 'Pão integral', cat: 'Pão', p: 9, c: 41, g: 3, noRaw: true, note: 'Por 100g. Checar marca.' },
+    { nome: 'Pão de forma branco', cat: 'Pão', p: 8, c: 50, g: 4, noRaw: true, note: 'Por 100g.' },
+    { nome: 'Cuscuz (milho)', cat: 'Cereal', p: 8, c: 70, g: 1, rawFactor: 0.38, note: 'Regional NE.' },
+    { nome: 'Tapioca (seca)', cat: 'Cereal', p: 0.2, c: 85, g: 0.1, noRaw: true, note: 'Granulada. Quase só amido.' },
+    // LEGUMINOSAS — base CRU (absorvem muita água)
+    { nome: 'Feijão preto', cat: 'Leguminosa', p: 21, c: 61, g: 1.5, rawFactor: 0.28, note: 'Rico em fibras e ferro.' },
+    { nome: 'Feijão carioca', cat: 'Leguminosa', p: 20, c: 60, g: 1.2, rawFactor: 0.28, note: '' },
+    { nome: 'Lentilha', cat: 'Leguminosa', p: 25, c: 60, g: 1, rawFactor: 0.38, note: 'Alta em proteína pra leguminosa.' },
+    { nome: 'Grão-de-bico', cat: 'Leguminosa', p: 19, c: 61, g: 6, rawFactor: 0.35, note: '' },
+    // FRUTAS — noRaw (não se cozinha usualmente)
+    { nome: 'Banana prata', cat: 'Fruta', p: 1.3, c: 26, g: 0.1, noRaw: true, note: 'Madura. Boa opção pré-treino.' },
+    { nome: 'Banana nanica', cat: 'Fruta', p: 1.4, c: 23, g: 0.2, noRaw: true, note: '' },
+    { nome: 'Manga', cat: 'Fruta', p: 0.8, c: 17, g: 0.4, noRaw: true, note: 'Polpa.' },
+    { nome: 'Maçã', cat: 'Fruta', p: 0.3, c: 15, g: 0.2, noRaw: true, note: 'Com casca.' },
+    { nome: 'Abacaxi', cat: 'Fruta', p: 0.9, c: 13, g: 0.2, noRaw: true, note: 'Polpa.' },
+    // VEGETAIS — base CRU
+    { nome: 'Brócolis', cat: 'Vegetal', p: 2.8, c: 7, g: 0.4, fav: true, rawFactor: 0.85, note: 'Rico em fibras e micronutrientes.' },
+    { nome: 'Abobrinha', cat: 'Vegetal', p: 1.2, c: 3.5, g: 0.3, fav: true, rawFactor: 0.9, note: 'Pouquíssima caloria.' },
+    { nome: 'Abóbora', cat: 'Vegetal', p: 1, c: 10, g: 0.1, fav: true, rawFactor: 0.82, note: 'Rica em beta-caroteno.' },
+    { nome: 'Beterraba', cat: 'Vegetal', p: 1.6, c: 10, g: 0.1, fav: true, rawFactor: 0.88, note: 'Nitrato natural — melhora performance.' },
+    { nome: 'Espinafre', cat: 'Vegetal', p: 2.9, c: 3.6, g: 0.4, fav: true, rawFactor: 0.9, note: 'Muito rico em micronutrientes.' },
+    { nome: 'Cenoura', cat: 'Vegetal', p: 0.9, c: 10, g: 0.2, fav: true, rawFactor: 0.88, note: '' },
+    { nome: 'Couve-flor', cat: 'Vegetal', p: 1.9, c: 5, g: 0.3, rawFactor: 0.88, note: '' },
+  ],
+  gorduras: [
+    { nome: 'Abacate', cat: 'Fruta gordurosa', p: 2, c: 9, g: 15, noRaw: true, note: 'Polpa. Gordura monoinsaturada — ômega-9.' },
+    { nome: 'Amendoim', cat: 'Oleaginosa', p: 26, c: 16, g: 49, noRaw: true, note: 'Torrado sem sal.' },
+    { nome: 'Castanha-do-Pará', cat: 'Oleaginosa', p: 14, c: 12, g: 66, noRaw: true, note: '1 castanha = ~5g. Rica em selênio.' },
+    { nome: 'Castanha de caju', cat: 'Oleaginosa', p: 15, c: 30, g: 46, noRaw: true, note: 'Torrada sem sal.' },
+    { nome: 'Amêndoa', cat: 'Oleaginosa', p: 21, c: 22, g: 50, noRaw: true, note: '' },
+    { nome: 'Nozes', cat: 'Oleaginosa', p: 14, c: 14, g: 65, noRaw: true, note: 'Sem casca.' },
+    { nome: 'Pasta de amendoim', cat: 'Oleaginosa', p: 25, c: 20, g: 50, noRaw: true, note: 'Natural (só amendoim).' },
+    { nome: 'Azeite de oliva', cat: 'Óleo', p: 0, c: 0, g: 100, noRaw: true, note: 'Extra virgem. Gordura monoinsaturada.' },
+    { nome: 'Óleo de coco', cat: 'Óleo', p: 0, c: 0, g: 100, noRaw: true, note: 'MCT — cadeia média.' },
+    { nome: 'Salmão', cat: 'Peixe gordo', p: 25, c: 0, g: 13, rawFactor: 1.25, note: 'Rico em EPA e DHA.' },
+    { nome: 'Sardinha (lata)', cat: 'Peixe gordo', p: 22, c: 0, g: 11, noRaw: true, note: 'Ômega-3 + vitamina D.' },
+    { nome: 'Ovo inteiro', cat: 'Ovo', p: 13, c: 1.1, g: 11, noRaw: true, note: 'A gema concentra ômega-3 e colina.' },
+    { nome: 'Queijo parmesão', cat: 'Laticínio', p: 32, c: 3, g: 28, noRaw: true, note: 'Por 100g.' },
+    { nome: 'Manteiga', cat: 'Laticínio', p: 0.9, c: 0.1, g: 81, noRaw: true, note: 'Saturada. Usar com moderação.' },
+    { nome: 'Linhaça', cat: 'Semente', p: 18, c: 29, g: 42, noRaw: true, note: 'Moída. Ômega-3 vegetal (ALA).' },
+    { nome: 'Chia', cat: 'Semente', p: 17, c: 42, g: 31, noRaw: true, note: 'Rica em fibra e ômega-3 vegetal.' },
+  ]
+};
+
+let foodTab = 'proteinas';
+let foodSearch = '';
+// Estado cru/cozido por alimento: chave = nome, valor = 'raw' | 'cooked'
+let foodCookState = {};
+
+function getFoodMacros(f, state) {
+  if (f.noRaw || !f.rawFactor) return { p: f.p, c: f.c, g: f.g };
+  const cooked = state === 'cooked';
+  if (cooked) {
+    return {
+      p: Math.round(f.p * f.rawFactor * 10) / 10,
+      c: Math.round(f.c * f.rawFactor * 10) / 10,
+      g: Math.round(f.g * f.rawFactor * 10) / 10
+    };
+  }
+  return { p: f.p, c: f.c, g: f.g };
+}
+
+function toggleCookState(nome) {
+  const current = foodCookState[nome] || 'raw';
+  foodCookState[nome] = current === 'raw' ? 'cooked' : 'raw';
+  renderFoodTable();
+}
+
+function filterFood() {
+  foodSearch = document.getElementById('food-search').value.toLowerCase();
+  renderFoodTable();
+}
+
+function renderFoodTable() {
+  let data = ALIMENTOS[foodTab].filter(f =>
+    f.nome.toLowerCase().includes(foodSearch) ||
+    f.cat.toLowerCase().includes(foodSearch)
+  );
+
+  if (!data.length) {
+    document.getElementById('food-content').innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px">Nenhum alimento encontrado</div>';
+    return;
+  }
+
+  data.sort((a, b) => {
+    if (a.fav && !b.fav) return -1;
+    if (!a.fav && b.fav) return 1;
+    return b.p - a.p;
+  });
+
+  let html = `<div class="food-table-wrap"><table class="food-table">
+    <tr>
+      <th>Alimento</th>
+      <th class="num">Prot.</th>
+      <th class="num">Carbo</th>
+      <th class="num">Gord.</th>
+      <th class="num">kcal</th>
+    </tr>`;
+
+  data.forEach(f => {
+    const cookState = foodCookState[f.nome] || 'raw';
+    const m = getFoodMacros(f, cookState);
+    const kcal = Math.round(m.p * 4 + m.c * 4 + m.g * 9);
+    const total = m.p + m.c + m.g;
+    const barP = total > 0 ? Math.round(m.p / total * 100) : 0;
+    const barC = total > 0 ? Math.round(m.c / total * 100) : 0;
+    const barG = 100 - barP - barC;
+    const isFav = f.fav;
+    const hasToggle = !f.noRaw && f.rawFactor;
+    const isCooked = cookState === 'cooked';
+
+    const toggleBtn = hasToggle
+      ? `<span class="cook-toggle ${isCooked ? 'cooked' : 'raw'}" onclick="toggleCookState('${f.nome.replace(/'/g, "\\'")}')">
+          ${isCooked ? '🍳 Cozido' : '🥩 Cru'}
+        </span>`
+      : `<span class="cook-fixed">${f.noRaw ? '—' : '🥩 Cru'}</span>`;
+
+    html += `<tr class="${isFav ? 'highlight' : ''}">
+      <td>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <div class="food-name">${f.nome}${isFav ? '<span class="food-badge badge-fav">⭐</span>' : ''}</div>
+          ${toggleBtn}
+        </div>
+        <div class="food-cat">${f.cat}</div>
+        <div class="macro-bar">
+          <div class="bar-p" style="width:${barP}%"></div>
+          <div class="bar-c" style="width:${barC}%"></div>
+          <div class="bar-f" style="width:${barG}%"></div>
+        </div>
+      </td>
+      <td class="num" style="color:var(--green)">${m.p}g</td>
+      <td class="num" style="color:var(--yellow)">${m.c}g</td>
+      <td class="num" style="color:var(--orange)">${m.g}g</td>
+      <td class="num">${kcal}</td>
+    </tr>`;
+    if (f.note) html += `<tr class="${isFav ? 'highlight' : ''}"><td colspan="5" class="food-note">${f.note}</td></tr>`;
+  });
+
+  html += '</table></div>';
+  html += `<p style="font-size:11px;color:var(--text3);margin-top:4px">⭐ = seus preferidos · valores por 100g · toque 🥩/🍳 para alternar · fonte: TACO/USDA</p>`;
+  document.getElementById('food-content').innerHTML = html;
+}
+
+document.getElementById('food-tabs').addEventListener('click', e => {
+  if (!e.target.dataset.ftab) return;
+  foodTab = e.target.dataset.ftab;
+  document.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderFoodTable();
+});
+
+renderFoodTable();
 
 // ============ CARGAS ============
 // Lista de exercícios agrupados por dia
@@ -705,6 +1488,9 @@ if (Object.keys(cargasState).length === 0) {
   };
 }
 renderCargas();
+
+// Inicializa demais módulos
+renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
 
 // Abre direto na aba Cargas se URL tem #cargas
 if (window.location.hash === '#cargas') {
