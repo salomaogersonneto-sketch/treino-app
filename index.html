@@ -37,6 +37,87 @@
   .tab { flex-shrink: 0; padding: 10px 14px; border: none; background: transparent; color: var(--text3); font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
   .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
+  /* Navegação 2 níveis */
+  .maintabs { display: flex; gap: 6px; padding-bottom: 10px; }
+  .maintab { flex: 1; padding: 11px; border: 1px solid var(--border); background: var(--bg2); color: var(--text2); font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 10px; white-space: nowrap; text-align: center; }
+  .maintab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .subtabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; border-top: 1px solid var(--border); padding-top: 2px; }
+  .subtabs::-webkit-scrollbar { display: none; }
+  .subtab { flex-shrink: 0; padding: 9px 12px; border: none; background: transparent; color: var(--text3); font-size: 12px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .subtab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ===== SUPLEMENTOS ===== */
+  .supp-evidence-legend { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .supp-ev-tag { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 10px; }
+  .supp-ev-tag.forte { background: var(--green-bg); color: var(--green); }
+  .supp-ev-tag.moderada { background: var(--yellow-bg); color: var(--yellow); }
+  .supp-ev-tag.fraca { background: var(--orange-bg); color: var(--orange); }
+  .supp-ev-tag.marketing { background: var(--red-bg); color: var(--red); }
+  .supp-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; border-left: 4px solid var(--border); }
+  .supp-card.forte { border-left-color: var(--green); }
+  .supp-card.moderada { border-left-color: var(--yellow); }
+  .supp-card.fraca { border-left-color: var(--orange); }
+  .supp-card.marketing { border-left-color: var(--red); }
+  .supp-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .supp-name { font-size: 16px; font-weight: 700; color: var(--text); }
+  .supp-badge { font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0; }
+  .supp-badge.forte { background: var(--green-bg); color: var(--green); }
+  .supp-badge.moderada { background: var(--yellow-bg); color: var(--yellow); }
+  .supp-badge.fraca { background: var(--orange-bg); color: var(--orange); }
+  .supp-badge.marketing { background: var(--red-bg); color: var(--red); }
+  .supp-what { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 10px; }
+  .supp-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+  .supp-row { background: var(--bg); border-radius: 8px; padding: 8px 10px; }
+  .supp-row-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+  .supp-row-val { font-size: 13px; font-weight: 700; color: var(--text); margin-top: 2px; }
+  .supp-verdict { font-size: 12px; color: var(--text2); background: var(--bg); border-radius: 8px; padding: 8px 10px; line-height: 1.5; }
+  .supp-verdict strong { color: var(--text); }
+
+  /* ===== MENTAL ===== */
+  .mental-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px; border-left: 4px solid var(--accent); }
+  .mental-principle { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.45; margin-bottom: 8px; }
+  .mental-apply { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+  .mental-apply strong { color: var(--text); }
+  .mental-source { font-size: 11px; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  .mental-source::before { content: '📖'; }
+  .mental-intro { background: var(--bg3); border-radius: 10px; padding: 12px 14px; font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 14px; }
+  .pdia { background: linear-gradient(135deg, #2d2416, #1a1510); color: white; padding: 14px 16px; margin: 0 16px 4px; border-radius: 12px; max-width: 720px; }
+  @media (min-width: 752px) { .pdia { margin-left: auto; margin-right: auto; } }
+  .pdia-label { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .pdia-text { font-size: 15px; font-weight: 600; line-height: 1.45; margin-bottom: 8px; }
+  .pdia-source { font-size: 11px; opacity: 0.7; }
+  .pdia-shuffle { margin-top: 10px; background: rgba(255,255,255,0.12); color: white; border: none; padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .pdia-shuffle:active { background: rgba(255,255,255,0.2); }
+
+  /* Navegação por autor */
+  .autor-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .autor-chip { padding: 8px 12px; border: 1px solid var(--border); border-radius: 18px; background: var(--bg2); font-size: 12px; font-weight: 600; color: var(--text2); cursor: pointer; }
+  .autor-chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .autor-frase { background: var(--bg2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
+  .autor-frase-text { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.45; }
+  .autor-frase-obra { font-size: 11px; color: var(--text3); margin-top: 5px; }
+
+  /* ===== HÁBITOS ===== */
+  .hab-dia { background: linear-gradient(135deg, #16241a, #101a14); color: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .hab-dia-label { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+  .hab-dia-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .hab-dia-focus { font-size: 13px; opacity: 0.85; line-height: 1.5; }
+  .hab-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
+  .hab-head { padding: 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .hab-icon { font-size: 24px; flex-shrink: 0; }
+  .hab-info { flex: 1; }
+  .hab-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .hab-mini { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 2px; }
+  .hab-chevron { font-size: 12px; color: var(--text3); transition: transform 0.2s; }
+  .hab-chevron.open { transform: rotate(180deg); }
+  .hab-body { padding: 0 14px 14px; border-top: 1px solid var(--border); display: none; }
+  .hab-body.open { display: block; }
+  .hab-section { margin-top: 12px; }
+  .hab-section-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .hab-section-text { font-size: 13px; color: var(--text2); line-height: 1.55; }
+  .hab-trigger { background: var(--green-bg); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--text2); margin-top: 10px; }
+  .hab-trigger strong { color: var(--green); }
+
   .content { padding: 16px; max-width: 720px; margin: 0 auto; }
   .section { display: none; }
   .section.active { display: block; animation: fade 0.2s ease; }
@@ -198,6 +279,43 @@
   .macro-legend-item { display: flex; align-items: center; gap: 4px; }
   .macro-legend-dot { width: 8px; height: 8px; border-radius: 2px; }
 
+  /* ===== DIA DO CAOS ===== */
+  .caos-intro { background: linear-gradient(135deg, #1a0a0a, #2d1010); color: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .caos-intro-title { font-size: 20px; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 4px; }
+  .caos-intro-sub { font-size: 12px; opacity: 0.8; line-height: 1.5; }
+  .caos-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+  .caos-btn { background: var(--bg2); border: 2px solid var(--border); border-radius: 12px; padding: 14px 8px; cursor: pointer; text-align: center; }
+  .caos-btn:active { transform: scale(0.97); }
+  .caos-btn.active { border-color: var(--red); background: var(--red-bg); }
+  .caos-btn-icon { font-size: 26px; margin-bottom: 4px; }
+  .caos-btn-label { font-size: 12px; font-weight: 700; color: var(--text); }
+  .caos-btn.active .caos-btn-label { color: var(--red); }
+
+  .caos-session { background: var(--bg2); border: 2px solid var(--red); border-radius: 12px; overflow: hidden; }
+  .caos-session-head { background: var(--red); color: white; padding: 12px 14px; }
+  .caos-session-title { font-size: 16px; font-weight: 800; }
+  .caos-session-meta { font-size: 11px; opacity: 0.9; margin-top: 2px; }
+  .caos-science { background: var(--red-bg); border-left: 3px solid var(--red); border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 12px 14px; font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .caos-science strong { color: var(--red); }
+  .caos-warmup { background: var(--blue-bg); border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 0 14px 12px; }
+  .caos-warmup-title { font-size: 11px; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .caos-warmup-text { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .caos-warmup-text strong { color: var(--blue); }
+
+  .caos-ex { border-top: 1px solid var(--border); padding: 12px 14px; }
+  .caos-ex-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .caos-ex-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: white; flex-shrink: 0; }
+  .caos-ex-num.heavy { background: var(--red); }
+  .caos-ex-num.vol { background: var(--orange); }
+  .caos-ex-num.fin { background: var(--purple); }
+  .caos-ex-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .caos-ex-type { font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 6px; text-transform: uppercase; flex-shrink: 0; }
+  .caos-ex-type.heavy { background: var(--red-bg); color: var(--red); }
+  .caos-ex-type.vol { background: var(--orange-bg); color: var(--orange); }
+  .caos-ex-type.fin { background: var(--purple-bg); color: var(--purple); }
+  .caos-ex-detail { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .caos-ex-why { font-size: 11px; color: var(--text3); font-style: italic; }
+
   .cook-toggle { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; cursor: pointer; transition: all 0.15s; user-select: none; }
   .cook-toggle.raw { background: var(--red-bg); color: var(--red); }
   .cook-toggle.cooked { background: var(--green-bg); color: var(--green); }
@@ -230,15 +348,13 @@
   <div class="h-label">GSN Training</div>
   <div class="h-title">Manual de Treino</div>
   <div class="h-sub">PPL 6x · Bodytech · base científica Jeff Nippard</div>
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-tab="treinos">Treinos</button>
-    <button class="tab" data-tab="split">Split</button>
-    <button class="tab" data-tab="cardio">Cardio</button>
-    <button class="tab" data-tab="tecnicas">Técnicas</button>
-    <button class="tab" data-tab="macros">Macros</button>
-    <button class="tab" data-tab="alimentos">🥩 Alimentos</button>
-    <button class="tab" data-tab="ciencia">Ciência</button>
-    <button class="tab" data-tab="cargas">⚖️ Cargas</button>
+  <div class="maintabs" id="maintabs">
+    <button class="maintab active" data-main="treino" onclick="selectMain('treino')">🏋️ Treino</button>
+    <button class="maintab" data-main="nutricao" onclick="selectMain('nutricao')">🥗 Nutrição</button>
+    <button class="maintab" data-main="mental" onclick="selectMain('mental')">🧠 Mental</button>
+  </div>
+  <div class="subtabs" id="subtabs"></div>
+  <div id="principio-dia-wrap"></div>
   </div>
 </div>
 
@@ -247,6 +363,19 @@
   <div class="section active" id="treinos">
     <div class="day-grid" id="day-grid"></div>
     <div id="day-detail"></div>
+  </div>
+
+  <div class="section" id="caos">
+    <div class="caos-intro">
+      <div class="caos-intro-title">💀 Dia do Caos</div>
+      <div class="caos-intro-sub">Volume máximo num único grupo muscular · Metodologia Nippard + Pacholok · Tensão mecânica → Estresse metabólico → Dano muscular</div>
+    </div>
+    <div class="caos-selector" id="caos-selector">
+      <div class="caos-btn" onclick="selectCaos('peito')"><div class="caos-btn-icon">🫁</div><div class="caos-btn-label">Peito</div></div>
+      <div class="caos-btn" onclick="selectCaos('costas')"><div class="caos-btn-icon">🦅</div><div class="caos-btn-label">Costas</div></div>
+      <div class="caos-btn" onclick="selectCaos('pernas')"><div class="caos-btn-icon">🦵</div><div class="caos-btn-label">Pernas</div></div>
+    </div>
+    <div id="caos-detail"></div>
   </div>
 
   <div class="section" id="split">
@@ -370,6 +499,65 @@
     <div id="food-content"></div>
   </div>
 
+  <div class="section" id="suplementos">
+    <h2>Suplementos</h2>
+    <p>Classificados por força de evidência científica. Foco no que realmente funciona — sem hype de marketing.</p>
+    <div class="supp-evidence-legend">
+      <span class="supp-ev-tag forte">● Forte evidência</span>
+      <span class="supp-ev-tag moderada">● Moderada</span>
+      <span class="supp-ev-tag fraca">● Fraca/contextual</span>
+      <span class="supp-ev-tag marketing">● Marketing</span>
+    </div>
+    <div id="supp-content"></div>
+    <div class="footer-note">Classificação baseada em meta-análises e posicionamentos da ISSN (International Society of Sports Nutrition), Examine.com e literatura revisada por pares. Não substitui orientação de nutricionista/médico.</div>
+  </div>
+
+  <div class="section" id="mental-habitos">
+    <h2>Hábitos</h2>
+    <div class="mental-intro">Os hábitos que você quer implantar, estruturados pela lógica do hábito mínimo (Hábitos Atômicos): comece tão pequeno que seja impossível falhar. O hábito do dia rotaciona automaticamente.</div>
+    <div id="hab-dia-wrap"></div>
+    <div id="hab-content"></div>
+  </div>
+
+  <div class="section" id="mental-manha">
+    <h2>Para começar o dia</h2>
+    <div class="mental-intro">Frases de impacto pra ver de manhã e entrar no dia com a mentalidade certa. Toque em "Ver outro" no card do topo pra variar.</div>
+    <div id="mental-manha-content"></div>
+  </div>
+
+  <div class="section" id="mental-autor">
+    <h2>Por Autor</h2>
+    <div class="mental-intro">Banco de conceitos organizado por autor. Toque num nome e veja todas as ideias dele reunidas.</div>
+    <div class="autor-chips" id="autor-chips"></div>
+    <div id="autor-content"></div>
+  </div>
+
+  <div class="section" id="mental-gestao">
+    <h2>Gestão & Liderança</h2>
+    <div class="mental-intro">Princípios de gestão, decisão e liderança — sintetizados das principais obras da área. Aplicáveis ao seu dia a dia como coordenador.</div>
+    <div id="mental-gestao-content"></div>
+  </div>
+  <div class="section" id="mental-disciplina">
+    <h2>Psicologia & Disciplina</h2>
+    <div class="mental-intro">Foco, consistência e controle emocional. O que sustenta resultado no longo prazo — na academia e fora dela.</div>
+    <div id="mental-disciplina-content"></div>
+  </div>
+  <div class="section" id="mental-evolucao">
+    <h2>Evolução Pessoal & Hábitos</h2>
+    <div class="mental-intro">Como construir hábitos, produtividade e mentalidade de crescimento.</div>
+    <div id="mental-evolucao-content"></div>
+  </div>
+  <div class="section" id="mental-financas">
+    <h2>Finanças & Investimento</h2>
+    <div class="mental-intro">Princípios de mentalidade financeira e investimento de longo prazo. Não é recomendação — são conceitos das principais obras da área.</div>
+    <div id="mental-financas-content"></div>
+  </div>
+  <div class="section" id="mental-estoicismo">
+    <h2>Estoicismo & Filosofia</h2>
+    <div class="mental-intro">A filosofia prática que sobreviveu 2000 anos: foco no que você controla, aceitação do resto.</div>
+    <div id="mental-estoicismo-content"></div>
+  </div>
+
   <div class="section" id="cargas">
     <h2>Caderno de Cargas</h2>
     <div class="cargas-intro">
@@ -456,7 +644,7 @@ const PROGRAM = {
       { name: 'Cadeira Abdutora', sets: 3, reps: '15-20', tech: 'Myo-reps + tronco à frente', primary: ['Glúteo médio'], secondary: ['Glúteo máximo'], subs: ['Glúteo Máquina', 'Abdução Polia', 'Hip Thrust Máquina'], note: 'Inclinar tronco p/ frente p/ glúteo médio' },
       { name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', tech: 'Excêntrica controlada', primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Búlgaro Halter', 'Avanço Smith', 'Leg Press Unilateral'], note: 'Descida controlada 2s' },
       { name: 'Panturrilha Sentado', sets: 4, reps: '15-20', tech: 'Drop + 2s alongado', primary: ['Sóleo'], secondary: ['Gastrocnêmio'], subs: ['Panturrilha em Pé', 'Panturrilha Leg Press', 'Panturrilha Smith'], note: 'Pausa 2s no alongamento' },
-      { name: 'Abdominal Pulley', sets: 3, reps: '12-15', tech: 'Crunch completo', primary: ['Reto abdominal'], secondary: ['Oblíquos'], subs: ['Crunch Máquina', 'Prancha', 'Elevação de Pernas'], note: 'Curvar coluna, não dobrar quadril' }
+      { name: 'Abdominal Pulley', sets: 3, reps: '12-15', tech: 'Rest-pause no último', primary: ['Reto abdominal'], secondary: ['Oblíquos'], subs: ['Crunch Máquina', 'Prancha', 'Elevação de Pernas'], note: 'Curvar coluna, não dobrar quadril' }
     ]}
 };
 const DAYS_ORDER = ['push-a', 'pull-a', 'legs-a', 'push-b', 'pull-b', 'legs-b'];
@@ -882,7 +1070,7 @@ const TECH_STEPS = {
   'Desenvolvimento Halter Sentado': 'ROM completo: <strong>desça até o cotovelo ficar paralelo ao chão</strong> (ou levemente abaixo). É esse ROM que diferencia o halter da máquina.',
   'Chest Press Reto Máquina': 'Squeeze: <strong>pausa de 1-2s no ponto de máxima extensão</strong>. Sente o peitoral contrair ao máximo antes de soltar.',
   'Supino Máquina': 'Dupla progressão: <strong>fecha o range de reps em todas as séries antes de subir a carga</strong>. Ex: 95kg, meta 4×6-8. Quando fizer 4×8 com boa forma → sobe pra 97.5kg.',
-  'Abdominal Pulley': 'Crunch completo: <strong>arredonda a lombar ativamente</strong> em cada rep. "Tenta colar o umbigo no peito" — não inclina, curva.'
+  'Abdominal Pulley': 'Rest-pause na última série: leva à falha → <strong>15s de pausa</strong> → mesma carga → mais reps até falhar de novo. Em cada rep, arredonda a lombar ativamente ("cola o umbigo no peito") — é flexão de coluna, não dobra de quadril. Séries 1-2 normais.'
 };
 
 // Tempo estimado por série (sets × (tempo médio por série + descanso))
@@ -921,7 +1109,11 @@ const CARDIOS = [
   { icon: '🏃', title: 'Corrida (com parcimônia)', goal: 'Só se gostar de correr', params: [
     { label: 'Tipo', val: 'Contínuo leve' }, { label: 'Ritmo', val: 'Conversável' },
     { label: 'Tempo', val: 'máx 25 min' }, { label: 'Frequência', val: 'máx 2x/sem' }
-  ], note: 'Maior interferência nas pernas. Se gosta de correr, mantenha curto e nunca em dia de perna.' }
+  ], note: 'Maior interferência nas pernas. Se gosta de correr, mantenha curto e nunca em dia de perna.' },
+  { icon: '⚡', title: 'HIIT — Bike ou Esteira', goal: 'Queima alta em pouco tempo (uso pontual)', hiit: true, params: [
+    { label: 'Protocolo', val: '30s forte / 90s leve' }, { label: 'Tiros', val: '6-8 rounds' },
+    { label: 'Tempo total', val: '~15-20 min' }, { label: 'Frequência', val: 'máx 1-2x/sem' }
+  ], note: 'Estrutura: 3min aquecimento → [30s a 85-90% do esforço máximo + 90s de recuperação leve] × 6-8 → 3min desaquecimento. Na bike é mais seguro que na esteira (sem risco de queda em alta velocidade). HIIT queima mais em menos tempo e tem efeito EPOC (gasto pós-treino), MAS interfere mais na recuperação muscular que a zona 2. Para seu objetivo (hipertrofia/definição), use só pontualmente — nunca em dia de perna, nunca antes de treino de força, e zona 2 continua sendo a escolha principal.' }
 ];
 
 const TECNICAS = [
@@ -1003,6 +1195,7 @@ function renderDayDetail() {
           <div class="ex-detail-row">
             <div class="ex-detail"><div class="ex-detail-label">Séries × Reps</div><div class="ex-detail-val">${ex.sets} × ${ex.reps}</div></div>
             <div class="ex-detail"><div class="ex-detail-label">Descanso</div><div class="ex-detail-val" style="font-size:12px">${ex.tech.toLowerCase().includes('cluster') ? '2-3 min' : ex.tech.toLowerCase().includes('myo') || ex.tech.toLowerCase().includes('drop') ? '90s' : '2 min'}</div></div>
+            ${(typeof cargasState !== 'undefined' && cargasState[ex.name]) ? `<div class="ex-detail" style="background:var(--accent-bg);border:1px solid var(--accent)"><div class="ex-detail-label" style="color:var(--accent)">Seu PR</div><div class="ex-detail-val" style="color:var(--accent)">${cargasState[ex.name]} kg</div></div>` : ''}
           </div>
           <div class="muscle-block"><div class="muscle-label">Músculos</div>
             <div class="muscle-pills">
@@ -1046,11 +1239,11 @@ function toggleEx(exKey) { openEx[exKey] = !openEx[exKey]; renderDayDetail(); }
 
 function renderCardios() {
   document.getElementById('cardio-cards').innerHTML = CARDIOS.map(c => `
-    <div class="cardio-card">
+    <div class="cardio-card" ${c.hiit ? 'style="border-color:var(--orange);border-width:2px"' : ''}>
       <div class="cardio-card-head"><div class="cardio-icon">${c.icon}</div>
         <div><div class="cardio-card-title">${c.title}</div><div class="cardio-card-goal">${c.goal}</div></div></div>
       <div class="cardio-params">${c.params.map(p => `<div class="cardio-param"><div class="cardio-param-label">${p.label}</div><div class="cardio-param-val">${p.val}</div></div>`).join('')}</div>
-      <div class="note-box" style="margin:0">${c.note}</div>
+      <div class="note-box" ${c.hiit ? 'style="margin:0;background:var(--orange-bg);border-left-color:var(--orange)"' : 'style="margin:0"'}>${c.note}</div>
     </div>`).join('');
 }
 
@@ -1087,15 +1280,6 @@ function calcMacros() {
   document.getElementById('m-dist').textContent = `5 refeições × ${protPerMeal}g de proteína = ${prot}g. Cada uma acima do estímulo máximo de MPS (~40g), mas o excedente contribui no balanço diário.`;
 }
 
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById(t.dataset.tab).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-});
 document.getElementById('m-goal').addEventListener('click', e => {
   if (!e.target.dataset.goal) return;
   macroGoal = e.target.dataset.goal;
@@ -1331,7 +1515,8 @@ const CARGAS_GRUPOS = [
   { label: 'Legs A — Quadríceps', exs: ['Hack Squat','Leg Press 45° Pés Baixos','Cadeira Extensora','Stiff Halter','Mesa Flexora','Panturrilha em Pé'] },
   { label: 'Push B — Hipertrofia', exs: ['Supino Inclinado Halter 45°','Chest Press Reto Máquina','Peck Deck (Crucifixo Máq)','Desenvolvimento Halter Sentado','Elevação Lateral Cabo Inclinado','Tríceps Testa Barra W','Tríceps Pulley Inverso'] },
   { label: 'Pull B — Hipertrofia', exs: ['Puxada Pronada Aberta','Remada Baixa Pega Aberta','Pulldown Pega Fechada','Remada Baixa Triângulo','Crucifixo Inverso','Rosca Alternada Banco Inclinado','Rosca Scott Máquina (B)'] },
-  { label: 'Legs B — Posterior', exs: ['Stiff Halter (B)','Hack Squat Pés Altos','Mesa Flexora Deitada','Cadeira Abdutora','Avanço Passada Halter','Panturrilha Sentado','Abdominal Pulley'] }
+  { label: 'Legs B — Posterior', exs: ['Stiff Halter (B)','Hack Squat Pés Altos','Mesa Flexora Deitada','Cadeira Abdutora','Avanço Passada Halter','Panturrilha Sentado','Abdominal Pulley'] },
+  { label: '🔥 Dia do Caos / Outros', exs: ['Remada Iso-Lateral','Puxada Alta (Máquina)','Remada Máquina Fechada','Pec Dec / Voador','Supino Reto Máquina','Romeno c/ Halteres'] }
 ];
 
 // Estado: { nome: kg } — começa vazio, carrega da URL se disponível
@@ -1454,18 +1639,23 @@ loadCargasFromURL();
 // Pré-popular com histórico (mai/2026) — só aplica se não veio da URL
 if (Object.keys(cargasState).length === 0) {
   cargasState = {
-    // Push A
-    'Chest Press Inclinado': 107.5,
+    // Push A — PRs 22/05/26
+    'Chest Press Inclinado': 110,
     'Supino Máquina': 107.5,
+    'Supino Reto Máquina': 107.5,
+    'Pec Dec / Voador': 135,
     'Supino Inclinado Halter 30°': 32,
     'Cross Over Alta→Baixa': 30,
     'Desenvolvimento Militar Máquina': 60,
     'Elevação Lateral Halter': 16,
     'Tríceps Corda': 55,
-    // Pull A
+    // Pull A — PRs 21-22/05/26
     'T-Bar (Cavalinho)': 62,
     'Pulldown Neutro': 65,
     'Puxada Pronada Aberta': 95,
+    'Puxada Alta (Máquina)': 95,
+    'Remada Máquina Fechada': 95,
+    'Remada Iso-Lateral': 190,
     'Pulldown Reto': 47,
     'Crucifixo Inverso': 85,
     'Rosca Scott Máquina': 82,
@@ -1473,31 +1663,643 @@ if (Object.keys(cargasState).length === 0) {
     // Pull B
     'Remada Baixa Pega Aberta': 120,
     'Rosca Scott Máquina (B)': 82,
-    // Legs A
+    // Legs — PRs 23/05/26
     'Hack Squat': 90,
-    'Leg Press 45° Pés Baixos': 265,
+    'Leg Press 45° Pés Baixos': 300,
     'Cadeira Extensora': 120,
-    'Stiff Halter': 72,
+    'Stiff Halter': 56,
+    'Romeno c/ Halteres': 34,
     'Mesa Flexora': 54,
     'Panturrilha em Pé': 135,
     // Push B
-    'Peck Deck (Crucifixo Máq)': 100,
+    'Peck Deck (Crucifixo Máq)': 135,
     // Legs B
-    'Stiff Halter (B)': 72,
+    'Stiff Halter (B)': 56,
     'Panturrilha Sentado': 130
   };
 }
 renderCargas();
 
 // Inicializa demais módulos
-renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
+// ============ DIA DO CAOS ============
+const CAOS_SESSIONS = {
+  peito: {
+    name: 'CAOS — PEITO',
+    meta: '~90-100 min · 16-18 séries válidas · dobro do volume normal',
+    science: '<strong>Protocolo Nippard para especialização:</strong> tensão mecânica (composto pesado, baixo rep) → estresse metabólico (volume alto, curto descanso) → dano muscular (stretch focus). Total: 2× o volume semanal normal em uma sessão.',
+    warmup: {
+      geral: ['5min bike ou esteira leve (eleva temperatura corporal)', 'Band pull-apart 2×15 + rotação externa mini-band 2×12 (ativa manguito antes da carga pesada)'],
+      ramp: 'No 1º exercício (Chest Press Inclinado): 50%×12 → 70%×8 → 85%×4 → 1ª série de trabalho',
+      feeder: '2º composto (Supino Reto Máquina): 1 feeder set leve ×8 antes do trabalho. Isoladores e finalizadores entram direto — músculo já quente e fatigado.'
+    },
+    exercises: [
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Chest Press Inclinado', sets: '6 séries × 3-5 reps', rest: '3-4 min', exec: 'Cluster pesado: 3 reps → 20s pausa → 2 reps → pausa → 2 reps. Carga 90-95% do PR (110kg). 6ª série: AMRAP.', why: 'Tensão mecânica alta = maior ativação de fibras tipo II. Base da hipertrofia segundo Schoenfeld (2010).' },
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Supino Reto Máquina', sets: '4 séries × 5-6 reps', rest: '3 min', exec: 'Carga pesada, squeeze 2s no topo. Após 4 séries: 1 série rest-pause até falhar.', why: 'Segundo composto pesado — tensão no peitoral plano que o inclinado não cobre.' },
+      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Pec Dec / Voador', sets: '4 séries × 12-15 reps', rest: '60-75s', exec: 'Carga 70%, pico contração 2s. Última série: MYO-REPS — 15 reps @RIR1 → 5 resp → 5 reps → repete 4x.', why: 'Estresse metabólico gera pump e sinalização anabólica local (Wernbom 2007).' },
+      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Cross Over Alta→Baixa', sets: '3 séries × 15-20 reps', rest: '60s', exec: 'Drop duplo na última: falha → -25% AMRAP → -25% AMRAP. Foco peitoral inferior.', why: 'Alto rep + curto descanso = pico de lactato → sinalização anabólica.' },
+      { tipo: 'fin', label: 'DANO MUSCULAR', name: 'Supino Inclinado Halter 30°', sets: '3 séries × 10-12 reps', rest: '90s', exec: 'STRETCH FOCUS: excêntrica 4s, pausa 2s no estiramento máximo. Carga leve (60%) — o estiramento é o objetivo.', why: 'Dano muscular no estiramento = maior resposta de crescimento (Schoenfeld 2014).' },
+      { tipo: 'fin', label: 'FINALIZADOR', name: 'Elevação Lateral Cabo Inclinado', sets: '3 séries × 15-20 reps', rest: '45s', exec: 'Drop triplo na última: falha → -20% → -20% → -20%. Deltoide lateral exausto.', why: 'Ombros como bônus — deltoide lateral responde muito a volume alto e drops.' }
+    ]
+  },
+  costas: {
+    name: 'CAOS — COSTAS',
+    meta: '~95-100 min · 17-19 séries válidas · largura + espessura',
+    science: '<strong>Protocolo Nippard para costas:</strong> vertical pull (largura) + horizontal pull (espessura) + isoladores. Dorsal precisa dos dois planos para desenvolvimento completo.',
+    warmup: {
+      geral: ['5min bike leve', 'Cat-camel 10 reps + dead hang 20-30s (descomprime e ativa pegada/dorsal)', 'Band pull-apart 2×15 (ativa romboides)'],
+      ramp: 'No 1º exercício (T-Bar / Cavalinho): 50%×10 → 70%×8 → 85%×4 → 1ª série de trabalho',
+      feeder: '2º composto (Puxada Alta Aberta): 1 feeder set leve ×8 antes do trabalho. Isoladores e finalizadores entram direto.'
+    },
+    exercises: [
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'T-Bar (Cavalinho)', sets: '6 séries × 4-6 reps', rest: '3-4 min', exec: 'Carga 85-90% PR. Cluster: 4 reps → 20s pausa intra-set → 2 reps. Cotovelo baixo (~45° do tronco), puxar até o quadril, escápula retraída no topo. 6ª série: AMRAP.', why: 'Tensão mecânica máxima no dorsal e romboides. Composto mais pesado do dia — ROM livre permite carga alta com bom estiramento.' },
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Puxada Alta Aberta (pronada)', sets: '4 séries × 5-7 reps', rest: '3 min', exec: 'Pega larga pronada (palmas pra frente). ROM total — extensão completa no topo (sente o dorsal alongar) → puxa até o alto do peito, cotovelos descem pra baixo e pra trás. Contração 1s embaixo. Leve inclinação do tronco pra trás, sem usar impulso.', why: 'Largura do dorsal — vertical pull com pega larga recruta mais a porção superior/lateral do dorsal que o T-Bar não cobre.' },
+      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Pulldown Pega Fechada', sets: '4 séries × 10-12 reps', rest: '75s', exec: 'Última série: rest-pause — falha → 15s → mesma carga → mais reps. ROM total.', why: 'Pega fechada = ROM mais profundo e melhor alongamento do dorsal.' },
+      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Remada Baixa Triângulo', sets: '4 séries × 12-15 reps', rest: '75s', exec: 'Squeeze escápulas 2s. Última série: drop -25% AMRAP.', why: 'Horizontal pull de alto volume — romboides e trapézio médio.' },
+      { tipo: 'fin', label: 'DANO MUSCULAR', name: 'Pullover Polia Alta', sets: '3 séries × 15 reps', rest: '75s', exec: 'STRETCH FOCUS: pausa 2s no estiramento máximo (braços pra cima). Cotovelo travado. Carga moderada.', why: 'Dano muscular via estiramento — encerra o protocolo com dorsal exausto.' },
+      { tipo: 'fin', label: 'FINALIZADOR', name: 'Rosca Scott Máquina', sets: '3 séries × 10-12 reps', rest: '60s', exec: 'Myo-reps: 10 reps @RIR1 → 5 resp → 3-4 reps → repete 3x. Bíceps já pré-fadigado.', why: 'Bíceps pré-fadigado pelo dia de costas — myo-reps maximiza com pouco esforço adicional.' }
+    ]
+  },
+  pernas: {
+    name: 'CAOS — PERNAS',
+    meta: '~100-110 min · 18-20 séries válidas · quadríceps + posterior + glúteo',
+    science: '<strong>Protocolo Nippard + Pacholok para pernas:</strong> composto pesado de quadríceps → posterior pesado → volume isolado → finalizadores. Pernas têm a maior capacidade de recuperação e volume de todos os grupos musculares.',
+    warmup: {
+      geral: ['5min bike subindo intensidade (ativa quadríceps e aquece joelho)', '90/90 hip stretch 8/lado + dorsiflexão na parede 10/lado', '10 agachamentos livres profundos (padrão de movimento)'],
+      ramp: 'No 1º exercício (Leg Press): 40%×10 → 60%×8 → 80%×4 → 90%×1 → 1ª série de trabalho (perna precisa de rampa mais longa)',
+      feeder: '2º e 3º compostos (Hack Squat, Stiff): 1 feeder set leve ×6-8 cada antes do trabalho. Isoladores e finalizadores entram direto.'
+    },
+    exercises: [
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Leg Press 45° Pés Baixos', sets: '6 séries × 4-6 reps', rest: '3-4 min', exec: 'CARGA MÁXIMA. Cluster: 4 reps → 20s → 2 reps → pausa → 2 reps. ROM profundo (90°+). 6ª série: AMRAP. PR atual: 300kg.', why: 'Tensão mecânica máxima de quadríceps. Leg press permite carga supramaximal vs agachamento.' },
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Hack Squat', sets: '4 séries × 5-7 reps', rest: '3 min', exec: 'Cluster: 4 reps → 20s → mais 2-3. Pés baixos, ROM profundo. 4ª série: AMRAP.', why: 'Ângulo de tensão diferente do leg press — cobre o quadríceps de forma complementar.' },
+      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Stiff Halter', sets: '4 séries × 6-8 reps', rest: '3 min', exec: 'Carga 85% PR (56kg), excêntrica 3s, hip hinge limpo. Posterior e glúteo máximos.', why: 'Posterior pesado após quadríceps — equilíbrio e prevenção de desequilíbrio.' },
+      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Cadeira Extensora', sets: '4 séries × 12-15 reps', rest: '60s', exec: 'Última série: rest-pause triplo — falha → 15s → reps → 15s → reps. Squeeze no topo.', why: 'Isolador de quadríceps em alto volume — estresse metabólico máximo.' },
+      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Mesa Flexora', sets: '3 séries × 12-15 reps', rest: '60s', exec: 'Myo-reps na última: 15 reps @RIR1 → 5 resp → 5 reps → repete 3x. ROM total.', why: 'Posterior em alto volume — complementa o stiff com foco no pico de contração.' },
+      { tipo: 'fin', label: 'DANO MUSCULAR', name: 'Avanço Passada Halter', sets: '3 séries × 10/perna', rest: '90s', exec: 'EXCÊNTRICA 4s em cada rep. Quadríceps e glúteo já pré-fadigados — o estiramento vai ser intenso.', why: 'Dano muscular via excêntrica em músculo pré-fadigado = resposta máxima de crescimento.' },
+      { tipo: 'fin', label: 'FINALIZADOR', name: 'Panturrilha em Pé', sets: '4 séries × 15-20 reps', rest: '45s', exec: 'Drop duplo nas últimas 2 séries + pausa 3s no estiramento a cada rep.', why: 'Panturrilha como bônus — responde muito a volume alto e pausa no estiramento.' }
+    ]
+  }
+};
 
-// Abre direto na aba Cargas se URL tem #cargas
-if (window.location.hash === '#cargas') {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+let caosAtual = null;
+
+function selectCaos(grupo) {
+  caosAtual = grupo;
+  document.querySelectorAll('.caos-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.caos-btn[onclick="selectCaos(\'' + grupo + '\')"]').classList.add('active');
+  renderCaosDetail();
+}
+
+function renderCaosDetail() {
+  if (!caosAtual) { document.getElementById('caos-detail').innerHTML = ''; return; }
+  const s = CAOS_SESSIONS[caosAtual];
+  document.getElementById('caos-detail').innerHTML = `
+    <div class="caos-session">
+      <div class="caos-session-head">
+        <div class="caos-session-title">${s.name}</div>
+        <div class="caos-session-meta">${s.meta}</div>
+      </div>
+      <div class="caos-science">${s.science}</div>
+      ${s.warmup ? `
+      <div class="caos-warmup">
+        <div class="caos-warmup-title">🔥 Aquecimento</div>
+        <div class="caos-warmup-text">
+          <strong>Geral (5 min):</strong><br>
+          ${s.warmup.geral.map(g => `• ${g}`).join('<br>')}
+          <div style="margin-top:8px"><strong>📈 Rampa:</strong> ${s.warmup.ramp}</div>
+          <div style="margin-top:8px"><strong>⚡ Feeder sets:</strong> ${s.warmup.feeder}</div>
+        </div>
+      </div>` : ''}
+      ${s.exercises.map((ex, i) => `
+        <div class="caos-ex">
+          <div class="caos-ex-head">
+            <div class="caos-ex-num ${ex.tipo}">${i + 1}</div>
+            <div style="flex:1;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <div class="caos-ex-name">${ex.name}</div>
+              <span class="caos-ex-type ${ex.tipo}">${ex.label}</span>
+            </div>
+          </div>
+          <div class="caos-ex-detail"><strong>${ex.sets}</strong> · descanso ${ex.rest}<br>${ex.exec}</div>
+          <div class="caos-ex-why">📖 ${ex.why}</div>
+        </div>`).join('')}
+    </div>
+    <div class="callout red" style="margin-top:14px">
+      <strong>⚠️ Regra do Caos:</strong> use esporadicamente — 1× a cada 2-3 semanas por grupo. Recuperação mínima: 72h antes de treinar o mesmo grupo novamente.
+    </div>`;
+}
+
+// ============ SUPLEMENTOS ============
+const SUPLEMENTOS = [
+  {
+    nome: 'Creatina Monohidratada', ev: 'forte',
+    what: 'O suplemento mais estudado e eficaz para força e hipertrofia. Aumenta os estoques de fosfocreatina, melhorando performance em esforços curtos e intensos. Também tem benefícios cognitivos.',
+    dose: '3-5g/dia', quando: 'Qualquer horário',
+    verdict: '<strong>Compre.</strong> Custo-benefício imbatível. Não precisa de fase de saturação nem ciclar. Monohidratada é a melhor forma — as "novas versões" (HCl, etc) são marketing. Pode reter um pouco de água no músculo (não é gordura).'
+  },
+  {
+    nome: 'Whey Protein', ev: 'forte',
+    what: 'Proteína de rápida absorção e alto valor biológico. Não é "mágico" — é só uma forma prática de bater a meta de proteína. Se você já come proteína suficiente, não é obrigatório.',
+    dose: '20-40g por dose', quando: 'Qualquer horário, conveniência',
+    verdict: '<strong>Útil, não essencial.</strong> Vale pela praticidade de bater 250g de proteína. Isolado se você é sensível a lactose; concentrado é mais barato e serve pra maioria. A "janela anabólica" é muito mais ampla do que vendem.'
+  },
+  {
+    nome: 'Cafeína', ev: 'forte',
+    what: 'Ergogênico comprovado: aumenta foco, reduz percepção de esforço e melhora performance de força e resistência. Funciona de verdade no treino.',
+    dose: '3-6mg/kg (~300-400mg)', quando: '30-45min pré-treino',
+    verdict: '<strong>Funciona.</strong> Pode vir de café, cápsula ou pré-treino. Cuidado com tolerância — ciclar ajuda. Evite perto do horário de dormir (meia-vida de ~5h). Não tome em jejum se te dá desconforto.'
+  },
+  {
+    nome: 'Beta-Alanina', ev: 'moderada',
+    what: 'Aumenta a carnosina muscular, tamponando o ácido e retardando a fadiga em séries de 1-4 min. Causa o formigamento característico (parestesia) — inofensivo.',
+    dose: '3-6g/dia', quando: 'Qualquer horário (dose dividida reduz formigamento)',
+    verdict: '<strong>Vale para alto volume.</strong> Benefício real em faixas de 8-15+ reps e drop sets — exatamente seu estilo. Efeito é cumulativo, precisa de semanas de uso constante. Não funciona como "dose única" pré-treino.'
+  },
+  {
+    nome: 'Citrulina Malato', ev: 'moderada',
+    what: 'Precursor de óxido nítrico — aumenta o fluxo sanguíneo e o "pump". Pode reduzir levemente a fadiga e melhorar o volume de treino.',
+    dose: '6-8g', quando: '40-60min pré-treino',
+    verdict: '<strong>Opcional.</strong> O pump é real e pode ajudar no volume de séries. Evidência para hipertrofia direta é modesta. Melhor que arginina (que tem baixa absorção). Dose abaixo de 6g provavelmente não faz nada.'
+  },
+  {
+    nome: 'Ômega-3 (EPA/DHA)', ev: 'moderada',
+    what: 'Ácidos graxos essenciais com benefício anti-inflamatório, cardiovascular e possível auxílio na síntese proteica e recuperação. Importante se você não come peixe gordo regularmente.',
+    dose: '2-3g EPA+DHA/dia', quando: 'Com refeição (gordura melhora absorção)',
+    verdict: '<strong>Vale pela saúde.</strong> Mais por saúde geral e recuperação do que por hipertrofia direta. Se você come salmão/sardinha com frequência, menos necessário. Cuidado com qualidade — óleo rançoso é comum.'
+  },
+  {
+    nome: 'Vitamina D3', ev: 'moderada',
+    what: 'Hormônio esteroide envolvido em força muscular, saúde óssea, imunidade e produção de testosterona. Deficiência é muito comum, mesmo em país tropical (trabalho indoor).',
+    dose: '2000-4000 UI/dia (ajustar por exame)', quando: 'Com refeição com gordura',
+    verdict: '<strong>Cheque seu nível.</strong> Faça exame de 25-OH-vitamina D. Se estiver baixo (comum), suplementar tem impacto real em força e bem-estar. Se já está bom, suplementar a mais não adiciona benefício.'
+  },
+  {
+    nome: 'Multivitamínico', ev: 'fraca',
+    what: 'Cobre possíveis lacunas de micronutrientes. Não substitui comida de verdade, mas serve de "seguro" nutricional, especialmente em fase de cutting com calorias restritas.',
+    dose: '1 dose/dia', quando: 'Com refeição',
+    verdict: '<strong>Opcional.</strong> Útil como seguro em dietas restritas ou variedade alimentar baixa. Não melhora performance se sua dieta já é completa. Priorize comida — vegetais, que você já come bem.'
+  },
+  {
+    nome: 'BCAA', ev: 'fraca',
+    what: 'Aminoácidos de cadeia ramificada (leucina, isoleucina, valina). Vendidos como anticatabólicos e estimuladores de síntese proteica.',
+    dose: '—', quando: '—',
+    verdict: '<strong>Não compre.</strong> Se você já consome proteína suficiente (whey, carne, ovo), o BCAA é redundante — você já ingere esses aminoácidos em quantidade muito maior na comida. É um dos suplementos mais superestimados do mercado. Dinheiro melhor gasto em whey.'
+  },
+  {
+    nome: 'Glutamina', ev: 'fraca',
+    what: 'Aminoácido vendido para recuperação e imunidade. A teoria não se sustentou na prática para indivíduos saudáveis e bem alimentados.',
+    dose: '—', quando: '—',
+    verdict: '<strong>Pule.</strong> Sem benefício comprovado para hipertrofia ou recuperação em quem treina e come bem. Tem uso clínico específico (pacientes hospitalizados), mas não para o seu caso. Marketing puro no contexto fitness.'
+  },
+  {
+    nome: 'Pré-treino (blends)', ev: 'fraca',
+    what: 'Misturas comerciais — geralmente cafeína + beta-alanina + citrulina + "proprietary blends" não revelados. O que funciona neles são os ingredientes que você pode comprar separado e mais barato.',
+    dose: '—', quando: 'Pré-treino',
+    verdict: '<strong>Conveniência cara.</strong> Você paga por marketing e doses muitas vezes subdosadas escondidas em "blends proprietários". Melhor: cafeína + citrulina + beta-alanina comprados separados, com doses que você controla.'
+  },
+  {
+    nome: 'Nitrato (suco de beterraba)', ev: 'moderada',
+    what: 'Precursor de óxido nítrico via via dietética (diferente da citrulina). Melhora a eficiência muscular e o fluxo sanguíneo, reduzindo o custo de oxigênio do esforço. Benefício real em resistência e séries de alto volume.',
+    dose: '300-600mg nitrato (~500ml suco de beterraba ou 2 shots concentrados)', quando: '2-3h pré-treino',
+    verdict: '<strong>Funciona, especialmente pra você.</strong> Beterraba já é seu carbo preferido — pode tomar o suco concentrado pré-treino. O nitrato precisa de ~2-3h para converter, então não adianta tomar em cima do treino. Evidência mais forte em cardio/resistência, mas ajuda no volume metabólico de musculação. Não usar enxaguante bucal nas horas seguintes (mata as bactérias que convertem o nitrato).'
+  },
+  {
+    nome: 'Testosterona Booster (natural)', ev: 'marketing',
+    what: 'Tribulus, ácido D-aspártico, fenacho e similares vendidos para "aumentar testosterona naturalmente".',
+    dose: '—', quando: '—',
+    verdict: '<strong>Não funciona.</strong> Nenhum "booster natural" eleva testosterona de forma significativa em homens saudáveis — os estudos são consistentes nisso. Se você usa apoio hormonal, é ainda mais irrelevante. Economize o dinheiro.'
+  }
+];
+
+function renderSuplementos() {
+  const order = { forte: 0, moderada: 1, fraca: 2, marketing: 3 };
+  const labels = { forte: 'Forte evidência', moderada: 'Evidência moderada', fraca: 'Evidência fraca', marketing: 'Marketing' };
+  const data = [...SUPLEMENTOS].sort((a, b) => order[a.ev] - order[b.ev]);
+
+  document.getElementById('supp-content').innerHTML = data.map(s => `
+    <div class="supp-card ${s.ev}">
+      <div class="supp-head">
+        <div class="supp-name">${s.nome}</div>
+        <span class="supp-badge ${s.ev}">${labels[s.ev]}</span>
+      </div>
+      <div class="supp-what">${s.what}</div>
+      ${s.dose !== '—' ? `
+      <div class="supp-rows">
+        <div class="supp-row"><div class="supp-row-label">Dose</div><div class="supp-row-val">${s.dose}</div></div>
+        <div class="supp-row"><div class="supp-row-label">Quando</div><div class="supp-row-val" style="font-size:11px">${s.quando}</div></div>
+      </div>` : ''}
+      <div class="supp-verdict">${s.verdict}</div>
+    </div>
+  `).join('');
+}
+
+// ============ NAVEGAÇÃO 2 NÍVEIS ============
+const NAV = {
+  treino: [
+    { id: 'treinos', label: 'Sessões' },
+    { id: 'caos', label: '🔥 Caos' },
+    { id: 'split', label: 'Split' },
+    { id: 'tecnicas', label: 'Técnicas' },
+    { id: 'cardio', label: 'Cardio' },
+    { id: 'ciencia', label: 'Ciência' },
+    { id: 'cargas', label: '⚖️ Cargas' }
+  ],
+  nutricao: [
+    { id: 'macros', label: 'Macros' },
+    { id: 'alimentos', label: '🥩 Alimentos' },
+    { id: 'suplementos', label: '💊 Suplementos' }
+  ],
+  mental: [
+    { id: 'mental-habitos', label: '🎯 Hábitos' },
+    { id: 'mental-manha', label: '☀️ Manhã' },
+    { id: 'mental-autor', label: '✍️ Por Autor' },
+    { id: 'mental-gestao', label: 'Gestão' },
+    { id: 'mental-disciplina', label: 'Disciplina' },
+    { id: 'mental-evolucao', label: 'Evolução' },
+    { id: 'mental-financas', label: 'Finanças' },
+    { id: 'mental-estoicismo', label: 'Estoicismo' }
+  ]
+};
+let currentMain = 'treino';
+let currentSub = 'treinos';
+
+function selectMain(main) {
+  currentMain = main;
+  currentSub = NAV[main][0].id;
+  document.querySelectorAll('.maintab').forEach(t => t.classList.toggle('active', t.dataset.main === main));
+  renderSubtabs();
+  renderPrincipioDia();
+  showSection(currentSub);
+}
+
+function renderSubtabs() {
+  document.getElementById('subtabs').innerHTML = NAV[currentMain].map(s =>
+    `<button class="subtab ${s.id === currentSub ? 'active' : ''}" onclick="selectSub('${s.id}')">${s.label}</button>`
+  ).join('');
+}
+
+function selectSub(id) {
+  currentSub = id;
+  renderSubtabs();
+  showSection(id);
+}
+
+function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelector('[data-tab="cargas"]').classList.add('active');
-  document.getElementById('cargas').classList.add('active');
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ MENTAL ============
+const MENTAL = {
+  'mental-gestao': [
+    { p: 'Foque no que só você pode fazer; delegue o resto.', a: 'Como gestor, seu tempo é o recurso mais escasso. Toda tarefa que outra pessoa pode fazer a 80% da sua qualidade deve ser delegada — sua energia vai pro que exige sua decisão.', s: 'Peter Drucker — O Gestor Eficaz' },
+    { p: 'Primeiro quem, depois o quê.', a: 'Times excelentes se formam colocando as pessoas certas nos lugares certos antes de definir a estratégia. Pessoa errada em função certa afunda o projeto.', s: 'Jim Collins — Good to Great' },
+    { p: 'Lidere começando pelo porquê.', a: 'Pessoas se engajam com propósito, não com tarefas. Comunique o motivo antes do método — o "como" e o "o quê" seguem naturalmente quando o "porquê" está claro.', s: 'Simon Sinek — Comece pelo Porquê' },
+    { p: 'O que é medido é gerenciado — mas cuidado com o que você escolhe medir.', a: 'Métricas guiam comportamento. Se você mede só produtividade bruta, sacrifica qualidade. Escolha indicadores que reflitam o resultado real que você quer.', s: 'Princípio de gestão (Drucker / Goodhart)' },
+    { p: 'Decisões reversíveis devem ser rápidas; irreversíveis, lentas.', a: 'A maioria das decisões pode ser desfeita — não trave o time esperando certeza. Reserve a análise profunda para o que não tem volta.', s: 'Jeff Bezos — princípio de decisão (portas de 1 e 2 vias)' },
+    { p: 'O líder absorve a culpa e distribui o crédito.', a: 'Quando o time erra, a responsabilidade é sua. Quando acerta, o mérito é deles. Isso constrói confiança e lealdade mais que qualquer discurso.', s: 'Princípio de liderança (Sinek / Extreme Ownership)' },
+    { p: 'Extreme Ownership: o líder é dono de tudo no seu domínio.', a: 'Não existe "a culpa foi do fornecedor / do outro setor". Se está sob sua responsabilidade, o resultado é seu. Essa postura elimina desculpas e foca em solução.', s: 'Jocko Willink — Extreme Ownership' }
+  ],
+  'mental-disciplina': [
+    { p: 'Disciplina é fazer o que precisa ser feito mesmo sem vontade.', a: 'Motivação é volátil — vem e vai. Disciplina é o sistema que opera quando a motivação some. Treinar nos dias ruins é o que separa resultado de tentativa.', s: 'Princípio (Goggins / Willink)' },
+    { p: 'Você não sobe à altura das suas metas; você cai à altura dos seus sistemas.', a: 'Metas dão direção, mas é a rotina diária que produz o resultado. Em vez de mirar "quero definição", construa o sistema: treino marcado, comida preparada, sono protegido.', s: 'James Clear — Hábitos Atômicos' },
+    { p: 'Grit: paixão e persistência por objetivos de longo prazo.', a: 'Talento importa menos que consistência ao longo dos anos. Quem persiste em uma direção por tempo suficiente supera o talentoso que desiste.', s: 'Angela Duckworth — Garra (Grit)' },
+    { p: 'O desconforto voluntário fortalece.', a: 'Buscar o difícil de propósito — a série extra, o treino no dia cansado — constrói resiliência mental que transborda pra todas as áreas da vida.', s: 'Princípio estoico / Goggins' },
+    { p: 'Controle os impulsos: a regra dos 10 minutos.', a: 'Quando bater vontade de desviar (pular treino, furar dieta), espere 10 minutos antes de ceder. Na maioria das vezes o impulso passa e a decisão racional vence.', s: 'Princípio de autocontrole (psicologia comportamental)' }
+  ],
+  'mental-evolucao': [
+    { p: 'Melhore 1% ao dia. O efeito composto é brutal.', a: '1% melhor por dia = 37× melhor em um ano. Pequenas melhorias consistentes superam grandes mudanças esporádicas. Vale pra carga, dieta e qualquer hábito.', s: 'James Clear — Hábitos Atômicos' },
+    { p: 'Mentalidade de crescimento: habilidade se constrói, não se nasce com ela.', a: 'Ver o esforço como caminho para a maestria (não como sinal de incapacidade) muda tudo. "Ainda não consigo" em vez de "não consigo".', s: 'Carol Dweck — Mindset' },
+    { p: 'Trabalho profundo: foco sem distração é a habilidade do século.', a: 'A capacidade de focar intensamente em uma tarefa difícil, sem interrupções, é rara e valiosa. Bloqueie tempo, elimine notificação, faça uma coisa de cada vez.', s: 'Cal Newport — Trabalho Profundo' },
+    { p: 'Comece com o fim em mente.', a: 'Defina onde quer chegar antes de agir. Cada decisão diária deve ser checada contra o objetivo final — isso evita esforço desperdiçado em direções erradas.', s: 'Stephen Covey — Os 7 Hábitos' },
+    { p: 'Identidade primeiro, hábito depois.', a: 'Não é "quero treinar", é "sou uma pessoa que treina". Quando o hábito vira parte de quem você é, ele para de exigir força de vontade.', s: 'James Clear — Hábitos Atômicos' },
+    { p: 'O ambiente vence a força de vontade.', a: 'Desenhe o ambiente pra facilitar o certo e dificultar o errado. Comida ruim fora de casa, roupa de treino separada. Você não precisa resistir ao que não está por perto.', s: 'James Clear — Hábitos Atômicos' }
+  ],
+  'mental-financas': [
+    { p: 'Comportamento importa mais que conhecimento técnico.', a: 'Ganhar dinheiro e mantê-lo são habilidades diferentes. Manter exige humildade e controle emocional — não fazer besteira na euforia ou no pânico vale mais que escolher o investimento perfeito.', s: 'Morgan Housel — A Psicologia Financeira' },
+    { p: 'Pague-se primeiro: poupe antes de gastar.', a: 'Separe a poupança/investimento assim que o dinheiro entra, não o que sobra no fim do mês (que nunca sobra). Automatize.', s: 'Princípio clássico (O Homem Mais Rico da Babilônia)' },
+    { p: 'Ativos colocam dinheiro no seu bolso; passivos tiram.', a: 'A diferença entre construir riqueza e parecer rico. Foque em adquirir coisas que geram renda, não em sustentar aparência que drena renda.', s: 'Robert Kiyosaki — Pai Rico, Pai Pobre' },
+    { p: 'Juros compostos: o tempo é seu maior aliado.', a: 'O retorno sobre retorno cresce exponencialmente. Começar cedo e deixar render por décadas vence aportes grandes começados tarde. Consistência > timing.', s: 'Princípio fundamental de investimento' },
+    { p: 'Margem de segurança: nunca opere no limite.', a: 'Deixe folga — financeira e operacional. Quem opera sem reserva quebra na primeira surpresa. Vale pra finanças pessoais e pra gestão de obra.', s: 'Benjamin Graham — O Investidor Inteligente' },
+    { p: 'Riqueza é o que você não vê.', a: 'Riqueza real é o dinheiro não gasto — a liberdade e as opções que ele compra. O carro de luxo é dinheiro que virou objeto, não riqueza acumulada.', s: 'Morgan Housel — A Psicologia Financeira' }
+  ],
+  'mental-estoicismo': [
+    { p: 'Foque só no que está sob seu controle.', a: 'Suas ações, esforço e reações são seus. Resultado, opinião dos outros e o passado não são. Gastar energia no que não controla é sofrimento desnecessário.', s: 'Epicteto — Enquirídio' },
+    { p: 'O obstáculo é o caminho.', a: 'Toda adversidade carrega a oportunidade de praticar uma virtude — paciência, coragem, criatividade. O que bloqueia o caminho vira o próprio caminho.', s: 'Marco Aurélio — Meditações' },
+    { p: 'Não é o que acontece, é como você reage.', a: 'Os eventos são neutros; o sofrimento vem do julgamento que fazemos deles. Entre o estímulo e a resposta existe um espaço — e nesse espaço está sua liberdade.', s: 'Epicteto / Marco Aurélio' },
+    { p: 'Memento mori: lembre que vai morrer.', a: 'Não é mórbido — é clarificador. A consciência da finitude corta a procrastinação e foca no que importa. Você não tem tempo infinito pra adiar o que quer ser.', s: 'Sêneca — Sobre a Brevidade da Vida' },
+    { p: 'Pratique a privação voluntária.', a: 'De vez em quando, abra mão de conforto de propósito (jejum, frio, simplicidade). Isso reduz o medo de perder e aumenta a gratidão pelo que tem.', s: 'Sêneca — Cartas a Lucílio' },
+    { p: 'Amor fati: ame o seu destino.', a: 'Não apenas aceite o que acontece — abrace. Tratar cada evento, bom ou ruim, como necessário e útil é a forma mais alta de paz mental.', s: 'Princípio estoico (Marco Aurélio / Nietzsche)' },
+    { p: 'Enquanto adiamos viver, a vida passa.', a: 'A procrastinação rouba mais vida que qualquer fracasso. O que você adia hoje em nome do "momento certo" pode nunca acontecer. O momento é agora.', s: 'Sêneca — Cartas a Lucílio' },
+    { p: 'A dificuldade revela quem você é.', a: 'Qualquer um é calmo em mar tranquilo. O caráter aparece na tempestade. Encare os dias difíceis como o teste que mostra do que você é feito.', s: 'Epicteto' },
+    { p: 'A melhor vingança é não ser como quem te feriu.', a: 'Não desperdice energia em ressentimento. Responder à baixeza com baixeza te rebaixa. Seja melhor — isso é o que de fato incomoda quem agiu mal.', s: 'Marco Aurélio — Meditações' },
+    { p: 'Faça cada ação como se fosse a última.', a: 'Não no sentido de pressa, mas de presença e qualidade. Se essa fosse a última coisa que você faz, faria com atenção total e sem desperdício.', s: 'Marco Aurélio — Meditações' }
+  ],
+  'mental-manha': [
+    { p: 'Levante. O dia não espera quem hesita.', a: 'O primeiro ato de disciplina é vencer a cama. Quem domina o despertar domina o resto do dia.', s: 'Mentalidade estoica' },
+    { p: 'Hoje você tem uma chance que ontem não te deu.', a: 'Cada manhã é um recomeço limpo. O que falhou ontem não amarra o hoje — a não ser que você deixe.', s: 'Princípio de renovação' },
+    { p: 'Discipline-se hoje pra ter liberdade amanhã.', a: 'Cada escolha difícil agora (treino, dieta, foco) compra liberdade no futuro. O conforto de hoje é a prisão de amanhã.', s: 'Jocko Willink — Disciplina = Liberdade' },
+    { p: 'Não conte os dias. Faça os dias contarem.', a: 'Não é sobre quanto tempo, é sobre o que você coloca dentro dele. Um dia bem vivido vale por vários desperdiçados.', s: 'Princípio de propósito' },
+    { p: 'O corpo realiza o que a mente acredita.', a: 'A barreira quase sempre é mental antes de ser física. A última repetição que você acha impossível geralmente está disponível.', s: 'Mentalidade de performance' },
+    { p: 'Comece. A motivação vem depois da ação, não antes.', a: 'Esperar "estar com vontade" é a maior armadilha. A ação gera o ímpeto. Dê o primeiro passo e o resto vem.', s: 'Princípio comportamental' },
+    { p: 'Você já fez coisas mais difíceis que o dia de hoje.', a: 'Quando o dia parecer pesado, lembre do que você já superou. Sua história é prova de que você aguenta.', s: 'Mentalidade de resiliência' },
+    { p: 'Seja 1% melhor que ontem. Só isso.', a: 'Não precisa revolucionar hoje. Um treino, uma refeição certa, uma página lida. O composto faz o resto.', s: 'James Clear — Hábitos Atômicos' }
+  ]
+};
+
+function renderMental() {
+  Object.keys(MENTAL).forEach(secId => {
+    const el = document.getElementById(secId + '-content');
+    if (!el) return;
+    el.innerHTML = MENTAL[secId].map(item => `
+      <div class="mental-card">
+        <div class="mental-principle">"${item.p}"</div>
+        <div class="mental-apply">${item.a}</div>
+        <div class="mental-source">${item.s}</div>
+      </div>
+    `).join('');
+  });
+}
+
+// Princípio do Dia — rotaciona entre todos os 30 pelo dia do ano
+function renderPrincipioDia() {
+  const wrap = document.getElementById('principio-dia-wrap');
+  if (!wrap) return;
+  if (currentMain !== 'mental') { wrap.innerHTML = ''; return; }
+
+  // Junta todos os princípios numa lista única
+  const todos = [];
+  Object.keys(MENTAL).forEach(cat => MENTAL[cat].forEach(item => todos.push(item)));
+
+  let item;
+  if (principioForcado !== null) {
+    item = todos[principioForcado];
+  } else {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diaDoAno = Math.floor((now - start) / 86400000);
+    item = todos[diaDoAno % todos.length];
+  }
+
+  wrap.innerHTML = `
+    <div class="pdia">
+      <div class="pdia-label">💡 ${principioForcado !== null ? 'Princípio' : 'Princípio do dia'}</div>
+      <div class="pdia-text">"${item.p}"</div>
+      <div class="pdia-source">${item.s}</div>
+      <button class="pdia-shuffle" onclick="sortearPrincipio()">🔄 Ver outro</button>
+    </div>`;
+}
+
+let principioForcado = null;
+function sortearPrincipio() {
+  const todos = [];
+  Object.keys(MENTAL).forEach(cat => MENTAL[cat].forEach(() => todos.push(1)));
+  let novo;
+  do { novo = Math.floor(Math.random() * todos.length); } while (novo === principioForcado && todos.length > 1);
+  principioForcado = novo;
+  renderPrincipioDia();
+}
+
+// ============ FRASES POR AUTOR ============
+// Banco expandido de conceitos sintetizados, organizado por autor
+const AUTORES = {
+  'James Clear': { obra: 'Hábitos Atômicos', frases: [
+    'Você não sobe à altura das suas metas; você cai à altura dos seus sistemas.',
+    'Melhore 1% ao dia — em um ano você estará 37 vezes melhor.',
+    'Não é "quero treinar", é "sou alguém que treina". Mude a identidade, o hábito segue.',
+    'O ambiente vence a força de vontade. Desenhe o espaço pra facilitar o certo.',
+    'Hábitos são compostos: pequenos e invisíveis no curto prazo, transformadores no longo.',
+    'Não quebre a corrente duas vezes seguidas. Falhar um dia é acidente; dois é o novo padrão.',
+    'Torne o bom hábito óbvio, atraente, fácil e satisfatório.'
+  ]},
+  'Morgan Housel': { obra: 'A Psicologia Financeira', frases: [
+    'Comportamento importa mais que inteligência no dinheiro.',
+    'Riqueza é o que você não vê — é o dinheiro não gasto, não o ostentado.',
+    'Ganhar dinheiro e mantê-lo são habilidades completamente diferentes.',
+    'Controle do tempo é o maior dividendo que o dinheiro paga.',
+    'Ninguém é tão louco quanto parece — toda decisão financeira faz sentido pra quem a toma.',
+    'A margem de segurança é a única forma de navegar um futuro imprevisível.'
+  ]},
+  'Marco Aurélio': { obra: 'Meditações', frases: [
+    'O obstáculo é o caminho — o que impede a ação alimenta a ação.',
+    'Você tem poder sobre sua mente, não sobre eventos externos. Perceba isso e encontre força.',
+    'A felicidade da sua vida depende da qualidade dos seus pensamentos.',
+    'Não desperdice mais tempo discutindo o que um bom homem deve ser. Seja um.',
+    'Quando acordar, lembre: hoje vou encontrar pessoas difíceis. Mas nenhuma pode me ferir de verdade.',
+    'Confine-se ao presente.',
+    'Você poderia deixar a vida agora mesmo. Que isso determine o que você faz, fala e pensa.',
+    'A melhor vingança é não ser como quem te feriu.',
+    'Desperdiçamos a vida esperando viver. Comece a viver agora.',
+    'Limite-se ao presente: nem o passado nem o futuro pesam sobre você.',
+    'Tudo que ouvimos é opinião, não fato. Tudo que vemos é perspectiva, não verdade.',
+    'A alma se tinge da cor dos seus pensamentos.',
+    'Faça cada ação como se fosse a última da sua vida.',
+    'Não aja como se tivesse dez mil anos pela frente. Enquanto pode, seja bom.',
+    'Quão ridículo é não fugir da própria maldade, o que é possível, e tentar fugir da dos outros, o que não é.'
+  ]},
+  'Sêneca': { obra: 'Cartas / Sobre a Brevidade da Vida', frases: [
+    'Não é que temos pouco tempo, é que desperdiçamos muito.',
+    'Sofremos mais na imaginação do que na realidade.',
+    'Pratique a privação voluntária — pergunte: "é isto que eu temia?".',
+    'Toda noite, revise o dia: o que melhorei? Que falha enfrentei?',
+    'A sorte favorece o preparado.',
+    'Enquanto adiamos viver, a vida passa.',
+    'Não é o homem que tem pouco, mas o que deseja mais, que é pobre.',
+    'A maior parte da vida se passa fazendo o errado; boa parte, sem fazer nada; quase toda, fazendo o que não importa.',
+    'Comece já a viver, e conte cada dia como uma vida separada.',
+    'As dificuldades fortalecem a mente, como o trabalho fortalece o corpo.',
+    'Nenhum vento é favorável a quem não sabe pra onde vai.',
+    'É na adversidade que o homem se conhece de verdade.',
+    'Ninguém preserva sua vida para amanhã. Vivemos sempre adiando.',
+    'Tão longa é a vida quanto a sabemos usar.'
+  ]},
+  'Epicteto': { obra: 'Enquirídio', frases: [
+    'Foque só no que está sob seu controle; aceite o resto.',
+    'Não são os eventos que perturbam, mas os julgamentos sobre eles.',
+    'Primeiro diga a si mesmo o que você quer ser; depois faça o necessário.',
+    'Nenhum homem é livre se não é senhor de si mesmo.',
+    'Não explique sua filosofia. Encarne-a.',
+    'A dificuldade mostra o que as pessoas são. Encare-a como um treino.',
+    'Riqueza não consiste em ter muitas posses, mas em ter poucas necessidades.',
+    'É impossível alguém aprender o que pensa já saber.',
+    'Pequenos progressos somados são grandes progressos. Não despreze o pouco.',
+    'Você se torna aquilo a que dá atenção.',
+    'Exija de si mesmo, em cada momento, o melhor que você tem.'
+  ]},
+  'Ryan Holiday': { obra: 'O Obstáculo é o Caminho / Ego é seu Inimigo', frases: [
+    'O impedimento à ação avança a ação. O que está no caminho vira o caminho.',
+    'Ego é o inimigo do que você quer e do que você tem.',
+    'Faça o trabalho. Deixe o resultado cuidar de si mesmo.',
+    'Humildade no início, dignidade no meio, serenidade no fim.',
+    'Não é sobre o que acontece. É sobre como você reage — e a reação é sempre sua escolha.',
+    'O que decidimos fazer com o obstáculo é o que nos define.'
+  ]},
+  'Jim Collins': { obra: 'Good to Great', frases: [
+    'Primeiro quem, depois o quê — pessoas certas no ônibus antes da direção.',
+    'Bom é inimigo do ótimo.',
+    'Grandeza vem de disciplina consistente, não de um único grande golpe (efeito flywheel).',
+    'Confronte os fatos brutais da realidade, mas nunca perca a fé no resultado.'
+  ]},
+  'Simon Sinek': { obra: 'Comece pelo Porquê / Líderes se Servem por Último', frases: [
+    'Comece pelo porquê — pessoas compram o motivo, não o produto.',
+    'O líder come por último; protege a equipe antes de si.',
+    'Liderança não é ser responsável. É ser responsável por pessoas.'
+  ]},
+  'Peter Drucker': { obra: 'O Gestor Eficaz', frases: [
+    'O que é medido é gerenciado — escolha bem o que medir.',
+    'Não há nada tão inútil quanto fazer com eficiência o que não deveria ser feito.',
+    'Cultura come estratégia no café da manhã.',
+    'Foque na contribuição, não no esforço. Resultado importa, não horas.'
+  ]},
+  'Cal Newport': { obra: 'Trabalho Profundo', frases: [
+    'Foco sem distração em tarefa difícil é a habilidade mais valiosa e mais rara do século.',
+    'A capacidade de concentração é um músculo — treine, não fragmente.',
+    'Trabalho raso preenche o dia; trabalho profundo constrói a carreira.'
+  ]},
+  'Carol Dweck': { obra: 'Mindset', frases: [
+    'Habilidade se constrói com esforço — não é dom fixo.',
+    'Troque "não consigo" por "não consigo ainda".',
+    'O fracasso é informação, não identidade.'
+  ]},
+  'Jocko Willink': { obra: 'Extreme Ownership / Disciplina = Liberdade', frases: [
+    'Extreme ownership: o líder é dono de tudo no seu domínio. Sem desculpas.',
+    'Disciplina é igual a liberdade.',
+    'Não espere estar motivado. A disciplina opera quando a motivação falha.',
+    'Priorize e execute — uma coisa de cada vez, na ordem certa.'
+  ]},
+  'Robert Kiyosaki': { obra: 'Pai Rico, Pai Pobre', frases: [
+    'Ativos colocam dinheiro no bolso; passivos tiram. Saiba a diferença.',
+    'Não trabalhe por dinheiro — faça o dinheiro trabalhar por você.',
+    'A casa própria não é um ativo: ela tira dinheiro do bolso todo mês.'
+  ]},
+  'Angela Duckworth': { obra: 'Garra (Grit)', frases: [
+    'Garra é paixão e persistência por objetivos de longo prazo.',
+    'Talento sem esforço é potencial não realizado.',
+    'O que você faz com consistência ao longo dos anos vence o talento esporádico.'
+  ]}
+};
+
+let autorAtivo = null;
+
+function renderAutores() {
+  const chips = document.getElementById('autor-chips');
+  if (!chips) return;
+  const nomes = Object.keys(AUTORES);
+  if (!autorAtivo) autorAtivo = nomes[0];
+  chips.innerHTML = nomes.map(n =>
+    `<button class="autor-chip ${n === autorAtivo ? 'active' : ''}" onclick="selectAutor('${n.replace(/'/g, "\\'")}')">${n}</button>`
+  ).join('');
+
+  const a = AUTORES[autorAtivo];
+  document.getElementById('autor-content').innerHTML = a.frases.map(f => `
+    <div class="autor-frase">
+      <div class="autor-frase-text">"${f}"</div>
+      <div class="autor-frase-obra">${autorAtivo} · ${a.obra}</div>
+    </div>
+  `).join('');
+}
+
+function selectAutor(nome) {
+  autorAtivo = nome;
+  renderAutores();
+}
+
+// ============ HÁBITOS ============
+const HABITOS = [
+  {
+    icon: '📖', nome: 'Leitura', mini: '10 páginas ou 15 min por dia',
+    why: 'Você tem uma aba inteira de princípios de livros e disse que está adiando ler. A leitura constante é o que transforma esses princípios soltos em mudança real de mentalidade — e alimenta seu objetivo de virar gerente.',
+    como: 'Comece com 10 páginas por dia, ou 15 minutos. Tão pouco que não dá pra usar "não tenho tempo" como desculpa. A meta não é terminar o livro rápido — é nunca pular um dia. A quantidade aumenta sozinha quando o hábito firma.',
+    trigger: 'Empilhamento de hábito: leia logo depois de uma coisa que você já faz todo dia — ex: "depois de deitar, antes de pegar o celular, 10 páginas". Deixe o livro em cima do travesseiro.'
+  },
+  {
+    icon: '🌙', nome: 'Caminhada noturna', mini: '15-20 min após o jantar',
+    why: 'Você já tem cardio estruturado, mas a caminhada noturna tem dupla função pra você: é zona 2 leve que não interfere em nada na recuperação, e ajuda na digestão e no sono — útil pelo seu padrão de refeição maior à noite.',
+    como: 'Comece com 15 minutos depois do jantar. Sem pressa, ritmo conversável. Não precisa de roupa de treino nem academia — é só sair e andar. Se quiser, ouve um audiolivro e junta com o hábito de "leitura".',
+    trigger: 'Gatilho de tempo: logo após a última refeição da noite. "Terminei de comer → calço o tênis → saio." Não senta no sofá antes, porque aí não levanta mais.'
+  },
+  {
+    icon: '💧', nome: 'Hidratação ao longo do dia', mini: '3-4L, ~70% antes das 18h',
+    why: 'Seu padrão é concentrar consumo à noite. Distribuir a água ao longo do dia melhora a hidratação real, ajuda a controlar a fome, e reduz o inchaço matinal que você já notou (retenção do consumo noturno concentrado).',
+    como: 'Tenha uma garrafa de 1L visível na mesa de trabalho. Meta: encher e esvaziar 3x até as 18h. O simples ato de deixar a garrafa à vista já resolve metade — o que está no campo de visão é lembrado.',
+    trigger: 'Empilhe com a rotina de trabalho: um gole a cada vez que terminar uma tarefa ou abrir o e-mail. Encha a garrafa toda vez que for ao banheiro.'
+  },
+  {
+    icon: '😴', nome: 'Sono / horário de dormir', mini: 'Mesmo horário, 7-8h',
+    why: 'Sono é onde a hipertrofia realmente acontece — recuperação muscular, hormônios (importante no seu caso) e regulação do apetite. Horário irregular sabota tudo isso, mesmo com treino e dieta perfeitos.',
+    como: 'Defina um horário-alvo de dormir e cumpra mesmo nos fins de semana (variação máxima de 1h). Comece recuando 15 min por semana se hoje você dorme tarde. Consistência do horário importa mais que a quantidade exata.',
+    trigger: 'Alarme de "hora de desligar" 45 min antes de dormir — sinal pra largar telas. A caminhada noturna e a leitura encaixam aqui como ritual de desaceleração.'
+  },
+  {
+    icon: '🧘', nome: 'Meditação / respiração', mini: '5 min por dia',
+    why: 'Pelo seu cargo de coordenador (100-300 pessoas, contrato de milhões, mudanças de escopo não formalizadas), o controle do estresse é ferramenta de trabalho, não luxo. Respiração controlada reduz cortisol — que em excesso atrapalha recuperação e composição corporal.',
+    como: 'Comece com 5 minutos de respiração simples: inspira 4s, segura 4s, expira 6s. Não precisa de app nem postura especial. O objetivo não é "esvaziar a mente" — é só praticar voltar o foco quando ele dispersa.',
+    trigger: 'Melhor momento: antes de começar o trabalho (centra pro dia) ou na transição trabalho→casa (descarrega o estresse antes de chegar). 5 min no carro estacionado funciona.'
+  }
+];
+
+let habAberto = {};
+
+function renderHabitos() {
+  // Hábito do dia (rotaciona pelos 5 pelo dia do ano)
+  const wrapDia = document.getElementById('hab-dia-wrap');
+  if (wrapDia) {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diaDoAno = Math.floor((now - start) / 86400000);
+    const h = HABITOS[diaDoAno % HABITOS.length];
+    wrapDia.innerHTML = `
+      <div class="hab-dia">
+        <div class="hab-dia-label">🎯 Foco de hoje</div>
+        <div class="hab-dia-name">${h.icon} ${h.nome}</div>
+        <div class="hab-dia-focus">${h.mini} — ${h.trigger}</div>
+      </div>`;
+  }
+
+  const el = document.getElementById('hab-content');
+  if (!el) return;
+  el.innerHTML = HABITOS.map((h, i) => {
+    const isOpen = habAberto[i];
+    return `
+      <div class="hab-card">
+        <div class="hab-head" onclick="toggleHab(${i})">
+          <div class="hab-icon">${h.icon}</div>
+          <div class="hab-info">
+            <div class="hab-name">${h.nome}</div>
+            <div class="hab-mini">${h.mini}</div>
+          </div>
+          <div class="hab-chevron ${isOpen ? 'open' : ''}">▼</div>
+        </div>
+        <div class="hab-body ${isOpen ? 'open' : ''}">
+          <div class="hab-section">
+            <div class="hab-section-label">Por que vale a pena</div>
+            <div class="hab-section-text">${h.why}</div>
+          </div>
+          <div class="hab-section">
+            <div class="hab-section-label">Como começar pequeno</div>
+            <div class="hab-section-text">${h.como}</div>
+          </div>
+          <div class="hab-trigger"><strong>Gatilho:</strong> ${h.trigger}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleHab(i) { habAberto[i] = !habAberto[i]; renderHabitos(); }
+
+// ============ INIT ============
+renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
+renderSuplementos();
+renderMental();
+renderAutores();
+renderHabitos();
+renderSubtabs();
+
+// Abre direto na aba Cargas se URL tem #cargas (link salvo nos favoritos)
+if (window.location.hash === '#cargas') {
+  selectMain('treino');
+  selectSub('cargas');
+} else {
+  showSection('treinos');
 }
 </script>
 </body>
