@@ -2530,4 +2530,58 @@ function renderHabitos() {
     wrapDia.innerHTML = `
       <div class="hab-dia">
         <div class="hab-dia-label">🎯 Foco de hoje</div>
-      
+        <div class="hab-dia-name">${h.icon} ${h.nome}</div>
+        <div class="hab-dia-focus">${h.mini} — ${h.trigger}</div>
+      </div>`;
+  }
+
+  const el = document.getElementById('hab-content');
+  if (!el) return;
+  el.innerHTML = HABITOS.map((h, i) => {
+    const isOpen = habAberto[i];
+    return `
+      <div class="hab-card">
+        <div class="hab-head" onclick="toggleHab(${i})">
+          <div class="hab-icon">${h.icon}</div>
+          <div class="hab-info">
+            <div class="hab-name">${h.nome}</div>
+            <div class="hab-mini">${h.mini}</div>
+          </div>
+          <div class="hab-chevron ${isOpen ? 'open' : ''}">▼</div>
+        </div>
+        <div class="hab-body ${isOpen ? 'open' : ''}">
+          <div class="hab-section">
+            <div class="hab-section-label">Por que vale a pena</div>
+            <div class="hab-section-text">${h.why}</div>
+          </div>
+          <div class="hab-section">
+            <div class="hab-section-label">Como começar pequeno</div>
+            <div class="hab-section-text">${h.como}</div>
+          </div>
+          <div class="hab-trigger"><strong>Gatilho:</strong> ${h.trigger}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleHab(i) { habAberto[i] = !habAberto[i]; renderHabitos(); }
+
+// ============ INIT ============
+renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
+renderSuplementos();
+renderMental();
+renderAutores();
+renderHabitos();
+renderSubtabs();
+
+// Abre direto na aba Cargas se URL tem #cargas (link salvo nos favoritos)
+if (window.location.hash === '#cargas') {
+  renderVideos();
+  selectMain('treino');
+  selectSub('cargas');
+} else {
+  showSection('treinos');
+}
+</script>
+</body>
+</html>
