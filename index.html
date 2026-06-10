@@ -442,37 +442,37 @@
 
   <div class="section" id="split">
     <h2>Como funciona o Split</h2>
-    <p>Rotação PPL 6x — cada músculo é treinado 2x por semana, frequência ótima segundo o Nippard (volume distribuído em pelo menos 2 sessões).</p>
-    <div class="callout"><strong>Rotação de 8 dias:</strong> Pull A → Legs Q → Push B → OFF → Pull B → Legs P → Push A → OFF</div>
-    <h3>Lógica A vs B</h3>
+    <p>Híbrido Falha Real 6x — dias PESADOS (low volume, falha em tudo, estilo Yates/JP) separados dos dias PUMP (volume alto, falha só na última, estilo Meadows). A separação existe porque falha real custa caro de recuperar com 6h de sono: concentra o custo em 2 dias e mantém o estímulo de frequência nos outros 3.</p>
+    <div class="callout"><strong>Semana fixa:</strong> SEG Push Pesado → TER Pull Pesado → QUA Pernas (única) → QUI Push Pump → SEX Pull Pump → SÁB Pontos Fracos → DOM OFF total</div>
+    <h3>Lógica Pesado vs Pump</h3>
     <ul class="bullets">
-      <li><strong>Versão A (Força):</strong> compostos pesados, faixa 4-8 reps, cluster + AMRAP no primeiro exercício</li>
-      <li><strong>Versão B (Hipertrofia):</strong> volume metabólico, faixa 8-15, mais finalizadores (drop, myo)</li>
+      <li><strong>PESADO (SEG/TER):</strong> 1-2 séries por exercício, 6-10 reps, falha concêntrica real, descanso 2-3 min. A série acaba quando o peso não sobe — zero ambiguidade de RPE.</li>
+      <li><strong>PUMP (QUI/SEX/SÁB):</strong> 3-4 séries, 12-20 reps, falha só na última, descanso 45-75s, drops e parciais. Estresse metabólico, custo de recuperação baixo.</li>
+      <li><strong>PERNAS (QUA):</strong> híbrido na mesma sessão — pesado nos básicos, pump nos isoladores. Treina 1x, então é a sessão mais brutal da semana, sem exceção.</li>
     </ul>
     <h3>Frequência por músculo</h3>
     <div class="tbl-wrap"><table>
       <tr><th>Músculo</th><th>Sessões/semana</th></tr>
-      <tr><td>Peito</td><td>2× (Push A + Push B)</td></tr>
-      <tr><td>Costas</td><td>2× (Pull A + Pull B)</td></tr>
-      <tr><td>Quadríceps</td><td>2× (Legs A + Legs B)</td></tr>
-      <tr><td>Posteriores</td><td>2× (Legs A + Legs B)</td></tr>
-      <tr><td>Ombros</td><td>2× (Push A + Push B)</td></tr>
-      <tr><td>Bíceps</td><td>2× (Pull A + Pull B)</td></tr>
-      <tr><td>Tríceps</td><td>2× (Push A + Push B)</td></tr>
+      <tr><td>Peito</td><td>3× (SEG + QUI + SÁB)</td></tr>
+      <tr><td>Costas</td><td>3× (TER + SEX + SÁB)</td></tr>
+      <tr><td>Deltoide lateral</td><td>3× (SEG + QUI + SÁB) · 10+ séries/sem</td></tr>
+      <tr><td>Quadríceps / Posteriores</td><td>1× (QUA) — escolha deliberada, zero margem de erro</td></tr>
+      <tr><td>Bíceps / Tríceps</td><td>Direto 1× pesado + indireto em todos os push/pull</td></tr>
     </table></div>
-    <div class="callout green"><strong>Split PPL 6x está alinhado com o Nippard</strong> — distribui 2x/semana por músculo. Não mudar.</div>
+    <div class="callout green"><strong>Critério de sucesso:</strong> carga ou reps subindo nos dias pesados, semana após semana. 3 semanas sem subir = problema de recuperação (sono), não de treino.</div>
   </div>
 
   <div class="section" id="cardio">
-    <h2>Cardio sem matar gains</h2>
-    <p>Modelos baseados na ciência do Nippard (zona 2, ≤30min, ≤3x/sem). Zona 2 = 60-70% da FC máxima — você consegue conversar enquanto faz.</p>
+    <h2>Cardio na fase de acúmulo</h2>
+    <p><strong>Contexto atual: você está acumulando (~3.000 kcal), não cortando.</strong> Cardio aqui não é ferramenta de queima — é saúde cardiovascular, capacidade de trabalho e apetite. Cada caloria gasta no cardio é caloria que precisa voltar pelo garfo. Zona 2 = 60-70% da FC máxima, ritmo conversável.</p>
     <div id="cardio-cards"></div>
     <h3>Regras de ouro</h3>
     <div class="callout blue"><ul class="bullets" style="margin-top:0">
-      <li><strong>Máximo 3x/semana, até 30 min.</strong> Acima começa a interferir na hipertrofia.</li>
+      <li><strong>Fase de acúmulo: 2x/semana, 20-30 min, zona 2 apenas.</strong> Seu histórico de endurance joga contra o acúmulo — a tentação de fazer mais cardio é o seu padrão antigo de otimizar pra leanness.</li>
       <li><strong>6h+ separado do treino de força.</strong> Nunca antes do peso no mesmo dia.</li>
       <li><strong>Dia de perna:</strong> reduzir para 15-20 min ou pular.</li>
-      <li><strong>Zona 2 &gt; HIIT.</strong> Baixa intensidade não atrapalha gains e melhora recuperação.</li>
+      <li><strong>HIIT: zero durante o acúmulo.</strong> Com 6h de sono, o custo de recuperação do HIIT compete diretamente com os dias pesados. Volta a ser opção só em fase de definição.</li>
+      <li><strong>NEAT livre:</strong> caminhada não conta no limite — a obra já te dá NEAT alto, não precisa adicionar.</li>
     </ul></div>
   </div>
 
@@ -670,7 +670,7 @@ const PROGRAM = {
       { name: 'Hack Squat Pés Altos', sets: 2, reps: '6-9', tech: 'Falha técnica', rpe: 'FALHA', serie: { aq: '~40% × 10', feeders: ['~60% × 6', '~80% × 3'], validas: '2 × 6-9 até a falha técnica' }, primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Agachamento Livre', 'Leg Press 45° Pés Baixos'], note: 'Falha técnica = quando a postura quebra, não quando o ego quebra. Perna treina 1x: esta é a sessão mais brutal da semana, sem exceção.' },
       { name: 'Stiff Halter', sets: 2, reps: '8-10', tech: 'Falha técnica · excêntrica 3s', rpe: 'FALHA', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 8-10 até a falha técnica' }, primary: ['Posteriores', 'Glúteo'], secondary: ['Lombar'], subs: ['Stiff Barra', 'Levantamento Terra Romeno'], note: 'Alavanca longa: amplitude até onde a lombar segura neutra.' },
       { name: 'Leg Press 45° Pés Baixos', sets: 3, reps: '15-20', tech: 'Drop-set na última', primary: ['Quadríceps'], secondary: ['Glúteo'], subs: ['Hack Squat', 'Leg Press Vertical'], note: 'Aqui muda o estilo: PUMP. Descanso 60-75s. Última série: falha → -25% → AMRAP.' },
-      { name: 'Cadeira Extensora', sets: 2, reps: '12-15', tech: 'Falha + 5 parciais', primary: ['Quadríceps'], secondary: [], subs: ['Extensora Unilateral', 'Sissy Squat'], note: 'Parciais na metade final do movimento.' },
+      { name: 'Cadeira Extensora', sets: 2, reps: '12-15', tech: 'Myo-reps na última', primary: ['Quadríceps'], secondary: [], subs: ['Extensora Unilateral', 'Sissy Squat'], note: 'Ativação até a falha → 3-5 respirações → mini-sets de 3-5 reps. Encerra quando não fechar 3 reps (típico: 4-5 mini-sets).' },
       { name: 'Mesa Flexora', sets: 2, reps: '12-15', tech: 'Falha na última', primary: ['Posteriores'], secondary: [], subs: ['Cadeira Flexora (sentada)', 'Flexora Unilateral'], note: 'Flexora sentada se disponível (maior alongamento).' },
       { name: 'Panturrilha em Pé', sets: 4, reps: '10-15', tech: 'Pausa 2s alongado · falha em todas', primary: ['Gastrocnêmio'], secondary: ['Sóleo'], subs: ['Panturrilha Sentado', 'Panturrilha Leg Press'], note: 'Pausa de 2s no alongamento em toda rep.' }
     ]},
@@ -678,25 +678,25 @@ const PROGRAM = {
     exercises: [
       { name: 'Supino Inclinado Halter 30°', sets: 4, reps: '12-15', tech: 'Falha só na última', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado'], note: 'Carga leve, descanso 45-75s, foco total em contração.' },
       { name: 'Cross Over Baixa→Alta', sets: 3, reps: '15-20', tech: 'Drop na última', primary: ['Peitoral superior'], secondary: [], subs: ['Crucifixo Inclinado Halter', 'Peck Deck (Crucifixo Máq)'], note: 'De baixo pra cima = clavicular. Tensão contínua.' },
-      { name: 'Elevação Lateral Cabo Inclinado', sets: 4, reps: '15-20', tech: 'Falha na última + 5 parciais', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Halter', 'Elevação Lateral Máquina'], note: 'Mínimo 6 séries de lateral somando a semana — aqui vão 4.' },
+      { name: 'Elevação Lateral Cabo Inclinado', sets: 4, reps: '15-20', tech: 'Myo-reps na última', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Halter', 'Elevação Lateral Máquina'], note: 'Ativação até a falha → 3-5 respirações → mini-sets de 3-5 reps. Encerra quando não fechar 3 reps (típico: 4-5 mini-sets). Mínimo 6 séries de lateral na semana — aqui vão 4.' },
       { name: 'Desenvolvimento Militar Máquina', sets: 3, reps: '12-15', tech: 'Tensão contínua', primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Halter Sentado', 'Arnold Press'], note: 'Leve. Sem travar cotovelo.' },
-      { name: 'Tríceps Corda', sets: 3, reps: '12-15', tech: 'Drop na última', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Pulley Barra', 'Tríceps Francês'], note: 'Abrir a corda no final do movimento.' }
+      { name: 'Tríceps Corda', sets: 3, reps: '12-15', tech: 'Myo-reps na última', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Pulley Barra', 'Tríceps Francês'], note: 'Ativação até a falha → 3-5 respirações → mini-sets de 3-5 reps. Encerra quando não fechar 3 reps (típico: 4-5 mini-sets). Abrir a corda no final.' }
     ]},
   'pull-pump': { name: 'Pull Pump', sub: 'SEX · Volume alto · Espessura: pausa na contração', dur: 60, tag: 'pull',
     exercises: [
-      { name: 'Remada Baixa Triângulo', sets: 4, reps: '12-15', tech: 'Pausa 1-2s na contração', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio médio'], subs: ['Remada Máquina Fechada', 'Remada Triângulo'], note: 'Espessura vem de remar segurando a contração, não de mais puxada. 1-2s parado em TODA rep.' },
+      { name: 'Remada Baixa Triângulo', sets: 4, reps: '12-15', tech: 'Pausa na contração + Myo-reps na última', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio médio'], subs: ['Remada Máquina Fechada', 'Remada Triângulo'], note: 'Pausa 1-2s em TODA rep. Na última série: Ativação até a falha → 3-5 respirações → mini-sets de 3-5 reps. Encerra quando não fechar 3 reps (típico: 4-5 mini-sets).' },
       { name: 'Puxada Pronada Aberta', sets: 3, reps: '12-15', tech: 'Falha na última', primary: ['Dorsal'], secondary: ['Bíceps'], subs: ['Pulldown Neutro', 'Pulldown Reto'], note: 'Pega larga, ROM total.' },
       { name: 'Face Pull Corda', sets: 4, reps: '15-20', tech: 'Rotação externa', primary: ['Deltoide posterior'], secondary: ['Romboides', 'Trapézio médio'], subs: ['Crucifixo Inverso', 'Reverse Pec Deck'], note: 'Trapézio médio + posterior + saúde de ombro.' },
       { name: 'Pullover Polia Alta', sets: 3, reps: '12-15', tech: 'Stretch focus', primary: ['Dorsal'], secondary: ['Serrátil'], subs: ['Pulldown Reto', 'Pullover Halter'], note: 'Alongamento máximo de dorsal, cotovelo travado.' },
       { name: 'Rosca Martelo Halter', sets: 3, reps: '12-15', tech: 'Falha na última', primary: ['Braquial', 'Braquiorradial'], secondary: ['Bíceps'], subs: ['Rosca Corda Polia', 'Rosca Martelo Cabo'], note: 'Fecha o dia.' }
     ]},
-  'fracos': { name: 'Pontos Fracos', sub: 'SÁB · Pump · Lateral, peito superior, braços', dur: 60, tag: 'push',
+  'fracos': { name: 'Pontos Fracos', sub: 'SÁB · Pump · Lateral, peito superior, costas', dur: 60, tag: 'push',
     exercises: [
       { name: 'Elevação Lateral Halter', sets: 4, reps: '15-20', tech: 'Drop-set em 2 séries', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Cabo Inclinado', 'Elevação Lateral Máquina'], note: '1º exercício do dia, SEMPRE. Lateral é prioridade absoluta pro frame de 2,02m.' },
       { name: 'Supino Inclinado Halter 45°', sets: 3, reps: '10-12', tech: 'Falha na última', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado'], note: '45° pra variar o estímulo do resto da semana (30°).' },
-      { name: 'Cross Over Baixa→Alta', sets: 3, reps: '15-20', tech: 'Tensão contínua', primary: ['Peitoral superior'], secondary: [], subs: ['Crucifixo Inclinado Halter', 'Peck Deck (Crucifixo Máq)'], note: 'Sem descansar no fundo nem no topo.' },
-      { name: 'Rosca Scott Máquina', sets: 3, reps: '10-12', tech: 'Falha na última', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Alternada Banco Inclinado', 'Rosca Concentrada'], note: 'Pico de contração.' },
-      { name: 'Tríceps Francês Cabo Overhead', sets: 3, reps: '12-15', tech: 'Stretch focus', primary: ['Tríceps (cabeça longa)'], secondary: [], subs: ['Tríceps Testa Barra W', 'Tríceps Corda'], note: 'Alongamento máximo da cabeça longa.' },
+      { name: 'Cross Over Baixa→Alta', sets: 3, reps: '15-20', tech: 'Myo-reps na última', primary: ['Peitoral superior'], secondary: [], subs: ['Crucifixo Inclinado Halter', 'Peck Deck (Crucifixo Máq)'], note: 'Ativação até a falha → 3-5 respirações → mini-sets de 3-5 reps. Encerra quando não fechar 3 reps (típico: 4-5 mini-sets). Tensão contínua nas séries normais.' },
+      { name: 'Remada Máquina Fechada', sets: 3, reps: '12-15', tech: 'Pausa 1-2s na contração', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio médio'], subs: ['Remada Baixa Triângulo', 'Remada Triângulo'], note: 'Costas 3x na semana: espessura é prioridade igual a peito. Pausa em toda rep.' },
+      { name: 'Encolhimento Halter', sets: 3, reps: '10-12', tech: 'Falha + 1s no topo', primary: ['Trapézio superior'], secondary: ['Trapézio médio'], subs: ['Face Pull Corda', 'Encolhimento Barra'], note: 'Braço sai do sábado: é ponto forte e já recebe trabalho pesado SEG/TER + indireto diário.' },
       { name: 'Crucifixo Inverso', sets: 3, reps: '15-20', tech: 'Drop na última', primary: ['Deltoide posterior'], secondary: ['Romboides'], subs: ['Face Pull Corda', 'Reverse Pec Deck'], note: 'Fecha a semana com posterior de ombro.' }
     ]}
 };
@@ -1206,7 +1206,7 @@ const CARDIOS = [
   { icon: '⚡', title: 'HIIT — Bike ou Esteira', goal: 'Queima alta em pouco tempo (uso pontual)', hiit: true, params: [
     { label: 'Protocolo', val: '30s forte / 90s leve' }, { label: 'Tiros', val: '6-8 rounds' },
     { label: 'Tempo total', val: '~15-20 min' }, { label: 'Frequência', val: 'máx 1-2x/sem' }
-  ], note: 'Estrutura: 3min aquecimento → [30s a 85-90% do esforço máximo + 90s de recuperação leve] × 6-8 → 3min desaquecimento. Na bike é mais seguro que na esteira (sem risco de queda em alta velocidade). HIIT queima mais em menos tempo e tem efeito EPOC (gasto pós-treino), MAS interfere mais na recuperação muscular que a zona 2. Para seu objetivo (hipertrofia/definição), use só pontualmente — nunca em dia de perna, nunca antes de treino de força, e zona 2 continua sendo a escolha principal.' }
+  ], note: 'Estrutura: 3min aquecimento → [30s a 85-90% do esforço máximo + 90s de recuperação leve] × 6-8 → 3min desaquecimento. Na bike é mais seguro que na esteira (sem risco de queda em alta velocidade). HIIT queima mais em menos tempo e tem efeito EPOC (gasto pós-treino), MAS interfere mais na recuperação muscular que a zona 2. FASE ATUAL (acúmulo): não usar. Em definição, use só pontualmente — nunca em dia de perna, nunca antes de treino de força, e zona 2 continua sendo a escolha principal.' }
 ];
 
 const TECNICAS = [
@@ -2530,58 +2530,4 @@ function renderHabitos() {
     wrapDia.innerHTML = `
       <div class="hab-dia">
         <div class="hab-dia-label">🎯 Foco de hoje</div>
-        <div class="hab-dia-name">${h.icon} ${h.nome}</div>
-        <div class="hab-dia-focus">${h.mini} — ${h.trigger}</div>
-      </div>`;
-  }
-
-  const el = document.getElementById('hab-content');
-  if (!el) return;
-  el.innerHTML = HABITOS.map((h, i) => {
-    const isOpen = habAberto[i];
-    return `
-      <div class="hab-card">
-        <div class="hab-head" onclick="toggleHab(${i})">
-          <div class="hab-icon">${h.icon}</div>
-          <div class="hab-info">
-            <div class="hab-name">${h.nome}</div>
-            <div class="hab-mini">${h.mini}</div>
-          </div>
-          <div class="hab-chevron ${isOpen ? 'open' : ''}">▼</div>
-        </div>
-        <div class="hab-body ${isOpen ? 'open' : ''}">
-          <div class="hab-section">
-            <div class="hab-section-label">Por que vale a pena</div>
-            <div class="hab-section-text">${h.why}</div>
-          </div>
-          <div class="hab-section">
-            <div class="hab-section-label">Como começar pequeno</div>
-            <div class="hab-section-text">${h.como}</div>
-          </div>
-          <div class="hab-trigger"><strong>Gatilho:</strong> ${h.trigger}</div>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function toggleHab(i) { habAberto[i] = !habAberto[i]; renderHabitos(); }
-
-// ============ INIT ============
-renderDayGrid(); renderDayDetail(); renderCardios(); renderTecnicas(); calcMacros();
-renderSuplementos();
-renderMental();
-renderAutores();
-renderHabitos();
-renderSubtabs();
-
-// Abre direto na aba Cargas se URL tem #cargas (link salvo nos favoritos)
-if (window.location.hash === '#cargas') {
-  renderVideos();
-  selectMain('treino');
-  selectSub('cargas');
-} else {
-  showSection('treinos');
-}
-</script>
-</body>
-</html>
+      
