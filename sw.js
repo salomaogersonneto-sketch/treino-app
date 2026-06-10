@@ -1,7 +1,7 @@
-// GSN Training — Service Worker v2
+// GSN Training — Service Worker v3
 // Corrigido para GitHub Pages subpath (/treino-app/)
 
-const CACHE_NAME = 'gsn-training-v2';
+const CACHE_NAME = 'gsn-training-v3';
 const ASSETS = [
   '/treino-app/',
   '/treino-app/index.html'
