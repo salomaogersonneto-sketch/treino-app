@@ -316,39 +316,6 @@
   .caos-ex-detail { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
   .caos-ex-why { font-size: 11px; color: var(--text3); font-style: italic; }
 
-  /* ===== AVULSOS ===== */
-  .avulso-intro { background: linear-gradient(135deg, #1a1a2d, #10101a); color: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-  .avulso-intro-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-  .avulso-intro-sub { font-size: 12px; opacity: 0.8; line-height: 1.5; }
-  .avulso-selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-  .avulso-btn { background: var(--bg2); border: 2px solid var(--border); border-radius: 12px; padding: 12px 8px; cursor: pointer; text-align: center; }
-  .avulso-btn:active { transform: scale(0.97); }
-  .avulso-btn.active { border-color: var(--accent); background: var(--accent-bg); }
-  .avulso-btn-icon { font-size: 22px; margin-bottom: 4px; }
-  .avulso-btn-label { font-size: 12px; font-weight: 700; color: var(--text); }
-  .avulso-btn.active .avulso-btn-label { color: var(--accent); }
-  .avulso-session { background: var(--bg2); border: 2px solid var(--accent); border-radius: 12px; overflow: hidden; }
-  .avulso-session-head { background: var(--accent); color: white; padding: 12px 14px; }
-  .avulso-session-title { font-size: 16px; font-weight: 800; }
-  .avulso-session-meta { font-size: 11px; opacity: 0.9; margin-top: 2px; }
-  .avulso-warmup { background: var(--blue-bg); border-left: 3px solid var(--blue); padding: 10px 12px; margin: 12px 14px; font-size: 12px; color: var(--text2); line-height: 1.6; border-radius: 0 8px 8px 0; }
-  .avulso-warmup strong { color: var(--blue); }
-  .avulso-section-label { font-size: 10px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; padding: 12px 14px 4px; }
-  .avulso-ex { border-top: 1px solid var(--border); padding: 12px 14px; }
-  .avulso-ex-num { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; margin-right: 8px; flex-shrink: 0; }
-  .avulso-ex-head { display: flex; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 4px; }
-  .avulso-ex-name { font-size: 14px; font-weight: 700; color: var(--text); }
-  .avulso-ex-rpe { font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 6px; background: var(--bg3); color: var(--text3); margin-left: 6px; }
-  .avulso-ex-tech { font-size: 11px; color: var(--orange); margin-bottom: 6px; }
-  .avulso-ex-detail { font-size: 12px; color: var(--text2); line-height: 1.5; }
-  .avulso-ex-detail strong { color: var(--text); }
-  .avulso-ex-feeders { font-size: 11px; color: var(--text3); margin-top: 4px; }
-
-  .cook-toggle { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; cursor: pointer; transition: all 0.15s; user-select: none; }
-  .cook-toggle.raw { background: var(--red-bg); color: var(--red); }
-  .cook-toggle.cooked { background: var(--green-bg); color: var(--green); }
-  .cook-fixed { font-size: 10px; color: var(--text3); padding: 2px 4px; }
-
   /* ===== TREINO — CARD EXPANDIDO ===== */
   .ex-main-badge { display: inline-block; background: var(--accent); color: white; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 6px; }
   .ex-time-badge { display: inline-block; background: var(--bg3); color: var(--text3); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 8px; }
@@ -416,28 +383,13 @@
   <div class="section" id="caos">
     <div class="caos-intro">
       <div class="caos-intro-title">💀 Dia do Caos</div>
-      <div class="caos-intro-sub">Volume máximo num único grupo muscular · Metodologia Nippard + Pacholok · Tensão mecânica → Estresse metabólico → Dano muscular</div>
+      <div class="caos-intro-sub">Dia de especialização quando há tempo extra · Substitui o SÁBADO · Peito OU costas · Pesado até a falha → Pump → Posição alongada · Máx 1x a cada 2 semanas</div>
     </div>
     <div class="caos-selector" id="caos-selector">
       <div class="caos-btn" onclick="selectCaos('peito')"><div class="caos-btn-icon">🫁</div><div class="caos-btn-label">Peito</div></div>
       <div class="caos-btn" onclick="selectCaos('costas')"><div class="caos-btn-icon">🦅</div><div class="caos-btn-label">Costas</div></div>
-      <div class="caos-btn" onclick="selectCaos('pernas')"><div class="caos-btn-icon">🦵</div><div class="caos-btn-label">Pernas</div></div>
-    </div>
+      </div>
     <div id="caos-detail"></div>
-  </div>
-
-  <div class="section" id="avulsos">
-    <div class="avulso-intro">
-      <div class="avulso-intro-title">⚡ Treinos Avulsos</div>
-      <div class="avulso-intro-sub">Sessões alternativas no formato 2 válidas. Use quando não puder seguir o split — viagem, tempo curto, ou quando quiser variar. Não substituem o split principal de forma recorrente.</div>
-    </div>
-    <div class="avulso-selector" id="avulso-selector">
-      <div class="avulso-btn" onclick="selectAvulso('upper')"><div class="avulso-btn-icon">💪</div><div class="avulso-btn-label">Upper Peito+Costas</div></div>
-      <div class="avulso-btn" onclick="selectAvulso('ombrobraco')"><div class="avulso-btn-icon">🎯</div><div class="avulso-btn-label">Ombro + Braço</div></div>
-      <div class="avulso-btn" onclick="selectAvulso('curto')"><div class="avulso-btn-icon">⏱️</div><div class="avulso-btn-label">Tempo Curto</div></div>
-      <div class="avulso-btn" onclick="selectAvulso('fraco')"><div class="avulso-btn-icon">🎚️</div><div class="avulso-btn-label">Ponto Fraco</div></div>
-    </div>
-    <div id="avulso-detail"></div>
   </div>
 
   <div class="section" id="split">
@@ -460,6 +412,8 @@
       <tr><td>Bíceps / Tríceps</td><td>Direto 1× pesado + indireto em todos os push/pull</td></tr>
     </table></div>
     <div class="callout green"><strong>Critério de sucesso:</strong> carga ou reps subindo nos dias pesados, semana após semana. 3 semanas sem subir = problema de recuperação (sono), não de treino.</div>
+    <h3>Quando usar o Dia do Caos</h3>
+    <div class="callout"><strong>O Caos substitui o SÁBADO</strong> quando você tem tempo extra (~90 min). Escolha peito OU costas. Regras: máximo 1x a cada 2 semanas, nunca em semana de sono ruim, e na semana do Caos o pump correspondente (QUI se peito, SEX se costas) perde os intensificadores — só séries normais.</div>
   </div>
 
   <div class="section" id="cardio">
@@ -510,36 +464,56 @@
   </div>
 
   <div class="section" id="ciencia">
-    <h2>Princípios (Nippard)</h2>
-    <h3>Volume ótimo</h3>
-    <p>Relação volume × hipertrofia é uma curva em U invertido. Pouco não estimula, muito prejudica recuperação.</p>
-    <div class="callout"><strong>Janela ideal:</strong> 10-20 séries válidas por grupo muscular por semana, em pelo menos 2 sessões.</div>
-    <div class="callout red"><strong>Teto por sessão:</strong> 6-8 séries para um músculo. Acima vira <em>junk volume</em>.</div>
-    <h3>Esforço (RIR / RPE)</h3>
+    <h2>Princípios do sistema</h2>
+
+    <h3>1. Reps efetivas (Chris Beardsley)</h3>
+    <p>Numa série, só as últimas ~5 reps antes da falha recrutam as unidades motoras de alto limiar — as que crescem. As reps anteriores são o preço da entrada, não o estímulo.</p>
+    <div class="callout"><strong>Aplicação:</strong> é por isso que falha real, myo-reps e rest-pause funcionam — todos maximizam a proporção de reps efetivas por minuto de treino. E é por isso que série longe da falha é volume no papel, não estímulo.</div>
+
+    <h3>2. Falha vs RIR — o que a ciência diz</h3>
+    <p>Meta-análises recentes (Refalo et al. 2023-24, Robinson et al.) mostram: pra hipertrofia, treinar até a falha é igual ou levemente superior a parar a 1-2 reps, POR SÉRIE. O custo é mais fadiga por série. Pra força, falha não traz vantagem.</p>
+    <div class="callout green"><strong>Sua aplicação:</strong> você não estima bem RIR e não gosta de deixar reps na reserva — então a falha é seu marcador objetivo. O sistema paga o custo da fadiga com volume baixo nos dias pesados. É a troca certa pro seu perfil.</div>
+
+    <h3>3. Relação estímulo-fadiga (Israetel)</h3>
+    <p>Cada exercício tem uma razão entre o estímulo que gera e a fadiga que cobra. Máquinas e cabos têm razão alta (estímulo alto, custo baixo). Livres pesados com alavanca longa têm razão pior aos 2,02m.</p>
+    <div class="callout"><strong>Aplicação:</strong> falha real em máquina = seguro e barato. Falha em agachamento livre = falha TÉCNICA (quando a postura quebra), nunca colapso. É a regra da quarta-feira.</div>
+
+    <h3>4. Posição alongada (Wolf, Pedrosa 2022)</h3>
+    <p>Séries com ênfase na posição alongada do músculo produzem mais hipertrofia que na encurtada. Parciais alongadas após a falha estendem o estímulo sem carga extra.</p>
+    <div class="callout"><strong>Aplicação:</strong> crucifixo com pausa no fundo, pullover, stiff profundo, extensora com parciais. A fase 3 do Dia do Caos existe por causa disso.</div>
+
+    <h3>5. Volume: dose-resposta com retorno decrescente</h3>
     <div class="tbl-wrap"><table>
-      <tr><th>RIR</th><th>RPE</th><th>Quando usar</th></tr>
-      <tr><td>0 (falha)</td><td>10</td><td>Última série de finalizador — máx 1-2x/sessão</td></tr>
-      <tr><td>1 rep</td><td>9</td><td>Sets pesados de composto principal</td></tr>
-      <tr><td>2 reps</td><td>8</td><td>Maior parte do treino</td></tr>
-      <tr><td>3 reps</td><td>7</td><td>Aquecimento / calibração</td></tr>
+      <tr><th>Contexto</th><th>Séries válidas/semana por músculo</th></tr>
+      <tr><td>Pontos fortes (costas largura, braço)</td><td>6-10 — manutenção/crescimento lento</td></tr>
+      <tr><td>Padrão</td><td>10-16</td></tr>
+      <tr><td>Pontos fracos (lateral, peito sup., meio de costas)</td><td>12-18, frequência 3x</td></tr>
     </table></div>
-    <div class="callout green"><strong>Reps de 3 a 30 produzem hipertrofia similar</strong> se o set é levado perto da falha. A faixa 6-12 é conveniência, não regra.</div>
+    <div class="callout red"><strong>Com 6h de sono, o teto cai.</strong> O seu MRV real está abaixo do dos estudos (sujeitos dormindo 8h). Se a progressão travar 3 semanas, corta 20% do volume pump antes de mexer em qualquer outra coisa.</div>
+
+    <h3>6. Esforço no sistema híbrido</h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>Dia</th><th>Regra de esforço</th></tr>
+      <tr><td>PESADO (SEG/TER)</td><td>Falha concêntrica real em TODAS as séries de trabalho</td></tr>
+      <tr><td>PERNAS (QUA)</td><td>Falha técnica nos livres, falha real nas máquinas</td></tr>
+      <tr><td>PUMP (QUI/SEX/SÁB)</td><td>Falha só na última série de cada exercício (+ técnica aplicada)</td></tr>
+      <tr><td>Myo-reps</td><td>Ativação até a falha, mini-sets até não fechar 3 reps</td></tr>
+    </table></div>
+
+    <h3>7. Sono: a variável dominante</h3>
+    <p>Privação de sono reduz síntese proteica, testosterona e desempenho, e aumenta cortisol. Nenhum ajuste de treino ou dieta compensa sono cronicamente curto — ele define o teto de todos os outros princípios desta aba.</p>
+    <div class="callout green"><strong>Regra operacional:</strong> média 7 dias abaixo de 6h = semana seguinte sem Caos, sem rest-pause DC e com -20% de volume pump. Os dias pesados ficam, são a última coisa a cortar.</div>
+
     <h3>Descanso entre séries</h3>
     <div class="tbl-wrap"><table>
       <tr><th>Tipo</th><th>Descanso</th></tr>
-      <tr><td>Composto pesado</td><td>3-5 min</td></tr>
-      <tr><td>Isolador máquina/halter</td><td>1-2 min</td></tr>
-      <tr><td>Finalizador (drop/RP)</td><td>0-30s entre drops</td></tr>
+      <tr><td>Pesado até a falha (SEG/TER/QUA)</td><td>2-3 min</td></tr>
+      <tr><td>Pump (QUI/SEX/SÁB)</td><td>45-75s</td></tr>
+      <tr><td>Dentro de myo-reps</td><td>3-5 respirações</td></tr>
+      <tr><td>Dentro de rest-pause</td><td>10-15s (DC: 12-15 respirações)</td></tr>
     </table></div>
-    <div class="callout red">Encurtar descanso reduz volume válido e prejudica hipertrofia.</div>
-    <h3>Seleção de exercícios</h3>
-    <ul class="bullets">
-      <li><strong>Alta tensão no estiramento</strong> — onde mais hipertrofia acontece</li>
-      <li><strong>Permite progressão simples</strong> — adicionar reps ou peso sem retrabalho</li>
-      <li><strong>Não dói</strong> — desconforto fora de fadiga muscular = exercício errado</li>
-      <li><strong>50-70% compostos + 30-50% isoladores</strong> — composto primeiro</li>
-    </ul>
-    <div class="footer-note">Baseado em: Schoenfeld et al. (2017), Krieger (junk volume), Helms et al. (RIR), Wilson et al. (interferência cardio). Aplicado ao protocolo PPL 6x (Bodytech).</div>
+
+    <div class="footer-note">Baseado em: Beardsley (reps efetivas), Refalo et al. 2023-24 (falha vs RIR), Israetel (SFR/MRV), Wolf & Pedrosa 2022 (posição alongada), Schoenfeld et al. (volume), Trudel/Peters (rest-pause DC), Meadows (estrutura em fases). Aplicado ao Híbrido Falha Real 6x.</div>
   </div>
 
   <div class="section" id="alimentos">
@@ -1216,7 +1190,13 @@ const TECNICAS = [
   { name: 'Cluster Set', sub: 'Pausas intra-série programadas', desc: 'Divide uma série pesada em blocos curtos com micro-pausas, permitindo mais reps com carga alta mantendo qualidade.', how: '<strong>Como fazer:</strong> Ex: 5 reps pesadas → 15-20s de pausa → mais 5 reps → pausa → repete. Acumula volume com carga alta.' },
   { name: 'Cluster-Drop', sub: 'Combinação cluster + drop', desc: 'Faz o bloco de reps pesadas e na falha aplica drops sucessivos. Usado no 4º exercício do Push B / Legs B.', how: '<strong>Como fazer:</strong> 8 reps na carga → -25% AMRAP → -25% AMRAP. Combina força e fadiga metabólica numa série.' },
   { name: 'Stretch Focus (SF)', sub: 'Ênfase no estiramento', desc: 'Controla a excêntrica e enfatiza a posição alongada do músculo, onde mais hipertrofia acontece (Nippard).', how: '<strong>Como fazer:</strong> Excêntrica de 2-3s, pausa breve na posição alongada, sem rebote. Foco em sentir o estiramento.' },
-  { name: 'AMRAP', sub: 'As Many Reps As Possible', desc: 'Última série levada ao máximo de repetições com boa forma. Mede progresso e gera estímulo final.', how: '<strong>Como fazer:</strong> Na última série, em vez de parar no alvo, continua até a falha técnica. Registra as reps para acompanhar progresso.' }
+  { name: 'AMRAP', sub: 'As Many Reps As Possible', desc: 'Última série levada ao máximo de repetições com boa forma. Mede progresso e gera estímulo final.', how: '<strong>Como fazer:</strong> Na última série, em vez de parar no alvo, continua até a falha técnica. Registra as reps para acompanhar progresso.' },
+  { name: 'Parciais Alongadas', sub: 'Meias-reps na posição esticada', desc: 'Após a falha em amplitude completa, continua com meias-repetições só na metade alongada do movimento. A posição alongada tem a maior resposta hipertrófica por série (Milo Wolf, Pedrosa 2022).', how: '<strong>Como fazer:</strong> Falha em ROM completo → 4-6 meias-reps só na porção esticada (fundo do crucifixo, fundo da extensora, topo do pullover). Não usar em exercícios onde a posição alongada compromete a lombar.' },
+  { name: 'Rest-Pause DC', sub: 'Doggcrapp — 3 blocos até a falha', desc: 'Versão do rest-pause criada por Dante Trudel (base do método do Jordan Peters): uma série quebrada em 3 blocos até a falha com 20-30s de respiração profunda entre eles. Conta como 1 série, entrega o estímulo de 3.', how: '<strong>Como fazer:</strong> Falha (~8-10 reps) → 12-15 respirações profundas → mesma carga até a falha (~4-5 reps) → respirações → última falha (~2-3 reps). Só em máquinas e exercícios seguros. Máx 1 por sessão pesada.' },
+  { name: 'Pausa na Contração', sub: 'Isometria no pico', desc: 'Parar 1-2 segundos no ponto de contração máxima de cada repetição. Elimina impulso, garante que o músculo alvo está fazendo o trabalho. Sua ferramenta nº 1 para espessura de costas.', how: '<strong>Como fazer:</strong> Em toda remada: puxa → segura 1-2s com escápulas retraídas → excêntrica controlada. A carga cai ~20% em relação à remada sem pausa — é o esperado, não é regressão.' },
+  { name: 'Drop Mecânico', sub: 'Muda a alavanca, não a carga', desc: 'Na falha, em vez de reduzir o peso, muda pra uma variação mecanicamente mais forte do mesmo movimento e continua. Mantém a carga alta por mais reps efetivas.', how: '<strong>Como fazer:</strong> Ex: elevação lateral em pé até a falha → senta e continua (encurta alavanca) → falha de novo. Ou: supino inclinado 45° → falha → baixa pra 30° → continua.' },
+  { name: 'Pré-Exaustão', sub: 'Isolador antes do composto', desc: 'Fadigar o músculo alvo com um isolador antes do composto, garantindo que ele falhe primeiro que os sinergistas. Marca registrada do John Meadows pra peito e costas.', how: '<strong>Como fazer:</strong> Ex: peck deck 2×15 perto da falha → vai direto pro supino máquina. A carga do composto cai, mas o peitoral falha antes do tríceps. Usar só em dias pump — em dia pesado rouba carga dos compostos.' },
+  { name: 'Excêntrica Acentuada', sub: 'Descida lenta 3-5s', desc: 'Alongar deliberadamente a fase excêntrica. A excêntrica gera mais tensão por fibra e mais dano controlado — útil em exercícios onde subir a carga não é opção segura pra alavanca longa.', how: '<strong>Como fazer:</strong> Excêntrica de 3-5s contadas, concêntrica normal. Reduz as reps possíveis em ~20-30%. Boa em stiff, crucifixo e extensora. Não combinar com myo-reps no mesmo exercício.' }
 ];
 
 let currentDay = 'push-pesado';
@@ -1786,217 +1766,44 @@ if (Object.keys(cargasState).length === 0) {
 renderCargas();
 
 // Inicializa demais módulos
-// ============ TREINOS AVULSOS ============
-const AVULSOS = {
-  upper: {
-    name: 'UPPER — Peito + Costas',
-    meta: '~60-65 min · 6 exercícios · 12 séries válidas · formato 2 válidas',
-    warmup: '5min bike + band pull-apart 2×15 + cat-camel 10 reps. Rampa no 1º exercício: 50%×12 → 70%×8 → 85%×4.',
-    sections: [
-      { label: 'PEITO', exercises: [
-        { name: 'Chest Press Inclinado', rpe: '9', validas: '2 × 5-7 reps', feeders: '60%×6, 80%×3', tech: 'Cluster na 2ª válida', detail: 'Peito superior (ponto fraco) primeiro, fresco e pesado. Cluster: 5 reps → 15s → +2.' },
-        { name: 'Cross Over Alta→Baixa', rpe: '8', validas: '2 × 12-15 reps', feeders: '1 leve ×12', tech: 'Squeeze 1s', detail: 'Isolador. Pico de contração no cruzamento, cotovelo levemente flexionado fixo.' }
-      ]},
-      { label: 'COSTAS', exercises: [
-        { name: 'T-Bar (Cavalinho)', rpe: '9', validas: '2 × 5-7 reps', feeders: '60%×6, 80%×3', tech: 'Cluster na 2ª válida', detail: 'Espessura (ponto fraco). Cotovelo baixo ~45°, puxa até o quadril. Cluster: 5 reps → 15s → +2.' },
-        { name: 'Puxada Aberta Pronada', rpe: '9', validas: '2 × 6-8 reps', feeders: '70%×5', tech: 'ROM total', detail: 'Largura. Extensão completa no topo (sente o estiramento), puxa até o alto do peito.' },
-        { name: 'Remada Triângulo', rpe: '8-9', validas: '2 × 8-10 reps', feeders: '70%×5', tech: 'Squeeze 1s', detail: 'Espessura. Pausa 1s no pico, escápulas retraídas.' }
-      ]},
-      { label: 'FINALIZADOR', exercises: [
-        { name: 'Crucifixo Inverso', rpe: '8', validas: '2 × 15-20 reps', feeders: '1 leve ×12', tech: 'Sem técnica', detail: 'Deltoide posterior (saúde do ombro). Cotovelo ligeiramente flexionado fixo, pico 1s.' }
-      ]}
-    ]
-  },
-  ombrobraco: {
-    name: 'OMBRO + BRAÇO',
-    meta: '~60 min · 7 exercícios · 14 séries válidas · formato 2 válidas',
-    warmup: '5min bike + band pull-apart 2×15 + rotação externa mini-band 2×12 + círculos de ombro. Rampa no Desenvolvimento: 50%×12 → 70%×8 → 85%×4.',
-    sections: [
-      { label: 'OMBRO', exercises: [
-        { name: 'Desenvolvimento Militar Máquina', rpe: '9', validas: '2 × 6-8 reps', feeders: '60%×6, 80%×3', tech: 'Cluster na 2ª válida', detail: 'Composto pesado. Cluster: 6 reps → 15s → +2. Calibração da máquina importa — assento na altura certa.' },
-        { name: 'Elevação Lateral Halter', rpe: '8', validas: '2 × 12-15 reps', feeders: '1 leve ×12', tech: 'Myo-reps na 2ª', detail: 'Deltoide lateral. Cotovelo levemente flexionado, sobe até a linha do ombro. Myo: 15 @RIR1 → 5 resp → 5 reps × 3.' },
-        { name: 'Crucifixo Inverso', rpe: '8', validas: '2 × 15-20 reps', feeders: '1 leve ×12', tech: 'Pico 1s', detail: 'Deltoide posterior. Abertura controlada, contração 1s no topo.' }
-      ]},
-      { label: 'BÍCEPS', exercises: [
-        { name: 'Rosca Scott Máquina', rpe: '9', validas: '2 × 8-10 reps', feeders: '70%×5', tech: 'Sem técnica', detail: 'Bíceps pesado, fresco. ROM controlado, descida com 10° de flexão residual.' },
-        { name: 'Rosca Martelo Halter', rpe: '8', validas: '2 × 12-15 reps', feeders: '1 leve ×10', tech: 'Sem técnica', detail: 'Braquial. Pega neutra, cotovelo colado, sem supinar.' }
-      ]},
-      { label: 'TRÍCEPS', exercises: [
-        { name: 'Tríceps Corda', rpe: '8', validas: '2 × 10-12 reps', feeders: '70%×5', tech: 'Drop na 2ª válida', detail: 'Cotovelo fixo, abre as pontas no final. Drop: falha → -25% → AMRAP.' },
-        { name: 'Tríceps Testa Barra W', rpe: '8', validas: '2 × 10-12 reps', feeders: '1 leve ×10', tech: 'Stretch focus', detail: 'Cabeça longa. Cotovelos apontam pro teto, excêntrica 3s.' }
-      ]}
-    ]
-  },
-  curto: {
-    name: 'TEMPO CURTO',
-    meta: '~30-40 min · 4 exercícios · 8 séries válidas · sessão essencial',
-    warmup: '3min bike intensa + mobilidade rápida (band pull-apart 2×15 ou hip stretch dependendo do foco). Rampa no 1º: 60%×8 → 85%×3.',
-    sections: [
-      { label: 'COMO USAR', exercises: [
-        { name: 'Princípio', rpe: '—', validas: '—', feeders: '—', tech: '', detail: '<strong>Escolha um padrão de movimento por sessão</strong> (puxar, empurrar, ou perna). Os exercícios abaixo são exemplos pra cada padrão. Substitua conforme o foco do dia.' }
-      ]},
-      { label: 'EXEMPLO — UPPER PUXAR', exercises: [
-        { name: 'T-Bar ou Remada Máquina', rpe: '9', validas: '2 × 5-7 reps', feeders: '70%×5', tech: 'Sem firula', detail: 'Composto pesado de costas. Cargas altas, RPE 9 real.' },
-        { name: 'Puxada Aberta', rpe: '9', validas: '2 × 6-8 reps', feeders: '70%×5', tech: 'ROM total', detail: 'Vertical pull, largura.' },
-        { name: 'Rosca Scott', rpe: '8', validas: '2 × 8-10 reps', feeders: '1 leve ×8', tech: 'Sem técnica', detail: 'Bíceps fechando.' },
-        { name: 'Face Pull', rpe: '8', validas: '2 × 15-20 reps', feeders: '1 leve ×12', tech: 'Sem técnica', detail: 'Ombro/postura.' }
-      ]},
-      { label: 'EXEMPLO — UPPER EMPURRAR', exercises: [
-        { name: 'Chest Press Inclinado', rpe: '9', validas: '2 × 5-7 reps', feeders: '70%×5', tech: 'Cluster opcional', detail: 'Composto pesado de peito.' },
-        { name: 'Desenvolvimento Militar', rpe: '9', validas: '2 × 6-8 reps', feeders: '70%×5', tech: 'Sem técnica', detail: 'Composto de ombro.' },
-        { name: 'Tríceps Corda', rpe: '8', validas: '2 × 10-12 reps', feeders: '1 leve ×10', tech: 'Drop opcional', detail: 'Tríceps.' },
-        { name: 'Elevação Lateral', rpe: '8', validas: '2 × 12-15 reps', feeders: '1 leve ×12', tech: 'Sem técnica', detail: 'Deltoide lateral.' }
-      ]},
-      { label: 'EXEMPLO — PERNA', exercises: [
-        { name: 'Leg Press 45°', rpe: '9', validas: '2 × 6-8 reps', feeders: '70%×5, 85%×3', tech: 'Cluster opcional', detail: 'Composto pesado de quadríceps.' },
-        { name: 'Stiff Halter', rpe: '8', validas: '2 × 8-10 reps', feeders: '1 leve ×8', tech: 'Sem técnica', detail: 'Posterior.' },
-        { name: 'Cadeira Extensora', rpe: '8', validas: '2 × 12-15 reps', feeders: '1 leve ×10', tech: 'Sem técnica', detail: 'Isolador quadríceps.' },
-        { name: 'Panturrilha em Pé', rpe: '8', validas: '2 × 12-15 reps', feeders: '1 leve ×10', tech: 'Pausa 2s', detail: 'Panturrilha com pausa no estiramento.' }
-      ]}
-    ]
-  },
-  fraco: {
-    name: 'PONTO FRACO',
-    meta: '~50-60 min · 5 exercícios · 10 séries válidas · foco no atrasado',
-    warmup: '5min bike + mobilidade específica do grupo escolhido (ombro/quadril). Rampa no 1º: 50%×12 → 70%×8 → 85%×4.',
-    sections: [
-      { label: 'COMO USAR', exercises: [
-        { name: 'Princípio', rpe: '—', validas: '—', feeders: '—', tech: '', detail: '<strong>Escolha 1 ponto fraco por sessão</strong> e dedique o treino inteiro a ele. Seus pontos fracos documentados: peito superior, mid-back (espessura/romboides), quadríceps. Os blocos abaixo são exemplos pra cada um.' }
-      ]},
-      { label: 'PEITO SUPERIOR', exercises: [
-        { name: 'Chest Press Inclinado', rpe: '9', validas: '2 × 5-7', feeders: '60%×6, 80%×3', tech: 'Cluster na 2ª', detail: 'Tudo no peito superior. Banco a 30-45°.' },
-        { name: 'Supino Inclinado Halter 30°', rpe: '9', validas: '2 × 8-10', feeders: '70%×5', tech: 'Stretch focus', detail: 'Estiramento profundo. Excêntrica 3s.' },
-        { name: 'Cross Over Baixa→Alta', rpe: '8', validas: '2 × 12-15', feeders: '1 leve ×12', tech: 'Squeeze 1s', detail: 'Inverte o cross (alta→baixa pra baixa→alta) pra atacar fibras superiores.' },
-        { name: 'Pec Dec Inclinado', rpe: '8', validas: '2 × 12-15', feeders: '1 leve ×12', tech: 'Myo-reps na 2ª', detail: 'Isolador final, banco levemente inclinado.' },
-        { name: 'Crucifixo Halter Inclinado', rpe: '8', validas: '2 × 10-12', feeders: '1 leve ×10', tech: 'Stretch', detail: 'Finalizador no estiramento.' }
-      ]},
-      { label: 'MID-BACK (espessura/romboides)', exercises: [
-        { name: 'T-Bar (Cavalinho)', rpe: '9', validas: '2 × 5-7', feeders: '60%×6, 80%×3', tech: 'Cluster na 2ª', detail: 'Cotovelo baixo, puxa até o quadril.' },
-        { name: 'Remada Triângulo', rpe: '9', validas: '2 × 8-10', feeders: '70%×5', tech: 'Squeeze 2s', detail: 'Pausa 2s extra (vs 1s do normal) — foca no pico.' },
-        { name: 'Remada Máquina Fechada', rpe: '8', validas: '2 × 10-12', feeders: '1 leve ×10', tech: 'Sem técnica', detail: 'Variação de ângulo.' },
-        { name: 'Face Pull Corda', rpe: '8', validas: '2 × 15-20', feeders: '1 leve ×12', tech: 'Rotação externa', detail: 'Romboides + manguito.' },
-        { name: 'Encolhimento Trapézio', rpe: '8', validas: '2 × 12-15', feeders: '1 leve ×10', tech: 'Pausa no topo 2s', detail: 'Trapézio médio/superior fechando.' }
-      ]},
-      { label: 'QUADRÍCEPS', exercises: [
-        { name: 'Leg Press Pés Baixos', rpe: '9', validas: '2 × 5-7', feeders: '60%×6, 80%×3', tech: 'Cluster na 2ª', detail: 'Pés baixos = mais quadríceps. ROM profundo.' },
-        { name: 'Hack Squat ou Avanço Smith', rpe: '9', validas: '2 × 8-10', feeders: '70%×5', tech: 'Excêntrica 2-3s', detail: 'Segundo composto, foco em quadríceps.' },
-        { name: 'Cadeira Extensora', rpe: '9', validas: '2 × 10-12', feeders: '70%×5', tech: 'Rest-pause na 2ª', detail: 'Isolador puro. Rest-pause: falha → 15s → mais.' },
-        { name: 'Sissy Squat ou Extensora Unilateral', rpe: '8', validas: '2 × 10-12', feeders: '1 leve ×8', tech: 'Sem técnica', detail: 'Estiramento profundo do reto femoral.' },
-        { name: 'Cadeira Extensora pausa estendida', rpe: '8', validas: '2 × 12-15', feeders: '1 leve ×10', tech: 'Pausa 2s no topo', detail: 'Finalizador isométrico.' }
-      ]}
-    ]
-  }
-};
-
-let avulsoAtual = null;
-
-function selectAvulso(key) {
-  avulsoAtual = key;
-  document.querySelectorAll('.avulso-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.avulso-btn[onclick="selectAvulso(\'' + key + '\')"]').classList.add('active');
-  renderAvulsoDetail();
-}
-
-function renderAvulsoDetail() {
-  if (!avulsoAtual) { document.getElementById('avulso-detail').innerHTML = ''; return; }
-  const s = AVULSOS[avulsoAtual];
-  let html = `
-    <div class="avulso-session">
-      <div class="avulso-session-head">
-        <div class="avulso-session-title">${s.name}</div>
-        <div class="avulso-session-meta">${s.meta}</div>
-      </div>
-      <div class="avulso-warmup"><strong>🔥 Aquecimento:</strong> ${s.warmup}</div>`;
-
-  let exNum = 0;
-  s.sections.forEach(sec => {
-    html += `<div class="avulso-section-label">${sec.label}</div>`;
-    sec.exercises.forEach(ex => {
-      const isHelper = ex.rpe === '—';
-      if (!isHelper) exNum++;
-      html += `
-        <div class="avulso-ex">
-          <div class="avulso-ex-head">
-            ${!isHelper ? `<div class="avulso-ex-num">${exNum}</div>` : ''}
-            <div class="avulso-ex-name">${ex.name}</div>
-            ${!isHelper ? `<span class="avulso-ex-rpe">RPE ${ex.rpe}</span>` : ''}
-          </div>
-          ${ex.tech ? `<div class="avulso-ex-tech">⚡ ${ex.tech}</div>` : ''}
-          <div class="avulso-ex-detail">${!isHelper ? `<strong>${ex.validas}</strong> · ` : ''}${ex.detail}</div>
-          ${!isHelper && ex.feeders !== '—' ? `<div class="avulso-ex-feeders">Feeders: ${ex.feeders} (leve, sai fresco)</div>` : ''}
-        </div>`;
-    });
-  });
-
-  html += `</div>
-    <div class="callout" style="margin-top:14px;background:var(--bg3);padding:12px 14px;border-radius:8px;font-size:12px;color:var(--text2);line-height:1.5">
-      <strong>💡 Uso recomendado:</strong> Esses treinos são alternativas pontuais — não substituem o split principal de forma recorrente. Use quando o contexto pedir (viagem, tempo curto, vontade de variar) e volte pro PPL 6x na rotina normal.
-    </div>`;
-
-  document.getElementById('avulso-detail').innerHTML = html;
-}
-
-// ============ DIA DO CAOS ============
 const CAOS_SESSIONS = {
   peito: {
     name: 'CAOS — PEITO',
-    meta: '~90-100 min · 16-18 séries válidas · dobro do volume normal',
-    science: '<strong>Protocolo Nippard para especialização:</strong> tensão mecânica (composto pesado, baixo rep) → estresse metabólico (volume alto, curto descanso) → dano muscular (stretch focus). Total: 2× o volume semanal normal em uma sessão.',
+    meta: '~90 min · Especialização · Pesado até a falha → Pump → Stretch',
+    science: '<strong>Estrutura híbrida em 3 fases (lógica Meadows/Fortitude):</strong> FASE 1 Tensão mecânica — compostos pesados até a falha real, estilo dia pesado mas com mais exercícios. FASE 2 Estresse metabólico — volume alto, myo-reps e drops. FASE 3 Posição alongada — stretch focus pra fechar. Use no lugar do SÁBADO quando tiver tempo extra. Máximo 1x a cada 2 semanas, e nunca em semana de sono ruim (média < 6h).',
     warmup: {
-      geral: ['5min bike ou esteira leve (eleva temperatura corporal)', 'Band pull-apart 2×15 + rotação externa mini-band 2×12 (ativa manguito antes da carga pesada)'],
-      ramp: 'No 1º exercício (Chest Press Inclinado): 50%×12 → 70%×8 → 85%×4 → 1ª série de trabalho',
-      feeder: '2º composto (Supino Reto Máquina): 1 feeder set leve ×8 antes do trabalho. Isoladores e finalizadores entram direto — músculo já quente e fatigado.'
+      geral: ['5min bike leve', 'Band pull-apart 2×15 + rotação externa mini-band 2×12'],
+      ramp: 'No 1º exercício (Supino Inclinado): 50%×12 → 70%×6 → 85%×3 → trabalho até a falha',
+      feeder: '2º composto: 1 feeder leve ×6 antes do trabalho. Do meio pra frente entra direto — músculo já quente.'
     },
     exercises: [
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Chest Press Inclinado', sets: '6 séries × 3-5 reps', rest: '3-4 min', exec: 'Cluster pesado: 3 reps → 20s pausa → 2 reps → pausa → 2 reps. Carga 90-95% do PR (110kg). 6ª série: AMRAP.', why: 'Tensão mecânica alta = maior ativação de fibras tipo II. Base da hipertrofia segundo Schoenfeld (2010).' },
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Supino Reto Máquina', sets: '4 séries × 5-6 reps', rest: '3 min', exec: 'Carga pesada, squeeze 2s no topo. Após 4 séries: 1 série rest-pause até falhar.', why: 'Segundo composto pesado — tensão no peitoral plano que o inclinado não cobre.' },
-      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Pec Dec / Voador', sets: '4 séries × 12-15 reps', rest: '60-75s', exec: 'Carga 70%, pico contração 2s. Última série: MYO-REPS — 15 reps @RIR1 → 5 resp → 5 reps → repete 4x.', why: 'Estresse metabólico gera pump e sinalização anabólica local (Wernbom 2007).' },
-      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Cross Over Alta→Baixa', sets: '3 séries × 15-20 reps', rest: '60s', exec: 'Drop duplo na última: falha → -25% AMRAP → -25% AMRAP. Foco peitoral inferior.', why: 'Alto rep + curto descanso = pico de lactato → sinalização anabólica.' },
-      { tipo: 'fin', label: 'DANO MUSCULAR', name: 'Supino Inclinado Halter 30°', sets: '3 séries × 10-12 reps', rest: '90s', exec: 'STRETCH FOCUS: excêntrica 4s, pausa 2s no estiramento máximo. Carga leve (60%) — o estiramento é o objetivo.', why: 'Dano muscular no estiramento = maior resposta de crescimento (Schoenfeld 2014).' },
-      { tipo: 'fin', label: 'FINALIZADOR', name: 'Elevação Lateral Cabo Inclinado', sets: '3 séries × 15-20 reps', rest: '45s', exec: 'Drop triplo na última: falha → -20% → -20% → -20%. Deltoide lateral exausto.', why: 'Ombros como bônus — deltoide lateral responde muito a volume alto e drops.' }
+      { tipo: 'heavy', label: 'FASE 1 · PESADO ATÉ A FALHA', name: 'Supino Inclinado Halter 30°', sets: '3 séries × 6-9', rest: '2-3 min', exec: 'Falha concêntrica real em todas. Aqui você tem 1 série a mais que na segunda — é o luxo do dia com tempo.', why: 'Peito superior é seu ponto fraco nº 1 de frente. Tensão mecânica com falha real é o motor principal.' },
+      { tipo: 'heavy', label: 'FASE 1 · PESADO ATÉ A FALHA', name: 'Supino Reto Halteres', sets: '2 séries × 6-9', rest: '2-3 min', exec: 'Falha real. ROM completo, estiramento no fundo.', why: 'Plano reto cobre a porção esternal que o inclinado não maximiza.' },
+      { tipo: 'heavy', label: 'FASE 1 · PESADO ATÉ A FALHA', name: 'Desenvolvimento Halter Sentado', sets: '2 séries × 6-9', rest: '2 min', exec: 'Falha real. Sem travar cotovelo.', why: 'Ombro entra no caos de peito — empurrar pesado com peito já fatigado.' },
+      { tipo: 'vol', label: 'FASE 2 · PUMP', name: 'Peck Deck (Crucifixo Máq)', sets: '4 séries × 12-15', rest: '60-75s', exec: 'Pico de contração 1-2s. Última série: MYO-REPS — ativação à falha → 3-5 respirações → mini-sets de 3-5 reps × 4-5.', why: 'Estresse metabólico com resistência estável — alvo perfeito de myo-reps.' },
+      { tipo: 'vol', label: 'FASE 2 · PUMP', name: 'Cross Over Baixa→Alta', sets: '3 séries × 15-20', rest: '60s', exec: 'Drop duplo na última: falha → -25% AMRAP → -25% AMRAP. Tensão contínua.', why: 'De baixo pra cima = fibra clavicular. Pump máximo no ponto fraco.' },
+      { tipo: 'fin', label: 'FASE 3 · POSIÇÃO ALONGADA', name: 'Crucifixo Inclinado Halter', sets: '2 séries × 10-12', rest: '90s', exec: 'STRETCH FOCUS: excêntrica 4s, pausa 2s no estiramento máximo, carga leve (60%). Última série: + 5 parciais alongadas.', why: 'Tensão na posição alongada tem a maior resposta hipertrófica por série (Wolf/Pedrosa). Fecha o protocolo.' }
     ]
   },
   costas: {
     name: 'CAOS — COSTAS',
-    meta: '~95-100 min · 17-19 séries válidas · largura + espessura',
-    science: '<strong>Protocolo Nippard para costas:</strong> vertical pull (largura) + horizontal pull (espessura) + isoladores. Dorsal precisa dos dois planos para desenvolvimento completo.',
+    meta: '~90 min · Especialização · Espessura pesada → Largura → Pump → Stretch',
+    science: '<strong>Estrutura híbrida em 3 fases:</strong> FASE 1 — remadas pesadas até a falha (espessura é a SUA prioridade, então o horizontal vem antes do vertical e mais pesado). FASE 2 — volume com pausa na contração e myo-reps. FASE 3 — stretch de dorsal. Use no lugar do SÁBADO quando tiver tempo extra. Máximo 1x a cada 2 semanas, nunca em semana de sono ruim (média < 6h).',
     warmup: {
-      geral: ['5min bike leve', 'Cat-camel 10 reps + dead hang 20-30s (descomprime e ativa pegada/dorsal)', 'Band pull-apart 2×15 (ativa romboides)'],
-      ramp: 'No 1º exercício (T-Bar / Cavalinho): 50%×10 → 70%×8 → 85%×4 → 1ª série de trabalho',
-      feeder: '2º composto (Puxada Alta Aberta): 1 feeder set leve ×8 antes do trabalho. Isoladores e finalizadores entram direto.'
+      geral: ['5min bike leve', 'Cat-camel 10 reps + dead hang 20-30s', 'Band pull-apart 2×15'],
+      ramp: 'No 1º exercício (T-Bar): 50%×12 → 60%×6 → 80%×3 → trabalho até a falha',
+      feeder: '2º composto: 1 feeder leve ×6. Do meio pra frente entra direto.'
     },
     exercises: [
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'T-Bar (Cavalinho)', sets: '6 séries × 4-6 reps', rest: '3-4 min', exec: 'Carga 85-90% PR. Cluster: 4 reps → 20s pausa intra-set → 2 reps. Cotovelo baixo (~45° do tronco), puxar até o quadril, escápula retraída no topo. 6ª série: AMRAP.', why: 'Tensão mecânica máxima no dorsal e romboides. Composto mais pesado do dia — ROM livre permite carga alta com bom estiramento.' },
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Puxada Alta Aberta (pronada)', sets: '4 séries × 5-7 reps', rest: '3 min', exec: 'Pega larga pronada (palmas pra frente). ROM total — extensão completa no topo (sente o dorsal alongar) → puxa até o alto do peito, cotovelos descem pra baixo e pra trás. Contração 1s embaixo. Leve inclinação do tronco pra trás, sem usar impulso.', why: 'Largura do dorsal — vertical pull com pega larga recruta mais a porção superior/lateral do dorsal que o T-Bar não cobre.' },
-      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Pulldown Pega Fechada', sets: '4 séries × 10-12 reps', rest: '75s', exec: 'Última série: rest-pause — falha → 15s → mesma carga → mais reps. ROM total.', why: 'Pega fechada = ROM mais profundo e melhor alongamento do dorsal.' },
-      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Remada Baixa Triângulo', sets: '4 séries × 12-15 reps', rest: '75s', exec: 'Squeeze escápulas 2s. Última série: drop -25% AMRAP.', why: 'Horizontal pull de alto volume — romboides e trapézio médio.' },
-      { tipo: 'fin', label: 'DANO MUSCULAR', name: 'Pullover Polia Alta', sets: '3 séries × 15 reps', rest: '75s', exec: 'STRETCH FOCUS: pausa 2s no estiramento máximo (braços pra cima). Cotovelo travado. Carga moderada.', why: 'Dano muscular via estiramento — encerra o protocolo com dorsal exausto.' },
-      { tipo: 'fin', label: 'FINALIZADOR', name: 'Rosca Scott Máquina', sets: '3 séries × 10-12 reps', rest: '60s', exec: 'Myo-reps: 10 reps @RIR1 → 5 resp → 3-4 reps → repete 3x. Bíceps já pré-fadigado.', why: 'Bíceps pré-fadigado pelo dia de costas — myo-reps maximiza com pouco esforço adicional.' }
-    ]
-  },
-  pernas: {
-    name: 'CAOS — PERNAS',
-    meta: '~100-110 min · 18-20 séries válidas · quadríceps + posterior + glúteo',
-    science: '<strong>Protocolo Nippard + Pacholok para pernas:</strong> composto pesado de quadríceps → posterior pesado → volume isolado → finalizadores. Pernas têm a maior capacidade de recuperação e volume de todos os grupos musculares.',
-    warmup: {
-      geral: ['5min bike subindo intensidade (ativa quadríceps e aquece joelho)', '90/90 hip stretch 8/lado + dorsiflexão na parede 10/lado', '10 agachamentos livres profundos (padrão de movimento)'],
-      ramp: 'No 1º exercício (Leg Press): 40%×10 → 60%×8 → 80%×4 → 90%×1 → 1ª série de trabalho (perna precisa de rampa mais longa)',
-      feeder: '2º e 3º compostos (Hack Squat, Stiff): 1 feeder set leve ×6-8 cada antes do trabalho. Isoladores e finalizadores entram direto.'
-    },
-    exercises: [
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Leg Press 45° Pés Baixos', sets: '6 séries × 4-6 reps', rest: '3-4 min', exec: 'CARGA MÁXIMA. Cluster: 4 reps → 20s → 2 reps → pausa → 2 reps. ROM profundo (90°+). 6ª série: AMRAP. PR atual: 300kg.', why: 'Tensão mecânica máxima de quadríceps. Leg press permite carga supramaximal vs agachamento.' },
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Hack Squat', sets: '4 séries × 5-7 reps', rest: '3 min', exec: 'Cluster: 4 reps → 20s → mais 2-3. Pés baixos, ROM profundo. 4ª série: AMRAP.', why: 'Ângulo de tensão diferente do leg press — cobre o quadríceps de forma complementar.' },
-      { tipo: 'heavy', label: 'TENSÃO MECÂNICA', name: 'Stiff Halter', sets: '4 séries × 6-8 reps', rest: '3 min', exec: 'Carga 85% PR (56kg), excêntrica 3s, hip hinge limpo. Posterior e glúteo máximos.', why: 'Posterior pesado após quadríceps — equilíbrio e prevenção de desequilíbrio.' },
-      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Cadeira Extensora', sets: '4 séries × 12-15 reps', rest: '60s', exec: 'Última série: rest-pause triplo — falha → 15s → reps → 15s → reps. Squeeze no topo.', why: 'Isolador de quadríceps em alto volume — estresse metabólico máximo.' },
-      { tipo: 'vol', label: 'ESTRESSE METABÓLICO', name: 'Mesa Flexora', sets: '3 séries × 12-15 reps', rest: '60s', exec: 'Myo-reps na última: 15 reps @RIR1 → 5 resp → 5 reps → repete 3x. ROM total.', why: 'Posterior em alto volume — complementa o stiff com foco no pico de contração.' },
-      { tipo: 'fin', label: 'DANO MUSCULAR', name: 'Avanço Passada Halter', sets: '3 séries × 10/perna', rest: '90s', exec: 'EXCÊNTRICA 4s em cada rep. Quadríceps e glúteo já pré-fadigados — o estiramento vai ser intenso.', why: 'Dano muscular via excêntrica em músculo pré-fadigado = resposta máxima de crescimento.' },
-      { tipo: 'fin', label: 'FINALIZADOR', name: 'Panturrilha em Pé', sets: '4 séries × 15-20 reps', rest: '45s', exec: 'Drop duplo nas últimas 2 séries + pausa 3s no estiramento a cada rep.', why: 'Panturrilha como bônus — responde muito a volume alto e pausa no estiramento.' }
+      { tipo: 'heavy', label: 'FASE 1 · PESADO ATÉ A FALHA', name: 'T-Bar (Cavalinho)', sets: '3 séries × 6-9', rest: '2-3 min', exec: 'Falha real + pausa 1s na contração em toda rep. Cotovelo ~45° do tronco, puxar até o quadril.', why: 'Espessura de meio de costas é seu ponto mais atrasado do tronco. Remada pesada com pausa é o remédio.' },
+      { tipo: 'heavy', label: 'FASE 1 · PESADO ATÉ A FALHA', name: 'Remada Baixa Triângulo', sets: '2 séries × 8-10', rest: '2 min', exec: 'Falha real, escápulas retraídas 1s em toda rep.', why: 'Segundo horizontal — romboides e trapézio médio com ângulo diferente do T-Bar.' },
+      { tipo: 'heavy', label: 'FASE 1 · PESADO ATÉ A FALHA', name: 'Puxada Pronada Aberta', sets: '2 séries × 6-9', rest: '2 min', exec: 'Falha real. Pega larga, ROM total, alongar completo no topo.', why: 'Largura entra depois da espessura — sua dorsal já é larga, aqui é manutenção do ponto forte.' },
+      { tipo: 'vol', label: 'FASE 2 · PUMP', name: 'Remada Máquina Fechada', sets: '4 séries × 12-15', rest: '60-75s', exec: 'Pausa 1-2s na contração TODA rep. Última série: MYO-REPS — ativação à falha → 3-5 respirações → mini-sets × 4-5.', why: 'Volume de espessura com custo baixo — máquina estável, falha segura.' },
+      { tipo: 'vol', label: 'FASE 2 · PUMP', name: 'Face Pull Corda', sets: '3 séries × 15-20', rest: '45-60s', exec: 'Cotovelos altos, rotação externa no final. Última: drop -25% AMRAP.', why: 'Trapézio médio + posterior de ombro + saúde articular pro volume de empurrar da semana.' },
+      { tipo: 'fin', label: 'FASE 3 · POSIÇÃO ALONGADA', name: 'Pullover Polia Alta', sets: '2 séries × 12-15', rest: '75s', exec: 'STRETCH FOCUS: pausa 2s no estiramento máximo, cotovelo travado. Última série: + 5 parciais alongadas.', why: 'Dorsal sob tensão na posição mais alongada fecha o protocolo.' }
     ]
   }
 };
-
-let caosAtual = null;
-
 function selectCaos(grupo) {
   caosAtual = grupo;
   document.querySelectorAll('.caos-btn').forEach(b => b.classList.remove('active'));
@@ -2151,7 +1958,6 @@ const NAV = {
   treino: [
     { id: 'treinos', label: 'Sessões' },
     { id: 'caos', label: '🔥 Caos' },
-    { id: 'avulsos', label: '⚡ Avulsos' },
     { id: 'split', label: 'Split' },
     { id: 'tecnicas', label: 'Técnicas' },
     { id: 'cardio', label: 'Cardio' },
