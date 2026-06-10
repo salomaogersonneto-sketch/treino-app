@@ -386,7 +386,7 @@
 <div class="header">
   <div class="h-label">GSN Training</div>
   <div class="h-title">Manual de Treino</div>
-  <div class="h-sub">PPL 6x · Bodytech · base científica Jeff Nippard</div>
+  <div class="h-sub">Híbrido Falha Real · Pesado + Pump · Perna 1x · Yates / JP / Meadows / Stevenson</div>
   <div class="maintabs" id="maintabs">
     <button class="maintab active" data-main="treino" onclick="selectMain('treino')">🏋️ Treino</button>
     <button class="maintab" data-main="nutricao" onclick="selectMain('nutricao')">🥗 Nutrição</button>
@@ -402,6 +402,15 @@
   <div class="section active" id="treinos">
     <div class="day-grid" id="day-grid"></div>
     <div id="day-detail"></div>
+  </div>
+
+
+  <div class="section" id="videos">
+    <div class="caos-intro" style="margin-bottom:14px">
+      <div class="caos-intro-title">▶️ Referências em Vídeo</div>
+      <div class="caos-intro-sub">Os treinadores por trás do sistema · Pesado = Yates/JP · Pump = Meadows · Híbrido = Fortitude (Stevenson)</div>
+    </div>
+    <div id="videos-list"></div>
   </div>
 
   <div class="section" id="caos">
@@ -640,93 +649,84 @@
 
 <script>
 const PROGRAM = {
-  'push-a': { name: 'Push A', sub: 'Força · Peito-dominante', dur: 65, tag: 'push',
+  'push-pesado': { name: 'Push Pesado', sub: 'SEG · Falha real · Low volume (Yates/JP)', dur: 60, tag: 'push', modelo2v: true,
     exercises: [
-      { name: 'Chest Press Inclinado', sets: 5, reps: '4', tech: 'Cluster + AMRAP no 5º', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Inclinado Halter 30°', 'Supino Máquina', 'Supino Smith Inclinado'], note: '15s intra-set, 2-3min entre clusters' },
-      { name: 'Supino Reto Halteres', sets: 4, reps: '6-10', tech: 'Dupla progressão', primary: ['Peitoral'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Máquina', 'Supino Smith', 'Chest Press Reto'], note: 'ROM completo, estiramento no fundo. Progride de 2 em 2kg por halter' },
-      { name: 'Supino Inclinado Halter 30°', sets: 3, reps: '8-10', tech: 'Stretch focus', primary: ['Peitoral superior'], secondary: ['Deltoide anterior'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado', 'Crucifixo Inclinado'], note: '2s na descida, foco no estiramento' },
-      { name: 'Cross Over Alta→Baixa', sets: 3, reps: '10-12', tech: 'Squeeze 1s', primary: ['Peitoral inferior'], secondary: ['Peitoral'], subs: ['Pec Dec (Crucifixo Máq)', 'Crucifixo Inclinado Halter', 'Cross Over Baixa→Alta'], note: 'Apertar 1s no ponto de contração. Pode trocar por Pec Dec 100kg' },
-      { name: 'Desenvolvimento Militar Máquina', sets: 3, reps: '8-10', tech: 'Dupla progressão', primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Halter Sentado', 'Arnold Press', 'Desenvolvimento Smith'], note: 'Calibrar Bodytech' },
-      { name: 'Elevação Lateral Halter', sets: 3, reps: '12-15', tech: 'Myo-reps no último', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Cabo', 'Elevação Lateral Máquina', 'Elevação Lateral Inclinado'], note: 'Último: ativação + 3-5 mini-sets de 3-5 reps com 5 respirações' },
-      { name: 'Tríceps Corda', sets: 3, reps: '12-15', tech: 'Drop no último', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Pulley Barra', 'Tríceps Testa Barra W', 'Tríceps Francês'], note: 'Último: falha + (-25%) AMRAP' }
+      { name: 'Supino Inclinado Halter 30°', sets: 2, reps: '6-9', tech: 'Falha real', rpe: 'FALHA', serie: { aq: '~50% × 12', feeders: ['~70% × 6', '~85% × 3'], validas: '2 × 6-9 até a falha concêntrica' }, primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado'], note: 'Alavanca longa (2,02m): amplitude controlada, sem rebote. A série acaba quando o peso não sobe.' },
+      { name: 'Desenvolvimento Halter Sentado', sets: 2, reps: '6-9', tech: 'Falha real', rpe: 'FALHA', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 6-9 até a falha' }, primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Militar Máquina', 'Desenvolvimento Smith'], note: 'Sem travar cotovelo no topo.' },
+      { name: 'Crucifixo Inclinado Halter', sets: 2, reps: '8-10', tech: 'Falha + 2 parciais no alongamento', rpe: 'FALHA', serie: { aq: null, feeders: ['1 leve × 10'], validas: '2 × 8-10 até a falha + 2 parciais' }, primary: ['Peitoral superior'], secondary: ['Peitoral'], subs: ['Peck Deck (Crucifixo Máq)', 'Cross Over Baixa→Alta'], note: 'Parciais só na metade alongada.' },
+      { name: 'Elevação Lateral Halter', sets: 2, reps: '10-12', tech: 'Falha real, sem balanço', rpe: 'FALHA', serie: { aq: null, feeders: ['1 leve × 12'], validas: '2 × 10-12 até a falha' }, primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Cabo Inclinado', 'Elevação Lateral Máquina'], note: 'Lateral é ponto fraco prioritário. Zero balanço.' },
+      { name: 'Tríceps Testa Barra W', sets: 2, reps: '8-10', tech: 'Falha + rest-pause na última', rpe: 'FALHA', serie: { aq: null, feeders: ['1 leve × 10'], validas: '2 × 8-10 · última: falha → 15s → +reps' }, primary: ['Tríceps (cabeça longa)'], secondary: [], subs: ['Tríceps Francês Halter', 'Tríceps Corda'], note: 'Rest-pause em no máximo 1 exercício por sessão — é este.' }
     ]},
-  'pull-a': { name: 'Pull A', sub: 'Força · Dorso-dominante · Modelo 2 válidas', dur: 65, tag: 'pull', modelo2v: true,
+  'pull-pesado': { name: 'Pull Pesado', sub: 'TER · Falha real · Espessura prioridade', dur: 60, tag: 'pull', modelo2v: true,
     exercises: [
-      { name: 'T-Bar (Cavalinho)', sets: 2, reps: '5-7', tech: 'Cluster na 2ª válida', rpe: '9', serie: { aq: '~50% × 12', feeders: ['~60% × 6', '~80% × 3'], validas: '2 × 5-7 reps @RPE 9' }, primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio', 'Bíceps'], subs: ['Remada Máquina Fechada', 'Remada Triângulo', 'Remada Baixa'], note: 'Composto pesado do dia. 2ª válida: cluster (5 reps → 15s → +2)' },
-      { name: 'Pulldown Neutro', sets: 2, reps: '6-8', tech: 'Dupla progressão', rpe: '9', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 6-8 reps @RPE 9' }, primary: ['Dorsal'], secondary: ['Bíceps', 'Romboides'], subs: ['Puxada Aberta Pronada', 'Pulldown Reto', 'Puxada Supinada'], note: 'Pega neutra, contração 1s no peito' },
-      { name: 'Remada Triângulo', sets: 2, reps: '8-10', tech: 'Squeeze 1s', rpe: '8-9', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 8-10 reps @RPE 8-9' }, primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio médio', 'Bíceps'], subs: ['Remada Serrote Halter', 'Remada Máquina Fechada', 'Remada Baixa Aberta'], note: 'Espessura. Pausa 1s na contração máxima (escápulas retraídas)' },
-      { name: 'Pullover Polia Alta', sets: 2, reps: '12-15', tech: 'Stretch focus', rpe: '8', serie: { aq: null, feeders: ['1 leve × 10'], validas: '2 × 12-15 reps @RPE 8' }, primary: ['Dorsal'], secondary: ['Peitoral', 'Serrátil'], subs: ['Pulldown Reto', 'Cross Over Inverso', 'Pullover Halter'], note: 'Isolador. Cotovelo TRAVADO, stretch máximo' },
-      { name: 'Face Pull Corda', sets: 2, reps: '15-20', tech: 'Rotação externa', rpe: '8', serie: { aq: null, feeders: ['1 leve × 12'], validas: '2 × 15-20 reps @RPE 8' }, primary: ['Deltoide posterior'], secondary: ['Romboides', 'Trapézio'], subs: ['Crucifixo Inverso', 'Remada Alta Corda', 'Reverse Pec Deck'], note: 'Saúde do ombro. Cotovelos altos, abrir bem' },
-      { name: 'Rosca Polia Alongada', sets: 2, reps: '10-12', tech: 'Stretch focus (finalizador do dia)', rpe: '9', serie: { aq: null, feeders: ['~70% × 6'], validas: '2 × 10-12 reps, 2ª com pausa 2s no estiramento' }, primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Scott Máquina', 'Rosca Direta Barra W', 'Rosca Concentrada'], note: 'Evidência forte de hipertrofia: tensão máxima no estiramento (Nippard). Braço atrás do corpo, cotovelo travado' },
-      { name: 'Rosca Martelo Halter', sets: 2, reps: '12-15', tech: 'Reto (sem técnica)', rpe: '8', serie: { aq: null, feeders: ['1 leve × 10'], validas: '2 × 12-15 reps @RPE 8' }, primary: ['Braquial', 'Braquiorradial'], secondary: ['Bíceps'], subs: ['Rosca Direta Halter', 'Rosca Corda Polia', 'Rosca Martelo Cabo'], note: 'Fecha o dia. Sem técnica avançada — controle a tentação' }
+      { name: 'T-Bar (Cavalinho)', sets: 2, reps: '6-9', tech: 'Falha + pausa 1s na contração', rpe: 'FALHA', serie: { aq: '~50% × 12', feeders: ['~60% × 6', '~80% × 3'], validas: '2 × 6-9 até a falha, pausa 1s contraído' }, primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio', 'Bíceps'], subs: ['Remada Curvada Barra', 'Remada Máquina Fechada'], note: 'Prioridade da sessão. Espessura vem daqui.' },
+      { name: 'Pulldown Neutro', sets: 2, reps: '6-9', tech: 'Falha real', rpe: 'FALHA', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 6-9 até a falha' }, primary: ['Dorsal'], secondary: ['Bíceps', 'Romboides'], subs: ['Puxada Pronada Aberta', 'Pulldown Reto'], note: 'Contração 1s no peito.' },
+      { name: 'Remada Baixa Triângulo', sets: 2, reps: '8-10', tech: 'Falha + squeeze 1s', rpe: 'FALHA', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 8-10 até a falha' }, primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio médio'], subs: ['Remada Triângulo', 'Remada Serrote Halter'], note: 'Escápulas retraídas 1s em toda rep.' },
+      { name: 'Encolhimento Halter', sets: 2, reps: '10-12', tech: 'Falha + 1s no topo', rpe: 'FALHA', serie: { aq: null, feeders: ['1 leve × 10'], validas: '2 × 10-12 até a falha' }, primary: ['Trapézio superior'], secondary: ['Trapézio médio'], subs: ['Encolhimento Barra', 'Encolhimento Smith'], note: 'Segura 1s no topo, desce controlado.' },
+      { name: 'Rosca Alternada Banco Inclinado', sets: 2, reps: '8-10', tech: 'Falha + rest-pause na última', rpe: 'FALHA', serie: { aq: null, feeders: ['1 leve × 10'], validas: '2 × 8-10 · última: falha → 15s → +reps' }, primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Direta Barra W', 'Rosca Scott Máquina'], note: 'Stretch no fundo, sem balanço de tronco.' }
     ]},
-  'legs-a': { name: 'Legs A', sub: 'Força · Quadríceps-dominante', dur: 70, tag: 'legs',
+  'legs': { name: 'Pernas (única)', sub: 'QUA · Híbrido pesado+pump · Zero margem de erro', dur: 60, tag: 'legs', modelo2v: true,
     exercises: [
-      { name: 'Leg Press 45° Pés Baixos', sets: 5, reps: '5-7', tech: 'Cluster + AMRAP no 5º', primary: ['Quadríceps'], secondary: ['Glúteo'], subs: ['Hack Squat', 'Leg Press Vertical', 'Agachamento Smith'], note: 'Carga máxima do dia, fresco. Cluster: 5 reps → 20s → +2. ROM profundo (90°+), sem travar joelho. Confortável de estômago cheio (reclinado, sem compressão axial)' },
-      { name: 'Avanço no Smith', sets: 4, reps: '8-10/perna', tech: 'Excêntrica 2-3s', primary: ['Quadríceps'], secondary: ['Glúteo', 'Adutores'], subs: ['Hack Squat', 'Leg Press 45°', 'Agachamento Búlgaro'], note: 'Foco quadríceps: passada curta-média + tronco ereto. Joelho de trás quase no chão, excêntrica 2-3s' },
-      { name: 'Cadeira Extensora', sets: 3, reps: '12-15', tech: 'Rest-pause no último', primary: ['Quadríceps'], secondary: [], subs: ['Cadeira Extensora Unilateral', 'Leg Press Pés Altos', 'Sissy Squat'], note: 'Último: falha + 15s + reps' },
-      { name: 'Stiff Halter', sets: 3, reps: '8-10', tech: 'Stretch focus + RIR 2', primary: ['Posteriores', 'Glúteo'], secondary: ['Lombar'], subs: ['Stiff Barra', 'Levantamento Terra Romeno', 'Stiff Smith'], note: 'Excêntrica 3s, hip hinge limpo' },
-      { name: 'Mesa Flexora', sets: 3, reps: '10-12', tech: 'Myo-reps no último', primary: ['Posteriores'], secondary: ['Panturrilha'], subs: ['Cadeira Flexora (sentada)', 'Flexora em Pé', 'Flexora Unilateral'], note: 'Pico de contração, ROM total. Nippard sugere flexora SENTADA (55% mais ganho)' },
-      { name: 'Panturrilha em Pé', sets: 4, reps: '10-12', tech: 'Drop + 2s alongado', primary: ['Gastrocnêmio'], secondary: ['Sóleo'], subs: ['Panturrilha Sentado', 'Panturrilha Leg Press', 'Panturrilha Smith'], note: 'Pausa 2s no alongamento' }
+      { name: 'Hack Squat Pés Altos', sets: 2, reps: '6-9', tech: 'Falha técnica', rpe: 'FALHA', serie: { aq: '~40% × 10', feeders: ['~60% × 6', '~80% × 3'], validas: '2 × 6-9 até a falha técnica' }, primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Agachamento Livre', 'Leg Press 45° Pés Baixos'], note: 'Falha técnica = quando a postura quebra, não quando o ego quebra. Perna treina 1x: esta é a sessão mais brutal da semana, sem exceção.' },
+      { name: 'Stiff Halter', sets: 2, reps: '8-10', tech: 'Falha técnica · excêntrica 3s', rpe: 'FALHA', serie: { aq: null, feeders: ['~70% × 5'], validas: '2 × 8-10 até a falha técnica' }, primary: ['Posteriores', 'Glúteo'], secondary: ['Lombar'], subs: ['Stiff Barra', 'Levantamento Terra Romeno'], note: 'Alavanca longa: amplitude até onde a lombar segura neutra.' },
+      { name: 'Leg Press 45° Pés Baixos', sets: 3, reps: '15-20', tech: 'Drop-set na última', primary: ['Quadríceps'], secondary: ['Glúteo'], subs: ['Hack Squat', 'Leg Press Vertical'], note: 'Aqui muda o estilo: PUMP. Descanso 60-75s. Última série: falha → -25% → AMRAP.' },
+      { name: 'Cadeira Extensora', sets: 2, reps: '12-15', tech: 'Falha + 5 parciais', primary: ['Quadríceps'], secondary: [], subs: ['Extensora Unilateral', 'Sissy Squat'], note: 'Parciais na metade final do movimento.' },
+      { name: 'Mesa Flexora', sets: 2, reps: '12-15', tech: 'Falha na última', primary: ['Posteriores'], secondary: [], subs: ['Cadeira Flexora (sentada)', 'Flexora Unilateral'], note: 'Flexora sentada se disponível (maior alongamento).' },
+      { name: 'Panturrilha em Pé', sets: 4, reps: '10-15', tech: 'Pausa 2s alongado · falha em todas', primary: ['Gastrocnêmio'], secondary: ['Sóleo'], subs: ['Panturrilha Sentado', 'Panturrilha Leg Press'], note: 'Pausa de 2s no alongamento em toda rep.' }
     ]},
-  'push-b': { name: 'Push B', sub: 'Hipertrofia · Volume metabólico', dur: 67, tag: 'push',
+  'push-pump': { name: 'Push Pump', sub: 'QUI · Volume alto (Meadows) · Falha só na última', dur: 60, tag: 'push',
     exercises: [
-      { name: 'Supino Inclinado Halter 45°', sets: 4, reps: '8-10', tech: 'Cluster-drop no 4º', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Inclinado Halter 30°', 'Chest Press Inclinado', 'Supino Smith Inclinado'], note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP' },
-      { name: 'Chest Press Reto Máquina', sets: 3, reps: '10-12', tech: 'Squeeze', primary: ['Peitoral'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Supino Máquina', 'Supino Inclinado Halter', 'Crucifixo Máquina'], note: 'Foco em squeeze no topo' },
-      { name: 'Peck Deck (Crucifixo Máq)', sets: 3, reps: '12-15', tech: 'Myo-reps no último', primary: ['Peitoral'], secondary: [], subs: ['Cross Over Alta→Baixa', 'Crucifixo Inclinado Halter', 'Cross Over Médio'], note: 'Pico de contração 1-2s' },
-      { name: 'Desenvolvimento Halter Sentado', sets: 4, reps: '8-10', tech: 'ROM completo', primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Militar Máquina', 'Arnold Press', 'Desenvolvimento Smith'], note: 'Descida até paralelo ao chão' },
-      { name: 'Elevação Lateral Cabo Inclinado', sets: 4, reps: '12-15', tech: 'Drop duplo', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Halter', 'Elevação Lateral Máquina', 'Elevação Lateral Unilateral'], note: 'Último: -25% AMRAP, -25% AMRAP' },
-      { name: 'Tríceps Testa Barra W', sets: 3, reps: '10-12', tech: 'Stretch focus + cotovelo alto', primary: ['Tríceps (cabeça longa)'], secondary: [], subs: ['Tríceps Francês Halter', 'Tríceps Pulley Barra', 'Tríceps Testa Halter'], note: 'Cotovelo apontando teto' },
-      { name: 'Tríceps Pulley Inverso', sets: 2, reps: '12-15', tech: 'Myo-reps no último', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Corda', 'Tríceps Francês Unilateral', 'Tríceps Pulley Barra'], note: 'Pegada supinada, unilateral' }
+      { name: 'Supino Inclinado Halter 30°', sets: 4, reps: '12-15', tech: 'Falha só na última', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado'], note: 'Carga leve, descanso 45-75s, foco total em contração.' },
+      { name: 'Cross Over Baixa→Alta', sets: 3, reps: '15-20', tech: 'Drop na última', primary: ['Peitoral superior'], secondary: [], subs: ['Crucifixo Inclinado Halter', 'Peck Deck (Crucifixo Máq)'], note: 'De baixo pra cima = clavicular. Tensão contínua.' },
+      { name: 'Elevação Lateral Cabo Inclinado', sets: 4, reps: '15-20', tech: 'Falha na última + 5 parciais', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Halter', 'Elevação Lateral Máquina'], note: 'Mínimo 6 séries de lateral somando a semana — aqui vão 4.' },
+      { name: 'Desenvolvimento Militar Máquina', sets: 3, reps: '12-15', tech: 'Tensão contínua', primary: ['Deltoide anterior'], secondary: ['Deltoide lateral', 'Tríceps'], subs: ['Desenvolvimento Halter Sentado', 'Arnold Press'], note: 'Leve. Sem travar cotovelo.' },
+      { name: 'Tríceps Corda', sets: 3, reps: '12-15', tech: 'Drop na última', primary: ['Tríceps'], secondary: [], subs: ['Tríceps Pulley Barra', 'Tríceps Francês'], note: 'Abrir a corda no final do movimento.' }
     ]},
-  'pull-b': { name: 'Pull B', sub: 'Hipertrofia · Largura', dur: 65, tag: 'pull',
+  'pull-pump': { name: 'Pull Pump', sub: 'SEX · Volume alto · Espessura: pausa na contração', dur: 60, tag: 'pull',
     exercises: [
-      { name: 'Puxada Pronada Aberta', sets: 4, reps: '6-8', tech: 'Dupla progressão + ROM total', primary: ['Dorsal'], secondary: ['Bíceps', 'Romboides'], subs: ['Pulldown Neutro', 'Pulldown Reto', 'Puxada Supinada'], note: 'Pega larga' },
-      { name: 'Remada Baixa Pega Aberta', sets: 4, reps: '8-10', tech: 'AMRAP no último', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio', 'Bíceps'], subs: ['Remada Máquina Fechada', 'T-Bar', 'Remada Serrote'], note: 'Pega aberta, cotovelos abertos' },
-      { name: 'Pulldown Pega Fechada', sets: 3, reps: '10-12', tech: 'Rest-pause no último', primary: ['Dorsal'], secondary: ['Bíceps'], subs: ['Pulldown Neutro', 'Puxada Supinada', 'Pulldown Reto'], note: 'Último: falha + 15s + reps' },
-      { name: 'Remada Baixa Triângulo', sets: 3, reps: '10-12', tech: 'Squeeze 1s', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio'], subs: ['Remada Máquina Fechada', 'Remada Serrote Halter', 'Remada Baixa Aberta'], note: 'Apertar escápulas 1s' },
-      { name: 'Crucifixo Inverso', sets: 3, reps: '12-15', tech: 'Drop no último', primary: ['Deltoide posterior'], secondary: ['Romboides'], subs: ['Face Pull Corda', 'Remada Alta Corda', 'Reverse Pec Deck'], note: 'Pico contração 1-2s' },
-      { name: 'Rosca Alternada Banco Inclinado', sets: 3, reps: '10-12', tech: 'Stretch focus', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Concentrada', 'Rosca Scott', 'Rosca Direta Halter'], note: 'Stretch focus, supinar no início' },
-      { name: 'Rosca Scott Máquina', sets: 2, reps: '12-15', tech: 'Myo-reps no último', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Direta Barra W', 'Rosca Concentrada', 'Rosca Scott Halter'], note: 'Pico de contração' }
+      { name: 'Remada Baixa Triângulo', sets: 4, reps: '12-15', tech: 'Pausa 1-2s na contração', primary: ['Dorsal', 'Romboides'], secondary: ['Trapézio médio'], subs: ['Remada Máquina Fechada', 'Remada Triângulo'], note: 'Espessura vem de remar segurando a contração, não de mais puxada. 1-2s parado em TODA rep.' },
+      { name: 'Puxada Pronada Aberta', sets: 3, reps: '12-15', tech: 'Falha na última', primary: ['Dorsal'], secondary: ['Bíceps'], subs: ['Pulldown Neutro', 'Pulldown Reto'], note: 'Pega larga, ROM total.' },
+      { name: 'Face Pull Corda', sets: 4, reps: '15-20', tech: 'Rotação externa', primary: ['Deltoide posterior'], secondary: ['Romboides', 'Trapézio médio'], subs: ['Crucifixo Inverso', 'Reverse Pec Deck'], note: 'Trapézio médio + posterior + saúde de ombro.' },
+      { name: 'Pullover Polia Alta', sets: 3, reps: '12-15', tech: 'Stretch focus', primary: ['Dorsal'], secondary: ['Serrátil'], subs: ['Pulldown Reto', 'Pullover Halter'], note: 'Alongamento máximo de dorsal, cotovelo travado.' },
+      { name: 'Rosca Martelo Halter', sets: 3, reps: '12-15', tech: 'Falha na última', primary: ['Braquial', 'Braquiorradial'], secondary: ['Bíceps'], subs: ['Rosca Corda Polia', 'Rosca Martelo Cabo'], note: 'Fecha o dia.' }
     ]},
-  'legs-b': { name: 'Legs B', sub: 'Posterior + Metabólico', dur: 70, tag: 'legs',
+  'fracos': { name: 'Pontos Fracos', sub: 'SÁB · Pump · Lateral, peito superior, braços', dur: 60, tag: 'push',
     exercises: [
-      { name: 'Stiff Halter', sets: 4, reps: '6-8', tech: 'Stretch focus + AMRAP no último', primary: ['Posteriores', 'Glúteo'], secondary: ['Lombar'], subs: ['Stiff Barra', 'Levantamento Terra Romeno', 'Stiff Smith'], note: 'Excêntrica 3s, hip hinge' },
-      { name: 'Hack Squat Pés Altos', sets: 4, reps: '8-10', tech: 'Cluster-drop no 4º', primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Leg Press Pés Altos', 'Agachamento Smith Pés Altos', 'Leg Press 45°'], note: '4ª série: 8 reps → -25% AMRAP → -25% AMRAP' },
-      { name: 'Mesa Flexora Deitada', sets: 3, reps: '10-12', tech: 'Rest-pause no último', primary: ['Posteriores'], secondary: ['Panturrilha'], subs: ['Cadeira Flexora (sentada)', 'Mesa Flexora', 'Flexora Unilateral'], note: 'Último: falha + 15s + reps' },
-      { name: 'Cadeira Abdutora', sets: 3, reps: '15-20', tech: 'Myo-reps + tronco à frente', primary: ['Glúteo médio'], secondary: ['Glúteo máximo'], subs: ['Glúteo Máquina', 'Abdução Polia', 'Hip Thrust Máquina'], note: 'Inclinar tronco p/ frente p/ glúteo médio' },
-      { name: 'Avanço Passada Halter', sets: 3, reps: '10/perna', tech: 'Excêntrica controlada', primary: ['Quadríceps', 'Glúteo'], secondary: ['Posteriores'], subs: ['Búlgaro Halter', 'Avanço Smith', 'Leg Press Unilateral'], note: 'Descida controlada 2s' },
-      { name: 'Panturrilha Sentado', sets: 4, reps: '15-20', tech: 'Drop + 2s alongado', primary: ['Sóleo'], secondary: ['Gastrocnêmio'], subs: ['Panturrilha em Pé', 'Panturrilha Leg Press', 'Panturrilha Smith'], note: 'Pausa 2s no alongamento' },
-      { name: 'Abdominal Pulley', sets: 3, reps: '12-15', tech: 'Rest-pause no último', primary: ['Reto abdominal'], secondary: ['Oblíquos'], subs: ['Crunch Máquina', 'Prancha', 'Elevação de Pernas'], note: 'Curvar coluna, não dobrar quadril' }
+      { name: 'Elevação Lateral Halter', sets: 4, reps: '15-20', tech: 'Drop-set em 2 séries', primary: ['Deltoide lateral'], secondary: [], subs: ['Elevação Lateral Cabo Inclinado', 'Elevação Lateral Máquina'], note: '1º exercício do dia, SEMPRE. Lateral é prioridade absoluta pro frame de 2,02m.' },
+      { name: 'Supino Inclinado Halter 45°', sets: 3, reps: '10-12', tech: 'Falha na última', primary: ['Peitoral superior'], secondary: ['Deltoide anterior', 'Tríceps'], subs: ['Chest Press Inclinado', 'Supino Smith Inclinado'], note: '45° pra variar o estímulo do resto da semana (30°).' },
+      { name: 'Cross Over Baixa→Alta', sets: 3, reps: '15-20', tech: 'Tensão contínua', primary: ['Peitoral superior'], secondary: [], subs: ['Crucifixo Inclinado Halter', 'Peck Deck (Crucifixo Máq)'], note: 'Sem descansar no fundo nem no topo.' },
+      { name: 'Rosca Scott Máquina', sets: 3, reps: '10-12', tech: 'Falha na última', primary: ['Bíceps'], secondary: ['Braquial'], subs: ['Rosca Alternada Banco Inclinado', 'Rosca Concentrada'], note: 'Pico de contração.' },
+      { name: 'Tríceps Francês Cabo Overhead', sets: 3, reps: '12-15', tech: 'Stretch focus', primary: ['Tríceps (cabeça longa)'], secondary: [], subs: ['Tríceps Testa Barra W', 'Tríceps Corda'], note: 'Alongamento máximo da cabeça longa.' },
+      { name: 'Crucifixo Inverso', sets: 3, reps: '15-20', tech: 'Drop na última', primary: ['Deltoide posterior'], secondary: ['Romboides'], subs: ['Face Pull Corda', 'Reverse Pec Deck'], note: 'Fecha a semana com posterior de ombro.' }
     ]}
 };
-const DAYS_ORDER = ['push-a', 'pull-a', 'legs-a', 'push-b', 'pull-b', 'legs-b'];
+const DAYS_ORDER = ['push-pesado', 'pull-pesado', 'legs', 'push-pump', 'pull-pump', 'fracos'];
 
 // Aquecimento por sessão
 const WARMUP = {
-  'push-a': {
-    geral: ['5min bike leve ou esteira 0% (aquece ombro sem pré-fadigar)', 'Band pull-apart 2×15 (ativação manguito)', 'Rotação externa mini-band 2×12', 'Círculos de ombro 10 cada sentido'],
-    ramp: '50%×12 → 70%×8 → 85%×4 → trabalho (aplica só no Chest Press Inclinado)'
+  'push-pesado': {
+    geral: ['5min bike leve (aquece ombro sem pré-fadigar)', 'Band pull-apart 2×15', 'Rotação externa mini-band 2×12', 'Círculos de ombro 10 cada sentido'],
+    ramp: '50%×12 → 70%×6 → 85%×3 → trabalho até a falha (aplica no Supino Inclinado)'
   },
-  'pull-a': {
-    geral: ['5min bike leve', 'Cat-camel 10 reps (mobilidade torácica)', 'T-spine rotação 8/lado', 'Dead hang 20-30s (descomprime lombar, ativa pegada)'],
-    ramp: '50%×10 → 70%×8 → 85%×4 → trabalho (aplica no T-Bar)'
+  'pull-pesado': {
+    geral: ['5min bike leve', 'Cat-camel 10 reps', 'T-spine rotação 8/lado', 'Dead hang 20-30s'],
+    ramp: '50%×12 → 60%×6 → 80%×3 → trabalho até a falha (aplica no T-Bar)'
   },
-  'legs-a': {
-    geral: ['5min bike subindo intensidade (ativa quadríceps)', '90/90 hip stretch 8/lado', 'Dorsiflexão na parede 10/lado', 'Agachamento profundo bodyweight 30s pausa'],
-    ramp: '40%×10 → 60%×8 → 80%×4 → 90%×1 → trabalho (aplica no Leg Press 45°)'
+  'legs': {
+    geral: ['5min bike subindo intensidade', '90/90 hip stretch 8/lado', 'Dorsiflexão na parede 10/lado', 'Agachamento profundo bodyweight 30s'],
+    ramp: '40%×10 → 60%×6 → 80%×3 → trabalho até a falha técnica (aplica no Hack)'
   },
-  'push-b': {
+  'push-pump': {
     geral: ['5min bike leve', 'Band pull-apart 2×15', 'Rotação externa mini-band 2×12'],
-    ramp: '50%×10 → 70%×8 → 75%×5 → trabalho (aplica no Supino Inclinado Halter 45°)'
+    ramp: '1 série leve ×15 no primeiro exercício e já entra no ritmo (cargas leves, risco baixo)'
   },
-  'pull-b': {
-    geral: ['5min bike leve', 'Cat-camel 10 reps', 'T-spine rotação 8/lado', 'Dead hang 20s'],
-    ramp: '50%×12 → 70%×8 → 75%×5 → trabalho (aplica na Puxada Pronada)'
+  'pull-pump': {
+    geral: ['5min bike leve', 'Cat-camel 10 reps', 'Dead hang 20s'],
+    ramp: '1 série leve ×15 na remada e entra no ritmo'
   },
-  'legs-b': {
-    geral: ['5min bike subindo intensidade', '90/90 hip stretch 8/lado', 'Dorsiflexão na parede 10/lado'],
-    ramp: '50%×10 → 70%×8 → 75%×5 → trabalho (aplica no Stiff Halter)'
+  'fracos': {
+    geral: ['5min bike leve', 'Band pull-apart 2×15', 'Círculos de ombro 10 cada sentido'],
+    ramp: '2 séries leves de lateral ×15-20 já contam como rampa'
   }
 };
 
@@ -1219,7 +1219,7 @@ const TECNICAS = [
   { name: 'AMRAP', sub: 'As Many Reps As Possible', desc: 'Última série levada ao máximo de repetições com boa forma. Mede progresso e gera estímulo final.', how: '<strong>Como fazer:</strong> Na última série, em vez de parar no alvo, continua até a falha técnica. Registra as reps para acompanhar progresso.' }
 ];
 
-let currentDay = 'push-a';
+let currentDay = 'push-pesado';
 let openEx = {};
 
 function renderDayGrid() {
@@ -1277,7 +1277,7 @@ function renderDayDetail() {
             </div>
             <div class="ex-meta" style="margin-top:3px;display:flex;gap:5px;flex-wrap:wrap">
               <span>${ex.sets}×${ex.reps}</span>
-              ${ex.rpe ? `<span class="ex-rest-badge">RPE ${ex.rpe}</span>` : ''}
+              ${ex.rpe ? `<span class="ex-rest-badge">${ex.rpe === 'FALHA' ? '🔴 ATÉ A FALHA' : 'RPE ' + ex.rpe}</span>` : ''}
               <span class="ex-time-badge">~${estMin}min</span>
             </div>
           </div>
@@ -2156,7 +2156,8 @@ const NAV = {
     { id: 'tecnicas', label: 'Técnicas' },
     { id: 'cardio', label: 'Cardio' },
     { id: 'ciencia', label: 'Ciência' },
-    { id: 'cargas', label: '⚖️ Cargas' }
+    { id: 'cargas', label: '⚖️ Cargas' },
+    { id: 'videos', label: '▶️ Vídeos' }
   ],
   nutricao: [
     { id: 'macros', label: 'Macros' },
@@ -2174,6 +2175,29 @@ const NAV = {
     { id: 'mental-estoicismo', label: 'Estoicismo' }
   ]
 };
+
+// ============ VÍDEOS DE REFERÊNCIA ============
+const VIDEOS = [
+  { who: 'Dorian Yates', what: 'Blood & Guts — documentário completo. Base dos dias PESADOS: falha real, volume baixo.', url: 'https://www.youtube.com/watch?v=GsuNVV4h1dg', tag: 'PESADO' },
+  { who: 'Dorian Yates', what: 'Blood & Guts Trainer Ep.1/5 (peito e bíceps) — série didática de falha real.', url: 'https://www.youtube.com/watch?v=m3JM5-16zkM', tag: 'PESADO' },
+  { who: 'Jordan Peters', what: 'TBJP — Pernas low volume / high intensity. Modelo do seu dia de perna.', url: 'https://www.youtube.com/watch?v=0D-MgNLDl9M', tag: 'PERNAS' },
+  { who: 'Jordan Peters', what: 'TBJP Education Ep.04 — montagem de treino com falha.', url: 'https://www.youtube.com/watch?v=4QAce6Xfofc', tag: 'PESADO' },
+  { who: 'John Meadows', what: 'Mountain Dog — costas alta intensidade. Execução pro Pull Pump.', url: 'https://www.youtube.com/watch?v=8d4l0E-X50o', tag: 'PUMP' },
+  { who: 'Scott Stevenson', what: 'Fortitude Training na prática — sessão filmada explicando cada movimento.', url: 'https://www.youtube.com/watch?v=NZJtRpAHJdo', tag: 'HÍBRIDO' },
+  { who: 'Scott Stevenson', what: 'Fortitude Training explicado — legendado PT-BR.', url: 'https://www.youtube.com/watch?v=EiuZP3cQfY4', tag: 'HÍBRIDO' },
+  { who: 'Joe Bennett', what: 'Hypertrophy Coach analisa o Blood & Guts — biomecânica pra alavanca longa (2,02m).', url: 'https://www.youtube.com/watch?v=x_WAo24MwcY', tag: 'TÉCNICA' }
+];
+function renderVideos() {
+  document.getElementById('videos-list').innerHTML = VIDEOS.map(v => `
+    <div class="ex-card" style="padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <div style="font-weight:700">${v.who} <span class="day-btn-tag tag-${v.tag === 'PUMP' ? 'pull' : v.tag === 'PERNAS' ? 'legs' : 'push'}" style="margin-left:6px">${v.tag}</span></div>
+        <div style="font-size:12px;color:var(--text2);margin-top:3px">${v.what}</div>
+      </div>
+      <a href="${v.url}" target="_blank" rel="noopener" style="flex-shrink:0;background:var(--accent);color:white;text-decoration:none;font-weight:700;font-size:13px;padding:9px 16px;border-radius:8px">▶ Assistir</a>
+    </div>`).join('');
+}
+
 let currentMain = 'treino';
 let currentSub = 'treinos';
 
@@ -2552,6 +2576,7 @@ renderSubtabs();
 
 // Abre direto na aba Cargas se URL tem #cargas (link salvo nos favoritos)
 if (window.location.hash === '#cargas') {
+  renderVideos();
   selectMain('treino');
   selectSub('cargas');
 } else {
